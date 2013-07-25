@@ -8,6 +8,6 @@ Based loosely on:
 
 Built using:
 * jQuery
- * LESS CSS
- * Mindshare Theme API
- * Twitter Bootstrap
+* LESS CSS
+* Mindshare Theme API
+* Twitter Bootstrap
