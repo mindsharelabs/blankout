@@ -35,8 +35,10 @@ Built using:
 */
 // Includes for custom post types
 include(get_template_directory().'/carousel-post-type.php');
+// include(get_template_directory().'/inc/custom-post-types.php');
+
+// Enables theme customizer for Blankout in Appearance >> Themes
 include(get_template_directory().'/inc/options.php');
-// include(get_template_directory().'/custom-post-type.php');
 
 //if TRUE, overrides the default bootstrap behavior where user must click on a top level menu item in order to see subpages
 define('BOOTSTRAP_DROPDOWN_ON_HOVER', TRUE);
