@@ -1,8 +1,8 @@
 <?php get_header(); ?>
 
-<div class="container-fluid">
-	<div class="row-fluid">
-		<div id="main" class="span9">
+<div class="container">
+	<div class="row">
+		<div id="main" class="col-lg-9">
 			<?php if(is_category()) { ?>
 			<h1 class="archive-title h2">
 				<span><?php _e("Posts Categorized:", "blankout"); ?></span> <?php single_cat_title(); ?>

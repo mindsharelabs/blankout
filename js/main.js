@@ -23,13 +23,13 @@ function init() {
 		jQuery('.gform_button').addClass('pull-right');
 		jQuery('.gform_button').addClass('btn-success');
 		jQuery('.gform_page').addClass('row');
-		jQuery('.gform_page_footer').addClass('span8');
+		jQuery('.gform_page_footer').addClass('col-lg-8');
 		jQuery('.gform_button').addClass('controls');
 		jQuery('.gfield_error').addClass('inputWarning');
 		jQuery('.validation_error').addClass('alert');
 		jQuery('.validation_error').addClass('alert-error');
-		jQuery('#input_1_28').addClass('span8');
-		jQuery('#input_1_32').addClass('span8');
+		jQuery('#input_1_28').addClass('col-lg-8');
+		jQuery('#input_1_32').addClass('col-lg-8');
 	});
 
 	//jQuery("#suckerfishnav li:last-child ").css("border-right","none");

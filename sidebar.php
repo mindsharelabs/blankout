@@ -1,4 +1,4 @@
-<div class="span3">
+<div id="sidebar" class="col-lg-3">
 	<?php if(is_active_sidebar('Main Sidebar')) : ?>
 	<?php dynamic_sidebar('Main Sidebar'); ?>
 	<?php else : ?>

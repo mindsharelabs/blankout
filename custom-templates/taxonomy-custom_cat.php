@@ -15,9 +15,9 @@ taxonomy-shoes.php
 
 <?php get_header(); ?>
 
-<div class="container-fluid">
-	<div class="row-fluid">
-		<div id="main" class="span9">
+<div class="container">
+	<div class="row">
+		<div id="main" class="col-lg-9">
 			<h1 class="archive-title h2"><span><?php _e("Posts Categorized:", "blankout"); ?></span> <?php single_cat_title(); ?></h1>
 
 			<?php if(have_posts()) : while(have_posts()) : the_post(); ?>

@@ -33,29 +33,25 @@
 </head>
 <body <?php body_class(); ?>>
 <a id="top"></a>
-
 <div class="container">
-	<header class="header" role="banner">
-		<?php //blankout_rich_snippets(); ?>
-		<div id="inner-header" class="wrap clearfix">
-			<?php
-			// nav classes can be: .navbar-fixed-top to fix the navbar to the top of the window
-			// .navbar-fixed-bottom to fix the navbar to the bottom of the window
-			// .navbar-inverse to use a white-on-black color scheme
-			?>
-			<nav class="navbar">
-				<div class="navbar-inner">
-					<div class="nav-container">
-						<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
-						<?php if($theme_options['menu_title']) {?>
-							<a class="brand" id="logo" title="<?php echo get_bloginfo('description'); ?>" href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a>
-						<?php } ?>
-						
-						<div class="nav-collapse collapse">
-							<?php blankout_main_nav(); ?>
-						</div>
-					</div>
-				</div>
-			</nav>
+<header class="header" role="banner">
+	<nav class="navbar">
+		<div class="container">
+		    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+			    <span class="icon-bar"></span>
+			    <span class="icon-bar"></span>
+			    <span class="icon-bar"></span>
+		    </button>
+			<?php $options = get_option('blankout_options'); ?>
+			<?php if($options["menu_title"]) {?>
+				<a class="navbar-brand" id="logo" title="<?php echo get_bloginfo('description'); ?>" href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a>
+			<?php } ?>
+
+		    <div class="nav-collapse collapse nav-collapse-scrollable">
+				<?php blankout_main_nav(); ?>
+		    </div>
 		</div>
-	</header>
+	</nav>
+</header>
+</div>
+<div class="container">

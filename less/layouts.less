@@ -2,24 +2,19 @@
 // Layouts
 // --------------------------------------------------
 
-
-// Container (centered, fixed-width layouts)
-.container {
-	.container-fixed();
+.header {
+	margin-top: 50px;
+	
+	.navbar {
+	
+		.navbar-toggle + .nav-collapse {
+			margin-top: 0;
+		}
+		
+	}
+	
 }
 
-// Fluid layouts (left aligned, with sidebar, min- & max-width content)
-.container-fluid {
-	padding-right: @gridGutterWidth;
-	padding-left: @gridGutterWidth;
-	.clearfix();
-}
-
-// Wordpress body classes
-
-.rtl {
-}
-/* for sites that are read right to left (i.e. hebrew) */
 .home {
 }
 /* home page */
@@ -101,59 +96,58 @@
 .page-template-page-php {
 }
 /* individual page template (i.e. body.page-template-contact-php */
-	.page-paged-1 {
-	}
-	/* replace the number to the corresponding page number */
-	.page-parent {
-	}
-	/* parent page template */
-	.page-child {
-	}
-	/* child page template */
-	.parent-pageid-1 {
-	}
-	/* replace the number to the corresponding page number */
-	.logged-in {
-	}
-	/* if user is logged in */
-	.paged {
-	}
-	/* paged items like search results or archives */
-	.paged-1 {
-	}
-	/* individual paged (i.e. body.paged-3) */
+.page-paged-1 {
+}
+/* replace the number to the corresponding page number */
+.page-parent {
+}
+/* parent page template */
+.page-child {
+}
+/* child page template */
+.parent-pageid-1 {
+}
+/* replace the number to the corresponding page number */
+.logged-in {
+}
+/* if user is logged in */
+.paged {
+}
+/* paged items like search results or archives */
+.paged-1 {
+}
+/* individual paged (i.e. body.paged-3) */
 
-	// Posts & content styles
+// Posts & content styles
 
-	#content {
-		margin-top: 2.2em;
-	}
+#content {
+	margin-top: 2.2em;
+}
 
-	.hentry {
+.hentry {
 
-		header {
-		}
-
-		footer {
-		}
-
-	}
-	/* end .hentry */
-
-	.single-title,
-	.page-title {
+	header {
 	}
 
-	.single-title {
+	footer {
 	}
 
-	.page-title {
-	}
+}
+/* end .hentry */
 
-	.archive-title {
-	}
+.single-title,
+.page-title {
+}
 
-/* want to style individual post classes? Booya! */
+.single-title {
+}
+
+.page-title {
+}
+
+.archive-title {
+}
+
 .post-id {
 }
 /* post by id (i.e. post-3) */
@@ -196,6 +190,10 @@
 
 
 	ul, ol, table, dl {
+	}
+	
+	table {
+		.table;
 	}
 
 	ul, ol {
@@ -338,7 +336,10 @@ p.wp-caption-text {
 }
 
 // Sidebars and Asides
-.sidebar {
+#sidebar {
+
+	margin-top: 20px;
+	
 }
 
 .widgettitle {
@@ -375,15 +376,6 @@ ul {
 	clear: both;
 }
 
-/*
-if you checked out the link above:
-http://www.alistapart.com/articles/organizing-mobile/
-you'll want to style the footer nav
-a bit more in-depth. Remember to keep
-it simple because you'll have to
-override these styles for the desktop
-view.
-*/
 .footer-links {
 
 	ul {

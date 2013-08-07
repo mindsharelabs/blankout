@@ -107,9 +107,9 @@ class Blankout_Customize
       <!--Customizer CSS--> 
       <style type="text/css">
 			<?php if('blankout_options[menu_title]' == true) { ?>
-           		<?php self::generate_css('.brand', 'display', 'block'); ?> 
+           		<?php self::generate_css('.navbar-brand', 'display', 'block'); ?> 
 			<?php } else { ?>
-				<?php self::generate_css('.brand', 'display', 'none'); ?> 
+				<?php self::generate_css('.navbar-brand', 'display', 'none'); ?> 
 			<?php } ?>
 			<?php if('blankout_options[menu_search]' == true) { ?>
            		<?php self::generate_css('.navbar-search', 'display', 'block'); ?> 

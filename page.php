@@ -1,8 +1,8 @@
 <?php get_header(); ?>
 
-<div class="container-fluid">
-	<div class="row-fluid">
-		<div id="main" class="span9">
+<div class="container">
+	<div class="row">
+		<div id="main" class="col-lg-9">
 			<?php if(have_posts()) : while(have_posts()) : the_post(); ?>
 
 			<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?> role="article" itemscope itemtype="http://schema.org/BlogPosting">
