@@ -5646,6 +5646,11 @@ body.login form .input {
 #content {
   margin-top: 2.2em;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003131}}
+.hentry header .amp {
+  font-family: Baskerville, 'Goudy Old Style', Palatino, 'Book Antiqua', serif;
+  font-style: italic;
+}
 /* end .hentry */
 /* post by id (i.e. post-3) */
 /* general post style */
@@ -5656,12 +5661,12 @@ body.login form .input {
 /* style by category (i.e. category-videos) */
 /* style by tag (i.e. tag-news) */
 /* post meta */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003177}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003183}}
 .byline {
   color: #999;
 }
 /* entry content */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003186}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003192}}
 .entry-content {
   /*
 image alignment on a screen this size may be
@@ -5671,7 +5676,7 @@ but it's up to you. Feel free to change it up.
 */
 
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003195}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003201}}
 .entry-content table {
   width: 100%;
   margin-bottom: 20px;
@@ -5709,70 +5714,70 @@ but it's up to you. Feel free to change it up.
 .entry-content table .table {
   background-color: #ffffff;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003233}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003239}}
 .entry-content dd {
   margin-left: 0;
   font-size: 0.9em;
   color: #787878;
   margin-bottom: 1.5em;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003240}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003246}}
 .entry-content img {
   float: left;
   margin: 6px 20px 6px 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003251}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003257}}
 .entry-content .alignleft,
 .entry-content img.alignleft {
   float: left;
   margin: 6px 20px 6px 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003255}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003261}}
 .entry-content .alignright,
 .entry-content img.alignright {
   float: right;
   margin: 6px 0 6px 20px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003259}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003265}}
 .entry-content .aligncenter,
 .entry-content img.aligncenter {
   float: none;
   margin: 0 auto;
   margin: 6px 20px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003264}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003270}}
 .entry-content .alignnone,
 .entry-content img.alignnone {
   float: none;
   margin: 0 auto;
   margin: 6px 20px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003270}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003276}}
 .entry-content video,
 .entry-content object {
   max-width: 100%;
   height: auto;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003275}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003281}}
 .entry-content pre {
   background: #eee;
   border: 1px solid #cecece;
   padding: 10px;
 }
 /* end .entry-content */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003284}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003290}}
 .wp-caption {
   background: #eee;
   padding: 5px;
   /* images inside wp-caption */
 
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003289}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003295}}
 .wp-caption img {
   margin-bottom: 0;
   width: 100%;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003294}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003300}}
 .wp-caption p.wp-caption-text {
   font-size: 0.85em;
   margin: 4px 0 7px;
@@ -5782,16 +5787,16 @@ but it's up to you. Feel free to change it up.
 /* image gallery styles */
 /* end .gallery */
 /* gallery caption styles */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003339}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003345}}
 #sidebar {
   margin-top: 20px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003352}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003358}}
 .widget ul li {
   /* deep nesting */
 
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003375}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003381}}
 .footer {
   clear: both;
 }
