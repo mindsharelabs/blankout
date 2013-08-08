@@ -52,8 +52,7 @@ class Blankout_Customize
 	  $wp_customize->add_setting( 'blankout_options[menu_title]', //Give it a SERIALIZED name (so all theme settings can live under one db record)
 	     array(
 	        'default' => 'true', //Default setting/value to save
-	        'capability' => 'edit_theme_options', //Optional. Special permissions for accessing this setting.
-	        'transport' => 'postMessage', //What triggers a refresh of the setting? 'refresh' or 'postMessage' (instant)?
+	        'capability' => 'edit_theme_options' //Optional. Special permissions for accessing this setting.
 	     ) 
 	  );
       
@@ -87,7 +86,7 @@ class Blankout_Customize
       //4. We can also change built-in settings by modifying properties. For instance, let's make some stuff use live preview JS...
       $wp_customize->get_setting( 'blogname' )->transport = 'postMessage';
       $wp_customize->get_setting( 'blogdescription' )->transport = 'postMessage';
-      $wp_customize->get_setting( 'blankout_options[menu_title]' )->transport = 'postMessage';
+      $wp_customize->get_setting( 'blankout_options[menu_title]' )->transport = 'refresh';
       $wp_customize->get_setting( 'blankout_options[menu_search]' )->transport = 'postMessage';
       $wp_customize->get_setting( 'background_color' )->transport = 'postMessage';
    }

@@ -42,11 +42,10 @@
 			    <span class="icon-bar"></span>
 			    <span class="icon-bar"></span>
 		    </button>
-			<?php $options = get_option('blankout_options'); ?>
+			<?php $options = get_theme_mod('blankout_options'); ?>
 			<?php if($options["menu_title"]) {?>
 				<a class="navbar-brand" id="logo" title="<?php echo get_bloginfo('description'); ?>" href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a>
 			<?php } ?>
-
 		    <div class="nav-collapse collapse nav-collapse-scrollable">
 				<?php blankout_main_nav(); ?>
 		    </div>

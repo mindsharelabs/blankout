@@ -40,13 +40,6 @@ include(get_template_directory().'/inc/carousel-post-type.php');
 // Enables theme customizer for Blankout in Appearance >> Themes
 include(get_template_directory().'/inc/customize.php');
 
-// Adds "customize" to admin menu
-function customize_admin() {
-    // add the Customize link to the admin menu
-    add_theme_page( 'Customize', 'Customize', 'edit_theme_options', 'customize.php' );
-}
-add_action ('admin_menu', 'customize_admin');
-
 //if TRUE, overrides the default bootstrap behavior where user must click on a top level menu item in order to see subpages
 define('BOOTSTRAP_DROPDOWN_ON_HOVER', TRUE);
 
