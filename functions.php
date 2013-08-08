@@ -89,17 +89,16 @@ add_theme_support('custom-background',
 		 'chat' // chat transcript
 	)
 );*/
-
-register_nav_menus(
-	array(
-		 'main-nav'   => __('Main Menu', 'blankout'), // main nav in header
-		 'footer-nav' => __('Footer Menu', 'blankout') // secondary nav in footer
-	)
-);
-if(!is_nav_menu('main-nav')) {
-	wp_create_nav_menu(__('Main Menu', 'blankout'), array('slug' => 'main-nav'));
-	wp_create_nav_menu(__('Footer Menu', 'blankout'), array('slug' => 'footer-nav'));
+function blankout_setup_menus() {
+	register_nav_menus(
+		array(
+			 'main-nav'   => __('Main Navigation', 'blankout'), // main nav in header
+			 'footer-nav' => __('Footer Navigation', 'blankout') // secondary nav in footer
+		)
+	);
 }
+add_action('init', 'blankout_setup_menus');
+
 
 register_sidebar(
 	array(
@@ -373,7 +372,7 @@ function blankout_page_nav($before = '<div class="pagination pagination-centered
 	if($start_page <= 0) {
 		$start_page = 1;
 	}
-	echo $before."<ul>";
+	echo $before."<ul class='pagination'>";
 	if($start_page >= 2 && $pages_to_show < $max_page) {
 		$first_page_text = "First";
 		echo '<li class="bpn-first-page-link"><a href="'.get_pagenum_link().'" title="'.$first_page_text.'">'.$first_page_text.'</a></li>';
@@ -479,7 +478,7 @@ function blankout_copyright() {
 function blankout_footer_credit() {
 	$cc = 'V2Vic2l0ZSBkZXNpZ24sIGRldmVsb3BtZW50LCBhbmQgU0VPIGJ5IE1pbmRzaGFyZSBTdHVkaW9zLCBJbmM=';
 	$host = parse_url(get_bloginfo('url'));
-	$c = '<p id="credit" class="source-org copyright"><a class="no-icon" href="http://mind.sh/are/?ref='.$host['host'].'" target="_blank" title="'.base64_decode($cc).'"><img src="'.get_bloginfo('template_directory').'/img/credit.png" alt="'.base64_decode($cc).'" /></a></p>';
+	$c = '<span class="copyright pull-left">Copyright &copy; '.date('Y').' '.get_bloginfo('name').'</span><p id="credit" class="source-org copyright pull-right"><a class="no-icon" href="http://mind.sh/are/?ref='.$host['host'].'" target="_blank" title="'.base64_decode($cc).'"><img src="'.get_bloginfo('template_directory').'/img/credit.png" alt="'.base64_decode($cc).'" /></a></p>';
 	if(function_exists('mapi_get_option')) {
 		if(mapi_get_option('show_credit') == TRUE || $_GET['credit'] == 1) {
 			echo $c;

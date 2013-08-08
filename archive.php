@@ -49,7 +49,6 @@
 				</header>
 				<section class="entry-content clearfix">
 					<?php the_post_thumbnail('blankout-thumb-300'); ?>
-
 					<?php the_excerpt(); ?>
 				</section>
 				<footer class="article-footer">
@@ -58,18 +57,7 @@
 
 			<?php endwhile; ?>
 
-			<?php if(function_exists('blankout_page_nav')) : ?>
-				<?php blankout_page_nav(); ?>
-				<?php else : ?>
-				<nav class="wp-prev-next">
-					<ul class="clearfix">
-						<li class="prev-link"><?php next_posts_link(__('&laquo; Older Entries', "blankout")) ?></li>
-						<li class="next-link"><?php previous_posts_link(__('Newer Entries &raquo;', "blankout")) ?></li>
-					</ul>
-				</nav>
-				<?php endif; ?>
-
-
+			<?php blankout_page_nav(); ?>
 
 			<?php endif; ?>
 		</div>

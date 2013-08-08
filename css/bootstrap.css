@@ -5602,7 +5602,7 @@ body.login form .input {
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\000035}}
 .header {
-  margin-top: 50px;
+  margin-top: 15px;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\0000310}}
 .header .navbar .navbar-toggle + .nav-collapse {
@@ -5796,11 +5796,24 @@ but it's up to you. Feel free to change it up.
   /* deep nesting */
 
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003381}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003379}}
+.pagination.pagination-centered {
+  text-align: center;
+  width: 100%;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003386}}
 .footer {
   clear: both;
 }
 /* end .footer-links */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/layouts\.less}line{font-family:\00003403}}
+.copyright,
+#credit {
+  color: #ccc;
+  text-transform: uppercase;
+  font-size: 10px;
+  margin: 20px 0;
+}
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/blankout\/wp-content\/themes\/blankout\/less\/mixins\.less}line{font-family:\0000320}}
 .clearfix:before,
 .clearfix:after {
