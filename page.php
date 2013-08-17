@@ -13,7 +13,8 @@
 					<?php the_content(); ?>
 				</section>
 				<footer class="article-footer">
-					<?php the_tags('<p class="tags"><span class="tags-title">Tags:</span> ', ', ', '</p>'); ?>
+					<?php the_taxonomies('before=<p class="tags">&after=</p>'); ?>
+					<?php edit_post_link(); ?>
 				</footer>
 
 			</article>

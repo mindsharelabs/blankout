@@ -9,7 +9,7 @@
 				<header class="article-header">
 					<h1 class="entry-title single-title" itemprop="headline"><?php the_title(); ?></h1>
 					<p class="byline vcard"><?php _e("Posted", "blankout"); ?>
-						<time class="updated" datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php the_time('F jS, Y'); ?></time> <?php _e("by", "blankout"); ?>
+						<time class="updated" datetime="<?php echo the_time('Y-m-d'); ?>"><?php the_time('F jS, Y'); ?></time> <?php _e("by", "blankout"); ?>
 						<span class="author"><?php the_author_posts_link(); ?></span> <span class="amp">&amp;</span> <?php _e("filed under", "blankout"); ?> <?php the_category(', '); ?>.
 					</p>
 				</header>
@@ -17,7 +17,8 @@
 					<?php the_content(); ?>
 				</section>
 				<footer class="article-footer">
-					<?php the_tags('<p class="tags"><span class="tags-title">Tags:</span> ', ', ', '</p>'); ?>
+					<?php the_taxonomies('before=<p class="tags">&after=</p>'); ?>
+					<?php edit_post_link(); ?>
 				</footer>
 
 				<?php comments_template(); ?>

@@ -9,7 +9,7 @@
 				<header class="article-header">
 					<h1><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h1>
 					<p class="byline vcard"><?php _e('Posted', 'blankout'); ?>
-						<time class="updated" datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php the_time(get_option('date_format')); ?></time> <?php _e('by', 'blankout'); ?>
+						<time class="updated" datetime="<?php echo the_time('Y-m-d'); ?>"><?php the_time(get_option('date_format')); ?></time> <?php _e('by', 'blankout'); ?>
 						<span class="author"><?php the_author_posts_link(); ?></span> <span class="amp">&</span> <?php _e('filed under', 'blankout'); ?> <?php the_category(', '); ?>.
 					</p>
 				</header>
@@ -17,7 +17,7 @@
 					<?php the_content(); ?>
 				</section>
 				<footer class="article-footer">
-					<p class="tags"><?php the_tags('<span class="tags-title">Tags:</span> ', ', ', ''); ?></p>
+					<?php the_taxonomies('before=<p class="tags">&after=</p>'); ?>
 				</footer>
 
 				<?php // comments_template(); // uncomment if you want to use them ?>

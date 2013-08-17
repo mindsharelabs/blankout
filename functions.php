@@ -139,7 +139,7 @@ function blankout_scripts_and_styles() {
 		// modernizr (without media query polyfill)
 		wp_register_script('blankout-modernizr', get_stylesheet_directory_uri().'/js/libs/modernizr.custom.min.js', array(), '2.6.2'); // @todo MOVE TO PLUGIN
 		wp_register_script('bootstrap-js', get_stylesheet_directory_uri().'/js/libs/bootstrap-ck.js', array('jquery'));
-		wp_register_script('blankout-js', get_stylesheet_directory_uri().'/js/main.js', array('jquery'));
+		wp_register_script('blankout-js', get_stylesheet_directory_uri().'/js/main-ck.js', array('jquery'));
 
 		wp_register_style('bootstrap-stylesheet', get_stylesheet_directory_uri().'/css/bootstrap.css', array(), '', 'all');
 
@@ -509,6 +509,34 @@ function blankout_acf_settings($options) {
 }
 
 add_filter('acf_settings', 'blankout_acf_settings');
+
+// Open Graph meta tags and language attributes
+function add_opengraph_doctype( $output ) {
+		return $output . ' xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml"';
+	}
+add_filter('language_attributes', 'add_opengraph_doctype');
+
+function insert_fb_in_head() {
+	global $post;
+	if ( !is_singular()) //if it is not a post or a page
+		return;
+        echo '<meta property="fb:admins" content=""/>';
+        echo '<meta property="og:title" content="' . get_the_title() . '"/>';
+        echo '<meta property="og:type" content="article"/>';
+        echo '<meta property="og:url" content="' . get_permalink() . '"/>';
+        echo '<meta property="og:site_name" content="' . get_bloginfo('name') . '"/>';
+	if(!has_post_thumbnail( $post->ID )) { //the post does not have featured image, use a default image
+		$default_image = get_bloginfo('template_url') . "/favicon.png" ; //replace this with a default image on your server or an image in your media library
+		echo '<meta property="og:image" content="' . $default_image . '"/>';
+	}
+	else{
+		$thumbnail_src = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'medium' );
+		echo '<meta property="og:image" content="' . esc_attr( $thumbnail_src[0] ) . '"/>';
+	}
+	echo "
+";
+}
+add_action( 'wp_head', 'insert_fb_in_head', 5 );
 
 function blankout_enable_nav_hover() {
 	if(!mapi_is_mobile_device() && BOOTSTRAP_DROPDOWN_ON_HOVER) {

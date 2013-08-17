@@ -23,7 +23,7 @@ Template Name: Custom Page Example
 					<?php the_content(); ?>
 				</section>
 				<footer class="article-footer">
-					<p class="clearfix"><?php the_tags('<span class="tags">Tags: ', ', ', '</span>'); ?></p>
+					<?php the_taxonomies('before=<p class="tags">&after=</p>'); ?>
 				</footer>
 
 				<?php comments_template(); ?>

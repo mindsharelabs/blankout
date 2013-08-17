@@ -243,46 +243,35 @@
 		margin-bottom: 1.5em;
 	}
 
-	img {
+	.alignleft, img.alignleft {
 		float: left;
 		margin: 6px 20px 6px 0;
 	}
+	.alignright, img.alignright {
+		float: right;
+		margin: 6px 0 6px 20px;
+	}
+	.aligncenter, img.aligncenter {
+		float: none;
+		margin: 0 auto;
+		margin: 6px 20px;
+	}
+	.alignnone, img.alignnone {
+		float: none;
+		margin: 0 auto;
+		margin: 6px 20px;
+	}
 
-/*
-image alignment on a screen this size may be
-a bit difficult. It's set to start aligning
-and floating images at the next breakpoint,
-but it's up to you. Feel free to change it up.
-*/
-.alignleft, img.alignleft {
-	float: left;
-	margin: 6px 20px 6px 0;
-}
-.alignright, img.alignright {
-	float: right;
-	margin: 6px 0 6px 20px;
-}
-.aligncenter, img.aligncenter {
-	float: none;
-	margin: 0 auto;
-	margin: 6px 20px;
-}
-.alignnone, img.alignnone {
-	float: none;
-	margin: 0 auto;
-	margin: 6px 20px;
-}
+	video, object {
+		max-width: 100%;
+		height: auto;
+	}
 
-video, object {
-	max-width: 100%;
-	height: auto;
-}
-
-pre {
-	background: #eee;
-	border: 1px solid #cecece;
-	padding: 10px;
-}
+	pre {
+		background: #eee;
+		border: 1px solid #cecece;
+		padding: 10px;
+	}
 
 }
 /* end .entry-content */

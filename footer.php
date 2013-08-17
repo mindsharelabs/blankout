@@ -7,7 +7,6 @@
 			<?php blankout_footer_credit(); ?>
 		</div>
 	</footer>
-	</div>
 </div>
 <?php wp_footer(); ?>
 </body>
