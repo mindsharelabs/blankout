@@ -13,27 +13,6 @@
 		} );
 	} );
 
-	wp.customize( 'blankout_options[menu_title]', function( value ) {
-		value.bind( function( newval ) {
-			if( newval == false) {
-				$('.brand').css('display', 'none' );
-			} else {
-				$('.brand').css('display', 'block' );
-			}
-		} );
-	} );
-	
-	wp.customize( 'blankout_options[menu_search]', function( value ) {
-		value.bind( function( newval ) {
-			if( newval == false) {
-				$('.navbar-search').css('display', 'none' );
-			} else {
-				$('.navbar-search').css('display', 'block' );
-			}
-		} );
-	} );
-	
-
 	//Update site background color...
 	wp.customize( 'background_color', function( value ) {
 		value.bind( function( newval ) {
@@ -42,9 +21,15 @@
 	} );
 	
 	//Update link color in real time...
-	wp.customize( 'blankout_options[link_textcolor]', function( value ) {
+	wp.customize( 'link_textcolor', function( value ) {
 		value.bind( function( newval ) {
 			$('#main a').css('color', newval );
+		} );
+	} );
+	
+	wp.customize( 'navbar_background', function( value ) {
+		value.bind( function( newval ) {
+			$('.navbar').css('background-color', newval );
 		} );
 	} );
 	

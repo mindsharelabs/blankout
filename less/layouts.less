@@ -1,5 +1,8 @@
 //
-// Layouts
+// LAYOUTS
+// Place all of your custom styles in here. This stylesheet is loaded last,
+// and takes precedence over all others.
+//
 // --------------------------------------------------
 
 .header {
@@ -15,110 +18,18 @@
 	
 }
 
-.home {
-}
-/* home page */
-.blog {
-}
-/* blog template page */
-.archive {
-}
-/* archive page */
-.date {
-}
-/* date archive page */
-.date-paged-1 {
-}
-/* replace the number to the corresponding page number */
-.search {
-}
-/* search page */
-.search-results {
-}
-/* search result page */
-.search-no-results {
-}
-/* no results search page */
-.search-paged-1 {
-}
-/* individual paged search (i.e. body.search-paged-3) */
-.error404 {
-}
-/* 404 page */
-.single {
-}
-/* single post page */
-.postid-1 {
-}
-/* individual post page by id (i.e. body.postid-73) */
-.single-paged-1 {
-}
-/* individual paged single (i.e. body.single-paged-3) */
-.attachment {
-}
-/* attatchment page */
-.attachmentid-1 {
-}
-/* individual attatchment page (i.e. body.attachmentid-763) */
-.attachment-mime-type {
-}
-/* style mime type pages */
-.author {
-}
-/* author page */
-.author-nicename {
-}
-/* user nicename (i.e. body.author-samueladams) */
-.author-paged-1 {
-}
-/* paged author archives (i.e. body.author-paged-4) for page 4 */
-.category {
-}
-/* category page */
-.category-1 {
-}
-/* individual category page (i.e. body.category-6) */
-.category-paged-1 {
-}
-/* replace the number to the corresponding page number */
-.tag {
-}
-/* tag page */
-.tag-slug {
-}
-/* individual tag page (i.e. body.tag-news) */
-.tag-paged-1 {
-}
-/* replace the number to the corresponding page number */
-.page-template {
-}
-/* custom page template page */
-.page-template-page-php {
-}
-/* individual page template (i.e. body.page-template-contact-php */
-.page-paged-1 {
-}
-/* replace the number to the corresponding page number */
-.page-parent {
-}
-/* parent page template */
-.page-child {
-}
-/* child page template */
-.parent-pageid-1 {
-}
-/* replace the number to the corresponding page number */
-.logged-in {
-}
-/* if user is logged in */
-.paged {
-}
-/* paged items like search results or archives */
-.paged-1 {
-}
-/* individual paged (i.e. body.paged-3) */
+//
+// Common Wordpress body classes
+// --------------------------------------------------
 
-// Posts & content styles
+.home {}
+.archive {}
+.single {}
+
+//
+// Posts and content
+// --------------------------------------------------
+
 
 #content {
 	margin-top: 2.2em;
@@ -142,42 +53,13 @@
 /* end .hentry */
 
 .single-title,
-.page-title {
-}
+.page-title {}
 
-.single-title {
-}
+.single-title {}
 
-.page-title {
-}
+.page-title {}
 
-.archive-title {
-}
-
-.post-id {
-}
-/* post by id (i.e. post-3) */
-.post {
-}
-/* general post style */
-.page {
-}
-/* general article on a page style */
-.attachment {
-}
-/* general style on an attatchment */
-.sticky {
-}
-/* sticky post style */
-.hentry {
-}
-/* hentry class */
-.category-slug {
-}
-/* style by category (i.e. category-videos) */
-.tag-slug {
-}
-/* style by tag (i.e. tag-news) */
+.archive-title {}
 
 /* post meta */
 .byline {
@@ -202,13 +84,6 @@
 		.table;
 	}
 
-	ul, ol {
-
-		li {
-		}
-
-	}
-
 	ul {
 
 		li {
@@ -216,12 +91,6 @@
 
 	}
 
-	ol {
-
-		li {
-		}
-
-	}
 
 	blockquote {
 
@@ -276,21 +145,38 @@
 }
 /* end .entry-content */
 
+.article-footer {
+	
+	p.tags {
+		
+		font-size: 12px;
+		color: #777;
+		
+		a {
+			.label;
+			.label-default;
+			font-size: 90%;
+		}
+		 
+	}
+	
+}
+
 .wp-caption {
 	background: #eee;
 	padding: 5px;
 
-/* images inside wp-caption */
-img {
-	margin-bottom: 0;
-	width: 100%;
-}
+	/* images inside wp-caption */
+	img {
+		margin-bottom: 0;
+		width: 100%;
+	}
 
-p.wp-caption-text {
-	font-size: 0.85em;
-	margin: 4px 0 7px;
-	text-align: center;
-}
+	p.wp-caption-text {
+		font-size: 0.85em;
+		margin: 4px 0 7px;
+		text-align: center;
+	}
 
 }
 /* end .wp-caption */
@@ -321,6 +207,8 @@ p.wp-caption-text {
 .gallery-caption {
 }
 
+/* image sizes */
+
 .size-full {
 }
 .size-large {
@@ -330,7 +218,7 @@ p.wp-caption-text {
 .size-thumbnail {
 }
 
-// Sidebars and Asides
+/* sidebars and asides */
 #sidebar {
 
 	margin-top: 20px;
@@ -354,20 +242,36 @@ p.wp-caption-text {
 
 			a {
 			}
-
-/* deep nesting */
-ul {
+		}
+	}
 }
-
-}
-
-}
-
-}
-
 .pagination.pagination-centered {
 	text-align: center;
 	width: 100%;
+}
+
+// Comments
+
+.comments {
+	
+	.comment {
+		padding: 20px;
+		
+		&.odd {
+			background: #f8f8f8;
+		}
+		
+		img.media-object {
+			width: 64px;
+			height: 64px;
+		}
+		
+	}
+	
+	.comment.depth-2 {
+		margin-left: 34px;
+	}
+	
 }
 
 // Footer Styles
@@ -388,6 +292,17 @@ ul {
 }
 /* end .footer-links */
 
+/* misc. bootstrap style overrides */
+
+.btn a {
+	color: @btn-default-color;
+	font-weight: normal;
+	text-decoration: none;
+}
+
+.btn.btn-primary a {
+	color: @btn-primary-color;
+}
 
 .copyright, #credit {
 	color: #ccc;

@@ -27,29 +27,25 @@ class Blankout_Customize
          array(
             'title' => __( 'Blankout Options', 'blankout' ), //Visible title of section
             'priority' => 1, //Determines what order this appears in
-            'capability' => 'edit_theme_options', //Capability needed to tweak
             'description' => __('Allows you to customize some example settings for Blankout.', 'blankout'), //Descriptive tooltip
          ) 
       );
       
       //2. Register new settings to the WP database...
-      $wp_customize->add_setting( 'blankout_options[link_textcolor]', //Give it a SERIALIZED name (so all theme settings can live under one db record)
+      $wp_customize->add_setting( 'link_textcolor',
          array(
             'default' => '#08C', //Default setting/value to save
-            'type' => 'option', //Is this an 'option' or a 'theme_mod'?
-            'capability' => 'edit_theme_options', //Optional. Special permissions for accessing this setting.
             'transport' => 'postMessage', //What triggers a refresh of the setting? 'refresh' or 'postMessage' (instant)?
          ) 
       );
-	  $wp_customize->add_setting( 'blankout_options[menu_search]', //Give it a SERIALIZED name (so all theme settings can live under one db record)
-	     array(
-	        'default' => 'true', //Default setting/value to save
-	        'capability' => 'edit_theme_options', //Optional. Special permissions for accessing this setting.
-	        'transport' => 'postMessage', //What triggers a refresh of the setting? 'refresh' or 'postMessage' (instant)?
-	     ) 
-	  );
+      $wp_customize->add_setting( 'navbar_background',
+         array(
+            'default' => '#EEE', //Default setting/value to save
+            'transport' => 'postMessage', //What triggers a refresh of the setting? 'refresh' or 'postMessage' (instant)?
+         ) 
+      );
 	
-	  $wp_customize->add_setting( 'blankout_options[menu_title]', //Give it a SERIALIZED name (so all theme settings can live under one db record)
+	  $wp_customize->add_setting( 'menu_title', //Give it a SERIALIZED name (so all theme settings can live under one db record)
 	     array(
 	        'default' => 'true', //Default setting/value to save
 	        'capability' => 'edit_theme_options' //Optional. Special permissions for accessing this setting.
@@ -64,21 +60,25 @@ class Blankout_Customize
          array(
             'label' => __( 'Body Link Color', 'blankout' ), //Admin-visible name of the control
             'section' => 'colors', //ID of the section this control should render in (can be one of yours, or a WordPress default section)
-            'settings' => 'blankout_options[link_textcolor]', //Which setting to load and manipulate (serialized is okay)
-            'priority' => 10, //Determines the order this control appears in for the specified section
+            'settings' => 'link_textcolor', //Which setting to load and manipulate (serialized is okay)
+            'priority' => 11, //Determines the order this control appears in for the specified section
          ) 
       ) );
 
+	  $wp_customize->add_control( new WP_Customize_Color_Control(
+	     $wp_customize,
+	     'blankout_navbar_background', //Set a unique ID for the control
+	     array(
+	        'label' => __( 'Navbar Background', 'blankout' ), //Admin-visible name of the control
+	        'section' => 'colors', //ID of the section this control should render in (can be one of yours, or a WordPress default section)
+	        'settings' => 'navbar_background', //Which setting to load and manipulate (serialized is okay)
+	        'priority' => 10, //Determines the order this control appears in for the specified section
+	     ) 
+	  ) );
+
 		$wp_customize->add_control( 'show_menu_title', array(
-		    'settings' => 'blankout_options[menu_title]',
+		    'settings' => 'menu_title',
 		    'label'    => __( 'Show title in nav bar' ),
-		    'section'  => 'blankout_options',
-		    'type'     => 'checkbox',
-		) );
-		
-		$wp_customize->add_control( 'show_menu_search', array(
-		    'settings' => 'blankout_options[menu_search]',
-		    'label'    => __( 'Show search in nav bar' ),
 		    'section'  => 'blankout_options',
 		    'type'     => 'checkbox',
 		) );
@@ -86,8 +86,8 @@ class Blankout_Customize
       //4. We can also change built-in settings by modifying properties. For instance, let's make some stuff use live preview JS...
       $wp_customize->get_setting( 'blogname' )->transport = 'postMessage';
       $wp_customize->get_setting( 'blogdescription' )->transport = 'postMessage';
-      $wp_customize->get_setting( 'blankout_options[menu_title]' )->transport = 'refresh';
-      $wp_customize->get_setting( 'blankout_options[menu_search]' )->transport = 'postMessage';
+      $wp_customize->get_setting( 'menu_title' )->transport = 'refresh';
+      $wp_customize->get_setting( 'navbar_background' )->transport = 'postMessage';
       $wp_customize->get_setting( 'background_color' )->transport = 'postMessage';
    }
 
@@ -110,13 +110,9 @@ class Blankout_Customize
 			<?php } else { ?>
 				<?php self::generate_css('.navbar-brand', 'display', 'none'); ?> 
 			<?php } ?>
-			<?php if('blankout_options[menu_search]' == true) { ?>
-           		<?php self::generate_css('.navbar-search', 'display', 'block'); ?> 
-			<?php } else { ?>
-				<?php self::generate_css('.navbar-search', 'display', 'none'); ?> 
-			<?php } ?>
-           	<?php self::generate_css('body', 'background-color', 'background_color', '#'); ?> 
-           	<?php self::generate_css('a', 'color', 'blankout_options[link_textcolor]'); ?>
+           	<?php self::generate_css('body', 'background-color', 'background_color'); ?> 
+           	<?php self::generate_css('a', 'color', 'link_textcolor'); ?>
+           	<?php self::generate_css('.navbar', 'background-color', 'navbar_background'); ?>
       </style> 
       <!--/Customizer CSS-->
       <?php
@@ -137,7 +133,7 @@ class Blankout_Customize
    {
       wp_enqueue_script( 
            'blankout-themecustomizer', //Give the script an ID
-           get_template_directory_uri().'/js/theme-customizer.js', //Define it's JS file
+           get_template_directory_uri().'/js/theme-customizer-ck.js', //Define it's JS file
            array( 'jquery','customize-preview' ), //Define dependencies
            '', //Define a version (optional) 
            true //Specify whether to put in footer (leave this true)

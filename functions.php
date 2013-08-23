@@ -43,20 +43,16 @@ include(get_template_directory().'/inc/customize.php');
 //if TRUE, overrides the default bootstrap behavior where user must click on a top level menu item in order to see subpages
 define('BOOTSTRAP_DROPDOWN_ON_HOVER', TRUE);
 
-// check for Mindshare Theme API plugin (required)
-if(!is_plugin_active('mcms-api/mcms-api.php') && !is_admin()) {
-	wp_die('This theme requires the Mindshare Theme API plugin. Luckily, it\'s free, open source and dead easy to get! <br /><br /><strong>Step 1</strong> <a href="http://svn.mindsharestudios.com/mcms-api/mcms-api.zip">Download the zip.</a> <br /><strong>Step 2</strong> <a href="/wp-admin/plugin-install.php?tab=upload">Install and activate.</a>');
-}
-
 if(!isset($content_width)) {
 	$content_width = 960;
 }
 
 // load global theme options
-$theme_options = get_theme_mod( 'blankout_options' );
+$theme_options = get_theme_mods();
 
 add_action('wp_enqueue_scripts', 'blankout_scripts_and_styles', 999);
 add_filter('style_loader_tag', 'blankout_ie_conditional', 10, 2);
+add_action('init', 'blankout_configure_mapi');
 
 // Thumbnail sizes
 add_theme_support('post-thumbnails');
@@ -103,6 +99,7 @@ add_action('init', 'blankout_setup_menus');
 register_sidebar(
 	array(
 		 'name'          => __('Main Sidebar', 'blankout'),
+		 'id'            => 'main-sidebar',
 		 'before_widget' => '<li id="%1$s" class="widget %2$s">',
 		 'after_widget'  => '</li>',
 		 'before_title'  => '<h4 class="widgettitle">',
@@ -113,6 +110,7 @@ register_sidebar(
 register_sidebar(
 	array(
 		 'name'          => __('Blog Sidebar', 'blankout'),
+		 'id'            => 'blog-sidebar',
 		 'before_widget' => '<li id="%1$s" class="widget %2$s">',
 		 'after_widget'  => '</li>',
 		 'before_title'  => '<h4 class="widgettitle">',
@@ -120,40 +118,29 @@ register_sidebar(
 	)
 );
 
-function add_search_box($items, $args) {
-	$form = '<form role="search" class="navbar-search pull-right" method="get" id="searchform" action="'.home_url('/').'" >
-	    <input type="text" class="search-query" value="'.get_search_query().'" name="s" id="s" placeholder="'.esc_attr__('Search', 'blankout').'" />
-	    </form>';
+function blankout_configure_mapi() {
+	// check for Mindshare Theme API plugin (required)
+	if(!is_plugin_active('mcms-api/mcms-api.php') && !is_admin()) {
+		wp_die('This theme requires the Mindshare Theme API plugin. Luckily, it\'s free, open source and dead easy to get! <br /><br /><strong>Step 1</strong> <a href="http://svn.mindsharestudios.com/mcms-api/mcms-api.zip">Download the zip.</a> <br /><strong>Step 2</strong> <a href="/wp-admin/plugin-install.php?tab=upload">Install and activate.</a>');
+	}
 
-	$items .= '<li class="pull-right">'.$form.'</li>';
-
-	return $items;
-}
-if($theme_options['menu_search']) {
-//	add_filter('wp_nav_menu_items', 'add_search_box', 10, 2);
+	mapi_update_option('load_bootstrap', true);
+	mapi_update_option('load_modernizr_js', true);
+	
 }
 
 function blankout_scripts_and_styles() {
 	if(!is_admin()) {
-
-		// modernizr (without media query polyfill)
-		wp_register_script('blankout-modernizr', get_stylesheet_directory_uri().'/js/libs/modernizr.custom.min.js', array(), '2.6.2'); // @todo MOVE TO PLUGIN
-		wp_register_script('bootstrap-js', get_stylesheet_directory_uri().'/js/libs/bootstrap-ck.js', array('jquery'));
+		
 		wp_register_script('blankout-js', get_stylesheet_directory_uri().'/js/main-ck.js', array('jquery'));
 
 		wp_register_style('bootstrap-stylesheet', get_stylesheet_directory_uri().'/css/bootstrap.css', array(), '', 'all');
-
-		if(is_singular() && comments_open() && (get_option('thread_comments') == 1)) {
-			wp_enqueue_script('comment-reply');
-		}
-
-		wp_enqueue_script('blankout-modernizr');
-		wp_enqueue_script('bootstrap-js');
 		wp_enqueue_script('blankout-js');
 		
 		wp_enqueue_style('bootstrap-stylesheet');
 		
 	}
+	
 }
 
 // adding conditional wrapper around ie stylesheet, source: http://code.garyjones.co.uk/ie-conditional-style-sheets-wordpress/
@@ -216,7 +203,7 @@ if(!class_exists('Bootstrap_Menu_Walker')) {
 		 * @param string $output Passed by reference. Used to append additional content.
 		 * @param int $depth Depth of page. Used for padding.
 		 */
-		function start_lvl( &$output, $depth ) {
+		function start_lvl( &$output, $depth = 0, $args = array() ) {
 			$indent = str_repeat( "\t", $depth );
 			$output	   .= "\n$indent<ul class=\"dropdown-menu\">\n";		
 		}
@@ -412,30 +399,25 @@ if(is_readable($locale_file)) {
 // wp_list_comments callback
 function blankout_comments($comment, $args, $depth) {
 	$GLOBALS['comment'] = $comment; ?>
-<div <?php comment_class("media"); ?>>
-	<article id="comment-<?php comment_ID(); ?>" class="clearfix">
+	<article id="comment-<?php comment_ID(); ?>" <?php comment_class("media clearfix"); ?>>
+		<img data-gravatar="http://www.gravatar.com/avatar/<?php echo md5($bgauthemail); ?>?s=48" class="pull-left media-object load-gravatar avatar avatar-48 photo" height="48" width="48" src="<?php echo get_template_directory_uri(); ?>/img/nothing.gif" />
 		<header class="comment-author vcard">
-			<?php
-
-			$bgauthemail = get_comment_author_email();
-			?>
-			<img data-gravatar="http://www.gravatar.com/avatar/<?php echo md5($bgauthemail); ?>?s=48" class="load-gravatar avatar avatar-48 photo pull-left" height="48" width="48" src="<?php echo get_template_directory_uri(); ?>/img/nothing.gif" />
+			<?php $bgauthemail = get_comment_author_email(); ?>
 
 			<?php printf(__('<cite class="fn">%s</cite>'), get_comment_author_link()) ?>
 			<time datetime="<?php echo comment_time('Y-m-j'); ?>"><a href="<?php echo htmlspecialchars(get_comment_link($comment->comment_ID)) ?>"><?php comment_time('F jS, Y'); ?> </a></time>
-			<?php edit_comment_link(__('Edit', 'blankout'), '', '') ?>
+			<?php edit_comment_link(__('Edit', 'blankout'), '<button class="btn btn-default btn-xs">', '</button>') ?>
 		</header>
 		<?php if($comment->comment_approved == '0') : ?>
 		<div class="alert info">
 			<p><?php _e('Your comment is awaiting moderation.', 'blankout') ?></p>
 		</div>
 		<?php endif; ?>
-		<section class="comment_content clearfix">
+		<section class="comment_content media-body clearfix">
 			<?php comment_text() ?>
+			<button class="btn btn-primary btn-sm"><?php comment_reply_link(array_merge($args, array('depth' => $depth, 'max_depth' => $args['max_depth']))) ?></button>
 		</section>
-		<?php comment_reply_link(array_merge($args, array('depth' => $depth, 'max_depth' => $args['max_depth']))) ?>
 	</article>
-</div>
 <?php
 }
 

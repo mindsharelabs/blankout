@@ -17,7 +17,7 @@
 					<?php the_content(); ?>
 				</section>
 				<footer class="article-footer">
-					<?php the_taxonomies('before=<p class="tags">&after=</p>'); ?>
+					<?php the_taxonomies('before=<p class="tags">&after=</p>&template=%s: %l'); ?>
 					<?php edit_post_link(); ?>
 				</footer>
 
