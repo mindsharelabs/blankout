@@ -36,9 +36,10 @@
 <a id="top"></a>
 <div class="container">
 	<header class="header" role="banner">
-		<nav class="navbar">
-			<div class="container">
-			    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse-scrollable">
+		<nav class="navbar navbar-default">
+			<div class="navbar-header">
+			    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
 				    <span class="icon-bar"></span>
 				    <span class="icon-bar"></span>
 				    <span class="icon-bar"></span>
@@ -46,10 +47,10 @@
 				<?php if(get_theme_mod('menu_title')) {?>
 					<a class="navbar-brand" id="logo" title="<?php echo get_bloginfo('description'); ?>" href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a>
 				<?php } ?>
-			    <div class="nav-collapse collapse nav-collapse-scrollable">
-					<?php blankout_main_nav(); ?>
-			    </div>
 			</div>
+		    <div class="collapse navbar-collapse">
+				<?php blankout_main_nav(); ?>
+		    </div>
 		</nav>
 	</header>
 </div>

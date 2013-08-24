@@ -41,7 +41,7 @@ include(get_template_directory().'/inc/carousel-post-type.php');
 include(get_template_directory().'/inc/customize.php');
 
 //if TRUE, overrides the default bootstrap behavior where user must click on a top level menu item in order to see subpages
-define('BOOTSTRAP_DROPDOWN_ON_HOVER', TRUE);
+define('BOOTSTRAP_DROPDOWN_ON_HOVER', FALSE);
 
 if(!isset($content_width)) {
 	$content_width = 960;
@@ -100,8 +100,8 @@ register_sidebar(
 	array(
 		 'name'          => __('Main Sidebar', 'blankout'),
 		 'id'            => 'main-sidebar',
-		 'before_widget' => '<li id="%1$s" class="widget %2$s">',
-		 'after_widget'  => '</li>',
+		 'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		 'after_widget'  => '</div>',
 		 'before_title'  => '<h4 class="widgettitle">',
 		 'after_title'   => '</h4>',
 	)
@@ -111,12 +111,22 @@ register_sidebar(
 	array(
 		 'name'          => __('Blog Sidebar', 'blankout'),
 		 'id'            => 'blog-sidebar',
-		 'before_widget' => '<li id="%1$s" class="widget %2$s">',
-		 'after_widget'  => '</li>',
+		 'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		 'after_widget'  => '</div>',
 		 'before_title'  => '<h4 class="widgettitle">',
 		 'after_title'   => '</h4>',
 	)
 );
+
+// CUSTOMIZING SIDEBAR WIDGETS
+
+add_filter('wp_list_categories', 'add_span_cat_count');
+
+function add_span_cat_count($links) {
+	$links = str_replace('</a> (', '</a> <span class="badge">', $links);
+	$links = str_replace(')', '</span>', $links);
+	return $links;
+}
 
 function blankout_configure_mapi() {
 	// check for Mindshare Theme API plugin (required)
@@ -133,7 +143,7 @@ function blankout_configure_mapi() {
 function blankout_scripts_and_styles() {
 	if(!is_admin()) {
 		
-		wp_register_script('blankout-js', get_stylesheet_directory_uri().'/js/main-ck.js', array('jquery'));
+		wp_register_script('blankout-js', get_stylesheet_directory_uri().'/js/main.min.js', array('jquery'));
 
 		wp_register_style('bootstrap-stylesheet', get_stylesheet_directory_uri().'/css/bootstrap.css', array(), '', 'all');
 		wp_enqueue_script('blankout-js');
@@ -503,7 +513,7 @@ function insert_fb_in_head() {
 	global $post;
 	if ( !is_singular()) //if it is not a post or a page
 		return;
-        echo '<meta property="fb:admins" content=""/>';
+        echo '<meta property="fb:admins" content="' . mapi_get_facebook_id(mapi_get_option("facebook_uri")) . '"/>';
         echo '<meta property="og:title" content="' . get_the_title() . '"/>';
         echo '<meta property="og:type" content="article"/>';
         echo '<meta property="og:url" content="' . get_permalink() . '"/>';

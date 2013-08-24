@@ -30,6 +30,8 @@
 .flexslider {
 	margin: 0;
 	padding: 0;
+	position: relative;
+	z-index: 1; // fix for webkit text rendering bug. if you remove this line, text will flicker on slide animation
 }
 .flexslider .slides > li {
 	display: none;

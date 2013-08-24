@@ -34,7 +34,7 @@ class Blankout_Customize
       //2. Register new settings to the WP database...
       $wp_customize->add_setting( 'link_textcolor',
          array(
-            'default' => '#08C', //Default setting/value to save
+            'default' => '#428BCA', //Default setting/value to save
             'transport' => 'postMessage', //What triggers a refresh of the setting? 'refresh' or 'postMessage' (instant)?
          ) 
       );
@@ -133,7 +133,7 @@ class Blankout_Customize
    {
       wp_enqueue_script( 
            'blankout-themecustomizer', //Give the script an ID
-           get_template_directory_uri().'/js/theme-customizer-ck.js', //Define it's JS file
+           get_template_directory_uri().'/js/theme-customizer.min.js', //Define it's JS file
            array( 'jquery','customize-preview' ), //Define dependencies
            '', //Define a version (optional) 
            true //Specify whether to put in footer (leave this true)

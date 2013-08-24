@@ -39,9 +39,19 @@
 
 	header {
 		
+		margin-top: 0px;
+		
 		.amp {
 			font-family: Baskerville,'Goudy Old Style',Palatino,'Book Antiqua',serif;
 			font-style: italic;
+		}
+		
+		.breadcrumb {
+			
+			.current_item {
+				color: @breadcrumb-active-color;
+			}
+			
 		}
 		
 	}
@@ -221,29 +231,48 @@
 /* sidebars and asides */
 #sidebar {
 
-	margin-top: 20px;
 	
-}
-
-.widgettitle {
 }
 
 .widget {
 
-	ul {
-
-		li {
-
-			&:first-child {
-			}
-
-			&:last-child {
-			}
-
-			a {
-			}
-		}
+	margin-bottom: 40px;
+			
+	.widgettitle {
+		border-bottom: 1px solid @table-border-color;
+		width: 90%;
+		padding-bottom: 4px;	
 	}
+	
+	ul {
+		.list-unstyled;
+	}
+
+	&:first-child {
+	}
+
+	&:last-child {
+	}
+
+	// Default Wordpress widgets
+	
+	&.widget_categories {
+		
+		select {
+			.form-control;
+		}
+		
+		>ul {
+			.list-group;
+			
+			li {
+				.list-group-item;
+			}
+			
+		}
+		
+	}
+
 }
 .pagination.pagination-centered {
 	text-align: center;

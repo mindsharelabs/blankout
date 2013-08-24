@@ -23,7 +23,7 @@ if($query->have_posts()) : ?>
 
 		<li class="item">
 			<?php the_post_thumbnail("full"); ?>
-			<p class="flex-caption"><?php echo get_the_content(); ?></p>
+			<p class="flex-caption hidden-sm hidden-xs"><?php echo get_the_content(); ?></p>
 		</li>
 
 		<?php endwhile; ?>
