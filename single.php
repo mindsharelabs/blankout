@@ -7,7 +7,11 @@
 
 			<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?> role="article" itemscope itemtype="http://schema.org/BlogPosting">
 				<header class="article-header page-header">
-					<ol class="breadcrumb"><?php if(function_exists('bcn_display')) bcn_display_list();?></ol>
+					<?php if(function_exists('bcn_display')) { ?> 
+						<ol class="breadcrumb">
+							<?php bcn_display_list();?>
+						</ol>
+					<?php } ?>
 					<h1 class="entry-title single-title" itemprop="headline"><?php the_title(); ?></h1>
 					<p class="byline vcard"><?php _e("Posted", "blankout"); ?>
 						<time class="updated" datetime="<?php echo the_time('Y-m-d'); ?>"><?php the_time('F jS, Y'); ?></time> <?php _e("by", "blankout"); ?>
