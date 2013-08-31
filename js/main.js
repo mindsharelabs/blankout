@@ -16,7 +16,7 @@ jQuery(document).ready(function() {
 function init() {
 
 	// bind Bootsrtap's CSS classes to Grvaity Forms 
-	jQuery(document).bind('gform_post_render', function(){
+	jQuery(document).bind('gform_post_render', function() {
 		jQuery('.button').addClass('btn');
 		jQuery('.button').addClass('btn-primary');
 		jQuery('.gform_next_button').addClass('pull-right');
@@ -31,13 +31,6 @@ function init() {
 		jQuery('#input_1_28').addClass('col-lg-8');
 		jQuery('#input_1_32').addClass('col-lg-8');
 	});
-
-	//jQuery("#suckerfishnav li:last-child ").css("border-right","none");
-
-	/*jQuery('a[href=#top]').click(function(){
-	 jQuery('html, body').animate({scrollTop:0}, 400);
-	 return false;
-	 });*/
 
 }
 
@@ -97,7 +90,7 @@ jQuery(document).ready(function($) {
 	if(responsive_viewport > 1030) {
 
 	}
-	
+
 	// Enable flexslider carousel. Make sure to turn on jquery.flexslider in Developer Options
 
 	$('.flexslider').flexslider({

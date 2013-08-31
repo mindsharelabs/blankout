@@ -6,25 +6,26 @@
 <html <?php language_attributes(); ?> class="no-js lt-ie9 lt-ie8"><![endif]-->
 <!--[if (IE 8)&!(IEMobile)]>
 <html <?php language_attributes(); ?> class="no-js lt-ie9"><![endif]-->
-<!--[if gt IE 8]><!--> <html <?php language_attributes(); ?> class="no-js"><!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html <?php language_attributes(); ?> class="no-js"><!--<![endif]-->
 <head>
 	<meta charset="<?php bloginfo('charset'); ?>" />
 	<title><?php bloginfo('name'); ?> | <?php is_front_page() ? bloginfo('description') : wp_title(''); ?></title>
 	<?php blankout_copyright(); ?>
-	<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+	<!--[if IE]>
+	<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
 	<meta name="HandheldFriendly" content="True" />
 	<meta name="MobileOptimized" content="320" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	
-	<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/favicon.png" />
+	<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/img/favicon.png" />
 	<link rel="alternate" type="application/rss+xml" href="<?php bloginfo('rss2_url'); ?>" title="<?php echo esc_html(get_bloginfo('name')); ?> latest updates" />
 
 	<?php if(get_option('default_comment_status') == 'open') : ?>
-	<link rel="alternate" type="application/rss+xml" href="<?php bloginfo('comments_rss2_url'); ?>" title="<?php echo esc_html(get_bloginfo('name')); ?> recent comments" />
+		<link rel="alternate" type="application/rss+xml" href="<?php bloginfo('comments_rss2_url'); ?>" title="<?php echo esc_html(get_bloginfo('name')); ?> recent comments" />
 	<?php endif; ?>
 
 	<?php if(get_option('default_ping_status') == 'open') : ?>
-	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
+		<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 	<?php endif; ?>
 
 	<?php wp_head(); ?>
@@ -34,23 +35,31 @@
 </head>
 <body <?php body_class(); ?>>
 <a id="top"></a>
+
 <div class="container">
 	<header class="header" role="banner">
 		<nav class="navbar navbar-default">
 			<div class="navbar-header">
-			    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="sr-only">Toggle navigation</span>
-				    <span class="icon-bar"></span>
-				    <span class="icon-bar"></span>
-				    <span class="icon-bar"></span>
-			    </button>
-				<?php if(get_theme_mod('menu_title')) {?>
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+				</button>
+				<?php if(get_theme_mod('menu_title')) { ?>
 					<a class="navbar-brand" id="logo" title="<?php echo get_bloginfo('description'); ?>" href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a>
 				<?php } ?>
 			</div>
-		    <div class="collapse navbar-collapse">
-				<?php blankout_main_nav(); ?>
-		    </div>
+			<div class="collapse navbar-collapse">
+				<?php wp_nav_menu(
+					array(
+						 'container'       => ' ',
+						 'container_class' => 'nav',
+						 'menu'            => 'main-nav',
+						 'menu_class'      => 'nav navbar-nav',
+						 'theme_location'  => 'main-nav',
+						 'depth'           => '2',
+						 'walker'          => new Bootstrap_Menu_Walker()
+					)
+				); ?>
+			</div>
 		</nav>
 	</header>
 </div>

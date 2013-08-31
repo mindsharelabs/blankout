@@ -1,58 +1,22 @@
 <?php
 /*
-Blankout Theme
-Description: An advanced HTML5 theme framework by Mindshare Studios.
-Author: Mindshare Studios, Inc
-Author URI: http://mind.sh/are/
-
-License: GPLv3
-License URI: http://www.gnu.org/licenses/
-
-Tags: html5, microdata, widgets, blank slate, starter theme, minimalist, developer, mindshare, flexble-width, translation-ready, microformats, rtl-language-support, responsive
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-Based loosely on:
-	http://themble.com/bones/
-
-Built using:
-	jQuery
-	LESS CSS
-	Mindshare Theme API
-	Twitter Bootstrap
-
+Blankout Theme WordPress Functions File
 */
-// Includes for custom post types
-include(get_template_directory().'/inc/carousel-post-type.php');
-// include(get_template_directory().'/inc/custom-post-types.php');
 
-// Enables theme customizer for Blankout in Appearance >> Themes
+// Enable theme customizer for Blankout (Appearance > Themes)
 include(get_template_directory().'/inc/customize.php');
+include(get_template_directory().'/inc/carousel-post-type.php');
+//include(get_template_directory().'/inc/custom-post-types.php');
 
-//if TRUE, overrides the default bootstrap behavior where user must click on a top level menu item in order to see subpages
+/**
+ * if TRUE, overrides the default bootstrap behavior where user must click on a top level menu item in order to see subpages
+ *
+ */
 define('BOOTSTRAP_DROPDOWN_ON_HOVER', FALSE);
 
 if(!isset($content_width)) {
 	$content_width = 960;
 }
-
-// load global theme options
-$theme_options = get_theme_mods();
-
-add_action('wp_enqueue_scripts', 'blankout_scripts_and_styles', 999);
-add_filter('style_loader_tag', 'blankout_ie_conditional', 10, 2);
-add_action('init', 'blankout_configure_mapi');
 
 // Thumbnail sizes
 add_theme_support('post-thumbnails');
@@ -85,16 +49,13 @@ add_theme_support('custom-background',
 		 'chat' // chat transcript
 	)
 );*/
-function blankout_setup_menus() {
-	register_nav_menus(
-		array(
-			 'main-nav'   => __('Main Navigation', 'blankout'), // main nav in header
-			 'footer-nav' => __('Footer Navigation', 'blankout') // secondary nav in footer
-		)
-	);
-}
-add_action('init', 'blankout_setup_menus');
 
+register_nav_menus(
+	array(
+		 'main-nav'   => __('Main Navigation', 'blankout'), // main nav in header
+		 'footer-nav' => __('Footer Navigation', 'blankout') // secondary nav in footer
+	)
+);
 
 register_sidebar(
 	array(
@@ -122,80 +83,59 @@ register_sidebar(
 
 add_filter('wp_list_categories', 'add_span_cat_count');
 
+/**
+ * @param $links
+ *
+ * @return mixed
+ */
 function add_span_cat_count($links) {
 	$links = str_replace('</a> (', '</a> <span class="badge">', $links);
 	$links = str_replace(')', '</span>', $links);
 	return $links;
 }
 
+/**
+ * Check for Mindshare Theme API plugin and initialize options
+ *
+ */
 function blankout_configure_mapi() {
-	// check for Mindshare Theme API plugin (required)
 	if(!is_plugin_active('mcms-api/mcms-api.php') && !is_admin()) {
 		wp_die('This theme requires the Mindshare Theme API plugin. Luckily, it\'s free, open source and dead easy to get! <br /><br /><strong>Step 1</strong> <a href="http://svn.mindsharestudios.com/mcms-api/mcms-api.zip">Download the zip.</a> <br /><strong>Step 2</strong> <a href="/wp-admin/plugin-install.php?tab=upload">Install and activate.</a>');
 	}
 	if(function_exists('mapi_update_option')) {
-		mapi_update_option('load_bootstrap', true);
-		mapi_update_option('load_modernizr_js', true);
+		mapi_update_option('load_bootstrap', TRUE);
+		mapi_update_option('load_modernizr_js', TRUE);
 	}
-	
 }
 
+add_action('init', 'blankout_configure_mapi');
+
+/**
+ * Load frontend CSS/JS
+ *
+ */
 function blankout_scripts_and_styles() {
 	if(!is_admin()) {
-		
-		wp_register_script('blankout-js', get_stylesheet_directory_uri().'/js/main.min.js', array('jquery'));
 
-		wp_register_style('bootstrap-stylesheet', get_stylesheet_directory_uri().'/css/bootstrap.css', array(), '', 'all');
+		wp_register_script('blankout-js', get_stylesheet_directory_uri().'/js/main.js', array('jquery'));
 		wp_enqueue_script('blankout-js');
-		
-		wp_enqueue_style('bootstrap-stylesheet');
-		
-	}
-	
-}
 
-// adding conditional wrapper around ie stylesheet, source: http://code.garyjones.co.uk/ie-conditional-style-sheets-wordpress/
-function blankout_ie_conditional($tag, $handle) {
-	if('blankout-ie-only' == $handle) {
-		$tag = '<!--[if lt IE 9]>'."\n".$tag.'<![endif]-->'."\n";
-	}
-	return $tag;
-}
-
-function blankout_main_nav() {
-	if ( has_nav_menu( 'main-nav' ) ) {
-		wp_nav_menu(
-			array(
-				 'container'       => ' ',
-				 'container_class' => 'nav',
-				 'menu'            => 'main-nav',
-				 'menu_class'      => 'nav navbar-nav',
-				 'theme_location'  => 'main-nav',
-				 'depth'           => '2',
-				 'walker'          => new Bootstrap_Menu_Walker()
-			)
-		);
+		// only load the Bootstrap CSS if the Mindshare Theme API is not already loading it
+		if(!mapi_is_true(mapi_get_option('load_bootstrap_css'))) {
+			wp_register_style('bootstrap-stylesheet', get_stylesheet_directory_uri().'/css/bootstrap.css', array(), '', 'all');
+			wp_enqueue_style('bootstrap-stylesheet');
+		}
 	}
 }
 
-function blankout_footer_nav() {
-	wp_nav_menu(
-		array(
-			 'container'       => '', // remove nav container
-			 'container_class' => 'footer-nav clearfix', // class of container (should you choose to use it)
-			 'menu'            => __('Footer Menu', 'blankout'), // nav name
-			 'menu_class'      => 'nav footer-nav clearfix nav-pills', // adding custom nav class
-			 'theme_location'  => 'footer-nav', // where it's located in the theme
-			 'before'          => '', // before the menu
-			 'after'           => '', // after the menu
-			 'link_before'     => '', // before each link
-			 'link_after'      => '', // after each link
-			 'depth'           => 1, // limit the depth of the nav
-			 //'fallback_cb'     => 'blankout_footer_nav_fallback' // fallback function
-		)
-	);
-}
+add_action('wp_enqueue_scripts', 'blankout_scripts_and_styles', 999);
 
+/**
+ * @param $classes
+ * @param $item
+ *
+ * @return array
+ */
 function add_active_class($classes, $item) {
 	if($item->menu_item_parent == 0 && in_array('current-menu-item', $classes)) {
 		$classes[] = "active";
@@ -206,97 +146,106 @@ function add_active_class($classes, $item) {
 add_filter('nav_menu_css_class', 'add_active_class', 10, 2);
 
 if(!class_exists('Bootstrap_Menu_Walker')) {
-	class Bootstrap_Menu_Walker extends Walker_Nav_Menu {
 	/**
-		 * @see Walker::start_lvl()
+	 * Class Bootstrap_Menu_Walker
+	 */
+	class Bootstrap_Menu_Walker extends Walker_Nav_Menu {
+		/**
+		 * @see   Walker::start_lvl()
 		 * @since 3.0.0
 		 *
 		 * @param string $output Passed by reference. Used to append additional content.
-		 * @param int $depth Depth of page. Used for padding.
+		 * @param int    $depth  Depth of page. Used for padding.
 		 */
-		function start_lvl( &$output, $depth = 0, $args = array() ) {
-			$indent = str_repeat( "\t", $depth );
-			$output	   .= "\n$indent<ul class=\"dropdown-menu\">\n";		
+		function start_lvl(&$output, $depth = 0, $args = array()) {
+			$indent = str_repeat("\t", $depth);
+			$output .= "\n$indent<ul class=\"dropdown-menu\">\n";
 		}
 
 		/**
-		 * @see Walker::start_el()
+		 * @see   Walker::start_el()
 		 * @since 3.0.0
 		 *
-		 * @param string $output Passed by reference. Used to append additional content.
-		 * @param object $item Menu item data object.
-		 * @param int $depth Depth of menu item. Used for padding.
-		 * @param int $current_page Menu item ID.
+		 * @param string $output       Passed by reference. Used to append additional content.
+		 * @param object $item         Menu item data object.
+		 * @param int    $depth        Depth of menu item. Used for padding.
+		 * @param int    $current_page Menu item ID.
 		 * @param object $args
 		 */
 
-		function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
+		function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0) {
 			global $wp_query;
-			$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
+			$indent = ($depth) ? str_repeat("\t", $depth) : '';
 
 			/**
 			 * Dividers & Headers
-		     * ==================
+			 * ==================
 			 * Determine whether the item is a Divider, Header, or regular menu item.
 			 * To prevent errors we use the strcasecmp() function to so a comparison
-			 * that is not case sensitive. The strcasecmp() function returns a 0 if 
+			 * that is not case sensitive. The strcasecmp() function returns a 0 if
 			 * the strings are equal.
 			 */
-			if (strcasecmp($item->title, 'divider') == 0) {
+			if(strcasecmp($item->title, 'divider') == 0) {
 				// Item is a Divider
-				$output .= $indent . '<li class="divider">';
-			} else if (strcasecmp($item->title, 'divider-vertical') == 0) {
-				// Item is a Vertical Divider
-				$output .= $indent . '<li class="divider-vertical">';
-			} else if (strcasecmp($item->title, 'nav-header') == 0) {
-				// Item is a Header
-				$output .= $indent . '<li class="nav-header">' . esc_attr( $item->attr_title );
+				$output .= $indent.'<li class="divider">';
 			} else {
-
-				$class_names = $value = '';
-				$classes = empty( $item->classes ) ? array() : (array) $item->classes;
-				$classes[] = ($item->current) ? 'active' : '';
-				$classes[] = 'menu-item-' . $item->ID;
-				$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
-
-				if ($args->has_children && $depth > 0) {
-					$class_names .= ' dropdown-submenu';
-				} else if($args->has_children && $depth === 0) {
-					$class_names .= ' dropdown';
-				}
-
-				$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
-
-				$id = apply_filters( 'nav_menu_item_id', 'menu-item-'. $item->ID, $item, $args );
-				$id = $id ? ' id="' . esc_attr( $id ) . '"' : '';
-
-				$output .= $indent . '<li' . $id . $value . $class_names .'>';
-
-				$attributes = ! empty( $item->target )     ? ' target="' . esc_attr( $item->target     ) .'"' : '';
-				$attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
-				$attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
-				$attributes .= ($args->has_children) 	    ? ' data-toggle="dropdown" data-target="#" class="dropdown-toggle"' : '';
-
-				$item_output = $args->before;
-
-				/**
-				 * Glyphicons
-				 * ===========
-				 * Since the the menu item is NOT a Divider or Header we check the see
-				 * if there is a value in the attr_title property. If the attr_title
-				 * property is NOT null we apply it as the class name for the glyphicon.
-				 */
-				if(! empty( $item->attr_title )){
-					$item_output .= '<a'. $attributes .'><i class="' . esc_attr( $item->attr_title ) . '"></i>&nbsp;';
+				if(strcasecmp($item->title, 'divider-vertical') == 0) {
+					// Item is a Vertical Divider
+					$output .= $indent.'<li class="divider-vertical">';
 				} else {
-					$item_output .= '<a'. $attributes .'>';
+					if(strcasecmp($item->title, 'nav-header') == 0) {
+						// Item is a Header
+						$output .= $indent.'<li class="nav-header">'.esc_attr($item->attr_title);
+					} else {
+
+						$class_names = $value = '';
+						$classes = empty($item->classes) ? array() : (array) $item->classes;
+						$classes[] = ($item->current) ? 'active' : '';
+						$classes[] = 'menu-item-'.$item->ID;
+						$class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args));
+
+						if($args->has_children && $depth > 0) {
+							$class_names .= ' dropdown-submenu';
+						} else {
+							if($args->has_children && $depth === 0) {
+								$class_names .= ' dropdown';
+							}
+						}
+
+						$class_names = $class_names ? ' class="'.esc_attr($class_names).'"' : '';
+
+						$id = apply_filters('nav_menu_item_id', 'menu-item-'.$item->ID, $item, $args);
+						$id = $id ? ' id="'.esc_attr($id).'"' : '';
+
+						$output .= $indent.'<li'.$id.$value.$class_names.'>';
+
+						$attributes = !empty($item->target) ? ' target="'.esc_attr($item->target).'"' : '';
+						$attributes .= !empty($item->xfn) ? ' rel="'.esc_attr($item->xfn).'"' : '';
+						$attributes .= !empty($item->url) ? ' href="'.esc_attr($item->url).'"' : '';
+						$attributes .= ($args->has_children) ? ' data-toggle="dropdown" data-target="#" class="dropdown-toggle"' : '';
+
+						$item_output = $args->before;
+
+						/**
+						 * Glyphicons
+						 * ===========
+						 * Since the the menu item is NOT a Divider or Header we check the see
+						 * if there is a value in the attr_title property. If the attr_title
+						 * property is NOT null we apply it as the class name for the glyphicon.
+						 */
+						if(!empty($item->attr_title)) {
+							$item_output .= '<a'.$attributes.'><i class="'.esc_attr($item->attr_title).'"></i>&nbsp;';
+						} else {
+							$item_output .= '<a'.$attributes.'>';
+						}
+
+						$item_output .= $args->link_before.apply_filters('the_title', $item->title, $item->ID).$args->link_after;
+						$item_output .= ($args->has_children && $depth == 0) ? ' <span class="caret"></span></a>' : '</a>';
+						$item_output .= $args->after;
+
+						$output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);
+					}
 				}
-
-				$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
-				$item_output .= ($args->has_children && $depth == 0) ? ' <span class="caret"></span></a>' : '</a>';
-				$item_output .= $args->after;
-
-				$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 			}
 		}
 
@@ -305,39 +254,44 @@ if(!class_exists('Bootstrap_Menu_Walker')) {
 		 *
 		 * Display one element if the element doesn't have any children otherwise,
 		 * display the element and its children. Will only traverse up to the max
-		 * depth and no ignore elements under that depth. 
+		 * depth and no ignore elements under that depth.
 		 *
 		 * This method shouldn't be called directly, use the walk() method instead.
 		 *
-		 * @see Walker::start_el()
+		 * @see   Walker::start_el()
 		 * @since 2.5.0
 		 *
-		 * @param object $element Data object
-		 * @param array $children_elements List of elements to continue traversing.
-		 * @param int $max_depth Max depth to traverse.
-		 * @param int $depth Depth of current element.
-		 * @param array $args
-		 * @param string $output Passed by reference. Used to append additional content.
+		 * @param object $element           Data object
+		 * @param array  $children_elements List of elements to continue traversing.
+		 * @param int    $max_depth         Max depth to traverse.
+		 * @param int    $depth             Depth of current element.
+		 * @param array  $args
+		 * @param string $output            Passed by reference. Used to append additional content.
+		 *
 		 * @return null Null on failure with no changes to parameters.
 		 */
 
-		function display_element( $element, &$children_elements, $max_depth, $depth, $args, &$output ) {
-	        if ( !$element ) {
-	            return;
-	        }
+		function display_element($element, &$children_elements, $max_depth, $depth, $args, &$output) {
+			if(!$element) {
+				return;
+			}
 
-	        $id_field = $this->db_fields['id'];
+			$id_field = $this->db_fields['id'];
 
-	        //display this element
-	        if ( is_object( $args[0] ) ) {
-	           $args[0]->has_children = ! empty( $children_elements[$element->$id_field] );
-	        }
+			//display this element
+			if(is_object($args[0])) {
+				$args[0]->has_children = !empty($children_elements[$element->$id_field]);
+			}
 
-	        parent::display_element($element, $children_elements, $max_depth, $depth, $args, $output);
+			parent::display_element($element, $children_elements, $max_depth, $depth, $args, $output);
 		}
 	}
 }
 
+/**
+ * @param string $before
+ * @param string $after
+ */
 function blankout_page_nav($before = '<div class="pagination pagination-centered">', $after = '</div>') {
 	global $wp_query; // $wpdb
 	//$request = $wp_query->request;
@@ -407,7 +361,13 @@ if(is_readable($locale_file)) {
 	require_once($locale_file);
 }
 
-// wp_list_comments callback
+/**
+ * wp_list_comments callback
+ *
+ * @param $comment
+ * @param $args
+ * @param $depth
+ */
 function blankout_comments($comment, $args, $depth) {
 	$GLOBALS['comment'] = $comment; ?>
 	<article id="comment-<?php comment_ID(); ?>" <?php comment_class("media clearfix"); ?>>
@@ -420,9 +380,9 @@ function blankout_comments($comment, $args, $depth) {
 			<?php edit_comment_link(__('Edit', 'blankout'), '<button class="btn btn-default btn-xs">', '</button>') ?>
 		</header>
 		<?php if($comment->comment_approved == '0') : ?>
-		<div class="alert info">
-			<p><?php _e('Your comment is awaiting moderation.', 'blankout') ?></p>
-		</div>
+			<div class="alert info">
+				<p><?php _e('Your comment is awaiting moderation.', 'blankout') ?></p>
+			</div>
 		<?php endif; ?>
 		<section class="comment_content media-body clearfix">
 			<?php comment_text() ?>
@@ -432,28 +392,37 @@ function blankout_comments($comment, $args, $depth) {
 <?php
 }
 
-// @see http://support.google.com/webmasters/bin/answer.py?hl=en&answer=99170 for info on rich snippets
+/**
+ * Adds a hidden div with HTML5 Microdata for posts.
+ *
+ * @see http://support.google.com/webmasters/bin/answer.py?hl=en&answer=99170 for info on rich snippets
+ *
+ */
 function blankout_rich_snippets() {
-	if(function_exists('mapi_option')) {
-		?>
-	<div itemscope itemtype="http://data-vocabulary.org/Organization" class="microdata-meta contact">
-		<meta itemprop="name" content="<?php mapi_option('sitename_txt'); ?>" />
-		<meta itemprop="tel" content="<?php mapi_option('phone_txt'); ?>" />
-		<meta itemprop="email" content="<?php mapi_option('email'); ?>" />
-		<meta itemprop="url" content="<?php echo home_url(); ?>" />
-		<address itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">
-			<span itemprop="street-address"><?php mapi_option('addr1_txt'); ?> <?php mapi_option('addr2_txt'); ?></span> <span itemprop="locality"><?php mapi_option('city_txt'); ?></span>
-			<span itemprop="region"><?php mapi_option('state'); ?></span> <span itemprop="postal-code"><?php mapi_option('zip_txt'); ?></span>
-		</address>
+	if(function_exists('mapi_option')) : ?>
+		<div itemscope itemtype="http://data-vocabulary.org/Organization" class="microdata-meta contact">
+			<meta itemprop="name" content="<?php mapi_option('sitename_txt'); ?>" />
+			<meta itemprop="tel" content="<?php mapi_option('phone_txt'); ?>" />
+			<meta itemprop="email" content="<?php mapi_option('email'); ?>" />
+			<meta itemprop="url" content="<?php echo home_url(); ?>" />
+			<address itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">
+				<span itemprop="street-address"><?php mapi_option('addr1_txt'); ?> <?php mapi_option('addr2_txt'); ?></span> <span itemprop="locality"><?php mapi_option('city_txt'); ?></span>
+				<span itemprop="region"><?php mapi_option('state'); ?></span> <span itemprop="postal-code"><?php mapi_option('zip_txt'); ?></span>
+			</address>
 			<span itemprop="geo" itemscope itemtype="http://data-vocabulary.org/Geo">
 				<meta itemprop="latitude" content="<?php mapi_option('lat_txt'); ?>" />
 				<meta itemprop="longitude" content="<?php mapi_option('long_txt'); ?>" />
 			</span>
-	</div>
-	<?php
-	}
+		</div>
+	<?php endif;
 }
 
+/**
+ * Optionally displays a credit message in compatible themes
+ * when enabled in the Mindshare Theme API
+ * (Settings > Developer Settings > Misc. Settings > Show Credit)
+ *
+ */
 function blankout_copyright() {
 	echo '<!--compression-none-->';
 	echo '<!-- Copyright '.date('Y').' '.get_bloginfo('name').' -->';
@@ -468,10 +437,16 @@ function blankout_copyright() {
 	echo '<!--compression-none-->';
 }
 
+/**
+ * Optionally displays a credit message in compatible themes
+ * when enabled in the Mindshare Theme API
+ * (Settings > Developer Settings > Misc. Settings > Show Credit)
+ *
+ */
 function blankout_footer_credit() {
 	$cc = 'V2Vic2l0ZSBkZXNpZ24sIGRldmVsb3BtZW50LCBhbmQgU0VPIGJ5IE1pbmRzaGFyZSBTdHVkaW9zLCBJbmM=';
 	$host = parse_url(get_bloginfo('url'));
-	$c = '<span class="copyright pull-left">Copyright &copy; '.date('Y').' '.get_bloginfo('name').'</span><p id="credit" class="source-org copyright pull-right"><a class="no-icon" href="http://mind.sh/are/?ref='.$host['host'].'" target="_blank" title="'.base64_decode($cc).'"><img src="'.get_bloginfo('template_directory').'/img/credit.png" alt="'.base64_decode($cc).'" /></a></p>';
+	$c = '<span class="copyright pull-left">Copyright &copy; '.date('Y').' '.get_bloginfo('name').'</span><p id="credit" class="source-org copyright pull-right"><a class="no-icon" href="http://mind.sh/are/?ref='.$host['host'].'" target="_blank" title="'.base64_decode($cc).'"><img src="'.get_template_directory_uri().'/img/credit.png" alt="'.base64_decode($cc).'" /></a></p>';
 	if(function_exists('mapi_get_option')) {
 		if(mapi_get_option('show_credit') == TRUE || $_GET['credit'] == 1) {
 			echo $c;
@@ -483,66 +458,61 @@ function blankout_footer_credit() {
 	}
 }
 
-// ACF setup
-function blankout_acf_settings($options) {
-	$options = array(
-		'options_page'     => array(
-			'capability' => 'edit_theme_options', // capability to view options page
-			'title'      => __('Global Options', 'acf'),
-			'pages'      => array(), // an array of sub pages ('Header, Footer, Home, etc')
-		),
-		'activation_codes' => array(
-			'repeater'         => 'QJF7-L4IX-UCNP-RF2W',
-			'options_page'     => 'OPN8-FA4J-Y2LW-81LS',
-			'flexible_content' => 'FC9O-H6VN-E4CL-LT33',
-			'gallery'          => 'GF72-8ME6-JS15-3PZC',
-		),
-	);
-	return $options;
+/**
+ * Open Graph meta tags and language attributes
+ *
+ * @todo Move to API
+ *
+ * @param $output
+ *
+ * @return string
+ */
+function blankout_add_opengraph_doctype($output) {
+	return $output.' xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml"';
 }
 
-add_filter('acf_settings', 'blankout_acf_settings');
+add_filter('language_attributes', 'blankout_add_opengraph_doctype');
 
-// Open Graph meta tags and language attributes
-function add_opengraph_doctype( $output ) {
-		return $output . ' xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml"';
-	}
-add_filter('language_attributes', 'add_opengraph_doctype');
-
-function insert_fb_in_head() {
-	global $post;
-	if ( !is_singular()) //if it is not a post or a page
-		return;
-        echo '<meta property="fb:admins" content="' . mapi_get_facebook_id(mapi_get_option("facebook_uri")) . '"/>';
-        echo '<meta property="og:title" content="' . get_the_title() . '"/>';
-        echo '<meta property="og:type" content="article"/>';
-        echo '<meta property="og:url" content="' . get_permalink() . '"/>';
-        echo '<meta property="og:site_name" content="' . get_bloginfo('name') . '"/>';
-	if(!has_post_thumbnail( $post->ID )) { //the post does not have featured image, use a default image
-		$default_image = get_bloginfo('template_url') . "/favicon.png" ; //replace this with a default image on your server or an image in your media library
-		echo '<meta property="og:image" content="' . $default_image . '"/>';
-	}
-	else{
-		$thumbnail_src = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'medium' );
-		echo '<meta property="og:image" content="' . esc_attr( $thumbnail_src[0] ) . '"/>';
-	}
-	echo "
-";
+/**
+ * @todo Move to API
+ *
+ */
+function blankout_facebook_head() {
+	if(is_singular()) : ?>
+		<meta property="fb:admins" content="<?php mapi_facebook_id(); ?>" />
+		<meta property="og:title" content="<?php echo get_the_title_rss(); ?>" />
+		<meta property="og:type" content="article" />
+		<meta property="og:url" content="<?php the_permalink_rss(); ?>" />
+		<meta property="og:site_name" content="<?php bloginfo_rss('name'); ?>" />
+		<?php if(!has_post_thumbnail(get_the_ID())) : // the post does not have featured image, use a default image ?>
+			<meta property="og:image" content="<?php echo get_template_directory_uri().'/img/nothumb.gif'; ?>" />
+		<?php else : ?>
+			<meta property="og:image" content="<?php echo esc_attr(mapi_get_attachment_image_src(NULL, 'medium')); ?>" />
+		<?php endif; ?>
+	<?php endif;
 }
-add_action( 'wp_head', 'insert_fb_in_head', 5 );
 
+add_action('wp_head', 'blankout_facebook_head', 5);
+
+/**
+ * Changes the default behavior of Bootstrap dropdown nav menus
+ * if the constant BOOTSTRAP_DROPDOWN_ON_HOVER is TRUE.
+ *
+ * @todo Test with Bootstrap 3.0
+ *
+ */
 function blankout_enable_nav_hover() {
 	if(!mapi_is_mobile_device() && BOOTSTRAP_DROPDOWN_ON_HOVER) {
 		?>
-	<style type="text/css">
-		ul.nav li.dropdown:hover ul.dropdown-menu {
-			display:block;
-			margin:0;
-		}
-		a.menu:after, .dropdown-toggle:after {
-			content:none;
-		}
-	</style>
+		<style type="text/css">
+			ul.nav li.dropdown:hover ul.dropdown-menu {
+				display:block;
+				margin:0;
+			}
+			a.menu:after, .dropdown-toggle:after {
+				content:none;
+			}
+		</style>
 	<?php
 	}
 }
