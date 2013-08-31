@@ -4,12 +4,12 @@
  *
  * Use this file to override the Mindshare Theme API defaults for TimThumb.
  * This file can be safely deleted if you don't need it
- * 
- * @created 8/27/13 11:38 AM
- * @author Mindshare Studios, Inc.
+ *
+ * @created   8/27/13 11:38 AM
+ * @author    Mindshare Studios, Inc.
  * @copyright Copyright (c) 2013
- * @link http://www.mindsharelabs.com/documentation/
- * 
+ * @link      http://www.mindsharelabs.com/documentation/
+ *
  */
 
 // Max sizes
