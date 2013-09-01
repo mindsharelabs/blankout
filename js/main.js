@@ -15,7 +15,7 @@ jQuery(document).ready(function() {
 
 function init() {
 
-	// bind Bootsrtap's CSS classes to Gravity Forms
+	// Bootsrtap CSS classes to Gravity Forms
 	jQuery(document).bind('gform_post_render', function() {
 		jQuery('.button').addClass('btn btn-primary');
 		jQuery('.gform_next_button').addClass('pull-right');
@@ -26,11 +26,17 @@ function init() {
 		jQuery('.validation_error').addClass('alert alert-error');
 	});
 
-	// Enable flexslider. Make sure to turn on jquery.flexslider in Developer Options
-	console.log(typeof(jQuery('.flexslider').flexslider));
-	jQuery('.flexslider').flexslider({
-		animation: "slide"
-	});
+	// FlexSlider
+	if(jQuery.isFunction(jQuery.fn.flexslider)) {
+
+		// FlexSlider config @see http://www.woothemes.com/flexslider/
+		jQuery('.flexslider').flexslider({
+			animation: "slide"
+		});
+
+	} else {
+		//console.log('Please enable FlexSlider (Settings > Developer Settings > Libraries & Plugins).');
+	}
 
 	/**
 	 *  Responsive jQuery
@@ -62,7 +68,6 @@ function init() {
 	if(viewport > 1030) {
 
 	}
-
 
 }
 
