@@ -15,22 +15,54 @@ jQuery(document).ready(function() {
 
 function init() {
 
-	// bind Bootsrtap's CSS classes to Grvaity Forms 
+	// bind Bootsrtap's CSS classes to Gravity Forms
 	jQuery(document).bind('gform_post_render', function() {
-		jQuery('.button').addClass('btn');
-		jQuery('.button').addClass('btn-primary');
+		jQuery('.button').addClass('btn btn-primary');
 		jQuery('.gform_next_button').addClass('pull-right');
-		jQuery('.gform_button').addClass('pull-right');
-		jQuery('.gform_button').addClass('btn-success');
+		jQuery('.gform_button').addClass('pull-right btn-success controls');
 		jQuery('.gform_page').addClass('row');
 		jQuery('.gform_page_footer').addClass('col-lg-8');
-		jQuery('.gform_button').addClass('controls');
 		jQuery('.gfield_error').addClass('inputWarning');
-		jQuery('.validation_error').addClass('alert');
-		jQuery('.validation_error').addClass('alert-error');
-		jQuery('#input_1_28').addClass('col-lg-8');
-		jQuery('#input_1_32').addClass('col-lg-8');
+		jQuery('.validation_error').addClass('alert alert-error');
 	});
+
+	// Enable flexslider. Make sure to turn on jquery.flexslider in Developer Options
+	console.log(typeof(jQuery('.flexslider').flexslider));
+	jQuery('.flexslider').flexslider({
+		animation: "slide"
+	});
+
+	/**
+	 *  Responsive jQuery
+	 */
+
+	// viewport width
+	var viewport = jQuery(window).width();
+
+	// smaller than 481px
+	if(viewport < 481) {
+
+	}
+
+	// larger than 481px
+	if(viewport > 481) {
+
+	}
+
+	// larger than or equal to 768px
+	if(viewport >= 768) {
+
+		// load gravatars
+		jQuery('.comment img[data-gravatar]').each(function() {
+			jQuery(this).attr('src', jQuery(this).attr('data-gravatar'));
+		});
+	}
+
+	// larger than 1030px
+	if(viewport > 1030) {
+
+	}
+
 
 }
 
@@ -54,50 +86,6 @@ if(!window.getComputedStyle) {
 	}
 }
 
-// as the page loads, call these scripts
-jQuery(document).ready(function($) {
-
-	/*
-	 Responsive jQuery is a tricky thing. There's a bunch of different ways to handle it, so be sure to research and find the one that works for you best.
-	 */
-
-	/* getting viewport width */
-	var responsive_viewport = $(window).width();
-
-	/* if is below 481px */
-	if(responsive_viewport < 481) {
-
-	}
-	/* end smallest screen */
-
-	/* if is larger than 481px */
-	if(responsive_viewport > 481) {
-
-	}
-	/* end larger than 481px */
-
-	/* if is above or equal to 768px */
-	if(responsive_viewport >= 768) {
-
-		/* load gravatars */
-		$('.comment img[data-gravatar]').each(function() {
-			$(this).attr('src', $(this).attr('data-gravatar'));
-		});
-
-	}
-
-	/* off the bat large screen actions */
-	if(responsive_viewport > 1030) {
-
-	}
-
-	// Enable flexslider carousel. Make sure to turn on jquery.flexslider in Developer Options
-
-	$('.flexslider').flexslider({
-		animation: "slide"
-	});
-
-});
 /* end of as page load scripts */
 
 
