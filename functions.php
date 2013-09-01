@@ -79,11 +79,9 @@ register_sidebar(
 	)
 );
 
-// CUSTOMIZING SIDEBAR WIDGETS
-
-add_filter('wp_list_categories', 'add_span_cat_count');
-
 /**
+ * Customizing sidebar widgets
+ *
  * @param $links
  *
  * @return mixed
@@ -93,6 +91,9 @@ function add_span_cat_count($links) {
 	$links = str_replace(')', '</span>', $links);
 	return $links;
 }
+
+add_filter('wp_list_categories', 'add_span_cat_count');
+
 
 /**
  * Check for Mindshare Theme API plugin and initialize options
