@@ -1,34 +1,33 @@
 <?php
-/*
-Blankout Theme WordPress Functions File
-*/
+/**
+ * Blankout Theme WordPress Functions File
+ *
+ */
 
-// Enable theme customizer for Blankout (Appearance > Themes)
-include(get_template_directory().'/inc/customize.php');
+include(get_template_directory().'/inc/customize.php'); // enable theme customizer for Blankout (Appearance > Themes)
 include(get_template_directory().'/inc/carousel-post-type.php');
-//include(get_template_directory().'/inc/custom-post-types.php');
 
 /**
  * if TRUE, overrides the default bootstrap behavior where user must click on a top level menu item in order to see subpages
- *
  */
 define('BOOTSTRAP_DROPDOWN_ON_HOVER', FALSE);
 
+/**
+ * WordPress setup
+ */
 if(!isset($content_width)) {
 	$content_width = 960;
 }
-
-// Thumbnail sizes
+add_theme_support('automatic-feed-links');
 add_theme_support('post-thumbnails');
 set_post_thumbnail_size(125, 125, TRUE);
 add_image_size('blankout-thumb-600', 600, 150, TRUE);
 add_image_size('blankout-thumb-300', 300, 100, TRUE);
 
-add_theme_support('automatic-feed-links');
 add_theme_support('custom-background',
 	array(
 		 'default-image'          => '', // background image default
-		 'default-color'          => '', // background color default (dont add the #)
+		 'default-color'          => '', // background color default (don't add the #)
 		 'wp-head-callback'       => '_custom_background_cb',
 		 'admin-head-callback'    => '',
 		 'admin-preview-callback' => ''
@@ -93,7 +92,6 @@ function add_span_cat_count($links) {
 }
 
 add_filter('wp_list_categories', 'add_span_cat_count');
-
 
 /**
  * Check for Mindshare Theme API plugin and initialize options
@@ -419,8 +417,7 @@ function blankout_rich_snippets() {
 }
 
 /**
- * Optionally displays a credit message in compatible themes
- * when enabled in the Mindshare Theme API
+ * Optionally displays a credit message in compatible themes when enabled in the Mindshare Theme API
  * (Settings > Developer Settings > Misc. Settings > Show Credit)
  *
  */
@@ -439,8 +436,7 @@ function blankout_copyright() {
 }
 
 /**
- * Optionally displays a credit message in compatible themes
- * when enabled in the Mindshare Theme API
+ * Optionally displays a credit message in compatible themes when enabled in the Mindshare Theme API
  * (Settings > Developer Settings > Misc. Settings > Show Credit)
  *
  */
@@ -498,8 +494,6 @@ add_action('wp_head', 'blankout_facebook_head', 5);
 /**
  * Changes the default behavior of Bootstrap dropdown nav menus
  * if the constant BOOTSTRAP_DROPDOWN_ON_HOVER is TRUE.
- *
- * @todo Test with Bootstrap 3.0
  *
  */
 function blankout_enable_nav_hover() {
