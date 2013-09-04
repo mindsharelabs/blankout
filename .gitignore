@@ -217,3 +217,5 @@ pip-log.txt
 *.idea
 
 .svn
+
+codekit-config.json
