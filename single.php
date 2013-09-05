@@ -7,14 +7,14 @@
 
 				<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?> role="article" itemscope itemtype="http://schema.org/BlogPosting">
 					<header class="article-header page-header">
-						<?php if(function_exists('bcn_display')) { ?>
+						<?php if(function_exists('bcn_display')) : ?>
 							<ol class="breadcrumb">
-								<?php bcn_display_list(); ?>
+								<?php if(function_exists('bcn_display_list')) : bcn_display_list(); endif; ?>
 							</ol>
-						<?php } ?>
+						<?php endif; ?>
 						<h1 class="entry-title single-title" itemprop="headline"><?php the_title(); ?></h1>
 						<p class="byline vcard"><?php _e("Posted", "blankout"); ?>
-							<time class="updated" datetime="<?php echo the_time('Y-m-d'); ?>"><?php the_time('F jS, Y'); ?></time> <?php _e("by", "blankout"); ?>
+							<time class="updated" datetime="<?php the_time('Y-m-d'); ?>"><?php the_time('F jS, Y'); ?></time> <?php _e("by", "blankout"); ?>
 							<span class="author"><?php the_author_posts_link(); ?></span> <span class="amp">&amp;</span> <?php _e("filed under", "blankout"); ?> <?php the_category(', '); ?>.
 						</p>
 					</header>
@@ -23,16 +23,13 @@
 					</section>
 					<footer class="article-footer">
 						<?php the_taxonomies('before=<p class="tags">&after=</p>&template=%s: %l'); ?>
-						<?php edit_post_link(); ?>
+						<?php mapi_edit_link(); ?>
 					</footer>
 
 					<?php comments_template(); ?>
 				</article>
 
 			<?php endwhile; ?>
-
-
-
 			<?php endif; ?>
 		</div>
 

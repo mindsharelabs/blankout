@@ -14,13 +14,13 @@
 						</p>
 					</header>
 					<section class="entry-content clearfix">
-						<?php the_content(); ?>
+						<?php echo mapi_excerpt(); ?>
 					</section>
 					<footer class="article-footer">
 						<?php the_taxonomies('before=<p class="tags">&after=</p>'); ?>
 					</footer>
 
-					<?php // comments_template(); // uncomment if you want to use them ?>
+					<?php //comments_template(); ?>
 				</article>
 
 			<?php endwhile; ?>

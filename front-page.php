@@ -26,11 +26,8 @@
 				</article>
 
 			<?php endwhile; ?>
-
-
 			<?php endif; ?>
 		</div>
-
 		<?php get_sidebar(); ?>
 	</div>
 </div>

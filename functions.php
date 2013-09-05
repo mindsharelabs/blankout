@@ -332,7 +332,7 @@ function blankout_page_nav($before = '<div class="pagination pagination-centered
 		echo '<li class="disabled"><span>&laquo;</span></li>';
 	} else {
 		echo '<li class="bpn-prev-link">';
-		echo previous_posts_link('&laquo;');
+		previous_posts_link('&laquo;');
 		echo '</li>';
 	}
 	for($i = $start_page; $i <= $end_page; $i++) {
@@ -368,14 +368,13 @@ if(is_readable($locale_file)) {
  * @param $depth
  */
 function blankout_comments($comment, $args, $depth) {
-	$GLOBALS['comment'] = $comment; ?>
+	$GLOBALS['comment'] = $comment;
+	$bgauthemail = get_comment_author_email(); ?>
 	<article id="comment-<?php comment_ID(); ?>" <?php comment_class("media clearfix"); ?>>
 		<img data-gravatar="http://www.gravatar.com/avatar/<?php echo md5($bgauthemail); ?>?s=48" class="pull-left media-object load-gravatar avatar avatar-48 photo" height="48" width="48" src="<?php echo get_template_directory_uri(); ?>/img/nothing.gif" />
 		<header class="comment-author vcard">
-			<?php $bgauthemail = get_comment_author_email(); ?>
-
 			<?php printf(__('<cite class="fn">%s</cite>'), get_comment_author_link()) ?>
-			<time datetime="<?php echo comment_time('Y-m-j'); ?>"><a href="<?php echo htmlspecialchars(get_comment_link($comment->comment_ID)) ?>"><?php comment_time('F jS, Y'); ?> </a></time>
+			<time datetime="<?php comment_time('Y-m-j'); ?>"><a href="<?php echo htmlspecialchars(get_comment_link($comment->comment_ID)) ?>"><?php comment_time('F jS, Y'); ?> </a></time>
 			<?php edit_comment_link(__('Edit', 'blankout'), '<button class="btn btn-default btn-xs">', '</button>') ?>
 		</header>
 		<?php if($comment->comment_approved == '0') : ?>
@@ -399,7 +398,7 @@ function blankout_comments($comment, $args, $depth) {
  */
 function blankout_rich_snippets() {
 	if(function_exists('mapi_option')) : ?>
-		<div itemscope itemtype="http://data-vocabulary.org/Organization" class="microdata-meta contact">
+		<div itemscope itemtype="http://data-vocabulary.org/Organization" class="microdata-meta hide contact">
 			<meta itemprop="name" content="<?php mapi_option('sitename_txt'); ?>" />
 			<meta itemprop="tel" content="<?php mapi_option('phone_txt'); ?>" />
 			<meta itemprop="email" content="<?php mapi_option('email'); ?>" />

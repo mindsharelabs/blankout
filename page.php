@@ -7,11 +7,12 @@
 
 				<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?> role="article" itemscope itemtype="http://schema.org/BlogPosting">
 					<header class="article-header page-header">
-						<?php if(function_exists('bcn_display')) { ?>
+						<?php blankout_rich_snippets(); ?>
+						<?php if(function_exists('bcn_display')) : ?>
 							<ol class="breadcrumb">
 								<?php bcn_display_list(); ?>
 							</ol>
-						<?php } ?>
+						<?php endif; ?>
 						<h1 class="page-title" itemprop="headline"><?php the_title(); ?></h1>
 					</header>
 					<section class="entry-content clearfix" itemprop="articleBody">
@@ -19,7 +20,7 @@
 					</section>
 					<footer class="article-footer">
 						<?php the_taxonomies('before=<p class="tags">&after=</p>'); ?>
-						<?php edit_post_link(); ?>
+						<?php mapi_edit_link(); ?>
 					</footer>
 				</article>
 

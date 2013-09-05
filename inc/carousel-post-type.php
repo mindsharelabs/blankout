@@ -39,5 +39,3 @@ function carousel_post() {
 
 // adding the function to the Wordpress init
 add_action('init', 'carousel_post');
-
-?>

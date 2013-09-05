@@ -4,7 +4,7 @@
 		<div id="main" class="eightcol first clearfix" role="main">
 			<article id="post-not-found" class="hentry clearfix">
 				<header class="article-header">
-					<h1><?php _e("404 Error - Article Not Found", "blankout"); ?></h1>
+					<h1><?php _e("404 Error - Page Not Found", "blankout"); ?></h1>
 				</header>
 				<section class="entry-content">
 					<p>

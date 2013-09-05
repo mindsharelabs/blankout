@@ -1,13 +1,13 @@
 <?php //mapi_mobile_header('class', true, false); ?>
 <!DOCTYPE HTML>
 <!--[if lt IE 7]>
-<html <?php language_attributes(); ?> class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<html <?php language_attributes(); ?> class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]-->
 <!--[if (IE 7)&!(IEMobile)]>
 <html <?php language_attributes(); ?> class="no-js lt-ie9 lt-ie8"><![endif]-->
 <!--[if (IE 8)&!(IEMobile)]>
 <html <?php language_attributes(); ?> class="no-js lt-ie9"><![endif]-->
-<!--[if gt IE 8]><!-->
-<html <?php language_attributes(); ?> class="no-js"><!--<![endif]-->
+<!--[if gt IE 8]>
+<html <?php language_attributes(); ?> class="no-js"><![endif]-->
 <head>
 	<meta charset="<?php bloginfo('charset'); ?>" />
 	<title><?php bloginfo('name'); ?> | <?php is_front_page() ? bloginfo('description') : wp_title(''); ?></title>
@@ -29,9 +29,9 @@
 	<?php endif; ?>
 
 	<?php wp_head(); ?>
+
 	<link rel="stylesheet" type="text/css" href="<?php bloginfo('stylesheet_url'); ?>" media="all" />
 	<?php blankout_enable_nav_hover(); ?>
-	<script type="text/javascript">document.cookie = 'resolution=' + Math.max(screen.width, screen.height) + ("devicePixelRatio" in window ? "," + devicePixelRatio : ",1") + '; path=/';</script>
 </head>
 <body <?php body_class(); ?>>
 <a id="top"></a>
@@ -43,9 +43,9 @@
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 				</button>
-				<?php if(get_theme_mod('menu_title')) { ?>
-					<a class="navbar-brand" id="logo" title="<?php echo get_bloginfo('description'); ?>" href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a>
-				<?php } ?>
+				<?php if(get_theme_mod('menu_title')) : ?>
+					<a class="navbar-brand" id="logo" title="<?php bloginfo('description'); ?>" href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a>
+				<?php endif; ?>
 			</div>
 			<div class="collapse navbar-collapse">
 				<?php wp_nav_menu(
