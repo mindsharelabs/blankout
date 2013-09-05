@@ -17,7 +17,7 @@
 						</p>
 					</header>
 					<section class="entry-content">
-						<?php the_excerpt('<span class="read-more">Read more &raquo;</span>'); ?>
+						<?php echo mapi_excerpt('<span class="read-more">Read more &raquo;</span>'); ?>
 					</section>
 					<footer class="article-footer">
 					</footer>

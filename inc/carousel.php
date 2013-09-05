@@ -9,19 +9,29 @@
  *
  */
 
-$query = new WP_Query('post_type=carousel');
+$slide_query = new WP_Query('post_type=carousel');
 
-if($query->have_posts()) : ?>
+if($slide_query->have_posts()) : ?>
 
 	<div id="carousel" class="flexslider">
 		<ul class="slides">
-			<?php while($query->have_posts()) : $query->the_post(); ?>
-
-				<li class="item">
-					<?php the_post_thumbnail("full"); ?>
-					<p class="flex-caption hidden-sm hidden-xs"><?php echo get_the_content(); ?></p>
-				</li>
-
+			<?php while($slide_query->have_posts()) : $slide_query->the_post(); ?>
+				<?php if(has_post_thumbnail()) : ?>
+					<li class="item">
+						<?php
+						$img_src = mapi_thumb(
+							array(
+								 'src' => mapi_get_attachment_image_src(),
+								 'w'   => 1170,
+								 'h'   => 480,
+								 'q'   => 90
+							)
+						);
+						?>
+						<img src="<?php echo $img_src; ?>" class="attachment-full wp-post-image" alt="<?php echo mapi_get_attachment_image_title(); ?>" />
+						<p class="flex-caption hidden-sm hidden-xs"><?php echo mapi_excerpt(100); ?>&nbsp;<?php echo mapi_excerpt_more() ?></p>
+					</li>
+				<?php endif; ?>
 			<?php endwhile; ?>
 			<?php wp_reset_postdata(); ?>
 		</ul>

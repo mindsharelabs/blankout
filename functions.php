@@ -20,9 +20,6 @@ if(!isset($content_width)) {
 }
 add_theme_support('automatic-feed-links');
 add_theme_support('post-thumbnails');
-set_post_thumbnail_size(125, 125, TRUE);
-add_image_size('blankout-thumb-600', 600, 150, TRUE);
-add_image_size('blankout-thumb-300', 300, 100, TRUE);
 
 add_theme_support('custom-background',
 	array(
