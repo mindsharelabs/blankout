@@ -2,95 +2,91 @@
 // Forms
 // --------------------------------------------------
 
-
 // Normalize non-controls
 //
 // Restyle and baseline non-control form elements.
 
 fieldset {
-  padding: 0;
-  margin: 0;
-  border: 0;
+	padding:0;
+	margin:0;
+	border:0;
 }
 
 legend {
-  display: block;
-  width: 100%;
-  padding: 0;
-  margin-bottom: @line-height-computed;
-  font-size: (@font-size-base * 1.5);
-  line-height: inherit;
-  color: @legend-color;
-  border: 0;
-  border-bottom: 1px solid @legend-border-color;
+	display:block;
+	width:100%;
+	padding:0;
+	margin-bottom:@line-height-computed;
+	font-size:(@font-size-base * 1.5);
+	line-height:inherit;
+	color:@legend-color;
+	border:0;
+	border-bottom:1px solid @legend-border-color;
 }
 
 label {
-  display: inline-block;
-  margin-bottom: 5px;
-  font-weight: bold;
+	display:inline-block;
+	margin-bottom:5px;
+	font-weight:bold;
 }
-
 
 // Normalize form controls
 
 // Override content-box in Normalize (* isn't specific enough)
 input[type="search"] {
-  .box-sizing(border-box);
+	.box-sizing(border-box);
 }
 
 // Position radios and checkboxes better
 input[type="radio"],
 input[type="checkbox"] {
-  margin: 4px 0 0;
-  margin-top: 1px \9; /* IE8-9 */
-  line-height: normal;
+	margin:4px 0 0;
+	margin-top:1px   \9; /* IE8-9 */
+	line-height:normal;
 }
 
 // Set the height of select and file controls to match text inputs
 input[type="file"] {
-  display: block;
+	display:block;
 }
 
 // Make multiple select elements height not fixed
 select[multiple],
 select[size] {
-  height: auto;
+	height:auto;
 }
 
 // Fix optgroup Firefox bug per https://github.com/twbs/bootstrap/issues/7611
 select optgroup {
-  font-size: inherit;
-  font-style: inherit;
-  font-family: inherit;
+	font-size:inherit;
+	font-style:inherit;
+	font-family:inherit;
 }
 
 // Focus for select, file, radio, and checkbox
 input[type="file"]:focus,
 input[type="radio"]:focus,
 input[type="checkbox"]:focus {
-  .tab-focus();
+	.tab-focus();
 }
 
 // Fix for Chrome number input
 // Setting certain font-sizes causes the `I` bar to appear on hover of the bottom increment button.
 // See https://github.com/twbs/bootstrap/issues/8350 for more.
 input[type="number"] {
-  &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button {
-    height: auto;
-  }
+	&::-webkit-outer-spin-button,
+	&::-webkit-inner-spin-button {
+		height:auto;
+	}
 }
-
 
 // Placeholder
 //
 // Placeholder text gets special styles because when browsers invalidate entire
 // lines if it doesn't understand a selector/
 .form-control {
-  .placeholder();
+	.placeholder();
 }
-
 
 // Common form controls
 //
@@ -115,40 +111,39 @@ input[type="number"] {
 // input[type="color"]
 
 .form-control {
-  display: block;
-  width: 100%;
-  height: @input-height-base; // Make inputs at least the height of their button counterpart (base line-height + padding + border)
-  padding: @padding-base-vertical @padding-base-horizontal;
-  font-size: @font-size-base;
-  line-height: @line-height-base;
-  color: @input-color;
-  vertical-align: middle;
-  background-color: @input-bg;
-  border: 1px solid @input-border;
-  border-radius: @input-border-radius;
-  .box-shadow(inset 0 1px 1px rgba(0,0,0,.075));
-  .transition(~"border-color ease-in-out .15s, box-shadow ease-in-out .15s");
+	display:block;
+	width:100%;
+	height:@input-height-base; // Make inputs at least the height of their button counterpart (base line-height + padding + border)
+	padding:@padding-base-vertical @padding-base-horizontal;
+	font-size:@font-size-base;
+	line-height:@line-height-base;
+	color:@input-color;
+	vertical-align:middle;
+	background-color:@input-bg;
+	border:1px solid @input-border;
+	border-radius:@input-border-radius;
+	.box-shadow(inset 0 1px 1px rgba(0,0,0,.075));
+	.transition(~"border-color ease-in-out .15s, box-shadow ease-in-out .15s");
 
-  // Customize the `:focus` state to imitate native WebKit styles.
-  .form-control-focus();
+	// Customize the `:focus` state to imitate native WebKit styles.
+	.form-control-focus();
 
-  // Disabled and read-only inputs
-  // Note: HTML5 says that controls under a fieldset > legend:first-child won't
-  // be disabled if the fieldset is disabled. Due to implementation difficulty,
-  // we don't honor that edge case; we style them as disabled anyway.
-  &[disabled],
-  &[readonly],
-  fieldset[disabled] & {
-    cursor: not-allowed;
-    background-color: @input-bg-disabled;
-  }
+	// Disabled and read-only inputs
+	// Note: HTML5 says that controls under a fieldset > legend:first-child won't
+	// be disabled if the fieldset is disabled. Due to implementation difficulty,
+	// we don't honor that edge case; we style them as disabled anyway.
+	&[disabled],
+	&[readonly],
+	fieldset[disabled] & {
+		cursor:not-allowed;
+		background-color:@input-bg-disabled;
+	}
 
-  // Reset height for `textarea`s
-  textarea& {
-    height: auto;
-  }
+	// Reset height for `textarea`s
+	textarea& {
+		height:auto;
+	}
 }
-
 
 // Form groups
 //
@@ -156,9 +151,8 @@ input[type="number"] {
 // horizontal forms, use the predefined grid classes.
 
 .form-group {
-  margin-bottom: 15px;
+	margin-bottom:15px;
 }
-
 
 // Checkboxes and radios
 //
@@ -166,45 +160,45 @@ input[type="number"] {
 
 .radio,
 .checkbox {
-  display: block;
-  min-height: @line-height-computed; // clear the floating input if there is no label text
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding-left: 20px;
-  vertical-align: middle;
-  label {
-    display: inline;
-    margin-bottom: 0;
-    font-weight: normal;
-    cursor: pointer;
-  }
+	display:block;
+	min-height:@line-height-computed; // clear the floating input if there is no label text
+	margin-top:10px;
+	margin-bottom:10px;
+	padding-left:20px;
+	vertical-align:middle;
+	label {
+		display:inline;
+		margin-bottom:0;
+		font-weight:normal;
+		cursor:pointer;
+	}
 }
 .radio input[type="radio"],
 .radio-inline input[type="radio"],
 .checkbox input[type="checkbox"],
 .checkbox-inline input[type="checkbox"] {
-  float: left;
-  margin-left: -20px;
+	float:left;
+	margin-left:-20px;
 }
 .radio + .radio,
 .checkbox + .checkbox {
-  margin-top: -5px; // Move up sibling radios or checkboxes for tighter spacing
+	margin-top:-5px; // Move up sibling radios or checkboxes for tighter spacing
 }
 
 // Radios and checkboxes on same line
 .radio-inline,
 .checkbox-inline {
-  display: inline-block;
-  padding-left: 20px;
-  margin-bottom: 0;
-  vertical-align: middle;
-  font-weight: normal;
-  cursor: pointer;
+	display:inline-block;
+	padding-left:20px;
+	margin-bottom:0;
+	vertical-align:middle;
+	font-weight:normal;
+	cursor:pointer;
 }
 .radio-inline + .radio-inline,
 .checkbox-inline + .checkbox-inline {
-  margin-top: 0;
-  margin-left: 10px; // space out consecutive inline controls
+	margin-top:0;
+	margin-left:10px; // space out consecutive inline controls
 }
 
 // Apply same disabled cursor tweak as for inputs
@@ -216,21 +210,30 @@ input[type="checkbox"],
 .radio-inline,
 .checkbox,
 .checkbox-inline {
-  &[disabled],
-  fieldset[disabled] & {
-    cursor: not-allowed;
-  }
+	&[disabled],
+	fieldset[disabled] & {
+		cursor:not-allowed;
+	}
 }
 
 // Form control sizing
 .input-sm {
-  .input-size(@input-height-small; @padding-small-vertical; @padding-small-horizontal; @font-size-small; @line-height-small; @border-radius-small);
+	.input-size(@input-height-small;
+@padding-small-vertical;
+@padding-small-horizontal;
+@font-size-small;
+@line-height-small;
+@border-radius-small);
 }
 
 .input-lg {
-  .input-size(@input-height-large; @padding-large-vertical; @padding-large-horizontal; @font-size-large; @line-height-large; @border-radius-large);
+	.input-size(@input-height-large;
+@padding-large-vertical;
+@padding-large-horizontal;
+@font-size-large;
+@line-height-large;
+@border-radius-large);
 }
-
 
 // Form control feedback states
 //
@@ -238,17 +241,22 @@ input[type="checkbox"],
 
 // Warning
 .has-warning {
-  .form-control-validation(@state-warning-text; @state-warning-text; @state-warning-bg);
+	.form-control-validation(@state-warning-text;
+@state-warning-text;
+@state-warning-bg);
 }
 // Error
 .has-error {
-  .form-control-validation(@state-danger-text; @state-danger-text; @state-danger-bg);
+	.form-control-validation(@state-danger-text;
+@state-danger-text;
+@state-danger-bg);
 }
 // Success
 .has-success {
-  .form-control-validation(@state-success-text; @state-success-text; @state-success-bg);
+	.form-control-validation(@state-success-text;
+@state-success-text;
+@state-success-bg);
 }
-
 
 // Static form control text
 //
@@ -256,10 +264,9 @@ input[type="checkbox"],
 // a horizontal form layout.
 
 .form-control-static {
-  margin-bottom: 0; // Remove default margin from `p`
-  padding-top: (@padding-base-vertical + 1);
+	margin-bottom:0; // Remove default margin from `p`
+	padding-top:(@padding-base-vertical + 1);
 }
-
 
 // Help text
 //
@@ -267,13 +274,11 @@ input[type="checkbox"],
 // below a form control. Use for general help, formatting, or instructional text.
 
 .help-block {
-  display: block; // account for any element using help-block
-  margin-top: 5px;
-  margin-bottom: 10px;
-  color: lighten(@text-color, 25%); // lighten the text some for contrast
+	display:block; // account for any element using help-block
+	margin-top:5px;
+	margin-bottom:10px;
+	color:lighten(@text-color, 25%); // lighten the text some for contrast
 }
-
-
 
 // Inline forms
 //
@@ -288,38 +293,37 @@ input[type="checkbox"],
 
 .form-inline {
 
-  // Kick in the inline
-  @media (min-width: @screen-tablet) {
-    // Inline-block all the things for "inline"
-    .form-group  {
-      display: inline-block;
-      margin-bottom: 0;
-      vertical-align: middle;
-    }
+	// Kick in the inline
+	@media (min-width: @screen-tablet) {
+		// Inline-block all the things for "inline"
+		.form-group {
+			display:inline-block;
+			margin-bottom:0;
+			vertical-align:middle;
+		}
 
-    // In navbar-form, allow folks to *not* use `.form-group`
-    .form-control {
-      display: inline-block;
-    }
+		// In navbar-form, allow folks to *not* use `.form-group`
+		.form-control {
+			display:inline-block;
+		}
 
-    // Remove default margin on radios/checkboxes that were used for stacking, and
-    // then undo the floating of radios and checkboxes to match (which also avoids
-    // a bug in WebKit: https://github.com/twbs/bootstrap/issues/1969).
-    .radio,
-    .checkbox {
-      display: inline-block;
-      margin-top: 0;
-      margin-bottom: 0;
-      padding-left: 0;
-    }
-    .radio input[type="radio"],
-    .checkbox input[type="checkbox"] {
-      float: none;
-      margin-left: 0;
-    }
-  }
+		// Remove default margin on radios/checkboxes that were used for stacking, and
+		// then undo the floating of radios and checkboxes to match (which also avoids
+		// a bug in WebKit: https://github.com/twbs/bootstrap/issues/1969).
+		.radio,
+		.checkbox {
+			display:inline-block;
+			margin-top:0;
+			margin-bottom:0;
+			padding-left:0;
+		}
+		.radio input[type="radio"],
+		.checkbox input[type="checkbox"] {
+			float:none;
+			margin-left:0;
+		}
+	}
 }
-
 
 // Horizontal forms
 //
@@ -328,26 +332,26 @@ input[type="checkbox"],
 
 .form-horizontal {
 
-  // Consistent vertical alignment of labels, radios, and checkboxes
-  .control-label,
-  .radio,
-  .checkbox,
-  .radio-inline,
-  .checkbox-inline {
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-top: (@padding-base-vertical + 1); // Default padding plus a border
-  }
+	// Consistent vertical alignment of labels, radios, and checkboxes
+	.control-label,
+	.radio,
+	.checkbox,
+	.radio-inline,
+	.checkbox-inline {
+		margin-top:0;
+		margin-bottom:0;
+		padding-top:(@padding-base-vertical + 1); // Default padding plus a border
+	}
 
-  // Make form groups behave like rows
-  .form-group {
-    .make-row();
-  }
+	// Make form groups behave like rows
+	.form-group {
+		.make-row();
+	}
 
-  // Only right align form labels here when the columns stop stacking
-  @media (min-width: @screen-tablet) {
-    .control-label {
-      text-align: right;
-    }
-  }
+	// Only right align form labels here when the columns stop stacking
+	@media (min-width: @screen-tablet) {
+		.control-label {
+			text-align:right;
+		}
+	}
 }
