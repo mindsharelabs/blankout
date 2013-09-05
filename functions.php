@@ -416,7 +416,6 @@ function blankout_rich_snippets() {
  * Optionally displays a credit message in compatible themes when enabled in the Mindshare Theme API
  * (Settings > Developer Settings > Misc. Settings > Show Credit)
  *
- * @todo Move to API?
  */
 function blankout_copyright() {
 	echo '<!--compression-none-->';
@@ -436,7 +435,7 @@ function blankout_copyright() {
  * Optionally displays a credit message in compatible themes when enabled in the Mindshare Theme API
  * (Settings > Developer Settings > Misc. Settings > Show Credit)
  *
- * @todo Move to API?
+ * @todo Move to API
  */
 function blankout_footer_credit() {
 	$cc = 'V2Vic2l0ZSBkZXNpZ24sIGRldmVsb3BtZW50LCBhbmQgU0VPIGJ5IE1pbmRzaGFyZSBTdHVkaW9zLCBJbmM=';

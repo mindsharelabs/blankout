@@ -29,7 +29,7 @@ if($slide_query->have_posts()) : ?>
 						);
 						?>
 						<img src="<?php echo $img_src; ?>" class="attachment-full wp-post-image" alt="<?php echo mapi_get_attachment_image_title(); ?>" />
-						<p class="flex-caption hidden-sm hidden-xs"><?php echo mapi_excerpt(100); ?>&nbsp;<?php echo mapi_excerpt_more() ?></p>
+						<p class="flex-caption hidden-sm hidden-xs"><?php echo mapi_excerpt(100); ?> <?php echo mapi_excerpt_more() ?></p>
 					</li>
 				<?php endif; ?>
 			<?php endwhile; ?>

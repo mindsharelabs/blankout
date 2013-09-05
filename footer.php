@@ -19,7 +19,7 @@
 			); ?>
 		</nav>
 		<span class="copyright pull-left">
-			&copy;<?php echo date('Y'); ?> <a href="<?php home_url('/') ?>" title="<?php bloginfo('name'); ?>"><?php bloginfo('name'); ?></a>. <?php _e('All rights reserved', 'blankout'); ?>.
+			&copy;<?php echo date('Y'); ?> <a href="<?php echo home_url('/') ?>" title="<?php bloginfo('name'); ?>"><?php bloginfo('name'); ?></a>. <?php _e('All rights reserved', 'blankout'); ?>.
 		</span>
 		<?php blankout_footer_credit(); ?>
 	</footer>

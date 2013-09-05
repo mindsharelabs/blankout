@@ -21,11 +21,16 @@ function init() {
 	jQuery('.button, .button-primary, .field input[type="submit"], #wp-submit').addClass('btn');
 	jQuery('.login p.error').addClass('alert alert-error');
 	jQuery('.login p.message').addClass('alert alert-info');
-	jQuery('.post-edit-link').addClass('btn btn-xs btn-default');
-	jQuery('.form-table').addClass('table');
-	jQuery('.alignleft').addClass('pull-left');
-	jQuery('.alignright').addClass('pull-right');
-	jQuery('.page-template p.label').addClass('muted').removeClass('label');
+
+
+	// tables
+	jQuery('#main table, .form-table').addClass('table table-hover');
+
+	// wordpress classes
+	jQuery('.alignleft').addClass('text-left');
+	jQuery('.alignright').addClass('text-right');
+	jQuery('.aligncenter').addClass('text-center');
+	jQuery('.post-edit-link').addClass('btn btn-xs btn-primary');
 
 	// Gravity Forms stuff
 	jQuery(".gform_wrapper .disable input").attr('disabled', 'disabled');

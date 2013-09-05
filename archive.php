@@ -14,6 +14,12 @@
 				<h1 class="archive-title h2">
 					<span><?php _e("Posts Categorized:", "blankout"); ?></span> <?php mapi_single_cat_title(); ?>
 				</h1>
+				<?php
+				$category_description = category_description();
+				if (!empty($category_description)) {
+					echo apply_filters('archive_meta', '<div class="archive-meta">'.$category_description.'</div>');
+				}
+				?>
 
 			<?php elseif(is_tag()) : ?>
 				<h1 class="archive-title h2">
