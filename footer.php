@@ -14,7 +14,7 @@
 						 'link_before'     => '', // before each link
 						 'link_after'      => '', // after each link
 						 'depth'           => 1, // limit the depth of the nav
-						 //'fallback_cb'     => 'blankout_footer_nav_fallback' // fallback function
+						 'fallback_cb'     => 'wp_page_menu'
 					)
 				); ?>
 			</nav>

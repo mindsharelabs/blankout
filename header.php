@@ -52,11 +52,12 @@
 					array(
 						 'container'       => ' ',
 						 'container_class' => 'nav',
+						 'fallback_cb'     => 'wp_page_menu',
 						 'menu'            => 'main-nav',
 						 'menu_class'      => 'nav navbar-nav',
 						 'theme_location'  => 'main-nav',
 						 'depth'           => '2',
-						 'walker'          => new Bootstrap_Menu_Walker()
+						 'walker'          => new Blankout_Menu_Walker()
 					)
 				); ?>
 			</div>

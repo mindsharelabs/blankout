@@ -144,11 +144,11 @@ function add_active_class($classes, $item) {
 
 add_filter('nav_menu_css_class', 'add_active_class', 10, 2);
 
-if(!class_exists('Bootstrap_Menu_Walker')) {
+if(!class_exists('Blankout_Menu_Walker')) {
 	/**
-	 * Class Bootstrap_Menu_Walker
+	 * Class Blankout_Menu_Walker
 	 */
-	class Bootstrap_Menu_Walker extends Walker_Nav_Menu {
+	class Blankout_Menu_Walker extends Walker_Nav_Menu {
 		/**
 		 * @see   Walker::start_lvl()
 		 * @since 3.0.0

@@ -7,7 +7,7 @@
 
 				<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?> role="article" itemscope itemtype="http://schema.org/BlogPosting">
 					<header class="article-header page-header">
-						<?php blankout_rich_snippets(); ?>
+						<?php //blankout_rich_snippets(); ?>
 						<?php if(function_exists('bcn_display')) : ?>
 							<ol class="breadcrumb">
 								<?php bcn_display_list(); ?>

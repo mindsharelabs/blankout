@@ -215,7 +215,7 @@ pip-log.txt
 .mr.developer.cfg
 
 *.idea
-
-.svn
+*.svn
+github.php
 
 codekit-config.json

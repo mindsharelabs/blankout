@@ -7,6 +7,7 @@
 
 				<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?> role="article">
 					<header class="article-header">
+						<?php //blankout_rich_snippets(); ?>
 						<h1><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h1>
 						<p class="byline vcard"><?php _e('Posted', 'blankout'); ?>
 							<time class="updated" datetime="<?php echo the_time('Y-m-d'); ?>"><?php the_time(get_option('date_format')); ?></time> <?php _e('by', 'blankout'); ?>
