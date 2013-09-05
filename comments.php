@@ -23,7 +23,7 @@ if(!empty($_SERVER['SCRIPT_FILENAME']) && 'comments.php' == basename($_SERVER['S
 
 	<?php if(have_comments()) : ?>
 
-		<h3 id="comments" class="h2"><?php comments_number('<span>No</span> Responses', '<span>One</span> Response', '<span>%</span> Responses'); ?> to &#8220;<?php the_title(); ?>&#8221;</h3>
+		<h3 id="comments"><?php comments_number('<span>No</span> Responses', '<span>One</span> Response', '<span>%</span> Responses'); ?> to &#8220;<?php the_title(); ?>&#8221;</h3>
 
 		<nav id="comment-nav">
 			<ul class="clearfix pager">
@@ -60,7 +60,7 @@ if(!empty($_SERVER['SCRIPT_FILENAME']) && 'comments.php' == basename($_SERVER['S
 	<?php if(comments_open()) : ?>
 
 		<section id="respond" class="respond-form">
-			<h3 id="comment-form-title" class="h2"><?php comment_form_title(__('Leave a Reply', 'blankout'), __('Leave a Reply to %s', 'blankout')); ?></h3>
+			<h3 id="comment-form-title"><?php comment_form_title(__('Leave a Reply', 'blankout'), __('Leave a Reply to %s', 'blankout')); ?></h3>
 
 			<div id="cancel-comment-reply">
 				<p class="small"><?php cancel_comment_reply_link(); ?></p>

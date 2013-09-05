@@ -14,10 +14,10 @@
 							</ol>
 						<?php endif; ?>
 						<h1 class="entry-title single-title" itemprop="headline"><?php the_title(); ?></h1>
-						<p class="byline vcard"><?php _e("Posted", "blankout"); ?>
+						<small class="byline vcard"><?php _e("Posted", "blankout"); ?>
 							<time class="updated" datetime="<?php the_time('Y-m-d'); ?>"><?php the_time('F jS, Y'); ?></time> <?php _e("by", "blankout"); ?>
 							<span class="author"><?php the_author_posts_link(); ?></span> <span class="amp">&amp;</span> <?php _e("filed under", "blankout"); ?> <?php the_category(', '); ?>.
-						</p>
+						</small>
 					</header>
 					<section class="entry-content clearfix" itemprop="articleBody">
 						<?php the_content(); ?>
