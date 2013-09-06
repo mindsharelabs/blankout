@@ -82,13 +82,13 @@ register_sidebar(
  *
  * @return mixed
  */
-function add_span_cat_count($links) {
+function blankout_add_cat_count($links) {
 	$links = str_replace('</a> (', '</a> <span class="badge">', $links);
 	$links = str_replace(')', '</span>', $links);
 	return $links;
 }
 
-add_filter('wp_list_categories', 'add_span_cat_count');
+add_filter('wp_list_categories', 'blankout_add_cat_count');
 
 /**
  * Check for Mindshare Theme API plugin and initialize options
@@ -494,8 +494,7 @@ add_action('wp_head', 'blankout_facebook_head', 5);
  *
  */
 function blankout_enable_nav_hover() {
-	if(!mapi_is_mobile_device() && BOOTSTRAP_DROPDOWN_ON_HOVER) {
-		?>
+	if(!mapi_is_mobile_device() && BOOTSTRAP_DROPDOWN_ON_HOVER) : ?>
 		<style type="text/css">
 			ul.nav li.dropdown:hover ul.dropdown-menu {
 				display:block;
@@ -505,6 +504,5 @@ function blankout_enable_nav_hover() {
 				content:none;
 			}
 		</style>
-	<?php
-	}
+	<?php endif;
 }

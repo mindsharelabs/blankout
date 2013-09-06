@@ -16,7 +16,8 @@ jQuery(document).ready(function() {
 function init() {
 
 	// setup some additional Bootstrap CSS classes
-	jQuery('.mapi.edit-link,.aside-block .link-icons').addClass('pull-right');
+	jQuery('.aside-block .link-icons').addClass('pull-right');
+	jQuery('.mapi.edit-link').addClass('text-right');
 	jQuery('.wp-caption-text, .gfield_description').addClass('muted');
 	jQuery('.button, .button-primary, .field input[type="submit"], #wp-submit').addClass('btn');
 	jQuery('.login p.error').addClass('alert alert-error');
