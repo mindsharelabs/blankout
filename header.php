@@ -1,30 +1,25 @@
 <?php //mapi_mobile_header('class', true, false); ?>
 <!DOCTYPE HTML>
-<!--[if lt IE 7]>
-<html <?php language_attributes(); ?> class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]-->
-<!--[if (IE 7)&!(IEMobile)]>
-<html <?php language_attributes(); ?> class="no-js lt-ie9 lt-ie8"><![endif]-->
-<!--[if (IE 8)&!(IEMobile)]>
-<html <?php language_attributes(); ?> class="no-js lt-ie9"><![endif]-->
-<!--[if gt IE 8]>
-<html <?php language_attributes(); ?> class="no-js"><![endif]-->
+<!--[if lt IE 7]><html <?php language_attributes(); ?> class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html <?php language_attributes(); ?> class="no-js lt-ie9 lt-ie8"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html <?php language_attributes(); ?> class="no-js lt-ie9"><![endif]-->
+<!--[if gt IE 8]><html <?php language_attributes(); ?> class="no-js"><![endif]-->
 <head>
 	<meta charset="<?php bloginfo('charset'); ?>" />
-	<title><?php bloginfo('name'); ?> | <?php is_front_page() ? bloginfo('description') : wp_title(''); ?></title>
+	<title><?php bloginfo('name'); ?> | <?php is_front_page() ? bloginfo('description') : wp_title(); ?></title>
 	<?php blankout_copyright(); ?>
-	<!--[if IE]>
-	<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+	<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
 	<meta name="HandheldFriendly" content="True" />
 	<meta name="MobileOptimized" content="320" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 	<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/img/favicon.png" />
-	<link rel="alternate" type="application/rss+xml" href="<?php bloginfo('rss2_url'); ?>" title="<?php echo esc_html(get_bloginfo('name')); ?> latest updates" />
+	<link rel="alternate" type="application/rss+xml" href="<?php echo get_feed_link(); ?>" title="<?php echo esc_html(get_bloginfo('name')); ?> latest updates" />
 
-	<?php if(get_option('default_comment_status') == 'open') : ?>
-		<link rel="alternate" type="application/rss+xml" href="<?php bloginfo('comments_rss2_url'); ?>" title="<?php echo esc_html(get_bloginfo('name')); ?> recent comments" />
+	<?php if(mapi_is_true(get_option('default_comment_status'))) : ?>
+		<link rel="alternate" type="application/rss+xml" href="<?php echo get_post_comments_feed_link(); ?>" title="<?php echo esc_html(get_bloginfo('name')); ?> recent comments" />
 	<?php endif; ?>
 
-	<?php if(get_option('default_ping_status') == 'open') : ?>
+	<?php if(mapi_is_true(get_option('default_ping_status'))) : ?>
 		<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 	<?php endif; ?>
 

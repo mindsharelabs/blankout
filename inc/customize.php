@@ -53,34 +53,41 @@ class Blankout_Customize {
 		);
 
 		//3. Finally, we define the control itself (which links a setting to a section and renders the HTML controls)...
-		$wp_customize->add_control(new WP_Customize_Color_Control( //Instantiate the color control class
-			$wp_customize, //Pass the $wp_customize object (required)
-			'blankout_link_textcolor', //Set a unique ID for the control
-			array(
-				 'label'    => __('Body Link Color', 'blankout'), //Admin-visible name of the control
-				 'section'  => 'colors', //ID of the section this control should render in (can be one of yours, or a WordPress default section)
-				 'settings' => 'link_textcolor', //Which setting to load and manipulate (serialized is okay)
-				 'priority' => 11, //Determines the order this control appears in for the specified section
+		$wp_customize->add_control(
+			new WP_Customize_Color_Control(
+				$wp_customize, //Pass the $wp_customize object (required)
+				'blankout_link_textcolor', //Set a unique ID for the control
+				array(
+					 'label'    => __('Body Link Color', 'blankout'), //Admin-visible name of the control
+					 'section'  => 'colors', //ID of the section this control should render in (can be one of yours, or a WordPress default section)
+					 'settings' => 'link_textcolor', //Which setting to load and manipulate (serialized is okay)
+					 'priority' => 11, //Determines the order this control appears in for the specified section
+				)
 			)
-		));
+		);
 
-		$wp_customize->add_control(new WP_Customize_Color_Control(
-			$wp_customize,
-			'blankout_navbar_background', //Set a unique ID for the control
-			array(
-				 'label'    => __('Navbar Background', 'blankout'), //Admin-visible name of the control
-				 'section'  => 'colors', //ID of the section this control should render in (can be one of yours, or a WordPress default section)
-				 'settings' => 'navbar_background', //Which setting to load and manipulate (serialized is okay)
-				 'priority' => 10, //Determines the order this control appears in for the specified section
+		$wp_customize->add_control(
+			new WP_Customize_Color_Control(
+				$wp_customize,
+				'blankout_navbar_background', //Set a unique ID for the control
+				array(
+					 'label'    => __('Navbar Background', 'blankout'), //Admin-visible name of the control
+					 'section'  => 'colors', //ID of the section this control should render in (can be one of yours, or a WordPress default section)
+					 'settings' => 'navbar_background', //Which setting to load and manipulate (serialized is okay)
+					 'priority' => 10, //Determines the order this control appears in for the specified section
+				)
 			)
-		));
+		);
 
-		$wp_customize->add_control('show_menu_title', array(
-														   'settings' => 'menu_title',
-														   'label'    => __('Show title in nav bar'),
-														   'section'  => 'blankout_options',
-														   'type'     => 'checkbox',
-													  ));
+		$wp_customize->add_control(
+			'show_menu_title',
+			array(
+				 'settings' => 'menu_title',
+				 'label'    => __('Show title in nav bar', 'blankout'),
+				 'section'  => 'blankout_options',
+				 'type'     => 'checkbox',
+			)
+		);
 
 		//4. We can also change built-in settings by modifying properties. For instance, let's make some stuff use live preview JS...
 		$wp_customize->get_setting('blogname')->transport = 'postMessage';
@@ -100,18 +107,18 @@ class Blankout_Customize {
 	 */
 	public static function header_output() {
 		?>
-		<!--Customizer CSS-->
 		<style type="text/css">
-			<?php if('blankout_options[menu_title]' == TRUE) { ?>
-			<?php self::generate_css('.navbar-brand', 'display', 'block'); ?>
-			<?php } else { ?>
-			<?php self::generate_css('.navbar-brand', 'display', 'none'); ?>
-			<?php } ?>
-			<?php self::generate_css('body', 'background-color', 'background_color'); ?>
-			<?php self::generate_css('a', 'color', 'link_textcolor'); ?>
-			<?php self::generate_css('.navbar', 'background-color', 'navbar_background'); ?>
+			<?php
+			if('blankout_options[menu_title]' == TRUE) {
+			self::generate_css('.navbar-brand', 'display', 'block');
+			} else {
+			self::generate_css('.navbar-brand', 'display', 'none');
+			}
+			self::generate_css('body', 'background-color', 'background_color');
+			self::generate_css('a', 'color', 'link_textcolor');
+			self::generate_css('.navbar', 'background-color', 'navbar_background');
+			?>
 		</style>
-		<!--/Customizer CSS-->
 	<?php
 	}
 

@@ -19,7 +19,22 @@
 						<?php the_content(); ?>
 					</section>
 					<footer class="article-footer">
-						<?php the_taxonomies('before=<p class="tags">&after=</p>'); ?>
+						<?php
+						wp_link_pages(
+							array(
+								 'before'           => '<ul class="pagination">'.__('Pages:', 'blankout'),
+								 'after'            => '</div>',
+								 'link_before'      => '<li>',
+								 'link_after'       => '</li>',
+								 'next_or_number'   => 'number',
+								 'nextpagelink'     => __('Next page', 'blankout'),
+								 'previouspagelink' => __('Previous page', 'blankout'),
+								 'pagelink'         => '%',
+								 'echo'             => 1
+							)
+						);
+						?>
+						<?php the_taxonomies('before=<div class="tags">&after=</div>'); ?>
 						<?php mapi_edit_link(); ?>
 					</footer>
 				</article>

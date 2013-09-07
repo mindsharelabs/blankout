@@ -16,11 +16,10 @@ define('BOOTSTRAP_DROPDOWN_ON_HOVER', FALSE);
  * WordPress setup
  */
 if(!isset($content_width)) {
-	$content_width = 960;
+	$content_width = 1170;
 }
 add_theme_support('automatic-feed-links');
 add_theme_support('post-thumbnails');
-
 add_theme_support('custom-background',
 	array(
 		 'default-image'          => '', // background image default
@@ -30,6 +29,11 @@ add_theme_support('custom-background',
 		 'admin-preview-callback' => ''
 	)
 );
+function blankout_add_editor_styles() {
+	add_editor_style('css/editor-style.css');
+}
+
+add_action('init', 'blankout_add_editor_styles');
 
 // adding post format support
 /*add_theme_support('post-formats',

@@ -1,5 +1,5 @@
 <?php
-$placeholder =  esc_attr__('Search', 'blankout').mapi_single_cat_title();
+$placeholder = esc_attr__('Search', 'blankout').mapi_single_cat_title();
 $cat = '';
 // 1st check for categories sent in from mapi_cat_search_form
 if(!empty($cat_str)) {
@@ -18,7 +18,7 @@ if(!empty($cat_str)) {
 	<?php endif; ?>
 
 	<?php if(!empty($cat)) : ?>
-		<input type="hidden" name="cat" value="<?= $cat ?>" />
+		<input type="hidden" name="cat" value="<?php echo $cat; ?>" />
 	<?php endif; ?>
 
 	<span class="input-group-btn">

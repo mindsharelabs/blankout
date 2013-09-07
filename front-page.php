@@ -13,16 +13,16 @@
 					<header class="article-header">
 						<?php //blankout_rich_snippets(); ?>
 						<h1 class="entry-title single-title" itemprop="headline"><?php the_title(); ?></h1>
-						<small class="byline vcard"><?php _e("Posted", "blankout"); ?>
-							<time class="updated" datetime="<?php the_time('Y-m-d'); ?>"><?php the_time('F jS, Y'); ?></time> <?php _e("by", "blankout"); ?>
-							<span class="author"><?php the_author_posts_link(); ?></span> <span class="amp">&amp;</span> <?php _e("filed under", "blankout"); ?> <?php the_category(', '); ?>.
+						<small class="byline vcard"><?php _e("Posted", 'blankout'); ?>
+							<time class="updated" datetime="<?php the_time('Y-m-d'); ?>"><?php the_time('F jS, Y'); ?></time> <?php _e("by", 'blankout'); ?>
+							<span class="author"><?php the_author_posts_link(); ?></span> <span class="amp">&amp;</span> <?php _e("filed under", 'blankout'); ?> <?php the_category(', '); ?>.
 						</small>
 					</header>
 					<section class="entry-content clearfix" itemprop="articleBody">
 						<?php the_content(); ?>
 					</section>
 					<footer class="article-footer">
-						<?php the_taxonomies('before=<p class="tags">&after=</p>'); ?>
+						<?php the_taxonomies('before=<div class="tags">&after=</div>'); ?>
 					</footer>
 				</article>
 

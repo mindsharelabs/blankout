@@ -18,7 +18,7 @@
 						<?php echo mapi_excerpt(); ?> <?php echo mapi_excerpt_more(); ?>
 					</section>
 					<footer class="article-footer">
-						<?php the_taxonomies('before=<p class="tags">&after=</p>'); ?>
+						<?php the_taxonomies('before=<div class="tags">&after=</div>'); ?>
 					</footer>
 
 					<?php //comments_template(); ?>
@@ -31,8 +31,8 @@
 				<?php else : ?>
 					<nav class="wp-prev-next">
 						<ul class="clearfix">
-							<li class="prev-link"><?php next_posts_link(__('&laquo; Older Entries', "blankout")) ?></li>
-							<li class="next-link"><?php previous_posts_link(__('Newer Entries &raquo;', "blankout")) ?></li>
+							<li class="prev-link"><?php next_posts_link(__('&laquo; Older Entries', 'blankout')) ?></li>
+							<li class="next-link"><?php previous_posts_link(__('Newer Entries &raquo;', 'blankout')) ?></li>
 						</ul>
 					</nav>
 				<?php endif; ?>
