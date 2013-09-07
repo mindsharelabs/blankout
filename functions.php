@@ -15,40 +15,77 @@ define('BOOTSTRAP_DROPDOWN_ON_HOVER', FALSE);
 /**
  * WordPress setup
  */
+// Set content width value based on the theme's design
 if(!isset($content_width)) {
 	$content_width = 1170;
 }
-add_theme_support('automatic-feed-links');
-add_theme_support('post-thumbnails');
-add_theme_support('custom-background',
-	array(
-		 'default-image'          => '', // background image default
-		 'default-color'          => '', // background color default (don't add the #)
-		 'wp-head-callback'       => '_custom_background_cb',
-		 'admin-head-callback'    => '',
-		 'admin-preview-callback' => ''
-	)
-);
+
+if(!function_exists('blankout_theme_features')) {
+
+	// Register Theme Features
+	function blankout_theme_features() {
+
+		// Add theme support for Automatic Feed Links
+		add_theme_support('automatic-feed-links');
+
+		// Add theme support for Post Formats
+		$formats = array('status', 'quote', 'gallery', 'image', 'video', 'audio', 'link', 'aside', 'chat',);
+		//add_theme_support('post-formats', $formats);
+
+		// Add theme support for Featured Images
+		add_theme_support('post-thumbnails');
+
+		// Set custom thumbnail dimensions
+		set_post_thumbnail_size(125, 125, TRUE);
+
+		// Add theme support for Custom Background
+		$background_args = array(
+			'default-color'          => 'ffffff',
+			'default-image'          => '',
+			'wp-head-callback'       => '_custom_background_cb',
+			'admin-head-callback'    => '',
+			'admin-preview-callback' => '',
+		);
+		add_theme_support('custom-background', $background_args);
+
+		// Add theme support for Custom Header
+		$header_args = array(
+			'default-image'      => '',
+			'width'              => 1170,
+			'height'             => 480,
+			'flex-width'         => TRUE,
+			'flex-height'        => TRUE,
+			'random-default'     => TRUE,
+			'header-text'        => TRUE,
+			'default-text-color' => '000',
+			'uploads'            => TRUE,
+
+		);
+		//add_theme_support('custom-header', $header_args);
+
+		// Add theme support for Semantic Markup
+		$markup = array('search-form', 'comment-form', 'comment-list');
+		add_theme_support('html5', $markup);
+
+		// Add theme support for Translation
+		load_theme_textdomain('blankout', get_template_directory().'/translation');
+		$locale = get_locale();
+		$locale_file = get_template_directory()."/translation/$locale.php";
+		if(is_readable($locale_file)) {
+			require_once($locale_file);
+		}
+	}
+
+	// Hook into the 'after_setup_theme' action
+	add_action('after_setup_theme', 'blankout_theme_features');
+}
+
+// Add theme support for custom CSS in the TinyMCE visual editor
 function blankout_add_editor_styles() {
 	add_editor_style('css/editor-style.css');
 }
 
 add_action('init', 'blankout_add_editor_styles');
-
-// adding post format support
-/*add_theme_support('post-formats',
-	array(
-		 'aside', // title less blurb
-		 'gallery', // gallery of images
-		 'link', // quick link to other site
-		 'image', // an image
-		 'quote', // a quick quote
-		 'status', // a Facebook like status update
-		 'video', // video
-		 'audio', // audio
-		 'chat' // chat transcript
-	)
-);*/
 
 register_nav_menus(
 	array(
@@ -105,6 +142,8 @@ function blankout_configure_mapi() {
 	if(function_exists('mapi_update_option')) {
 		mapi_update_option('load_bootstrap', TRUE);
 		mapi_update_option('load_modernizr_js', TRUE);
+		// let's not load Bootstrap CSS twice in the Mindshare Theme API
+		mapi_get_option('load_bootstrap_css', FALSE);
 	}
 }
 
@@ -115,20 +154,17 @@ add_action('init', 'blankout_configure_mapi');
  *
  */
 function blankout_scripts_and_styles() {
-	if(!is_admin()) {
+	if(!is_admin()) { // @todo... Bryce, is this needed?
 
 		wp_register_script('blankout-js', get_stylesheet_directory_uri().'/js/main.js', array('jquery'));
 		wp_enqueue_script('blankout-js');
 
-		// only load the Bootstrap CSS if the Mindshare Theme API is not already loading it
-		if(!mapi_is_true(mapi_get_option('load_bootstrap_css'))) {
-			wp_register_style('bootstrap-stylesheet', get_stylesheet_directory_uri().'/css/bootstrap.css', array(), '', 'all');
-			wp_enqueue_style('bootstrap-stylesheet');
-		}
+		wp_register_style('bootstrap-stylesheet', get_stylesheet_directory_uri().'/css/bootstrap.css', array(), '', 'all');
+		wp_enqueue_style('bootstrap-stylesheet');
 	}
 }
 
-add_action('wp_enqueue_scripts', 'blankout_scripts_and_styles', 999);
+add_action('wp_enqueue_scripts', 'blankout_scripts_and_styles'); // @todo priority was set to 999 .. why?
 
 /**
  * @param $classes
@@ -136,14 +172,14 @@ add_action('wp_enqueue_scripts', 'blankout_scripts_and_styles', 999);
  *
  * @return array
  */
-function add_active_class($classes, $item) {
+function blankout_add_active_class($classes, $item) {
 	if($item->menu_item_parent == 0 && in_array('current-menu-item', $classes)) {
 		$classes[] = "active";
 	}
 	return $classes;
 }
 
-add_filter('nav_menu_css_class', 'add_active_class', 10, 2);
+add_filter('nav_menu_css_class', 'blankout_add_active_class', 10, 2);
 
 if(!class_exists('Blankout_Menu_Walker')) {
 	/**
@@ -351,14 +387,6 @@ function blankout_page_nav($before = '<div class="pagination pagination-centered
 		echo '<li class="bpn-last-page-link"><a href="'.get_pagenum_link($max_page).'" title="'.$last_page_text.'">'.$last_page_text.'</a></li>';
 	}
 	echo $after."</ul>";
-}
-
-// Adding Translation Option
-load_theme_textdomain('blankout', get_template_directory().'/translation');
-$locale = get_locale();
-$locale_file = get_template_directory()."/translation/$locale.php";
-if(is_readable($locale_file)) {
-	require_once($locale_file);
 }
 
 /**
