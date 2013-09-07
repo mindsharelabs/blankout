@@ -448,6 +448,7 @@ function blankout_rich_snippets() {
  * Optionally displays a credit message in compatible themes when enabled in the Mindshare Theme API
  * (Settings > Developer Settings > Misc. Settings > Show Credit)
  *
+ * @todo Move to API
  */
 function blankout_copyright() {
 	echo '<!--compression-none-->';
@@ -500,7 +501,7 @@ function blankout_add_opengraph_doctype($output) {
 add_filter('language_attributes', 'blankout_add_opengraph_doctype');
 
 /**
- * @todo Move to API?
+ * Adds Facebook Open Graph API stuff to head
  *
  */
 function blankout_facebook_head() {
