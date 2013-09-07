@@ -32,7 +32,7 @@
 				</h1>
 			<?php elseif(is_day()) : ?>
 				<h1 class="archive-title h2">
-					<span><?php _e("Daily Archive:", 'blankout'); ?></span> <?php the_time('l, F j, Y'); ?>
+					<span><?php _e("Daily Archive:", 'blankout'); ?></span> <?php the_time(get_option('date_format', 'l, F j, Y')); ?>
 				</h1>
 
 			<?php elseif(is_month()) : ?>

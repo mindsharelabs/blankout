@@ -24,7 +24,7 @@
 	<?php endif; ?>
 
 	<?php wp_head(); ?>
-
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,700,600,800,300" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="<?php bloginfo('stylesheet_url'); ?>" media="all" />
 	<?php blankout_enable_nav_hover(); ?>
 </head>
