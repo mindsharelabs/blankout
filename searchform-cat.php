@@ -1,4 +1,7 @@
 <?php
+/**
+ * Use this form for category specific searches
+ */
 $placeholder = esc_attr__('Search', 'blankout').mapi_single_cat_title();
 $cat = '';
 // 1st check for categories sent in from mapi_cat_search_form

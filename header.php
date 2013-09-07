@@ -1,14 +1,19 @@
 <?php //mapi_mobile_header('class', true, false); ?>
 <!DOCTYPE HTML>
-<!--[if lt IE 7]><html <?php language_attributes(); ?> class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]-->
-<!--[if (IE 7)&!(IEMobile)]><html <?php language_attributes(); ?> class="no-js lt-ie9 lt-ie8"><![endif]-->
-<!--[if (IE 8)&!(IEMobile)]><html <?php language_attributes(); ?> class="no-js lt-ie9"><![endif]-->
-<!--[if gt IE 8]><html <?php language_attributes(); ?> class="no-js"><![endif]-->
+<!--[if lt IE 7]>
+<html <?php language_attributes(); ?> class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]-->
+<!--[if (IE 7)&!(IEMobile)]>
+<html <?php language_attributes(); ?> class="no-js lt-ie9 lt-ie8"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]>
+<html <?php language_attributes(); ?> class="no-js lt-ie9"><![endif]-->
+<!--[if gt IE 8]>
+<html <?php language_attributes(); ?> class="no-js"><![endif]-->
 <head>
 	<meta charset="<?php bloginfo('charset'); ?>" />
 	<title><?php bloginfo('name'); ?> | <?php is_front_page() ? bloginfo('description') : wp_title(); ?></title>
 	<?php blankout_copyright(); ?>
-	<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+	<!--[if IE]>
+	<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
 	<meta name="HandheldFriendly" content="True" />
 	<meta name="MobileOptimized" content="320" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
@@ -36,14 +41,15 @@
 		<nav class="navbar navbar-default">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+					<span class="sr-only"><?php _e('Toggle navigation', 'blankout'); ?></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 				</button>
 				<?php if(get_theme_mod('menu_title')) : ?>
-					<a class="navbar-brand" id="logo" title="<?php bloginfo('description'); ?>" href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a>
+					<a class="navbar-brand" id="logo" title="<?php bloginfo('name'); ?> - <?php bloginfo('description'); ?>" href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a>
 				<?php endif; ?>
 			</div>
 			<div class="collapse navbar-collapse">
-				<?php wp_nav_menu(
+				<?php
+				wp_nav_menu(
 					array(
 						 'container'       => ' ',
 						 'container_class' => 'nav',
@@ -54,7 +60,8 @@
 						 'depth'           => '2',
 						 'walker'          => new Blankout_Menu_Walker()
 					)
-				); ?>
+				);
+				?>
 			</div>
 		</nav>
 	</header>
