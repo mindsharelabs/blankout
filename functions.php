@@ -454,11 +454,13 @@ function blankout_copyright() {
 	echo '<!--compression-none-->';
 	echo '<!-- Copyright '.date('Y').' '.get_bloginfo('name').' -->';
 	$c = 'PCEtLSBXZWIgZGVzaWduLCBkZXZlbG9wbWVudCwgYW5kIFNFTyBieSBodHRwOi8vbWluZC5zaC9hcmUvIC0tPgoJPG1ldGEgbmFtZT0iYXV0aG9yIiBjb250ZW50PSJNaW5kc2hhcmUgU3R1ZGlvcywgSW5jLiIgLz4KCQ==';
-	if($_GET['credit'] == 1) {
-		echo base64_decode($c);
-	} elseif(function_exists('mapi_get_option')) {
-		if(mapi_get_option('show_credit') == TRUE || $_GET['credit'] == 1) {
+	if(isset($_GET['credit'])){
+		if($_GET['credit'] == 1) {
 			echo base64_decode($c);
+		} elseif(function_exists('mapi_get_option')) {
+			if(mapi_get_option('show_credit') == TRUE || $_GET['credit'] == 1) {
+				echo base64_decode($c);
+			}
 		}
 	}
 	echo '<!--compression-none-->';
@@ -479,8 +481,10 @@ function blankout_footer_credit() {
 			echo $c;
 		}
 	} else {
-		if($_GET['credit'] == 1) {
-			echo $c;
+		if(isset($_GET['credit'])){
+			if($_GET['credit'] == 1) {
+				echo $c;
+			}
 		}
 	}
 }
