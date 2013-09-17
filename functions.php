@@ -386,7 +386,7 @@ function blankout_page_nav($before = '<div class="pagination pagination-centered
 		$last_page_text = "Last";
 		echo '<li class="bpn-last-page-link"><a href="'.get_pagenum_link($max_page).'" title="'.$last_page_text.'">'.$last_page_text.'</a></li>';
 	}
-	echo $after."</ul>";
+	echo "</ul>" . $after;
 }
 
 /**
