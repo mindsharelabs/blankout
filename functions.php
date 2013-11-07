@@ -6,6 +6,7 @@
 
 include(get_template_directory().'/inc/customize.php'); // enable theme customizer for Blankout (Appearance > Themes)
 include(get_template_directory().'/inc/carousel-post-type.php');
+include(get_template_directory().'/inc/woocommerce.php'); // enable WooCommerce support
 
 /**
  * if TRUE, overrides the default bootstrap behavior where user must click on a top level menu item in order to see subpages
