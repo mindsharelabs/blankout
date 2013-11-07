@@ -1,14 +1,14 @@
 <?php
 /**
  * article-footer.php
- * 
- * @created 9/7/13 12:16 AM
- * @author Mindshare Studios, Inc.
+ *
+ * @created   9/7/13 12:16 AM
+ * @author    Mindshare Studios, Inc.
  * @copyright Copyright (c) 2013
- * @link http://www.mindsharelabs.com/documentation/
- * 
+ * @link      http://www.mindsharelabs.com/documentation/
+ *
  */
- 
+
 ?>
 <?php if(is_page()) : ?>
 
@@ -38,7 +38,8 @@
 		<?php mapi_edit_link(); ?>
 	</footer>
 
-<?php else : ?>
+<?php
+else : ?>
 
 	<footer class="article-footer"></footer>
 

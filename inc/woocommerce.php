@@ -24,7 +24,7 @@ add_action('woocommerce_after_main_content', 'blankout_woo_wrapper_end', 10);
 function blankout_woo_wrapper_start() {
 	?>
 	<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?> role="article" itemscope itemtype="http://schema.org/Product">
-	<?php get_template_part('inc/article-header'); ?>
+	<?php //get_template_part('inc/article-header'); ?>
 	<section class="entry-content clearfix" itemprop="articleBody">
 <?php
 }
