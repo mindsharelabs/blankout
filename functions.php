@@ -148,7 +148,7 @@ function blankout_configure_mapi() {
 	}
 }
 
-add_action('init', 'blankout_configure_mapi');
+add_action('after_theme_setup', 'blankout_configure_mapi');
 
 /**
  * Load frontend CSS/JS
@@ -193,6 +193,7 @@ if(!class_exists('Blankout_Menu_Walker')) {
 		 *
 		 * @param string $output Passed by reference. Used to append additional content.
 		 * @param int    $depth  Depth of page. Used for padding.
+		 * @param array  $args
 		 */
 		function start_lvl(&$output, $depth = 0, $args = array()) {
 			$indent = str_repeat("\t", $depth);
@@ -200,14 +201,16 @@ if(!class_exists('Blankout_Menu_Walker')) {
 		}
 
 		/**
-		 * @see   Walker::start_el()
-		 * @since 3.0.0
+		 * @see      Walker::start_el()
+		 * @since    3.0.0
 		 *
-		 * @param string $output       Passed by reference. Used to append additional content.
-		 * @param object $item         Menu item data object.
-		 * @param int    $depth        Depth of menu item. Used for padding.
-		 * @param int    $current_page Menu item ID.
-		 * @param object $args
+		 * @param string       $output Passed by reference. Used to append additional content.
+		 * @param object       $item   Menu item data object.
+		 * @param int          $depth  Depth of menu item. Used for padding.
+		 * @param array|object $args
+		 * @param int          $id
+		 *
+		 * @internal param int $current_page Menu item ID.
 		 */
 
 		function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0) {
@@ -387,7 +390,7 @@ function blankout_page_nav($before = '<div class="pagination pagination-centered
 		$last_page_text = "Last";
 		echo '<li class="bpn-last-page-link"><a href="'.get_pagenum_link($max_page).'" title="'.$last_page_text.'">'.$last_page_text.'</a></li>';
 	}
-	echo "</ul>" . $after;
+	echo "</ul>".$after;
 }
 
 /**
@@ -455,7 +458,7 @@ function blankout_copyright() {
 	echo '<!--compression-none-->';
 	echo '<!-- Copyright '.date('Y').' '.get_bloginfo('name').' -->';
 	$c = 'PCEtLSBXZWIgZGVzaWduLCBkZXZlbG9wbWVudCwgYW5kIFNFTyBieSBodHRwOi8vbWluZC5zaC9hcmUvIC0tPgoJPG1ldGEgbmFtZT0iYXV0aG9yIiBjb250ZW50PSJNaW5kc2hhcmUgU3R1ZGlvcywgSW5jLiIgLz4KCQ==';
-	if(isset($_GET['credit'])){
+	if(isset($_GET['credit'])) {
 		if($_GET['credit'] == 1) {
 			echo base64_decode($c);
 		} elseif(function_exists('mapi_get_option')) {
@@ -482,7 +485,7 @@ function blankout_footer_credit() {
 			echo $c;
 		}
 	} else {
-		if(isset($_GET['credit'])){
+		if(isset($_GET['credit'])) {
 			if($_GET['credit'] == 1) {
 				echo $c;
 			}
