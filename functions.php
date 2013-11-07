@@ -4,14 +4,17 @@
  *
  */
 
+/**
+ * Constants
+ */
+define('BOOTSTRAP_DROPDOWN_ON_HOVER', FALSE); // if TRUE, overrides the default bootstrap behavior where user must click on a top level menu item in order to see subpages
+
+/**
+ * Includes
+ */
 include(get_template_directory().'/inc/customize.php'); // enable theme customizer for Blankout (Appearance > Themes)
 include(get_template_directory().'/inc/carousel-post-type.php');
 include(get_template_directory().'/inc/woocommerce.php'); // enable WooCommerce support
-
-/**
- * if TRUE, overrides the default bootstrap behavior where user must click on a top level menu item in order to see subpages
- */
-define('BOOTSTRAP_DROPDOWN_ON_HOVER', FALSE);
 
 /**
  * WordPress setup
@@ -88,12 +91,21 @@ function blankout_add_editor_styles() {
 
 add_action('init', 'blankout_add_editor_styles');
 
+/**
+ * Menus
+ */
 register_nav_menus(
 	array(
 		 'main-nav'   => __('Main Navigation', 'blankout'), // main nav in header
 		 'footer-nav' => __('Footer Navigation', 'blankout') // secondary nav in footer
 	)
 );
+if(!is_nav_menu('main-nav')) {
+	wp_create_nav_menu('Main Navigation', array('slug' => 'main-nav'));
+}
+if(!is_nav_menu('main-nav')) {
+	wp_create_nav_menu('Footer Navigation', array('slug' => 'footer-nav'));
+}
 
 register_sidebar(
 	array(
@@ -137,8 +149,10 @@ add_filter('wp_list_categories', 'blankout_add_cat_count');
  *
  */
 function blankout_configure_mapi() {
-	if(!is_plugin_active('mcms-api/mcms-api.php') && !is_admin()) {
-		wp_die('This theme requires the Mindshare Theme API plugin. Luckily, it\'s free, open source and dead easy to get! <br /><br /><strong>Step 1</strong> <a href="http://svn.mindsharestudios.com/mcms-api/mcms-api.zip">Download the zip.</a> <br /><strong>Step 2</strong> <a href="/wp-admin/plugin-install.php?tab=upload">Install and activate.</a>');
+	if(!is_admin() && current_user_can('manage_plugins')) {
+		if(!in_array('mcms-api/mcms-api.php', apply_filters('active_plugins', get_option('active_plugins')))) {
+			wp_die('This theme requires the Mindshare Theme API plugin. Luckily, it\'s free, open source and dead easy to get! <br /><br /><strong>Step 1</strong> <a href="http://svn.mindsharestudios.com/mcms-api/mcms-api.zip">Download the zip.</a> <br /><strong>Step 2</strong> <a href="/wp-admin/plugin-install.php?tab=upload">Install and activate.</a>');
+		}
 	}
 	if(function_exists('mapi_update_option')) {
 		mapi_update_option('load_bootstrap', TRUE);
@@ -148,7 +162,7 @@ function blankout_configure_mapi() {
 	}
 }
 
-add_action('after_theme_setup', 'blankout_configure_mapi');
+add_action('admin_init', 'blankout_configure_mapi');
 
 /**
  * Load frontend CSS/JS
