@@ -3,7 +3,9 @@
 	<div class="row">
 		<div id="main" class="col-lg-9">
 			<article id="post-not-found" <?php post_class('post-not-found hentry clearfix'); ?>>
-				<?php get_template_part('inc/article-header'); ?>
+				<header class="article-header page-header">
+					<h1 class="entry-title page-title"><?php _e('404 - Page Not Found', 'blankout'); ?></h1>
+				</header>
 				<section class="entry-content">
 					<p>
 						<strong><?php _e('404', 'blankout'); ?></strong>: <?php _e('the requested page could not be found. Try a search to find what you were looking for. Alternatively, you can return to', 'blankout'); ?>
@@ -14,7 +16,7 @@
 					<?php if(function_exists('wbz404_suggestions')) : wbz404_suggestions(); endif; ?>
 				</section>
 
-				<?php get_template_part('inc/article-footer'); ?>
+				<footer class="article-footer"></footer>
 
 			</article>
 		</div>

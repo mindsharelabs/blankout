@@ -5,7 +5,7 @@
  */
 
 include(get_template_directory().'/inc/customize.php'); // enable theme customizer for Blankout (Appearance > Themes)
-include(get_template_directory().'/inc/carousel-post-type.php');
+include(get_template_directory().'/inc/custom-post-types.php');
 include(get_template_directory().'/inc/woocommerce.php'); // enable WooCommerce support
 
 /**
@@ -137,7 +137,7 @@ add_filter('wp_list_categories', 'blankout_add_cat_count');
  *
  */
 function blankout_configure_mapi() {
-	if(!is_plugin_active('mcms-api/mcms-api.php') && !is_admin()) {
+	if(!is_plugin_active('mcms-api/mcms-api.php')) {
 		wp_die('This theme requires the Mindshare Theme API plugin. Luckily, it\'s free, open source and dead easy to get! <br /><br /><strong>Step 1</strong> <a href="http://svn.mindsharestudios.com/mcms-api/mcms-api.zip">Download the zip.</a> <br /><strong>Step 2</strong> <a href="/wp-admin/plugin-install.php?tab=upload">Install and activate.</a>');
 	}
 	if(function_exists('mapi_update_option')) {
@@ -148,24 +148,20 @@ function blankout_configure_mapi() {
 	}
 }
 
-add_action('init', 'blankout_configure_mapi');
+add_action('admin-init', 'blankout_configure_mapi');
 
 /**
  * Load frontend CSS/JS
  *
  */
 function blankout_scripts_and_styles() {
-	if(!is_admin()) { // @todo... Bryce, is this needed?
 
-		wp_register_script('blankout-js', get_stylesheet_directory_uri().'/js/main.js', array('jquery'));
-		wp_enqueue_script('blankout-js');
-
-		wp_register_style('bootstrap-stylesheet', get_stylesheet_directory_uri().'/css/bootstrap.css', array(), '', 'all');
-		wp_enqueue_style('bootstrap-stylesheet');
-	}
+	wp_enqueue_script('blankout-js', get_stylesheet_directory_uri().'/js/main.min.js', array('jquery'));
+	wp_enqueue_style('bootstrap-stylesheet', get_stylesheet_directory_uri().'/css/bootstrap.css', array(), '', 'all');
+	
 }
 
-add_action('wp_enqueue_scripts', 'blankout_scripts_and_styles'); // @todo priority was set to 999 .. why?
+add_action('wp_enqueue_scripts', 'blankout_scripts_and_styles');
 
 /**
  * @param $classes

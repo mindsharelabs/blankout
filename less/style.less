@@ -5,6 +5,14 @@
 //
 // --------------------------------------------------
 
+body {
+	-moz-osx-font-smoothing: grayscale; // enable font-smoothing for browsers that support it
+	-webkit-font-smoothing: antialiased;
+	text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+}
+
+// Page header
+
 .header {
 	margin-top:15px;
 
@@ -18,38 +26,37 @@
 
 }
 
+
 //
-// Common Wordpress classes
+// Single post
 // --------------------------------------------------
 
-.home {
-}
-.archive {
-}
-.single {
-}
-.sticky {
+article {
 
-}
-.gallery-caption {
-
-}
-.bypostauthor {
-
-}
-//
-// Posts and content
-// --------------------------------------------------
-
-#content {
-	margin-top:2.2em;
-}
-
-.hentry {
-
-	header {
-
+	header, .article-header {
 		margin-top:0px;
+
+		&.post-header {
+			// applies only to posts / items listed in archives
+		}
+
+		&.page-header {
+			// applies only to single entries
+		}
+
+		.entry-title {
+			margin-bottom:0px;
+		}
+
+		.byline {
+			.text-muted;
+			display: inline-block;
+			margin-bottom: 8px;
+
+			time {
+			}
+
+		}
 
 		.amp {
 			font-family:Baskerville, 'Goudy Old Style', Palatino, 'Book Antiqua', serif;
@@ -66,234 +73,146 @@
 
 	}
 
-	footer {
-	}
+	section.entry-content {
 
-}
-/* end .hentry */
+		p {
 
-.single-title,
-.page-title {
-}
-
-.single-title {
-}
-
-.page-title {
-}
-
-.archive-title {
-}
-
-/* post meta */
-.byline {
-	.text-muted;
-	display: inline-block;
-	margin: 0 0 20px;
-
-	time {
-	}
-
-}
-
-/* entry content */
-.entry-title {
-	margin-bottom:0px !important;
-}
-.entry-content {
-
-	p {
-	}
-
-	ul, ol, table, dl {
-	}
-
-	table {
-		.table;
-	}
-
-	ul {
-
-		li {
 		}
 
-	}
+		ul, ol, table, dl {
 
-	blockquote {
-
-		&:before {
 		}
 
-	}
-
-	dl {
-	}
-
-	dt {
-	}
-
-	dd {
-		margin-left:0;
-		font-size:0.9em;
-		color:#787878;
-		margin-bottom:1.5em;
-	}
-
-	.alignleft, img.alignleft {
-		float:left;
-		margin:6px 20px 6px 0;
-	}
-	.alignright, img.alignright {
-		float:right;
-		margin:6px 0 6px 20px;
-	}
-	.aligncenter, img.aligncenter {
-		float:none;
-		margin:0 auto;
-		margin:6px 20px;
-	}
-	.alignnone, img.alignnone {
-		float:none;
-		margin:0 auto;
-		margin:6px 20px;
-	}
-
-	video, object {
-		max-width:100%;
-		height:auto;
-	}
-
-	pre {
-		background:#eee;
-		border:1px solid #cecece;
-		padding:10px;
-	}
-
-}
-/* end .entry-content */
-
-.article-footer {
-
-	p.tags {
-
-		font-size:12px;
-		color:#777;
-
-		a {
-			.label;
-			.label-default;
-			font-size:90%;
+		table {
+			.table;
 		}
 
-	}
-
-}
-
-.wp-caption {
-	background:#eee;
-	padding:5px;
-
-	/* images inside wp-caption */
-	img {
-		margin-bottom:0;
-		width:100%;
-	}
-
-	p.wp-caption-text {
-		font-size:0.85em;
-		margin:4px 0 7px;
-		text-align:center;
-	}
-
-}
-/* end .wp-caption */
-
-/* image gallery styles */
-.gallery {
-
-	dl {
-
-		a {
-		}
-
-		img {
-		}
-
-	}
-
-	dt {
-	}
-
-	dd {
-	}
-
-}
-/* end .gallery */
-
-/* gallery caption styles */
-.gallery-caption {
-}
-
-/* image sizes */
-
-.size-full {
-}
-.size-large {
-}
-.size-medium {
-}
-.size-thumbnail {
-}
-
-/* sidebars and asides */
-#sidebar {
-
-}
-
-.widget {
-
-	margin-bottom:40px;
-
-	.widgettitle {
-		border-bottom:1px solid @table-border-color;
-		width:90%;
-		padding-bottom:4px;
-	}
-
-	ul {
-		.list-unstyled;
-	}
-
-	&:first-child {
-	}
-
-	&:last-child {
-	}
-
-	// Default Wordpress widgets
-
-	&.widget_categories {
-
-		select {
-			.form-control;
-		}
-
-		>ul {
-			.list-group;
+		ul {
 
 			li {
-				.list-group-item;
+
 			}
 
 		}
 
+		blockquote {
+
+			&:before {
+
+			}
+
+		}
+
+		dl {
+		}
+
+		dt {
+		}
+
+		dd {
+			margin-left:0;
+			font-size:0.9em;
+			color:#787878;
+			margin-bottom:1.5em;
+		}
+
+		img {
+			max-width: 100%;
+		}
+
+		.wp-caption {
+			background:#eee;
+			padding:5px;
+
+			/* images inside wp-caption */
+			img {
+				margin-bottom:0;
+				width:100%;
+			}
+
+			p.wp-caption-text {
+				font-size:0.85em;
+				margin:4px 0 7px;
+				text-align:center;
+			}
+
+		}
+
+		.gallery {
+
+			dl {
+
+				a {
+				}
+
+				img {
+				}
+
+			}
+
+			dt {
+			}
+
+			dd {
+			}
+
+		}
+
+		.alignleft, img.alignleft {
+			float:left;
+			margin:6px 20px 6px 0;
+		}
+		.alignright, img.alignright {
+			float:right;
+			margin:6px 0 6px 20px;
+		}
+		.aligncenter, img.aligncenter {
+			float:none;
+			margin:0 auto;
+			margin:6px 20px;
+		}
+		.alignnone, img.alignnone {
+			float:none;
+			margin:0 auto;
+			margin:6px 20px;
+		}
+
+		video, object {
+			max-width:100%;
+			height:auto;
+		}
+
+		pre {
+			background:#eee;
+			border:1px solid #cecece;
+			padding:10px;
+		}
+
+	}
+
+	footer, .article-footer {
+		margin-top: 8px;
+
+		.tags {
+			font-size: @font-size-small;
+			color: @text-muted;
+
+			a {
+				.label;
+				.label-default;
+			}
+
+		}
+
+		.mapi-edit-link {
+
+		}
+
 	}
 
 }
-.pagination.pagination-centered {
-	text-align:center;
-	width:100%;
-}
+
+/* end single post */
 
 // Comments
 
@@ -319,17 +238,111 @@
 
 }
 
+/* sidebars and asides */
+#sidebar {
+
+	.widget {
+
+		margin-bottom:40px;
+
+		.widgettitle {
+			border-bottom:1px solid @table-border-color;
+			width:90%;
+			padding-bottom:4px;
+		}
+
+		ul {
+			.list-unstyled;
+		}
+
+		&:first-child {
+			// first widget
+		}
+
+		&:last-child {
+			// last widget
+		}
+
+		// Default Wordpress widgets
+
+		&.widget_categories {
+
+			select {
+				.form-control;
+			}
+
+			>ul {
+				.list-group;
+
+				li {
+					.list-group-item;
+				}
+
+			}
+
+		}
+
+	}
+
+}
+
+// Pagination
+
+.pagination.pagination-centered {
+	text-align:center;
+	width:100%;
+}
+
 // Footer Styles
 
-.footer {
+footer, .footer {
 	clear:both;
 	margin-top:15px;
-}
 
-.footer-nav>li>a {
-	padding:2px 6px;
+	.footer-nav {
+
+		li > a {
+			padding:2px 6px;
+		}
+
+		@media (max-width: @grid-float-breakpoint) {
+
+			li {
+				float: none;
+				width: 100%;
+				text-align: center;
+				padding: 5px 0;
+			}
+
+		}
+
+	}
+
+	.copyright, #credit {
+		color:#ccc;
+		text-transform:uppercase;
+		font-size:10px;
+		margin:20px 0;
+		line-height: 20px;
+
+		@media (max-width: @grid-float-breakpoint) {
+			float: none !important;
+			display: block;
+			width: 100%;
+			text-align: center;
+		}
+
+	}
+
+	#credit img {
+		opacity:0.5;
+	}
+
+	#credit img:hover {
+		opacity:1;
+	}
+
 }
-/* end .footer-links */
 
 /* misc. bootstrap style overrides */
 
@@ -341,19 +354,4 @@
 
 .btn.btn-primary a {
 	color:@btn-primary-color;
-}
-
-.copyright, #credit {
-	color:#ccc;
-	text-transform:uppercase;
-	font-size:10px;
-	margin:20px 0;
-}
-
-#credit img {
-	opacity:0.5;
-}
-
-#credit img:hover {
-	opacity:1;
 }

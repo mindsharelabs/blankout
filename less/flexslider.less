@@ -133,24 +133,24 @@ html[xmlns] .slides {
 	left: -50px;
 }
 .flex-direction-nav .flex-prev:before {
-	font-family: 'Glyphicons Halflings';
+	font-family: @icon-font-name;
 	font-style: normal;
 	font-weight: normal;
 	line-height: 1;
 	-webkit-font-smoothing: antialiased;
-	content: "\e079";
+	content: "\f060";
 }
 .flex-direction-nav .flex-next {
 	right: -50px;
 	text-align: right;
 }
 .flex-direction-nav .flex-next:before {
-	font-family: 'Glyphicons Halflings';
+	font-family: @icon-font-name;
 	font-style: normal;
 	font-weight: normal;
 	line-height: 1;
 	-webkit-font-smoothing: antialiased;
-	content: "\e080";
+	content: "\f061";
 }
 .flexslider:hover .flex-prev {
 	opacity: 0.7;
@@ -263,7 +263,7 @@ html[xmlns] .slides {
 	cursor: default;
 }
 
-@media screen and (max-width: 860px) {
+@media screen and (max-width: @screen-tablet) {
 	.flex-direction-nav .flex-prev {
 		opacity: 1;
 		left: 10px;

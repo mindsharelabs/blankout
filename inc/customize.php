@@ -136,10 +136,8 @@ class Blankout_Customize {
 	public static function live_preview() {
 		wp_enqueue_script(
 			'blankout-themecustomizer', //Give the script an ID
-			get_template_directory_uri().'/js/theme-customizer.js',
-			array('jquery', 'customize-preview'), //Define dependencies
-			'', //Define a version (optional)
-			TRUE //Specify whether to put in footer (leave this true)
+			get_template_directory_uri().'/js/theme-customizer.min.js',
+			array('jquery', 'customize-preview')
 		);
 	}
 
