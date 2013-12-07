@@ -152,7 +152,7 @@ function blankout_configure_mapi() {
 
 	if(!is_plugin_active('mcms-api/mcms-api.php')) {
 		wp_die('This theme requires the Mindshare Theme API plugin. Luckily, it\'s free, open source and dead easy to get! <br /><br /><strong>Step 1</strong> <a href="http://svn.mindsharestudios.com/mcms-api/mcms-api.zip">Download the zip.</a> <br /><strong>Step 2</strong> <a href="/wp-admin/plugin-install.php?tab=upload">Install and activate.</a>');
-
+	}
 	if(function_exists('mapi_update_option')) {
 		mapi_update_option('load_bootstrap', TRUE);
 		mapi_update_option('load_modernizr_js', TRUE);
