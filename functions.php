@@ -4,14 +4,23 @@
  *
  */
 
+<<<<<<< HEAD
 include(get_template_directory().'/inc/customize.php'); // enable theme customizer for Blankout (Appearance > Themes)
 include(get_template_directory().'/inc/custom-post-types.php');
 include(get_template_directory().'/inc/woocommerce.php'); // enable WooCommerce support
+=======
+/**
+ * Constants
+ */
+define('BOOTSTRAP_DROPDOWN_ON_HOVER', FALSE); // if TRUE, overrides the default bootstrap behavior where user must click on a top level menu item in order to see subpages
+>>>>>>> 84d7f7c5cc6c303159955326a1731745e0850b35
 
 /**
- * if TRUE, overrides the default bootstrap behavior where user must click on a top level menu item in order to see subpages
+ * Includes
  */
-define('BOOTSTRAP_DROPDOWN_ON_HOVER', FALSE);
+include(get_template_directory().'/inc/customize.php'); // enable theme customizer for Blankout (Appearance > Themes)
+include(get_template_directory().'/inc/carousel-post-type.php');
+include(get_template_directory().'/inc/woocommerce.php'); // enable WooCommerce support
 
 /**
  * WordPress setup
@@ -88,12 +97,21 @@ function blankout_add_editor_styles() {
 
 add_action('init', 'blankout_add_editor_styles');
 
+/**
+ * Menus
+ */
 register_nav_menus(
 	array(
 		 'main-nav'   => __('Main Navigation', 'blankout'), // main nav in header
 		 'footer-nav' => __('Footer Navigation', 'blankout') // secondary nav in footer
 	)
 );
+if(!is_nav_menu('main-nav')) {
+	wp_create_nav_menu('Main Navigation', array('slug' => 'main-nav'));
+}
+if(!is_nav_menu('main-nav')) {
+	wp_create_nav_menu('Footer Navigation', array('slug' => 'footer-nav'));
+}
 
 register_sidebar(
 	array(
@@ -137,8 +155,15 @@ add_filter('wp_list_categories', 'blankout_add_cat_count');
  *
  */
 function blankout_configure_mapi() {
+<<<<<<< HEAD
 	if(!is_plugin_active('mcms-api/mcms-api.php')) {
 		wp_die('This theme requires the Mindshare Theme API plugin. Luckily, it\'s free, open source and dead easy to get! <br /><br /><strong>Step 1</strong> <a href="http://svn.mindsharestudios.com/mcms-api/mcms-api.zip">Download the zip.</a> <br /><strong>Step 2</strong> <a href="/wp-admin/plugin-install.php?tab=upload">Install and activate.</a>');
+=======
+	if(!is_admin() && current_user_can('manage_plugins')) {
+		if(!in_array('mcms-api/mcms-api.php', apply_filters('active_plugins', get_option('active_plugins')))) {
+			wp_die('This theme requires the Mindshare Theme API plugin. Luckily, it\'s free, open source and dead easy to get! <br /><br /><strong>Step 1</strong> <a href="http://svn.mindsharestudios.com/mcms-api/mcms-api.zip">Download the zip.</a> <br /><strong>Step 2</strong> <a href="/wp-admin/plugin-install.php?tab=upload">Install and activate.</a>');
+		}
+>>>>>>> 84d7f7c5cc6c303159955326a1731745e0850b35
 	}
 	if(function_exists('mapi_update_option')) {
 		mapi_update_option('load_bootstrap', TRUE);
@@ -148,7 +173,11 @@ function blankout_configure_mapi() {
 	}
 }
 
+<<<<<<< HEAD
 add_action('admin-init', 'blankout_configure_mapi');
+=======
+add_action('admin_init', 'blankout_configure_mapi');
+>>>>>>> 84d7f7c5cc6c303159955326a1731745e0850b35
 
 /**
  * Load frontend CSS/JS
@@ -189,6 +218,7 @@ if(!class_exists('Blankout_Menu_Walker')) {
 		 *
 		 * @param string $output Passed by reference. Used to append additional content.
 		 * @param int    $depth  Depth of page. Used for padding.
+		 * @param array  $args
 		 */
 		function start_lvl(&$output, $depth = 0, $args = array()) {
 			$indent = str_repeat("\t", $depth);
@@ -196,14 +226,16 @@ if(!class_exists('Blankout_Menu_Walker')) {
 		}
 
 		/**
-		 * @see   Walker::start_el()
-		 * @since 3.0.0
+		 * @see      Walker::start_el()
+		 * @since    3.0.0
 		 *
-		 * @param string $output       Passed by reference. Used to append additional content.
-		 * @param object $item         Menu item data object.
-		 * @param int    $depth        Depth of menu item. Used for padding.
-		 * @param int    $current_page Menu item ID.
-		 * @param object $args
+		 * @param string       $output Passed by reference. Used to append additional content.
+		 * @param object       $item   Menu item data object.
+		 * @param int          $depth  Depth of menu item. Used for padding.
+		 * @param array|object $args
+		 * @param int          $id
+		 *
+		 * @internal param int $current_page Menu item ID.
 		 */
 
 		function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0) {
@@ -383,7 +415,7 @@ function blankout_page_nav($before = '<div class="pagination pagination-centered
 		$last_page_text = "Last";
 		echo '<li class="bpn-last-page-link"><a href="'.get_pagenum_link($max_page).'" title="'.$last_page_text.'">'.$last_page_text.'</a></li>';
 	}
-	echo "</ul>" . $after;
+	echo "</ul>".$after;
 }
 
 /**
@@ -451,7 +483,7 @@ function blankout_copyright() {
 	echo '<!--compression-none-->';
 	echo '<!-- Copyright '.date('Y').' '.get_bloginfo('name').' -->';
 	$c = 'PCEtLSBXZWIgZGVzaWduLCBkZXZlbG9wbWVudCwgYW5kIFNFTyBieSBodHRwOi8vbWluZC5zaC9hcmUvIC0tPgoJPG1ldGEgbmFtZT0iYXV0aG9yIiBjb250ZW50PSJNaW5kc2hhcmUgU3R1ZGlvcywgSW5jLiIgLz4KCQ==';
-	if(isset($_GET['credit'])){
+	if(isset($_GET['credit'])) {
 		if($_GET['credit'] == 1) {
 			echo base64_decode($c);
 		} elseif(function_exists('mapi_get_option')) {
@@ -478,7 +510,7 @@ function blankout_footer_credit() {
 			echo $c;
 		}
 	} else {
-		if(isset($_GET['credit'])){
+		if(isset($_GET['credit'])) {
 			if($_GET['credit'] == 1) {
 				echo $c;
 			}
