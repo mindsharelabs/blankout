@@ -13,7 +13,7 @@ define('BOOTSTRAP_DROPDOWN_ON_HOVER', FALSE); // if TRUE, overrides the default 
  * Includes
  */
 include(get_template_directory().'/inc/customize.php'); // enable theme customizer for Blankout (Appearance > Themes)
-include(get_template_directory().'/inc/carousel-post-type.php');
+include(get_template_directory().'/inc/custom-post-types.php');
 include(get_template_directory().'/inc/woocommerce.php'); // enable WooCommerce support
 
 /**
