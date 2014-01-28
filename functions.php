@@ -12,9 +12,9 @@ define('BOOTSTRAP_DROPDOWN_ON_HOVER', FALSE); // if TRUE, overrides the default 
 /**
  * Includes
  */
-include(get_template_directory().'/inc/customize.php'); // enable theme customizer for Blankout (Appearance > Themes)
-include(get_template_directory().'/inc/custom-post-types.php');
-include(get_template_directory().'/inc/woocommerce.php'); // enable WooCommerce support
+//include(get_template_directory().'/inc/customize.php'); // enable theme customizer for Blankout (Appearance > Themes)
+//include(get_template_directory().'/inc/custom-post-types.php');
+//include(get_template_directory().'/inc/woocommerce.php'); // enable WooCommerce support
 
 /**
  * WordPress setup
@@ -151,7 +151,7 @@ add_filter('wp_list_categories', 'blankout_add_cat_count');
 function blankout_configure_mapi() {
 
 	if(!is_plugin_active('mcms-api/mcms-api.php')) {
-		wp_die('This theme requires the Mindshare Theme API plugin. Luckily, it\'s free, open source and dead easy to get! <br /><br /><strong>Step 1</strong> <a href="http://svn.mindsharestudios.com/mcms-api/mcms-api.zip">Download the zip.</a> <br /><strong>Step 2</strong> <a href="/wp-admin/plugin-install.php?tab=upload">Install and activate.</a>');
+		echo 'This theme requires the Mindshare Theme API plugin. Luckily, it\'s free, open source and dead easy to get! <br /><br /><strong>Step 1</strong> <a href="http://svn.mindsharestudios.com/mcms-api/mcms-api.zip">Download the zip.</a> <br /><strong>Step 2</strong> <a href="/wp-admin/plugin-install.php?tab=upload">Install and activate.</a>';
 	}
 	if(function_exists('mapi_update_option')) {
 		mapi_update_option('load_bootstrap', TRUE);
@@ -522,7 +522,7 @@ add_filter('language_attributes', 'blankout_add_opengraph_doctype');
  *
  */
 function blankout_facebook_head() {
-	if(is_singular()) : ?>
+	if(is_singular() && function_exists('mapi_get_option')) : ?>
 		<meta property="fb:admins" content="<?php mapi_facebook_id(); ?>" />
 		<meta property="og:title" content="<?php echo get_the_title_rss(); ?>" />
 		<meta property="og:type" content="article" />
@@ -544,7 +544,7 @@ add_action('wp_head', 'blankout_facebook_head', 5);
  *
  */
 function blankout_enable_nav_hover() {
-	if(!mapi_is_mobile_device() && BOOTSTRAP_DROPDOWN_ON_HOVER) : ?>
+	if(function_exists('mapi_is_mobile_device') && !mapi_is_mobile_device() && BOOTSTRAP_DROPDOWN_ON_HOVER) : ?>
 		<style type="text/css">
 			ul.nav li.dropdown:hover ul.dropdown-menu {
 				display:block;

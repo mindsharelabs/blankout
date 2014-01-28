@@ -10,7 +10,7 @@
 <html <?php language_attributes(); ?> class="no-js"><![endif]-->
 <head>
 	<meta charset="<?php bloginfo('charset'); ?>" />
-	<title><?php bloginfo('name'); ?> | <?php is_front_page() ? bloginfo('description') : wp_title(); ?></title>
+	<title><?php bloginfo('name'); ?> | <?php is_front_page() ? bloginfo('description') : wp_title(''); ?></title>
 	<?php blankout_copyright(); ?>
 	<!--[if IE]>
 	<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
@@ -20,17 +20,18 @@
 	<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/img/favicon.png" />
 	<link rel="alternate" type="application/rss+xml" href="<?php echo get_feed_link(); ?>" title="<?php echo esc_html(get_bloginfo('name')); ?> latest updates" />
 
-	<?php if(mapi_is_true(get_option('default_comment_status'))) : ?>
+	<?php if(function_exists('mapi_is_true') && mapi_is_true(get_option('default_comment_status'))) : ?>
 		<link rel="alternate" type="application/rss+xml" href="<?php echo get_post_comments_feed_link(); ?>" title="<?php echo esc_html(get_bloginfo('name')); ?> recent comments" />
 	<?php endif; ?>
 
-	<?php if(mapi_is_true(get_option('default_ping_status'))) : ?>
+	<?php if(function_exists('mapi_is_true') && mapi_is_true(get_option('default_ping_status'))) : ?>
 		<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 	<?php endif; ?>
 
 	<?php wp_head(); ?>
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,700,600,800,300" rel="stylesheet" type="text/css" />
 	<?php blankout_enable_nav_hover(); ?>
+
 </head>
 <body <?php body_class(); ?>>
 <a id="top"></a>
@@ -48,19 +49,20 @@
 			</div>
 			<div class="collapse navbar-collapse">
 				<?php
-				wp_nav_menu(
-					array(
-						 'container'       => ' ',
-						 'container_class' => 'nav',
-						 'fallback_cb'     => 'wp_page_menu',
-						 'menu'            => 'main-nav',
-						 'menu_class'      => 'nav navbar-nav',
-						 'theme_location'  => 'main-nav',
-						 'depth'           => '2',
-						 'walker'          => new Blankout_Menu_Walker()
-					)
-				);
-				?>
+				if ( has_nav_menu( 'main-nav' ) ) {
+					wp_nav_menu(
+						array(
+							 'container'       => ' ',
+							 'container_class' => 'nav',
+							 'fallback_cb'     => 'wp_page_menu',
+							 'menu'            => 'main-nav',
+							 'menu_class'      => 'nav navbar-nav',
+							 'theme_location'  => 'main-nav',
+							 'depth'           => '2',
+							 'walker'          => new Blankout_Menu_Walker()
+						)
+					);
+				} ?>
 			</div>
 		</nav>
 	</header>

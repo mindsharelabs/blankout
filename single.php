@@ -20,10 +20,10 @@
 
 					<footer class="article-footer">
 						<?php the_taxonomies('before=<p class="tags">&after=</p>&template=%s: %l'); ?>
-						<?php mapi_edit_link(); ?>
+						<?php if(function_exists('mapi_edit_link')) mapi_edit_link(); ?>
 					</footer>
 
-					<?php if(comments_open() && mapi_is_true(get_option('default_comment_status'))) : comments_template(); endif; ?>
+					<?php if(comments_open()) comments_template(); ?>
 				</article>
 
 			<?php endwhile; ?>

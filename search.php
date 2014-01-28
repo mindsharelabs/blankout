@@ -18,7 +18,7 @@
 					</header>
 
 					<section class="entry-content">
-						<?php echo mapi_excerpt(); ?> <?php echo mapi_excerpt_more(); ?>
+						<?php if(function_exists('mapi_excerpt')) echo mapi_excerpt() . mapi_excerpt_more(); ?>
 					</section>
 
 					<footer class="article-footer"></footer>

@@ -39,7 +39,7 @@
 							)
 						);
 						?>
-						<?php mapi_edit_link(); ?>
+						<?php if(function_exists('mapi_edit_link')) mapi_edit_link(); ?>
 					</footer>
 
 				</article>

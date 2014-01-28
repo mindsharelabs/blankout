@@ -16,7 +16,7 @@ if($slide_query->have_posts()) : ?>
 	<div id="carousel" class="flexslider">
 		<ul class="slides">
 			<?php while($slide_query->have_posts()) : $slide_query->the_post(); ?>
-				<?php if(has_post_thumbnail()) : ?>
+				<?php if(has_post_thumbnail() && function_exists('mapi_thumb')) : ?>
 					<li class="item">
 						<?php
 						$img_src = mapi_thumb(
@@ -29,7 +29,7 @@ if($slide_query->have_posts()) : ?>
 						);
 						?>
 						<img src="<?php echo $img_src; ?>" class="attachment-full wp-post-image" alt="<?php echo mapi_get_attachment_image_title(); ?>" />
-						<p class="flex-caption hidden-sm hidden-xs"><?php echo mapi_excerpt(100); ?> <?php echo mapi_excerpt_more() ?></p>
+						<p class="flex-caption hidden-sm hidden-xs"><?php if(function_exists('mapi_excerpt')) echo mapi_excerpt(100) . mapi_excerpt_more(); ?></p>
 					</li>
 				<?php endif; ?>
 			<?php endwhile; ?>

@@ -9,60 +9,115 @@
  */
 
 jQuery.noConflict();
-jQuery(document).ready(function() {
-	init();
-});
-
-function init() {
+jQuery(document).ready(function($) {
 
 	// setup some additional Bootstrap CSS classes
-	jQuery('.aside-block .link-icons').addClass('pull-right');
-	jQuery('.mapi.edit-link').addClass('text-right');
-	jQuery('.wp-caption-text, .gfield_description').addClass('muted');
-	jQuery('.button, .button-primary, .field input[type="submit"], #wp-submit').addClass('btn');
-	jQuery('.login p.error').addClass('alert alert-error');
-	jQuery('.login p.message').addClass('alert alert-info');
-
+	$('.aside-block .link-icons').addClass('pull-right');
+	$('.mapi.edit-link').addClass('text-right');
+	$('.wp-caption-text, .gfield_description').addClass('muted');
+	$('.button, .button-primary, .field input[type="submit"], #wp-submit').addClass('btn');
+	$('.login p.error').addClass('alert alert-error');
+	$('.login p.message').addClass('alert alert-info');
 
 	// tables
-	jQuery('#main table, .form-table').addClass('table table-hover');
+	$('#main table, .form-table').addClass('table table-hover');
 
 	// wordpress classes
-	jQuery('.alignleft').addClass('text-left');
-	jQuery('.alignright').addClass('text-right');
-	jQuery('.aligncenter').addClass('text-center');
-	jQuery('.post-edit-link').addClass('btn btn-xs btn-primary');
+	$('.alignleft').addClass('text-left');
+	$('.alignright').addClass('text-right');
+	$('.aligncenter').addClass('text-center');
 
 	// Gravity Forms stuff
-	jQuery(".gform_wrapper .disable input").attr('disabled', 'disabled');
+	$(".gform_wrapper .disable input").attr('disabled', 'disabled');
 
 	// FlexSlider setup
-	if(jQuery.isFunction(jQuery.fn.flexslider)) {
-		// @see http://www.woothemes.com/flexslider/
-		jQuery('.flexslider').flexslider({
-			animation:      "fade",			//String: Select your animation type, "fade" or "slide"
-			slideshow:      true,           //Boolean: Animate slider automatically
-			slideshowSpeed: 10000,          //Integer: Set the speed of the slideshow cycling, in milliseconds
-			animationSpeed: 400,            //Integer: Set the speed of animations, in milliseconds
-			pauseOnAction:  true,           //Boolean: Pause the slideshow when interacting with control elements, highly recommended.
-			pauseOnHover:   true,           //Boolean: Pause the slideshow when hovering over slider, then resume when no longer hovering
-			useCSS:         true,           //{NEW} Boolean: Slider will use CSS3 transitions if available
-			touch:          true,           //{NEW} Boolean: Allow touch swipe navigation of the slider on touch-enabled devices
-			controlNav:     false,          //Boolean: Create navigation for paging control of each clide? Note: Leave true for manualControls usage
-			directionNav:   true,           //Boolean: Create navigation for previous/next navigation? (true/false)
-			prevText:       "Previous",     //String: Set the text for the "previous" directionNav item
-			nextText:       "Next",         //String: Set the text for the "next" directionNav item
-			keyboard:       true            //Boolean: Allow slider navigating via keyboard left/right keys
+	if($('.flexslider').length && $.isFunction($.fn.flexslider)) {
+		
+		$(function() {
+			var slider, // Global slider value to force playing and pausing by direct access of the slider control
+				canSlide = true; // Global switch to monitor video state
+		 
+			// Load the YouTube API. For some reason it's required to load it like this
+			var tag = document.createElement('script');
+		    tag.src = "//www.youtube.com/iframe_api";
+		    var firstScriptTag = document.getElementsByTagName('script')[0];
+		    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+		 
+		    // Setup a callback for the YouTube api to attach video event handlers
+			window.onYouTubeIframeAPIReady = function(){
+				// Iterate through all videos
+				$('.flexslider iframe').each(function(){
+					// Create a new player pointer; "this" is a DOMElement of the player's iframe
+					var player = new YT.Player(this, {
+						playerVars: {
+							autoplay: 0
+						}
+					});
+		 
+					// Watch for changes on the player
+					player.addEventListener("onStateChange", function(state){
+						switch(state.data)
+						{
+							// If the user is playing a video, stop the slider
+							case YT.PlayerState.PLAYING:
+								slider.flexslider("stop");
+								canSlide = false;
+								break;
+							// The video is no longer player, give the go-ahead to start the slider back up
+							case YT.PlayerState.ENDED:
+							case YT.PlayerState.PAUSED:
+								slider.flexslider("play");
+								canSlide = true;
+								break;
+						}
+					});
+		 
+					$(this).data('player', player);
+				});
+			}
+		 
+			// Setup the slider control
+			slider = $(".flexslider")
+				.flexslider({
+			    	animation: "fade",
+					easing: "swing",
+					slideshowSpeed: 6500,
+					animationSpeed: 900,
+					pauseOnHover: true,
+					pauseOnAction: true,
+					touch: true,
+					video: true,
+					controlNav: true,
+					animationLoop: true,
+					slideshow: true,
+					useCSS: false,
+			    	// Before you go to change slides, make sure you can!
+			    	before: function(){			    		
+			    		if(!canSlide)
+			    			slider.flexslider("stop");
+			    	}
+				});
+
+			if($.isFunction($.fn.fitVids)) {
+				$(".flexslider").fitVids;
+			}
+		 
+			slider.on("click", ".flex-prev, .flex-next", function(){
+				canSlide = true;
+				$('.flexslider iframe').each(function(){
+					$(this).data('player').pauseVideo();
+				});
+			});
 		});
 
-	} else {
-		//console.log('Please enable FlexSlider (Settings > Developer Settings > Libraries & Plugins).');
+	} else if($('.flexslider').length) {
+		console.log('Please enable FlexSlider (Settings > Developer Settings > Libraries & Plugins).');
 	}
 
 	/**
 	 *  Enable Bootstrap tooltips for items with '.tip' class
 	 */
-	jQuery('.tip').tooltip({
+	$('.tip').tooltip({
 		'container': 'body'
 	});
 
@@ -71,7 +126,7 @@ function init() {
 	 */
 
 	// viewport width
-	var viewport = jQuery(window).width();
+	var viewport = $(window).width();
 
 	// smaller than 481px
 	if(viewport < 481) {
@@ -87,8 +142,8 @@ function init() {
 	if(viewport >= 768) {
 
 		// load gravatars
-		jQuery('.comment img[data-gravatar]').each(function() {
-			jQuery(this).attr('src', jQuery(this).attr('data-gravatar'));
+		$('.comment img[data-gravatar]').each(function() {
+			$(this).attr('src', $(this).attr('data-gravatar'));
 		});
 	}
 
@@ -97,4 +152,4 @@ function init() {
 
 	}
 
-}
+});
