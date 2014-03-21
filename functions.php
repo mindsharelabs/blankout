@@ -12,9 +12,9 @@ define('BOOTSTRAP_DROPDOWN_ON_HOVER', FALSE); // if TRUE, overrides the default 
 /**
  * Includes
  */
-//include(get_template_directory().'/inc/customize.php'); // enable theme customizer for Blankout (Appearance > Themes)
-//include(get_template_directory().'/inc/custom-post-types.php');
-//include(get_template_directory().'/inc/woocommerce.php'); // enable WooCommerce support
+include(get_template_directory().'/inc/customize.php'); // enable theme customizer for Blankout (Appearance > Themes)
+include(get_template_directory().'/inc/carousel-post-type.php');
+include(get_template_directory().'/inc/woocommerce.php'); // enable WooCommerce support
 
 /**
  * WordPress setup
@@ -96,8 +96,8 @@ add_action('init', 'blankout_add_editor_styles');
  */
 register_nav_menus(
 	array(
-		 'main-nav'   => __('Main Navigation', 'blankout'), // main nav in header
-		 'footer-nav' => __('Footer Navigation', 'blankout') // secondary nav in footer
+		'main-nav'   => __('Main Navigation', 'blankout'), // main nav in header
+		'footer-nav' => __('Footer Navigation', 'blankout') // secondary nav in footer
 	)
 );
 if(!is_nav_menu('main-nav')) {
@@ -109,23 +109,23 @@ if(!is_nav_menu('main-nav')) {
 
 register_sidebar(
 	array(
-		 'name'          => __('Main Sidebar', 'blankout'),
-		 'id'            => 'main-sidebar',
-		 'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		 'after_widget'  => '</div>',
-		 'before_title'  => '<h4 class="widgettitle">',
-		 'after_title'   => '</h4>',
+		'name'          => __('Main Sidebar', 'blankout'),
+		'id'            => 'main-sidebar',
+		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h4 class="widgettitle">',
+		'after_title'   => '</h4>',
 	)
 );
 
 register_sidebar(
 	array(
-		 'name'          => __('Blog Sidebar', 'blankout'),
-		 'id'            => 'blog-sidebar',
-		 'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		 'after_widget'  => '</div>',
-		 'before_title'  => '<h4 class="widgettitle">',
-		 'after_title'   => '</h4>',
+		'name'          => __('Blog Sidebar', 'blankout'),
+		'id'            => 'blog-sidebar',
+		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h4 class="widgettitle">',
+		'after_title'   => '</h4>',
 	)
 );
 
@@ -149,9 +149,10 @@ add_filter('wp_list_categories', 'blankout_add_cat_count');
  *
  */
 function blankout_configure_mapi() {
-
-	if(!is_plugin_active('mcms-api/mcms-api.php')) {
-		echo 'This theme requires the Mindshare Theme API plugin. Luckily, it\'s free, open source and dead easy to get! <br /><br /><strong>Step 1</strong> <a href="http://svn.mindsharestudios.com/mcms-api/mcms-api.zip">Download the zip.</a> <br /><strong>Step 2</strong> <a href="/wp-admin/plugin-install.php?tab=upload">Install and activate.</a>';
+	if(!is_admin() && current_user_can('manage_plugins')) {
+		if(!in_array('mcms-api/mcms-api.php', apply_filters('active_plugins', get_option('active_plugins')))) {
+			wp_die('This theme requires the Mindshare Theme API plugin. Luckily, it\'s free, open source and dead easy to get! <br /><br /><strong>Step 1</strong> <a href="http://svn.mindsharestudios.com/mcms-api/mcms-api.zip">Download the zip.</a> <br /><strong>Step 2</strong> <a href="/wp-admin/plugin-install.php?tab=upload">Install and activate.</a>');
+		}
 	}
 	if(function_exists('mapi_update_option')) {
 		mapi_update_option('load_bootstrap', TRUE);
@@ -161,17 +162,21 @@ function blankout_configure_mapi() {
 	}
 }
 
-add_action('admin-init', 'blankout_configure_mapi');
+add_action('admin_init', 'blankout_configure_mapi');
 
 /**
  * Load frontend CSS/JS
  *
  */
 function blankout_scripts_and_styles() {
+	if(!is_admin()) {
 
-	wp_enqueue_script('blankout-js', get_stylesheet_directory_uri().'/js/main.min.js', array('jquery'));
-	wp_enqueue_style('bootstrap-stylesheet', get_stylesheet_directory_uri().'/css/bootstrap.css', array(), '', 'all');
-	
+		wp_register_script('blankout-js', get_stylesheet_directory_uri().'/js/main.js', array('jquery'));
+		wp_enqueue_script('blankout-js');
+
+		wp_register_style('bootstrap-stylesheet', get_stylesheet_directory_uri().'/css/bootstrap.css', array(), '', 'all');
+		wp_enqueue_style('bootstrap-stylesheet');
+	}
 }
 
 add_action('wp_enqueue_scripts', 'blankout_scripts_and_styles');
@@ -439,51 +444,26 @@ function blankout_comments($comment, $args, $depth) {
  *
  */
 function blankout_rich_snippets() {
-	if(function_exists('mapi_option')) : ?>
-		<div itemscope itemtype="http://data-vocabulary.org/Organization" class="microdata-meta hide contact">
-			<meta itemprop="name" content="<?php mapi_option('sitename_txt'); ?>" />
-			<meta itemprop="tel" content="<?php mapi_option('phone_txt'); ?>" />
-			<meta itemprop="email" content="<?php mapi_option('email'); ?>" />
-			<meta itemprop="url" content="<?php echo home_url(); ?>" />
-			<address itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">
-				<span itemprop="street-address"><?php mapi_option('addr1_txt'); ?> <?php mapi_option('addr2_txt'); ?></span> <span itemprop="locality"><?php mapi_option('city_txt'); ?></span>
-				<span itemprop="region"><?php mapi_option('state'); ?></span> <span itemprop="postal-code"><?php mapi_option('zip_txt'); ?></span>
-			</address>
-			<span itemprop="geo" itemscope itemtype="http://data-vocabulary.org/Geo">
-				<meta itemprop="latitude" content="<?php mapi_option('lat_txt'); ?>" />
-				<meta itemprop="longitude" content="<?php mapi_option('long_txt'); ?>" />
-			</span>
-		</div>
-	<?php endif;
+	if(function_exists('mapi_rich_snippets')) {
+		mapi_rich_snippets();
+	}
 }
 
 /**
  * Optionally displays a credit message in compatible themes when enabled in the Mindshare Theme API
  * (Settings > Developer Settings > Misc. Settings > Show Credit)
  *
- * @todo Move to API
  */
 function blankout_copyright() {
-	echo '<!--compression-none-->';
-	echo '<!-- Copyright '.date('Y').' '.get_bloginfo('name').' -->';
-	$c = 'PCEtLSBXZWIgZGVzaWduLCBkZXZlbG9wbWVudCwgYW5kIFNFTyBieSBodHRwOi8vbWluZC5zaC9hcmUvIC0tPgoJPG1ldGEgbmFtZT0iYXV0aG9yIiBjb250ZW50PSJNaW5kc2hhcmUgU3R1ZGlvcywgSW5jLiIgLz4KCQ==';
-	if(isset($_GET['credit'])) {
-		if($_GET['credit'] == 1) {
-			echo base64_decode($c);
-		} elseif(function_exists('mapi_get_option')) {
-			if(mapi_get_option('show_credit') == TRUE || $_GET['credit'] == 1) {
-				echo base64_decode($c);
-			}
-		}
+	if(function_exists('mapi_copyright')) {
+		mapi_copyright();
 	}
-	echo '<!--compression-none-->';
 }
 
 /**
  * Optionally displays a credit message in compatible themes when enabled in the Mindshare Theme API
  * (Settings > Developer Settings > Misc. Settings > Show Credit)
  *
- * @todo Move to API
  */
 function blankout_footer_credit() {
 	$cc = 'V2Vic2l0ZSBkZXNpZ24sIGRldmVsb3BtZW50LCBhbmQgU0VPIGJ5IE1pbmRzaGFyZSBTdHVkaW9zLCBJbmM=';
@@ -505,14 +485,12 @@ function blankout_footer_credit() {
 /**
  * Open Graph meta tags and language attributes (for IE)
  *
- * @todo Move to API or possibly delete?
- *
  * @param $output
  *
  * @return string
  */
 function blankout_add_opengraph_doctype($output) {
-	return $output.' xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml"';
+	return mapi_add_opengraph_doctype($output);
 }
 
 add_filter('language_attributes', 'blankout_add_opengraph_doctype');
@@ -522,18 +500,7 @@ add_filter('language_attributes', 'blankout_add_opengraph_doctype');
  *
  */
 function blankout_facebook_head() {
-	if(is_singular() && function_exists('mapi_get_option')) : ?>
-		<meta property="fb:admins" content="<?php mapi_facebook_id(); ?>" />
-		<meta property="og:title" content="<?php echo get_the_title_rss(); ?>" />
-		<meta property="og:type" content="article" />
-		<meta property="og:url" content="<?php the_permalink_rss(); ?>" />
-		<meta property="og:site_name" content="<?php bloginfo_rss('name'); ?>" />
-		<?php if(!has_post_thumbnail(get_the_ID())) : // the post does not have featured image, use a default image ?>
-			<meta property="og:image" content="<?php echo get_template_directory_uri().'/img/nothumb.gif'; ?>" />
-		<?php else : ?>
-			<meta property="og:image" content="<?php echo esc_attr(mapi_get_attachment_image_src(NULL, 'medium')); ?>" />
-		<?php endif; ?>
-	<?php endif;
+	mapi_facebook_head();
 }
 
 add_action('wp_head', 'blankout_facebook_head', 5);
@@ -544,7 +511,7 @@ add_action('wp_head', 'blankout_facebook_head', 5);
  *
  */
 function blankout_enable_nav_hover() {
-	if(function_exists('mapi_is_mobile_device') && !mapi_is_mobile_device() && BOOTSTRAP_DROPDOWN_ON_HOVER) : ?>
+	if(!mapi_is_mobile_device() && BOOTSTRAP_DROPDOWN_ON_HOVER) : ?>
 		<style type="text/css">
 			ul.nav li.dropdown:hover ul.dropdown-menu {
 				display:block;
