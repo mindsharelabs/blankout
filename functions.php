@@ -96,8 +96,8 @@ add_action('init', 'blankout_add_editor_styles');
  */
 register_nav_menus(
 	array(
-		 'main-nav'   => __('Main Navigation', 'blankout'), // main nav in header
-		 'footer-nav' => __('Footer Navigation', 'blankout') // secondary nav in footer
+		'main-nav'   => __('Main Navigation', 'blankout'), // main nav in header
+		'footer-nav' => __('Footer Navigation', 'blankout') // secondary nav in footer
 	)
 );
 if(!is_nav_menu('main-nav')) {
@@ -109,23 +109,23 @@ if(!is_nav_menu('main-nav')) {
 
 register_sidebar(
 	array(
-		 'name'          => __('Main Sidebar', 'blankout'),
-		 'id'            => 'main-sidebar',
-		 'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		 'after_widget'  => '</div>',
-		 'before_title'  => '<h4 class="widgettitle">',
-		 'after_title'   => '</h4>',
+		'name'          => __('Main Sidebar', 'blankout'),
+		'id'            => 'main-sidebar',
+		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h4 class="widgettitle">',
+		'after_title'   => '</h4>',
 	)
 );
 
 register_sidebar(
 	array(
-		 'name'          => __('Blog Sidebar', 'blankout'),
-		 'id'            => 'blog-sidebar',
-		 'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		 'after_widget'  => '</div>',
-		 'before_title'  => '<h4 class="widgettitle">',
-		 'after_title'   => '</h4>',
+		'name'          => __('Blog Sidebar', 'blankout'),
+		'id'            => 'blog-sidebar',
+		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h4 class="widgettitle">',
+		'after_title'   => '</h4>',
 	)
 );
 
@@ -169,7 +169,7 @@ add_action('admin_init', 'blankout_configure_mapi');
  *
  */
 function blankout_scripts_and_styles() {
-	if(!is_admin()) { // @todo... Bryce, is this needed?
+	if(!is_admin()) {
 
 		wp_register_script('blankout-js', get_stylesheet_directory_uri().'/js/main.js', array('jquery'));
 		wp_enqueue_script('blankout-js');
@@ -179,7 +179,7 @@ function blankout_scripts_and_styles() {
 	}
 }
 
-add_action('wp_enqueue_scripts', 'blankout_scripts_and_styles'); // @todo priority was set to 999 .. why?
+add_action('wp_enqueue_scripts', 'blankout_scripts_and_styles');
 
 /**
  * @param $classes
@@ -444,51 +444,24 @@ function blankout_comments($comment, $args, $depth) {
  *
  */
 function blankout_rich_snippets() {
-	if(function_exists('mapi_option')) : ?>
-		<div itemscope itemtype="http://data-vocabulary.org/Organization" class="microdata-meta hide contact">
-			<meta itemprop="name" content="<?php mapi_option('sitename_txt'); ?>" />
-			<meta itemprop="tel" content="<?php mapi_option('phone_txt'); ?>" />
-			<meta itemprop="email" content="<?php mapi_option('email'); ?>" />
-			<meta itemprop="url" content="<?php echo home_url(); ?>" />
-			<address itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">
-				<span itemprop="street-address"><?php mapi_option('addr1_txt'); ?> <?php mapi_option('addr2_txt'); ?></span> <span itemprop="locality"><?php mapi_option('city_txt'); ?></span>
-				<span itemprop="region"><?php mapi_option('state'); ?></span> <span itemprop="postal-code"><?php mapi_option('zip_txt'); ?></span>
-			</address>
-			<span itemprop="geo" itemscope itemtype="http://data-vocabulary.org/Geo">
-				<meta itemprop="latitude" content="<?php mapi_option('lat_txt'); ?>" />
-				<meta itemprop="longitude" content="<?php mapi_option('long_txt'); ?>" />
-			</span>
-		</div>
-	<?php endif;
+	if(function_exists('mapi_rich_snippets')) {
+		mapi_rich_snippets();
+	}
 }
 
 /**
  * Optionally displays a credit message in compatible themes when enabled in the Mindshare Theme API
  * (Settings > Developer Settings > Misc. Settings > Show Credit)
  *
- * @todo Move to API
  */
 function blankout_copyright() {
-	echo '<!--compression-none-->';
-	echo '<!-- Copyright '.date('Y').' '.get_bloginfo('name').' -->';
-	$c = 'PCEtLSBXZWIgZGVzaWduLCBkZXZlbG9wbWVudCwgYW5kIFNFTyBieSBodHRwOi8vbWluZC5zaC9hcmUvIC0tPgoJPG1ldGEgbmFtZT0iYXV0aG9yIiBjb250ZW50PSJNaW5kc2hhcmUgU3R1ZGlvcywgSW5jLiIgLz4KCQ==';
-	if(isset($_GET['credit'])) {
-		if($_GET['credit'] == 1) {
-			echo base64_decode($c);
-		} elseif(function_exists('mapi_get_option')) {
-			if(mapi_get_option('show_credit') == TRUE || $_GET['credit'] == 1) {
-				echo base64_decode($c);
-			}
-		}
-	}
-	echo '<!--compression-none-->';
+	mapi_copyright();
 }
 
 /**
  * Optionally displays a credit message in compatible themes when enabled in the Mindshare Theme API
  * (Settings > Developer Settings > Misc. Settings > Show Credit)
  *
- * @todo Move to API
  */
 function blankout_footer_credit() {
 	$cc = 'V2Vic2l0ZSBkZXNpZ24sIGRldmVsb3BtZW50LCBhbmQgU0VPIGJ5IE1pbmRzaGFyZSBTdHVkaW9zLCBJbmM=';
@@ -510,14 +483,12 @@ function blankout_footer_credit() {
 /**
  * Open Graph meta tags and language attributes (for IE)
  *
- * @todo Move to API or possibly delete?
- *
  * @param $output
  *
  * @return string
  */
 function blankout_add_opengraph_doctype($output) {
-	return $output.' xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml"';
+	return mapi_add_opengraph_doctype($output);
 }
 
 add_filter('language_attributes', 'blankout_add_opengraph_doctype');
@@ -527,18 +498,7 @@ add_filter('language_attributes', 'blankout_add_opengraph_doctype');
  *
  */
 function blankout_facebook_head() {
-	if(is_singular()) : ?>
-		<meta property="fb:admins" content="<?php mapi_facebook_id(); ?>" />
-		<meta property="og:title" content="<?php echo get_the_title_rss(); ?>" />
-		<meta property="og:type" content="article" />
-		<meta property="og:url" content="<?php the_permalink_rss(); ?>" />
-		<meta property="og:site_name" content="<?php bloginfo_rss('name'); ?>" />
-		<?php if(!has_post_thumbnail(get_the_ID())) : // the post does not have featured image, use a default image ?>
-			<meta property="og:image" content="<?php echo get_template_directory_uri().'/img/nothumb.gif'; ?>" />
-		<?php else : ?>
-			<meta property="og:image" content="<?php echo esc_attr(mapi_get_attachment_image_src(NULL, 'medium')); ?>" />
-		<?php endif; ?>
-	<?php endif;
+	mapi_facebook_head();
 }
 
 add_action('wp_head', 'blankout_facebook_head', 5);
