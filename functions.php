@@ -4,6 +4,9 @@
  *
  */
 
+// check for dependencies
+require_once(dirname(__FILE__).'/inc/dependencies/check.php');
+
 /**
  * Constants
  */
@@ -13,7 +16,7 @@ define('BOOTSTRAP_DROPDOWN_ON_HOVER', FALSE); // if TRUE, overrides the default 
  * Includes
  */
 include(get_template_directory().'/inc/customize.php'); // enable theme customizer for Blankout (Appearance > Themes)
-include(get_template_directory().'/inc/carousel-post-type.php');
+include(get_template_directory().'/inc/custom-post-types.php');
 include(get_template_directory().'/inc/woocommerce.php'); // enable WooCommerce support
 
 /**
@@ -149,11 +152,6 @@ add_filter('wp_list_categories', 'blankout_add_cat_count');
  *
  */
 function blankout_configure_mapi() {
-	if(!is_admin() && current_user_can('manage_plugins')) {
-		if(!in_array('mcms-api/mcms-api.php', apply_filters('active_plugins', get_option('active_plugins')))) {
-			wp_die('This theme requires the Mindshare Theme API plugin. Luckily, it\'s free, open source and dead easy to get! <br /><br /><strong>Step 1</strong> <a href="http://svn.mindsharestudios.com/mcms-api/mcms-api.zip">Download the zip.</a> <br /><strong>Step 2</strong> <a href="/wp-admin/plugin-install.php?tab=upload">Install and activate.</a>');
-		}
-	}
 	if(function_exists('mapi_update_option')) {
 		mapi_update_option('load_bootstrap', TRUE);
 		mapi_update_option('load_modernizr_js', TRUE);
@@ -161,7 +159,6 @@ function blankout_configure_mapi() {
 		mapi_get_option('load_bootstrap_css', FALSE);
 	}
 }
-
 add_action('admin_init', 'blankout_configure_mapi');
 
 /**
@@ -490,7 +487,9 @@ function blankout_footer_credit() {
  * @return string
  */
 function blankout_add_opengraph_doctype($output) {
-	return mapi_add_opengraph_doctype($output);
+	if(function_exists('mapi_add_opengraph_doctype')) {
+		return mapi_add_opengraph_doctype($output);
+	}
 }
 
 add_filter('language_attributes', 'blankout_add_opengraph_doctype');
@@ -500,7 +499,9 @@ add_filter('language_attributes', 'blankout_add_opengraph_doctype');
  *
  */
 function blankout_facebook_head() {
-	mapi_facebook_head();
+	if(function_exists('mapi_facebook_head')) {
+		mapi_facebook_head();
+	}
 }
 
 add_action('wp_head', 'blankout_facebook_head', 5);
@@ -511,15 +512,17 @@ add_action('wp_head', 'blankout_facebook_head', 5);
  *
  */
 function blankout_enable_nav_hover() {
-	if(!mapi_is_mobile_device() && BOOTSTRAP_DROPDOWN_ON_HOVER) : ?>
-		<style type="text/css">
-			ul.nav li.dropdown:hover ul.dropdown-menu {
-				display:block;
-				margin:0;
-			}
-			a.menu:after, .dropdown-toggle:after {
-				content:none;
-			}
-		</style>
-	<?php endif;
+	if(function_exists('mapi_is_mobile_device')) {
+		if(!mapi_is_mobile_device() && BOOTSTRAP_DROPDOWN_ON_HOVER) : ?>
+			<style type="text/css">
+				ul.nav li.dropdown:hover ul.dropdown-menu {
+					display:block;
+					margin:0;
+				}
+				a.menu:after, .dropdown-toggle:after {
+					content:none;
+				}
+			</style>
+		<?php endif;
+	}
 }
