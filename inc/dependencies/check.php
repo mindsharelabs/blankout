@@ -32,7 +32,7 @@ function blankout_register_required_plugins() {
 			'slug'               => 'mindshare-api-master', // The plugin slug (typically the folder name).
 			'source'             => 'https://github.com/mindsharestudios/mindshare-api/archive/master.zip', // The plugin source.
 			'required'           => TRUE, // If false, the plugin is only 'recommended' instead of required.
-			'force_activation'   => TRUE, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch.
+			'force_activation'   => FALSE, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch.
 			'force_deactivation' => FALSE, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins.
 			'external_url'       => 'http://mindsharelabs.com/downloads/mindshare-theme-api/', // If set, overrides default API URL and points to an external URL.
 		),
