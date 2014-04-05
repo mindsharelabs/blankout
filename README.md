@@ -12,6 +12,15 @@ Built using:
 
 ## Changelog
 
+### v3.4
+* Custom post types include now commented out by default
+* Completed styling for Gravity Forms
+* Added style-responsive.less with template for responsive styles
+* Added Blankout comment to header
+* Added conditional logic for main / blog sidebars
+* Added widgetized footer
+* Added Chrome-compatible LESS source maps
+
 ### v3.3
 * Removed fatal errors when Mindshare Theme API isn't present
 * Updated Flexslider initialization to pause videos on play

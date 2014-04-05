@@ -1,6 +1,11 @@
 <div class="container">
 	<footer class="footer" role="contentinfo">
 		<hr />
+
+		<?php if(is_active_sidebar('footer-widgets')) {
+			dynamic_sidebar('footer-widgets');
+		} ?>
+
 		<nav role="navigation">
 			<?php
 			if ( has_nav_menu( 'footer-nav' ) ) {

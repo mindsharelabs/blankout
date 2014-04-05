@@ -9,6 +9,19 @@
 <!--[if gt IE 8]>
 <html <?php language_attributes(); ?> class="no-js"><![endif]-->
 <head>
+
+<!--
+oooooooooo.  oooo                        oooo                                  .   
+`888'   `Y8b `888                        `888                                .o8   
+ 888     888  888   .oooo.   ooo. .oo.    888  oooo   .ooooo.  oooo  oooo  .o888oo 
+ 888oooo888'  888  `P  )88b  `888P"Y88b   888 .8P'   d88' `88b `888  `888    888   
+ 888    `88b  888   .oP"888   888   888   888888.    888   888  888   888    888   
+ 888    .88P  888  d8(  888   888   888   888 `88b.  888   888  888   888    888 . 
+o888bood8P'  o888o `Y888""8o o888o o888o o888o o888o `Y8bod8P'  `V88V"V8P'   "888" 
+// 
+// This project is built on the Blankout starter theme, by Mindshare Studios - http://mind.sh/are/
+//
+-->
 	<meta charset="<?php bloginfo('charset'); ?>" />
 	<title><?php bloginfo('name'); ?> | <?php is_front_page() ? bloginfo('description') : wp_title(''); ?></title>
 	<?php blankout_copyright(); ?>

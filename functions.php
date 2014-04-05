@@ -15,9 +15,9 @@ define('BOOTSTRAP_DROPDOWN_ON_HOVER', FALSE); // if TRUE, overrides the default 
 /**
  * Includes
  */
-include(get_template_directory().'/inc/customize.php'); // enable theme customizer for Blankout (Appearance > Themes)
-include(get_template_directory().'/inc/custom-post-types.php');
-include(get_template_directory().'/inc/woocommerce.php'); // enable WooCommerce support
+//include(get_template_directory().'/inc/customize.php'); // enable theme customizer for Blankout (Appearance > Themes)
+//include(get_template_directory().'/inc/custom-post-types.php');
+//include(get_template_directory().'/inc/woocommerce.php'); // enable WooCommerce support
 
 /**
  * WordPress setup
@@ -126,6 +126,17 @@ register_sidebar(
 		'name'          => __('Blog Sidebar', 'blankout'),
 		'id'            => 'blog-sidebar',
 		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h4 class="widgettitle">',
+		'after_title'   => '</h4>',
+	)
+);
+
+register_sidebar(
+	array(
+		'name'          => __('Footer Widgets', 'blankout'),
+		'id'            => 'footer-widgets',
+		'before_widget' => '<div id="%1$s" class="widget col-lg-4 %2$s">',
 		'after_widget'  => '</div>',
 		'before_title'  => '<h4 class="widgettitle">',
 		'after_title'   => '</h4>',

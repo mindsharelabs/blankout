@@ -218,6 +218,8 @@ pip-log.txt
 *.svn
 github.php
 
-codekit-config.json
+blankout.sublime-project
+blankout.sublime-workspace
+config.codekit
 sb-templates/
 wpus-results-template.php
