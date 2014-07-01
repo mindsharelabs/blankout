@@ -13,17 +13,19 @@
 							<span class="author"><?php the_author_posts_link(); ?></span> <span class="amp">&amp;</span> <?php _e("filed under", 'blankout'); ?> <?php the_category(', '); ?>.
 						</small>
 					</header>
-
 					<section class="entry-content clearfix" itemprop="articleBody">
 						<?php the_content(); ?>
 					</section>
-
 					<footer class="article-footer">
 						<?php the_taxonomies('before=<p class="tags">&after=</p>&template=%s: %l'); ?>
-						<?php if(function_exists('mapi_edit_link')) mapi_edit_link(); ?>
+						<?php if(function_exists('mapi_edit_link')) {
+							mapi_edit_link();
+						} ?>
 					</footer>
 
-					<?php if(comments_open()) comments_template(); ?>
+					<?php if(comments_open()) {
+						comments_template();
+					} ?>
 				</article>
 
 			<?php endwhile; ?>

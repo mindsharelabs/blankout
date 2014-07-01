@@ -8,7 +8,6 @@
 			<?php if(have_posts()) : while(have_posts()) : the_post(); ?>
 
 				<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?> role="article">
-
 					<header class="article-header page-header">
 						<h1 class="entry-title page-title" itemprop="headline"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h1>
 						<small class="byline vcard"><?php _e("Posted", 'blankout'); ?>
@@ -16,13 +15,12 @@
 							<span class="author"><?php the_author_posts_link(); ?></span> <span class="amp">&amp;</span> <?php _e("filed under", 'blankout'); ?> <?php the_category(', '); ?>.
 						</small>
 					</header>
-
 					<section class="entry-content">
-						<?php if(function_exists('mapi_excerpt')) echo mapi_excerpt() . mapi_excerpt_more(); ?>
+						<?php if(function_exists('mapi_excerpt')) {
+							echo mapi_excerpt().mapi_excerpt_more();
+						} ?>
 					</section>
-
 					<footer class="article-footer"></footer>
-
 				</article>
 
 			<?php endwhile; ?>

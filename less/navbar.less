@@ -17,7 +17,7 @@
 	// Prevent floats from breaking the navbar
 	.clearfix();
 
-	@media (min-width: @grid-float-breakpoint) {
+	@media (min-width:@grid-float-breakpoint) {
 		border-radius:@navbar-border-radius;
 	}
 }
@@ -30,7 +30,7 @@
 .navbar-header {
 	.clearfix();
 
-	@media (min-width: @grid-float-breakpoint) {
+	@media (min-width:@grid-float-breakpoint) {
 		float:left;
 	}
 }
@@ -59,7 +59,7 @@
 		overflow-y:auto;
 	}
 
-	@media (min-width: @grid-float-breakpoint) {
+	@media (min-width:@grid-float-breakpoint) {
 		width:auto;
 		border-top:0;
 		box-shadow:none;
@@ -97,7 +97,7 @@
 	margin-right:-@navbar-padding-horizontal;
 	margin-left:-@navbar-padding-horizontal;
 
-	@media (min-width: @grid-float-breakpoint) {
+	@media (min-width:@grid-float-breakpoint) {
 		margin-right:0;
 		margin-left:0;
 	}
@@ -112,7 +112,7 @@
 // Static top (unfixed, but 100% wide) navbar
 .navbar-static-top {
 	border-width:0 0 1px;
-	@media (min-width: @grid-float-breakpoint) {
+	@media (min-width:@grid-float-breakpoint) {
 		border-radius:0;
 	}
 }
@@ -126,7 +126,7 @@
 	border-width:0 0 1px;
 
 	// Undo the rounded corners
-	@media (min-width: @grid-float-breakpoint) {
+	@media (min-width:@grid-float-breakpoint) {
 		border-radius:0;
 	}
 }
@@ -151,7 +151,7 @@
 		text-decoration:none;
 	}
 
-	@media (min-width: @grid-float-breakpoint) {
+	@media (min-width:@grid-float-breakpoint) {
 		.navbar > .container & {
 			margin-left:-@navbar-padding-horizontal;
 		}
@@ -184,7 +184,7 @@
 		margin-top:4px;
 	}
 
-	@media (min-width: @grid-float-breakpoint) {
+	@media (min-width:@grid-float-breakpoint) {
 		display:none;
 	}
 }
@@ -203,7 +203,7 @@
 		line-height:@line-height-computed;
 	}
 
-	@media (max-width: @screen-xs-max) {
+	@media (max-width:@screen-xs-max) {
 		// Dropdowns get custom display when collapsed
 		.open .dropdown-menu {
 			position:static;
@@ -228,7 +228,7 @@
 	}
 
 	// Uncollapse the nav
-	@media (min-width: @grid-float-breakpoint) {
+	@media (min-width:@grid-float-breakpoint) {
 		float:left;
 		margin:0;
 
@@ -249,10 +249,12 @@
 // issues with parents and chaining. Only do this when the navbar is uncollapsed
 // though so that navbar contents properly stack and align in mobile.
 
-@media (min-width: @grid-float-breakpoint) {
-	.navbar-left { .pull-left();
+@media (min-width:@grid-float-breakpoint) {
+	.navbar-left {
+		.pull-left();
 	}
-	.navbar-right { .pull-right();
+	.navbar-right {
+		.pull-right();
 	}
 }
 
@@ -274,7 +276,7 @@
 	.form-inline();
 
 	.form-group {
-		@media (max-width: @screen-xs-max) {
+		@media (max-width:@screen-xs-max) {
 			margin-bottom:5px;
 		}
 	}
@@ -283,7 +285,7 @@
 	.navbar-vertical-align(@input-height-base);
 
 	// Undo 100% width for pull classes
-	@media (min-width: @grid-float-breakpoint) {
+	@media (min-width:@grid-float-breakpoint) {
 		width:auto;
 		border:0;
 		margin-left:0;
@@ -329,7 +331,7 @@
 	float:left;
 	.navbar-vertical-align(@line-height-computed);
 
-	@media (min-width: @grid-float-breakpoint) {
+	@media (min-width:@grid-float-breakpoint) {
 		margin-left:@navbar-padding-horizontal;
 		margin-right:@navbar-padding-horizontal;
 	}
@@ -427,7 +429,7 @@
 			border-bottom-color:@navbar-default-link-color;
 		}
 
-		@media (max-width: @screen-xs-max) {
+		@media (max-width:@screen-xs-max) {
 			// Dropdowns get custom display when collapsed
 			.open .dropdown-menu {
 				> li > a {
@@ -564,7 +566,7 @@
 			}
 		}
 
-		@media (max-width: @screen-xs-max) {
+		@media (max-width:@screen-xs-max) {
 			// Dropdowns get custom display
 			.open .dropdown-menu {
 				> .dropdown-header {

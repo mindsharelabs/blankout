@@ -111,7 +111,7 @@ register_nav_menus(
 if(!is_nav_menu('main-nav')) {
 	wp_create_nav_menu('Main Navigation', array('slug' => 'main-nav'));
 }
-if(!is_nav_menu('main-nav')) {
+if(!is_nav_menu('footer-nav')) {
 	wp_create_nav_menu('Footer Navigation', array('slug' => 'footer-nav'));
 }
 
@@ -170,9 +170,10 @@ add_filter('wp_list_categories', 'blankout_add_cat_count');
 function blankout_configure_mapi() {
 	if(function_exists('mapi_update_option')) {
 		mapi_update_option('load_bootstrap', TRUE);
+		mapi_update_option('load_font_awesome', TRUE);
 		mapi_update_option('load_modernizr_js', TRUE);
 		// let's not load Bootstrap CSS twice in the Mindshare Theme API
-		mapi_get_option('load_bootstrap_css', FALSE);
+		mapi_update_option('load_bootstrap_css', FALSE);
 	}
 }
 
@@ -188,12 +189,12 @@ function blankout_scripts_and_styles() {
 		wp_register_script('blankout-js', get_stylesheet_directory_uri().'/js/main.js', array('jquery'));
 		wp_enqueue_script('blankout-js');
 
-		wp_register_style('bootstrap-stylesheet', get_stylesheet_directory_uri().'/css/bootstrap.css', array(), '', 'all');
+		wp_register_style('bootstrap-stylesheet', get_stylesheet_directory_uri().'/style.css', array(), '', 'all');
 		wp_enqueue_style('bootstrap-stylesheet');
 	}
 }
 
-add_action('wp_enqueue_scripts', 'blankout_scripts_and_styles');
+add_action('wp_enqueue_scripts', 'blankout_scripts_and_styles', 999);
 
 /**
  * @param $classes

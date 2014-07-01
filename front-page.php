@@ -19,21 +19,17 @@
 							<span class="author"><?php the_author_posts_link(); ?></span> <span class="amp">&amp;</span> <?php _e("filed under", 'blankout'); ?> <?php the_category(', '); ?>.
 						</small>
 					</header>
-
 					<section class="entry-content clearfix" itemprop="articleBody">
 						<?php the_content(); ?>
 					</section>
-
 					<footer class="article-footer"></footer>
-
 				</article>
 
 			<?php endwhile; ?>
 
-			<?php blankout_page_nav(); ?>
+				<?php blankout_page_nav(); ?>
 
 			<?php endif; ?>
-
 		</div>
 		<?php get_sidebar(); ?>
 	</div>

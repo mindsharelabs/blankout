@@ -9,19 +9,18 @@
 <!--[if gt IE 8]>
 <html <?php language_attributes(); ?> class="no-js"><![endif]-->
 <head>
-
-<!--
-oooooooooo.  oooo                        oooo                                  .   
-`888'   `Y8b `888                        `888                                .o8   
- 888     888  888   .oooo.   ooo. .oo.    888  oooo   .ooooo.  oooo  oooo  .o888oo 
- 888oooo888'  888  `P  )88b  `888P"Y88b   888 .8P'   d88' `88b `888  `888    888   
- 888    `88b  888   .oP"888   888   888   888888.    888   888  888   888    888   
- 888    .88P  888  d8(  888   888   888   888 `88b.  888   888  888   888    888 . 
-o888bood8P'  o888o `Y888""8o o888o o888o o888o o888o `Y8bod8P'  `V88V"V8P'   "888" 
-// 
-// This project is built on the Blankout starter theme, by Mindshare Studios - http://mind.sh/are/
-//
--->
+	<!--
+	oooooooooo.  oooo                        oooo                                  .
+	`888'   `Y8b `888                        `888                                .o8
+	 888     888  888   .oooo.   ooo. .oo.    888  oooo   .ooooo.  oooo  oooo  .o888oo
+	 888oooo888'  888  `P  )88b  `888P"Y88b   888 .8P'   d88' `88b `888  `888    888
+	 888    `88b  888   .oP"888   888   888   888888.    888   888  888   888    888
+	 888    .88P  888  d8(  888   888   888   888 `88b.  888   888  888   888    888 .
+	o888bood8P'  o888o `Y888""8o o888o o888o o888o o888o `Y8bod8P'  `V88V"V8P'   "888"
+	//
+	// This project is built on the Blankout starter theme, by Mindshare Studios Inc - http://mind.sh/are/ and http://mindsharelabs.com/
+	//
+	-->
 	<meta charset="<?php bloginfo('charset'); ?>" />
 	<title><?php bloginfo('name'); ?> | <?php is_front_page() ? bloginfo('description') : wp_title(''); ?></title>
 	<?php blankout_copyright(); ?>
@@ -44,7 +43,6 @@ o888bood8P'  o888o `Y888""8o o888o o888o o888o o888o `Y8bod8P'  `V88V"V8P'   "88
 	<?php wp_head(); ?>
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,700,600,800,300" rel="stylesheet" type="text/css" />
 	<?php blankout_enable_nav_hover(); ?>
-
 </head>
 <body <?php body_class(); ?>>
 <a id="top"></a>
@@ -62,17 +60,17 @@ o888bood8P'  o888o `Y888""8o o888o o888o o888o o888o `Y8bod8P'  `V88V"V8P'   "88
 			</div>
 			<div class="collapse navbar-collapse">
 				<?php
-				if ( has_nav_menu( 'main-nav' ) ) {
+				if(has_nav_menu('main-nav')) {
 					wp_nav_menu(
 						array(
-							 'container'       => ' ',
-							 'container_class' => 'nav',
-							 'fallback_cb'     => 'wp_page_menu',
-							 'menu'            => 'main-nav',
-							 'menu_class'      => 'nav navbar-nav',
-							 'theme_location'  => 'main-nav',
-							 'depth'           => '2',
-							 'walker'          => new Blankout_Menu_Walker()
+							'container'       => ' ',
+							'container_class' => 'nav',
+							'fallback_cb'     => 'wp_page_menu',
+							'menu'            => 'main-nav',
+							'menu_class'      => 'nav navbar-nav',
+							'theme_location'  => 'main-nav',
+							'depth'           => '2',
+							'walker'          => new Blankout_Menu_Walker()
 						)
 					);
 				} ?>

@@ -12,6 +12,11 @@ Built using:
 
 ## Changelog
 
+### v3.5
+* new CSS/LESS structure, now compiles to style.css instead of boostrap.css
+* Remove focus highlight from form fields
+* misc bugfixes
+
 ### v3.4
 * Custom post types include now commented out by default
 * Completed styling for Gravity Forms

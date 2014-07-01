@@ -13,19 +13,22 @@
 							<span class="author"><?php the_author_posts_link(); ?></span> <span class="amp">&amp;</span> <?php _e("filed under", 'blankout'); ?> <?php the_category(', '); ?>.
 						</small>
 					</header>
-
 					<section class="entry-content clearfix">
-						<?php if(function_exists('mapi_excerpt')) echo mapi_excerpt() . mapi_excerpt_more(); ?>
+						<?php if(function_exists('mapi_excerpt')) {
+							echo mapi_excerpt().mapi_excerpt_more();
+						} ?>
 					</section>
 
 					<?php get_template_part('inc/article-footer'); ?>
 
-					<?php if(comments_open()) comments_template(); ?>
+					<?php if(comments_open()) {
+						comments_template();
+					} ?>
 				</article>
 
 			<?php endwhile; ?>
 
-			<?php blankout_page_nav(); ?>
+				<?php blankout_page_nav(); ?>
 
 			<?php endif; ?>
 		</div>

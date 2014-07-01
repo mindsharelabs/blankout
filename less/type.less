@@ -14,7 +14,7 @@ p {
 	font-weight:200;
 	line-height:1.4;
 
-	@media (min-width: 768px) {
+	@media (min-width:768px) {
 		font-size:(@font-size-base * 1.5);
 	}
 }
@@ -188,7 +188,7 @@ dd {
 // Defaults to being stacked without any of the below styles applied, until the
 // grid breakpoint is reached (default of ~768px).
 
-@media (min-width: @grid-float-breakpoint) {
+@media (min-width:@grid-float-breakpoint) {
 	.dl-horizontal {
 		dt {
 			float:left;
@@ -237,7 +237,7 @@ blockquote {
 		line-height:@line-height-base;
 		color:@blockquote-small-color;
 		&:before {
-			content:'\2014 \00A0';// EM DASH, NBSP
+			content:'\2014 \00A0'; // EM DASH, NBSP
 		}
 	}
 
@@ -256,7 +256,7 @@ blockquote {
 				content:'';
 			}
 			&:after {
-				content:'\00A0 \2014';// NBSP, EM DASH
+				content:'\00A0 \2014'; // NBSP, EM DASH
 			}
 		}
 	}

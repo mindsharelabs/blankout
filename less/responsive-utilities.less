@@ -6,8 +6,7 @@
 // Required for Windows 8 Metro split-screen snapping with IE10
 //
 // Source: http://timkadlec.com/2012/10/ie10-snap-mode-and-responsive-design/
-@-ms-viewport
-{
+@-ms-viewport {
 	width:device-width
 ;
 }
@@ -21,13 +20,12 @@
 // we won't be doing that here given our limited scope.
 //
 // Source: http://timkadlec.com/2013/01/windows-phone-8-and-device-width/
-@media screen and (max-width: 400px) {
-@-ms-viewport
-{
-	width:320px
-;
-}
+@media screen and (max-width:400px) {
+	@-ms-viewport {
+		width:320px
+	;
 	}
+}
 
 // Hide from screenreaders and browsers
 // Credit: HTML5 Boilerplate
@@ -40,21 +38,21 @@
 
 .visible-xs {
 	.responsive-invisibility();
-	@media (max-width: @screen-xs-max) {
+	@media (max-width:@screen-xs-max) {
 		.responsive-visibility();
 	}
 	&.visible-sm {
-		@media (min-width: @screen-sm) and (max-width: @screen-sm-max) {
+		@media (min-width:@screen-sm) and (max-width:@screen-sm-max) {
 			.responsive-visibility();
 		}
 	}
 	&.visible-md {
-		@media (min-width: @screen-md) and (max-width: @screen-md-max) {
+		@media (min-width:@screen-md) and (max-width:@screen-md-max) {
 			.responsive-visibility();
 		}
 	}
 	&.visible-lg {
-		@media (min-width: @screen-lg) {
+		@media (min-width:@screen-lg) {
 			.responsive-visibility();
 		}
 	}
@@ -62,20 +60,20 @@
 .visible-sm {
 	.responsive-invisibility();
 	&.visible-xs {
-		@media (max-width: @screen-xs-max) {
+		@media (max-width:@screen-xs-max) {
 			.responsive-visibility();
 		}
 	}
-	@media (min-width: @screen-sm) and (max-width: @screen-sm-max) {
+	@media (min-width:@screen-sm) and (max-width:@screen-sm-max) {
 		.responsive-visibility();
 	}
 	&.visible-md {
-		@media (min-width: @screen-md) and (max-width: @screen-md-max) {
+		@media (min-width:@screen-md) and (max-width:@screen-md-max) {
 			.responsive-visibility();
 		}
 	}
 	&.visible-lg {
-		@media (min-width: @screen-lg) {
+		@media (min-width:@screen-lg) {
 			.responsive-visibility();
 		}
 	}
@@ -83,20 +81,20 @@
 .visible-md {
 	.responsive-invisibility();
 	&.visible-xs {
-		@media (max-width: @screen-xs-max) {
+		@media (max-width:@screen-xs-max) {
 			.responsive-visibility();
 		}
 	}
 	&.visible-sm {
-		@media (min-width: @screen-sm) and (max-width: @screen-sm-max) {
+		@media (min-width:@screen-sm) and (max-width:@screen-sm-max) {
 			.responsive-visibility();
 		}
 	}
-	@media (min-width: @screen-md) and (max-width: @screen-md-max) {
+	@media (min-width:@screen-md) and (max-width:@screen-md-max) {
 		.responsive-visibility();
 	}
 	&.visible-lg {
-		@media (min-width: @screen-lg) {
+		@media (min-width:@screen-lg) {
 			.responsive-visibility();
 		}
 	}
@@ -104,42 +102,42 @@
 .visible-lg {
 	.responsive-invisibility();
 	&.visible-xs {
-		@media (max-width: @screen-xs-max) {
+		@media (max-width:@screen-xs-max) {
 			.responsive-visibility();
 		}
 	}
 	&.visible-sm {
-		@media (min-width: @screen-sm) and (max-width: @screen-sm-max) {
+		@media (min-width:@screen-sm) and (max-width:@screen-sm-max) {
 			.responsive-visibility();
 		}
 	}
 	&.visible-md {
-		@media (min-width: @screen-md) and (max-width: @screen-md-max) {
+		@media (min-width:@screen-md) and (max-width:@screen-md-max) {
 			.responsive-visibility();
 		}
 	}
-	@media (min-width: @screen-lg) {
+	@media (min-width:@screen-lg) {
 		.responsive-visibility();
 	}
 }
 
 .hidden-xs {
 	.responsive-visibility();
-	@media (max-width: @screen-xs-max) {
+	@media (max-width:@screen-xs-max) {
 		.responsive-invisibility();
 	}
 	&.hidden-sm {
-		@media (min-width: @screen-sm) and (max-width: @screen-sm-max) {
+		@media (min-width:@screen-sm) and (max-width:@screen-sm-max) {
 			.responsive-invisibility();
 		}
 	}
 	&.hidden-md {
-		@media (min-width: @screen-md) and (max-width: @screen-md-max) {
+		@media (min-width:@screen-md) and (max-width:@screen-md-max) {
 			.responsive-invisibility();
 		}
 	}
 	&.hidden-lg {
-		@media (min-width: @screen-lg) {
+		@media (min-width:@screen-lg) {
 			.responsive-invisibility();
 		}
 	}
@@ -147,20 +145,20 @@
 .hidden-sm {
 	.responsive-visibility();
 	&.hidden-xs {
-		@media (max-width: @screen-xs-max) {
+		@media (max-width:@screen-xs-max) {
 			.responsive-invisibility();
 		}
 	}
-	@media (min-width: @screen-sm) and (max-width: @screen-sm-max) {
+	@media (min-width:@screen-sm) and (max-width:@screen-sm-max) {
 		.responsive-invisibility();
 	}
 	&.hidden-md {
-		@media (min-width: @screen-md) and (max-width: @screen-md-max) {
+		@media (min-width:@screen-md) and (max-width:@screen-md-max) {
 			.responsive-invisibility();
 		}
 	}
 	&.hidden-lg {
-		@media (min-width: @screen-lg) {
+		@media (min-width:@screen-lg) {
 			.responsive-invisibility();
 		}
 	}
@@ -168,20 +166,20 @@
 .hidden-md {
 	.responsive-visibility();
 	&.hidden-xs {
-		@media (max-width: @screen-xs-max) {
+		@media (max-width:@screen-xs-max) {
 			.responsive-invisibility();
 		}
 	}
 	&.hidden-sm {
-		@media (min-width: @screen-sm) and (max-width: @screen-sm-max) {
+		@media (min-width:@screen-sm) and (max-width:@screen-sm-max) {
 			.responsive-invisibility();
 		}
 	}
-	@media (min-width: @screen-md) and (max-width: @screen-md-max) {
+	@media (min-width:@screen-md) and (max-width:@screen-md-max) {
 		.responsive-invisibility();
 	}
 	&.hidden-lg {
-		@media (min-width: @screen-lg) {
+		@media (min-width:@screen-lg) {
 			.responsive-invisibility();
 		}
 	}
@@ -189,21 +187,21 @@
 .hidden-lg {
 	.responsive-visibility();
 	&.hidden-xs {
-		@media (max-width: @screen-xs-max) {
+		@media (max-width:@screen-xs-max) {
 			.responsive-invisibility();
 		}
 	}
 	&.hidden-sm {
-		@media (min-width: @screen-sm) and (max-width: @screen-sm-max) {
+		@media (min-width:@screen-sm) and (max-width:@screen-sm-max) {
 			.responsive-invisibility();
 		}
 	}
 	&.hidden-md {
-		@media (min-width: @screen-md) and (max-width: @screen-md-max) {
+		@media (min-width:@screen-md) and (max-width:@screen-md-max) {
 			.responsive-invisibility();
 		}
 	}
-	@media (min-width: @screen-lg) {
+	@media (min-width:@screen-lg) {
 		.responsive-invisibility();
 	}
 }
