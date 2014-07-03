@@ -2,7 +2,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
-			<?php include(get_template_directory().'/inc/carousel.php'); ?>
+			<?php include(get_stylesheet_directory().'/inc/carousel.php'); ?>
 		</div>
 	</div>
 	<div class="row">

@@ -20,9 +20,9 @@ define('BOOTSTRAP_DROPDOWN_ON_HOVER', FALSE); // if TRUE, overrides the default 
 /**
  * Includes
  */
-//include(get_template_directory().'/inc/customize.php'); // enable theme customizer for Blankout (Appearance > Themes)
-//include(get_template_directory().'/inc/custom-post-types.php');
-//include(get_template_directory().'/inc/woocommerce.php'); // enable WooCommerce support
+//include(get_stylesheet_directory().'/inc/customize.php'); // enable theme customizer for Blankout (Appearance > Themes)
+//include(get_stylesheet_directory().'/inc/custom-post-types.php');
+//include(get_stylesheet_directory().'/inc/woocommerce.php'); // enable WooCommerce support
 
 /**
  * WordPress setup
@@ -80,9 +80,9 @@ if(!function_exists('blankout_theme_features')) {
 		add_theme_support('html5', $markup);
 
 		// Add theme support for Translation
-		load_theme_textdomain('blankout', get_template_directory().'/translation');
+		load_theme_textdomain('blankout', get_stylesheet_directory().'/translation');
 		$locale = get_locale();
-		$locale_file = get_template_directory()."/translation/$locale.php";
+		$locale_file = get_stylesheet_directory()."/translation/$locale.php";
 		if(is_readable($locale_file)) {
 			require_once($locale_file);
 		}
@@ -433,7 +433,7 @@ function blankout_comments($comment, $args, $depth) {
 	$GLOBALS['comment'] = $comment;
 	$bgauthemail = get_comment_author_email(); ?>
 	<article id="comment-<?php comment_ID(); ?>" <?php comment_class("media clearfix"); ?>>
-		<img data-gravatar="http://www.gravatar.com/avatar/<?php echo md5($bgauthemail); ?>?s=48" class="pull-left media-object load-gravatar avatar avatar-48 photo" height="48" width="48" src="<?php echo get_template_directory_uri(); ?>/img/nothing.gif" />
+		<img data-gravatar="http://www.gravatar.com/avatar/<?php echo md5($bgauthemail); ?>?s=48" class="pull-left media-object load-gravatar avatar avatar-48 photo" height="48" width="48" src="<?php echo get_stylesheet_directory_uri(); ?>/img/nothing.gif" />
 		<header class="comment-author vcard">
 			<?php printf(__('<cite class="fn">%s</cite>'), get_comment_author_link()) ?>
 			<time datetime="<?php comment_time('Y-m-j'); ?>"><a href="<?php echo htmlspecialchars(get_comment_link($comment->comment_ID)) ?>"><?php comment_time('F jS, Y'); ?> </a></time>
@@ -483,7 +483,7 @@ function blankout_copyright() {
 function blankout_footer_credit() {
 	$cc = 'V2Vic2l0ZSBkZXNpZ24sIGRldmVsb3BtZW50LCBhbmQgU0VPIGJ5IE1pbmRzaGFyZSBTdHVkaW9zLCBJbmM=';
 	$host = parse_url(get_bloginfo('url'));
-	$c = '<p id="credit" class="source-org copyright pull-right"><a class="no-icon" href="http://mind.sh/are/?ref='.$host['host'].'" target="_blank" title="'.base64_decode($cc).'"><img src="'.get_template_directory_uri().'/img/credit.png" alt="'.base64_decode($cc).'" /></a></p>';
+	$c = '<p id="credit" class="source-org copyright pull-right"><a class="no-icon" href="http://mind.sh/are/?ref='.$host['host'].'" target="_blank" title="'.base64_decode($cc).'"><img src="'.get_stylesheet_directory_uri().'/img/credit.png" alt="'.base64_decode($cc).'" /></a></p>';
 	if(function_exists('mapi_get_option')) {
 		if(mapi_get_option('show_credit') == TRUE || $_GET['credit'] == 1) {
 			echo $c;

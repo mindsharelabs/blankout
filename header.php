@@ -29,7 +29,11 @@
 	<meta name="HandheldFriendly" content="True" />
 	<meta name="MobileOptimized" content="320" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-	<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/img/favicon.png" />
+	<?php if(function_exists('mapi_get_favicon_url') && mapi_get_favicon_url() != NULL) : ?>
+		<link rel="shortcut icon" href="<?php echo mapi_get_favicon_url(); ?>" />
+	<?php else : ?>
+		<link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/img/favicon.png" />
+	<?php endif; ?>
 	<link rel="alternate" type="application/rss+xml" href="<?php echo get_feed_link(); ?>" title="<?php echo esc_html(get_bloginfo('name')); ?> latest updates" />
 
 	<?php if(function_exists('mapi_is_true') && mapi_is_true(get_option('default_comment_status'))) : ?>
