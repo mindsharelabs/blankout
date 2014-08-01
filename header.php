@@ -1,4 +1,4 @@
-<?php //mapi_mobile_header('class', true, false); ?>
+<?php //mapi_mobile_header('class', TRUE, FALSE); ?>
 <!DOCTYPE HTML>
 <!--[if lt IE 7]>
 <html <?php language_attributes(); ?> class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]-->
@@ -18,14 +18,16 @@
 	 888    .88P  888  d8(  888   888   888   888 `88b.  888   888  888   888    888 .
 	o888bood8P'  o888o `Y888""8o o888o o888o o888o o888o `Y8bod8P'  `V88V"V8P'   "888"
 	//
-	// This project is built on the Blankout starter theme, by Mindshare Studios Inc - http://mind.sh/are/ and http://mindsharelabs.com/
+	// This project is built on the Blankout starter theme
+	// by Mindshare Studios Inc - http://mind.sh/are/ and http://mindsharelabs.com/
 	//
 	-->
 	<meta charset="<?php bloginfo('charset'); ?>" />
 	<title><?php bloginfo('name'); ?> | <?php is_front_page() ? bloginfo('description') : wp_title(''); ?></title>
 	<?php blankout_copyright(); ?>
 	<!--[if IE]>
-	<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+	<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1' />
+	<![endif]-->
 	<meta name="HandheldFriendly" content="True" />
 	<meta name="MobileOptimized" content="320" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
