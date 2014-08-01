@@ -485,7 +485,7 @@ function blankout_footer_credit() {
 	$host = parse_url(get_bloginfo('url'));
 	$c = '<p id="credit" class="source-org copyright pull-right"><a class="no-icon" href="http://mind.sh/are/?ref='.$host['host'].'" target="_blank" title="'.base64_decode($cc).'"><img src="'.get_stylesheet_directory_uri().'/img/credit.png" alt="'.base64_decode($cc).'" /></a></p>';
 	if(function_exists('mapi_get_option')) {
-		if(mapi_get_option('show_credit') == TRUE || $_GET['credit'] == 1) {
+		if(mapi_get_option('show_credit') == TRUE || (array_key_exists('credit', $_GET) && $_GET['credit'] == 1)) {
 			echo $c;
 		}
 	} else {
