@@ -77,7 +77,7 @@
 					</section>
 					<footer class="article-footer">
 						<?php the_taxonomies('before=<p class="tags">&after=</p>&template=%s: %l'); ?>
-						<?php mapi_edit_link(); ?>
+						<?php echo mapi_edit_link(); ?>
 					</footer>
 				</article>
 

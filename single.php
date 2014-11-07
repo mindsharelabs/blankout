@@ -19,7 +19,7 @@
 					<footer class="article-footer">
 						<?php the_taxonomies('before=<p class="tags">&after=</p>&template=%s: %l'); ?>
 						<?php if(function_exists('mapi_edit_link')) {
-							mapi_edit_link();
+							echo mapi_edit_link();
 						} ?>
 					</footer>
 

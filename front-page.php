@@ -22,7 +22,11 @@
 					<section class="entry-content clearfix" itemprop="articleBody">
 						<?php the_content(); ?>
 					</section>
-					<footer class="article-footer"></footer>
+					<footer class="article-footer">
+						<?php if(function_exists('mapi_edit_link')) {
+							echo mapi_edit_link();
+						} ?>
+					</footer>
 				</article>
 
 			<?php endwhile; ?>

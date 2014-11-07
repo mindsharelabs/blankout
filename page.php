@@ -38,7 +38,7 @@
 						);
 						?>
 						<?php if(function_exists('mapi_edit_link')) {
-							mapi_edit_link();
+							echo mapi_edit_link();
 						} ?>
 					</footer>
 				</article>

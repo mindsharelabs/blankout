@@ -9,32 +9,29 @@
 
 .navbar {
 	position:relative;
-	z-index:@zindex-navbar;
 	min-height:@navbar-height; // Ensure a navbar always shows (e.g., without a .navbar-brand in collapsed mode)
 	margin-bottom:@navbar-margin-bottom;
 	border:1px solid transparent;
 
 	// Prevent floats from breaking the navbar
-	.clearfix();
+	&:extend(.clearfix all);
 
 	@media (min-width:@grid-float-breakpoint) {
 		border-radius:@navbar-border-radius;
 	}
 }
-
 // Navbar heading
 //
 // Groups `.navbar-brand` and `.navbar-toggle` into a single component for easy
 // styling of responsive aspects.
 
 .navbar-header {
-	.clearfix();
+	&:extend(.clearfix all);
 
 	@media (min-width:@grid-float-breakpoint) {
 		float:left;
 	}
 }
-
 // Navbar collapse (body)
 //
 // Group your navbar content into this for easy collapsing and expanding across
@@ -46,13 +43,12 @@
 // content for the user's viewport.
 
 .navbar-collapse {
-	max-height:340px;
 	overflow-x:visible;
 	padding-right:@navbar-padding-horizontal;
 	padding-left:@navbar-padding-horizontal;
 	border-top:1px solid transparent;
 	box-shadow:inset 0 1px 0 rgba(255, 255, 255, .1);
-	.clearfix();
+	&:extend(.clearfix all);
 	-webkit-overflow-scrolling:touch;
 
 	&.in {
@@ -66,64 +62,73 @@
 
 		&.collapse {
 			display:block !important;
+			visibility:visible !important;
 			height:auto !important;
 			padding-bottom:0; // Override default setting
 			overflow:visible !important;
 		}
-
 		&.in {
 			overflow-y:visible;
 		}
-
-		// Account for first and last children spacing
-		.navbar-nav.navbar-left:first-child {
-			margin-left:-@navbar-padding-horizontal;
-		}
-		.navbar-nav.navbar-right:last-child {
-			margin-right:-@navbar-padding-horizontal;
-		}
-		.navbar-text:last-child {
-			margin-right:0;
+		// Undo the collapse side padding for navbars with containers to ensure
+		// alignment of right-aligned contents.
+		.navbar-fixed-top &,
+		.navbar-static-top &,
+		.navbar-fixed-bottom & {
+			padding-left:0;
+			padding-right:0;
 		}
 	}
 }
+.navbar-fixed-top,
+.navbar-fixed-bottom {
+	.navbar-collapse {
+		max-height:@navbar-collapse-max-height;
 
+		@media (max-device-width:@screen-xs-min) and (orientation:landscape) {
+			max-height:200px;
+		}
+	}
+}
 // Both navbar header and collapse
 //
 // When a container is present, change the behavior of the header and collapse.
 
-.container > .navbar-header,
-.container > .navbar-collapse {
-	margin-right:-@navbar-padding-horizontal;
-	margin-left:-@navbar-padding-horizontal;
+.container,
+.container-fluid {
+	> .navbar-header,
+	> .navbar-collapse {
+		margin-right:-@navbar-padding-horizontal;
+		margin-left:-@navbar-padding-horizontal;
 
-	@media (min-width:@grid-float-breakpoint) {
-		margin-right:0;
-		margin-left:0;
+		@media (min-width:@grid-float-breakpoint) {
+			margin-right:0;
+			margin-left:0;
+		}
 	}
 }
-
 //
 // Navbar alignment options
 //
-// Display the navbar across the entirity of the page or fixed it to the top or
+// Display the navbar across the entirety of the page or fixed it to the top or
 // bottom of the page.
 
 // Static top (unfixed, but 100% wide) navbar
 .navbar-static-top {
+	z-index:@zindex-navbar;
 	border-width:0 0 1px;
+
 	@media (min-width:@grid-float-breakpoint) {
 		border-radius:0;
 	}
 }
-
 // Fix the top/bottom navbars when screen real estate supports it
 .navbar-fixed-top,
 .navbar-fixed-bottom {
 	position:fixed;
 	right:0;
 	left:0;
-	border-width:0 0 1px;
+	z-index:@zindex-navbar-fixed;
 
 	// Undo the rounded corners
 	@media (min-width:@grid-float-breakpoint) {
@@ -131,14 +136,14 @@
 	}
 }
 .navbar-fixed-top {
-	z-index:@zindex-navbar-fixed;
 	top:0;
+	border-width:0 0 1px;
 }
 .navbar-fixed-bottom {
 	bottom:0;
 	margin-bottom:0; // override .navbar defaults
+	border-width:1px 0 0;
 }
-
 // Brand/project name
 
 .navbar-brand {
@@ -146,18 +151,24 @@
 	padding:@navbar-padding-vertical @navbar-padding-horizontal;
 	font-size:@font-size-large;
 	line-height:@line-height-computed;
+	height:@navbar-height;
+
 	&:hover,
 	&:focus {
 		text-decoration:none;
 	}
 
+	> img {
+		display:block;
+	}
+
 	@media (min-width:@grid-float-breakpoint) {
-		.navbar > .container & {
+		.navbar > .container &,
+		.navbar > .container-fluid & {
 			margin-left:-@navbar-padding-horizontal;
 		}
 	}
 }
-
 // Navbar toggle
 //
 // Custom button for toggling the `.navbar-collapse`, powered by the collapse
@@ -170,8 +181,15 @@
 	padding:9px 10px;
 	.navbar-vertical-align(34px);
 	background-color:transparent;
+	background-image:none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
 	border:1px solid transparent;
 	border-radius:@border-radius-base;
+
+	// We remove the `outline` here, but later compensate by attaching `:hover`
+	// styles to `:focus`.
+	&:focus {
+		outline:0;
+	}
 
 	// Bars
 	.icon-bar {
@@ -188,10 +206,9 @@
 		display:none;
 	}
 }
-
 // Navbar nav links
 //
-// Builds on top of the `.nav` components with it's own modifier class to make
+// Builds on top of the `.nav` components with its own modifier class to make
 // the nav the full height of the horizontal nav (above 768px).
 
 .navbar-nav {
@@ -203,7 +220,7 @@
 		line-height:@line-height-computed;
 	}
 
-	@media (max-width:@screen-xs-max) {
+	@media (max-width:@grid-float-breakpoint-max) {
 		// Dropdowns get custom display when collapsed
 		.open .dropdown-menu {
 			position:static;
@@ -235,29 +252,12 @@
 		> li {
 			float:left;
 			> a {
-				padding-top:((@navbar-height - @line-height-computed) / 2);
-				padding-bottom:((@navbar-height - @line-height-computed) / 2);
+				padding-top:@navbar-padding-vertical;
+				padding-bottom:@navbar-padding-vertical;
 			}
 		}
 	}
-
 }
-
-// Component alignment
-//
-// Repurpose the pull utilities as their own navbar utilities to avoid specifity
-// issues with parents and chaining. Only do this when the navbar is uncollapsed
-// though so that navbar contents properly stack and align in mobile.
-
-@media (min-width:@grid-float-breakpoint) {
-	.navbar-left {
-		.pull-left();
-	}
-	.navbar-right {
-		.pull-right();
-	}
-}
-
 // Navbar form
 //
 // Extension of the `.form-inline` with some extra flavor for optimum display in
@@ -276,8 +276,12 @@
 	.form-inline();
 
 	.form-group {
-		@media (max-width:@screen-xs-max) {
+		@media (max-width:@grid-float-breakpoint-max) {
 			margin-bottom:5px;
+
+			&:last-child {
+				margin-bottom:0;
+			}
 		}
 	}
 
@@ -295,7 +299,6 @@
 		.box-shadow(none);
 	}
 }
-
 // Dropdown menus
 
 // Menu position and menu carets
@@ -307,36 +310,54 @@
 .navbar-fixed-bottom .navbar-nav > li > .dropdown-menu {
 	.border-bottom-radius(0);
 }
-
-// Right aligned menus need alt position
-.navbar-nav.pull-right > li > .dropdown-menu,
-.navbar-nav > li > .dropdown-menu.pull-right {
-	left:auto;
-	right:0;
-}
-
 // Buttons in navbars
 //
 // Vertically center a button within a navbar (when *not* in a form).
 
 .navbar-btn {
 	.navbar-vertical-align(@input-height-base);
-}
 
+	&.btn-sm {
+		.navbar-vertical-align(@input-height-small);
+	}
+	&.btn-xs {
+		.navbar-vertical-align(22);
+	}
+}
 // Text in navbars
 //
 // Add a class to make any element properly align itself vertically within the navbars.
 
 .navbar-text {
-	float:left;
 	.navbar-vertical-align(@line-height-computed);
 
 	@media (min-width:@grid-float-breakpoint) {
+		float:left;
 		margin-left:@navbar-padding-horizontal;
 		margin-right:@navbar-padding-horizontal;
 	}
 }
+// Component alignment
+//
+// Repurpose the pull utilities as their own navbar utilities to avoid specificity
+// issues with parents and chaining. Only do this when the navbar is uncollapsed
+// though so that navbar contents properly stack and align in mobile.
+//
+// Declared after the navbar components to ensure more specificity on the margins.
 
+@media (min-width:@grid-float-breakpoint) {
+	.navbar-left {
+		.pull-left();
+	}
+	.navbar-right {
+		.pull-right();
+		margin-right:-@navbar-padding-horizontal;
+
+		~ .navbar-right {
+			margin-right:0;
+		}
+	}
+}
 // Alternate navbars
 // --------------------------------------------------
 
@@ -399,18 +420,11 @@
 
 	.navbar-collapse,
 	.navbar-form {
-		border-color:darken(@navbar-default-bg, 7%);
+		border-color:@navbar-default-border;
 	}
 
-	// Dropdown menu items and carets
+	// Dropdown menu items
 	.navbar-nav {
-		// Caret should match text color on hover
-		> .dropdown > a:hover .caret,
-		> .dropdown > a:focus .caret {
-			border-top-color:@navbar-default-link-hover-color;
-			border-bottom-color:@navbar-default-link-hover-color;
-		}
-
 		// Remove background color from open dropdown
 		> .open > a {
 			&,
@@ -418,18 +432,10 @@
 			&:focus {
 				background-color:@navbar-default-link-active-bg;
 				color:@navbar-default-link-active-color;
-				.caret {
-					border-top-color:@navbar-default-link-active-color;
-					border-bottom-color:@navbar-default-link-active-color;
-				}
 			}
 		}
-		> .dropdown > a .caret {
-			border-top-color:@navbar-default-link-color;
-			border-bottom-color:@navbar-default-link-color;
-		}
 
-		@media (max-width:@screen-xs-max) {
+		@media (max-width:@grid-float-breakpoint-max) {
 			// Dropdowns get custom display when collapsed
 			.open .dropdown-menu {
 				> li > a {
@@ -471,8 +477,21 @@
 		}
 	}
 
+	.btn-link {
+		color:@navbar-default-link-color;
+		&:hover,
+		&:focus {
+			color:@navbar-default-link-hover-color;
+		}
+		&[disabled],
+		fieldset[disabled] & {
+			&:hover,
+			&:focus {
+				color:@navbar-default-link-disabled-color;
+			}
+		}
+	}
 }
-
 // Inverse navbar
 
 .navbar-inverse {
@@ -547,30 +566,15 @@
 				color:@navbar-inverse-link-active-color;
 			}
 		}
-		> .dropdown > a:hover .caret {
-			border-top-color:@navbar-inverse-link-hover-color;
-			border-bottom-color:@navbar-inverse-link-hover-color;
-		}
-		> .dropdown > a .caret {
-			border-top-color:@navbar-inverse-link-color;
-			border-bottom-color:@navbar-inverse-link-color;
-		}
-		> .open > a {
-			&,
-			&:hover,
-			&:focus {
-				.caret {
-					border-top-color:@navbar-inverse-link-active-color;
-					border-bottom-color:@navbar-inverse-link-active-color;
-				}
-			}
-		}
 
-		@media (max-width:@screen-xs-max) {
+		@media (max-width:@grid-float-breakpoint-max) {
 			// Dropdowns get custom display
 			.open .dropdown-menu {
 				> .dropdown-header {
 					border-color:@navbar-inverse-border;
+				}
+				.divider {
+					background-color:@navbar-inverse-border;
 				}
 				> li > a {
 					color:@navbar-inverse-link-color;
@@ -607,4 +611,18 @@
 		}
 	}
 
+	.btn-link {
+		color:@navbar-inverse-link-color;
+		&:hover,
+		&:focus {
+			color:@navbar-inverse-link-hover-color;
+		}
+		&[disabled],
+		fieldset[disabled] & {
+			&:hover,
+			&:focus {
+				color:@navbar-inverse-link-disabled-color;
+			}
+		}
+	}
 }
