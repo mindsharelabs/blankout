@@ -12,6 +12,10 @@ Built using:
 
 ## Changelog
 
+### v3.6
+* Updated to Bootstrap 3.3.0
+* Various minor improvements
+
 ### v3.5
 * new CSS/LESS structure, now compiles to style.css instead of boostrap.css
 * Remove focus highlight from form fields

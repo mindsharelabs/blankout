@@ -42,7 +42,7 @@ if(!empty($_SERVER['SCRIPT_FILENAME']) && 'comments.php' == basename($_SERVER['S
 			</ul>
 		</nav>
 
-	<?php else : // this is displayed if there are no comments so far ?>
+	<?php else : // this is displayed if there are no comments so far {{?>
 
 		<?php if(comments_open()) : ?>
 
@@ -53,9 +53,9 @@ if(!empty($_SERVER['SCRIPT_FILENAME']) && 'comments.php' == basename($_SERVER['S
 			<!-- If comments are closed. -->
 			<div class="alert alert-warning"><?php _e("Comments are closed.", 'blankout'); ?></div>
 
-		<?php endif; ?>
+			<?php endif; ?>
 
-	<?php endif; ?>
+		<?php endif; ?>
 
 
 	<?php if(comments_open()) : ?>
@@ -127,6 +127,7 @@ if(!empty($_SERVER['SCRIPT_FILENAME']) && 'comments.php' == basename($_SERVER['S
 					<?php comment_id_fields(); ?>
 
 					<?php do_action('comment_form', get_the_ID()); ?>
+					<?php //comment_form(); ?>
 				</form>
 
 			<?php endif; // If registration required and not logged in ?>

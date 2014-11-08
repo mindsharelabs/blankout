@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Contains methods for customizing the theme customization screen.
  *
@@ -25,30 +26,31 @@ class Blankout_Customize {
 		//1. Define a new section (if desired) to the Theme Customizer
 		$wp_customize->add_section('blankout_options',
 			array(
-				 'title'       => __('Blankout Options', 'blankout'), //Visible title of section
-				 'priority'    => 1, //Determines what order this appears in
-				 'description' => __('Allows you to customize some example settings for Blankout.', 'blankout'), //Descriptive tooltip
+				'title'       => __('Blankout Options', 'blankout'), //Visible title of section
+				'priority'    => 1, //Determines what order this appears in
+				'description' => __('Allows you to customize some example settings for Blankout.', 'blankout'), //Descriptive tooltip
 			)
 		);
 
 		//2. Register new settings to the WP database...
 		$wp_customize->add_setting('link_textcolor',
 			array(
-				 'default'   => '#428BCA', //Default setting/value to save
-				 'transport' => 'postMessage', //What triggers a refresh of the setting? 'refresh' or 'postMessage' (instant)?
+				'default'   => '#428BCA', //Default setting/value to save
+				'transport' => 'postMessage', //What triggers a refresh of the setting? 'refresh' or 'postMessage' (instant)?
 			)
 		);
 		$wp_customize->add_setting('navbar_background',
 			array(
-				 'default'   => '#EEE', //Default setting/value to save
-				 'transport' => 'postMessage', //What triggers a refresh of the setting? 'refresh' or 'postMessage' (instant)?
+				'default'   => '#EEE', //Default setting/value to save
+				'transport' => 'postMessage', //What triggers a refresh of the setting? 'refresh' or 'postMessage' (instant)?
 			)
 		);
 
-		$wp_customize->add_setting('menu_title', //Give it a SERIALIZED name (so all theme settings can live under one db record)
+		//Give it a SERIALIZED name (so all theme settings can live under one db record)
+		$wp_customize->add_setting('menu_title',
 			array(
-				 'default'    => 'true', //Default setting/value to save
-				 'capability' => 'edit_theme_options' //Optional. Special permissions for accessing this setting.
+				'default'    => 'true', //Default setting/value to save
+				'capability' => 'edit_theme_options' //Optional. Special permissions for accessing this setting.
 			)
 		);
 
@@ -58,10 +60,10 @@ class Blankout_Customize {
 				$wp_customize, //Pass the $wp_customize object (required)
 				'blankout_link_textcolor', //Set a unique ID for the control
 				array(
-					 'label'    => __('Body Link Color', 'blankout'), //Admin-visible name of the control
-					 'section'  => 'colors', //ID of the section this control should render in (can be one of yours, or a WordPress default section)
-					 'settings' => 'link_textcolor', //Which setting to load and manipulate (serialized is okay)
-					 'priority' => 11, //Determines the order this control appears in for the specified section
+					'label'    => __('Body Link Color', 'blankout'), //Admin-visible name of the control
+					'section'  => 'colors', //ID of the section this control should render in (can be one of yours, or a WordPress default section)
+					'settings' => 'link_textcolor', //Which setting to load and manipulate (serialized is okay)
+					'priority' => 11, //Determines the order this control appears in for the specified section
 				)
 			)
 		);
@@ -71,10 +73,10 @@ class Blankout_Customize {
 				$wp_customize,
 				'blankout_navbar_background', //Set a unique ID for the control
 				array(
-					 'label'    => __('Navbar Background', 'blankout'), //Admin-visible name of the control
-					 'section'  => 'colors', //ID of the section this control should render in (can be one of yours, or a WordPress default section)
-					 'settings' => 'navbar_background', //Which setting to load and manipulate (serialized is okay)
-					 'priority' => 10, //Determines the order this control appears in for the specified section
+					'label'    => __('Navbar Background', 'blankout'), //Admin-visible name of the control
+					'section'  => 'colors', //ID of the section this control should render in (can be one of yours, or a WordPress default section)
+					'settings' => 'navbar_background', //Which setting to load and manipulate (serialized is okay)
+					'priority' => 10, //Determines the order this control appears in for the specified section
 				)
 			)
 		);
@@ -82,10 +84,10 @@ class Blankout_Customize {
 		$wp_customize->add_control(
 			'show_menu_title',
 			array(
-				 'settings' => 'menu_title',
-				 'label'    => __('Show title in nav bar', 'blankout'),
-				 'section'  => 'blankout_options',
-				 'type'     => 'checkbox',
+				'settings' => 'menu_title',
+				'label'    => __('Show title in nav bar', 'blankout'),
+				'section'  => 'blankout_options',
+				'type'     => 'checkbox',
 			)
 		);
 
@@ -170,6 +172,7 @@ class Blankout_Customize {
 				echo $return;
 			}
 		}
+
 		return $return;
 	}
 }

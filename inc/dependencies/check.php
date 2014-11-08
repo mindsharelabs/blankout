@@ -34,7 +34,7 @@ function blankout_register_required_plugins() {
 			'required'           => TRUE, // If false, the plugin is only 'recommended' instead of required.
 			'force_activation'   => FALSE, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch.
 			'force_deactivation' => FALSE, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins.
-			'external_url'       => 'http://mindsharelabs.com/downloads/mindshare-theme-api/', // If set, overrides default API URL and points to an external URL.
+			'external_url'       => 'https://mindsharelabs.com/downloads/mindshare-theme-api/', // If set, overrides default API URL and points to an external URL.
 		),
 		// This is an example of how to include a plugin from the WordPress Plugin Repository.
 		/*array(

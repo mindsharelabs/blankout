@@ -8,30 +8,24 @@ module.exports = function(grunt) {
 
 		less: {
 			development: {
-				files:   {
+				files:      {
 					"style.css": "less/style.less"
-				},
-				options: {
-					sourceMap:         true,
-					compress:          true,
-					cleancss:          true,
-					sourceMapFilename: "style.css.map"
+				}, options: {
+					sourceMap: true, compress: true, cleancss: true, sourceMapFilename: "style.css.map"
 				}
 			}
 		},
 
 		watch: {
 			configFiles: {
-				files:   ['GRUNTFILE.js'],
-				//tasks: ['newer:jshint:all'],
+				files:   ['GRUNTFILE.js'], //tasks: ['newer:jshint:all'],
 				options: {
 					reload: true
 				}
 			},
 
 			less: {
-				files: ['less/*.less'],
-				tasks: ['less']
+				files: ['less/*.less'], tasks: ['less']
 			}
 
 		}

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Blankout Theme WordPress Functions File
  *
@@ -115,38 +116,43 @@ if(!is_nav_menu('footer-nav')) {
 	wp_create_nav_menu('Footer Navigation', array('slug' => 'footer-nav'));
 }
 
-register_sidebar(
-	array(
-		'name'          => __('Main Sidebar', 'blankout'),
-		'id'            => 'main-sidebar',
-		'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</div>',
-		'before_title'  => '<h4 class="widgettitle">',
-		'after_title'   => '</h4>',
-	)
-);
+function blankout_widgets_init() {
 
-register_sidebar(
-	array(
-		'name'          => __('Blog Sidebar', 'blankout'),
-		'id'            => 'blog-sidebar',
-		'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</div>',
-		'before_title'  => '<h4 class="widgettitle">',
-		'after_title'   => '</h4>',
-	)
-);
+	register_sidebar(
+		array(
+			'name'          => __('Main Sidebar', 'blankout'),
+			'id'            => 'main-sidebar',
+			'before_widget' => '<div id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<h4 class="widgettitle">',
+			'after_title'   => '</h4>',
+		)
+	);
 
-register_sidebar(
-	array(
-		'name'          => __('Footer Widgets', 'blankout'),
-		'id'            => 'footer-widgets',
-		'before_widget' => '<div id="%1$s" class="widget col-lg-4 %2$s">',
-		'after_widget'  => '</div>',
-		'before_title'  => '<h4 class="widgettitle">',
-		'after_title'   => '</h4>',
-	)
-);
+	register_sidebar(
+		array(
+			'name'          => __('Blog Sidebar', 'blankout'),
+			'id'            => 'blog-sidebar',
+			'before_widget' => '<div id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<h4 class="widgettitle">',
+			'after_title'   => '</h4>',
+		)
+	);
+
+	register_sidebar(
+		array(
+			'name'          => __('Footer Widgets', 'blankout'),
+			'id'            => 'footer-widgets',
+			'before_widget' => '<div id="%1$s" class="widget col-lg-4 %2$s">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<h4 class="widgettitle">',
+			'after_title'   => '</h4>',
+		)
+	);
+}
+
+add_action('widgets_init', 'blankout_widgets_init');
 
 /**
  * Customizing sidebar widgets
@@ -158,6 +164,7 @@ register_sidebar(
 function blankout_add_cat_count($links) {
 	$links = str_replace('</a> (', '</a> <span class="badge">', $links);
 	$links = str_replace(')', '</span>', $links);
+
 	return $links;
 }
 
@@ -170,14 +177,20 @@ add_filter('wp_list_categories', 'blankout_add_cat_count');
 function blankout_configure_mapi() {
 	if(function_exists('mapi_update_option')) {
 		mapi_update_option('load_bootstrap', TRUE);
+		add_action('wp_enqueue_scripts', 'mapi_load_bootstrap');
+
 		mapi_update_option('load_font_awesome', TRUE);
+		add_action('wp_enqueue_scripts', 'mapi_load_font_awesome');
+
 		mapi_update_option('load_modernizr_js', TRUE);
+		add_action('wp_enqueue_scripts', 'mapi_load_modernizr');
+
 		// let's not load Bootstrap CSS twice in the Mindshare Theme API
 		mapi_update_option('load_bootstrap_css', FALSE);
 	}
 }
 
-add_action('admin_init', 'blankout_configure_mapi');
+add_action('wp_loaded', 'blankout_configure_mapi');
 
 /**
  * Load frontend CSS/JS
@@ -185,6 +198,10 @@ add_action('admin_init', 'blankout_configure_mapi');
  */
 function blankout_scripts_and_styles() {
 	if(!is_admin()) {
+
+		if(is_singular() && comments_open()) {
+			wp_enqueue_script('comment-reply');
+		}
 
 		wp_register_script('blankout-js', get_stylesheet_directory_uri().'/js/main.js', array('jquery'));
 		wp_enqueue_script('blankout-js');
@@ -206,6 +223,7 @@ function blankout_add_active_class($classes, $item) {
 	if($item->menu_item_parent == 0 && in_array('current-menu-item', $classes)) {
 		$classes[] = "active";
 	}
+
 	return $classes;
 }
 
@@ -481,9 +499,8 @@ function blankout_copyright() {
  *
  */
 function blankout_footer_credit() {
-	$cc = 'V2Vic2l0ZSBkZXNpZ24sIGRldmVsb3BtZW50LCBhbmQgU0VPIGJ5IE1pbmRzaGFyZSBTdHVkaW9zLCBJbmM=';
-	$host = parse_url(get_bloginfo('url'));
-	$c = '<p id="credit" class="source-org copyright pull-right"><a class="no-icon" href="http://mind.sh/are/?ref='.$host['host'].'" target="_blank" title="'.base64_decode($cc).'"><img src="'.get_stylesheet_directory_uri().'/img/credit.png" alt="'.base64_decode($cc).'" /></a></p>';
+	$host = parse_url(esc_url(home_url()));
+	$c = '<p id="credit" class="source-org copyright pull-right"><a class="no-icon tip" href="http://mind.sh/are/?ref='.$host['host'].'" target="_blank" title="Web design, development + SEO by Mindshare Studios"><img src="'.get_stylesheet_directory_uri().'/img/credit.png" alt="Web design, development + SEO by Mindshare Studios" /></a></p>';
 	if(function_exists('mapi_get_option')) {
 		if(mapi_get_option('show_credit') == TRUE || (array_key_exists('credit', $_GET) && $_GET['credit'] == 1)) {
 			echo $c;
