@@ -1,0 +1,163 @@
+.gform_wrapper {
+
+	ul {
+		.list-unstyled();
+	}
+
+	li {
+		.form-group();
+	}
+
+	form {
+		margin-bottom:0;
+	}
+
+	.gfield_required {
+		padding-left:1px;
+		color:@state-danger-text;
+	}
+
+	.ginput_container input,
+	.ginput_container select,
+	.ginput_container textarea {
+		.form-control();
+	}
+
+	.ginput_container textarea {
+		height:auto;
+	}
+
+	.gform_button {
+		.btn();
+		.btn-primary();
+	}
+
+	.gfield_error {
+
+		.gfield_label {
+			color:@state-danger-text;
+		}
+
+		input,
+		select,
+		textarea {
+			border-color:@alert-danger-border;
+			background-color:@alert-danger-bg;
+			color:@alert-danger-text;
+
+			.form-control-focus(@alert-danger-text);
+		}
+	}
+
+	.validation_error {
+		.alert();
+		.alert-danger();
+	}
+
+	#gforms_confirmation_message {
+		.alert();
+		.alert-success();
+	}
+
+	input, select {
+
+		&.medium {
+			width:47%;
+		}
+
+		&.small {
+			width:25%;
+		}
+
+	}
+
+	textarea {
+
+		&.large {
+			height:250px;
+		}
+
+		&.medium {
+			height:150px;
+		}
+
+		&.small {
+			height:80px;
+		}
+
+	}
+
+	select[multiple] {
+		height:auto;
+	}
+
+	input[type='checkbox'], input[type='radio'] {
+		width:auto;
+		height:15px;
+		display:inline-block;
+		margin:0px;
+
+		&:focus {
+			border:none;
+			box-shadow:none;
+		}
+
+	}
+
+	input.datepicker {
+		width:100px;
+	}
+
+	.gfield_time_hour, .gfield_time_minute, .gfield_date_month, .gfield_date_day, .gfield_date_year {
+		width:70px;
+		display:inline-block;
+
+		input {
+			width:70%;
+		}
+
+		label {
+			font-size:11px;
+		}
+
+	}
+
+	.gfield_time_ampm {
+		vertical-align:top;
+		display:inline-block;
+
+		select {
+			width:60px;
+		}
+	}
+
+	.gfield_checkbox label, .gfield_radio label {
+		font-weight:normal;
+		padding-left:8px;
+		margin:0;
+	}
+
+	.ginput_complex {
+
+		.ginput_left {
+			width:50%;
+			float:left;
+		}
+
+		.ginput_right {
+			width:50%;
+			float:right;
+			padding-left:8px;
+		}
+
+		span {
+			display:block;
+		}
+
+		label {
+			font-size:11px;
+		}
+
+	}
+
+}
