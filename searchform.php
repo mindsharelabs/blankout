@@ -9,11 +9,16 @@
 	<span class="input-group-btn">
 		<button type="submit" id="searchsubmit" class="btn btn-default">Go</button>
 	</span>
-	<!--<input type="hidden" id="searchsubmit" />-->
+	<?php // no submit button version <input type="hidden" id="searchsubmit" /> ?>
 </form>
-<!--<form class="form-search" action="/" method="get">
+
+<?php // alternate version
+/*
+<form class="form-search" action="/" method="get">
 <div class="input-append">
 	<input type="text" name="s" class="span7 search-query">
 	<button type="submit" class="btn">Search</button>
 </div>
-</form>-->
+</form>
+*/
+?>

@@ -1,12 +1,4 @@
-/*
- Blankout Scripts File
-
- This file should contain any js scripts you want to add to the site.
- Instead of calling it in the header or throwing it inside wp_head()
- this file will be called automatically in the footer so as not to
- slow the page load.
-
- */
+document.write("<style>body{display:none;}</style>");
 
 jQuery.noConflict();
 jQuery(document).ready(function($) {
@@ -26,6 +18,22 @@ jQuery(document).ready(function($) {
 	$('.alignleft').addClass('text-left');
 	$('.alignright').addClass('text-right');
 	$('.aligncenter').addClass('text-center');
+
+	// here for each comment reply link of wordpress
+	$('.comment-reply-link').addClass('btn btn-primary');
+
+	// here for the submit button of the comment reply form
+	$('#commentsubmit').addClass('btn btn-primary');
+
+	// the search widget
+	$('input.search-field, .textwidget select, .widget_archive select').addClass('form-control');
+
+	$('.post-template-sticky .sticky').addClass('jumbotron');
+	$('.widget_rss ul').addClass('media-list');
+	$('.widget_rss li').addClass('media');
+	$('.widget_rss li a.rsswidget').addClass('media-heading');
+
+	$('table#wp-calendar').addClass('table table-striped');
 
 	// Gravity Forms stuff
 	$(".gform_wrapper .disable input").attr('disabled', 'disabled');
@@ -77,24 +85,24 @@ jQuery(document).ready(function($) {
 
 			// Setup the slider control
 			slider = $(".flexslider").flexslider({
-					animation:      "fade",
-					easing:         "swing",
-					slideshowSpeed: 6500,
-					animationSpeed: 900,
-					pauseOnHover:   true,
-					pauseOnAction:  true,
-					touch:          true,
-					video:          true,
-					controlNav:     true,
-					animationLoop:  true,
-					slideshow:      true,
-					useCSS:         false, // Before you go to change slides, make sure you can!
-					before:         function() {
-						if(!canSlide) {
-							slider.flexslider("stop");
-						}
+				animation:      "fade",
+				easing:         "swing",
+				slideshowSpeed: 6500,
+				animationSpeed: 900,
+				pauseOnHover:   true,
+				pauseOnAction:  true,
+				touch:          true,
+				video:          true,
+				controlNav:     true,
+				animationLoop:  true,
+				slideshow:      true,
+				useCSS:         false, // Before you go to change slides, make sure you can!
+				before:         function() {
+					if(!canSlide) {
+						slider.flexslider("stop");
 					}
-				});
+				}
+			});
 
 			if($.isFunction($.fn.fitVids)) {
 				$(".flexslider").fitVids;
@@ -149,5 +157,7 @@ jQuery(document).ready(function($) {
 	if(viewport > 1030) {
 
 	}
+
+	$(document.body).show();
 
 });

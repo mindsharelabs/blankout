@@ -2,7 +2,7 @@
 /**
  * Use this form for category specific searches
  */
-$placeholder = esc_attr__('Search', 'blankout').mapi_single_cat_title();
+$placeholder = esc_attr__('Search', 'blankout').' '.mapi_single_cat_title();
 $cat = '';
 // 1st check for categories sent in from mapi_cat_search_form
 if(!empty($cat_str)) {
@@ -27,5 +27,4 @@ if(!empty($cat_str)) {
 	<span class="input-group-btn">
 		<button type="submit" id="searchsubmit" class="btn btn-default">Go</button>
 	</span>
-	<!--<input type="hidden" id="searchsubmit" />-->
 </form>

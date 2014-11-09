@@ -37,11 +37,7 @@ function blankout_register_required_plugins() {
 			'external_url'       => 'https://mindsharelabs.com/downloads/mindshare-theme-api/', // If set, overrides default API URL and points to an external URL.
 		),
 		// This is an example of how to include a plugin from the WordPress Plugin Repository.
-		/*array(
-			'name'     => 'Simple History',
-			'slug'     => 'simple-history',
-			'required' => FALSE,
-		),*/
+
 		/*array(
 			'name'     => 'Plugin Central',
 			'slug'     => 'plugin-central',

@@ -14,8 +14,9 @@
 
 			<?php if(is_category()) : ?>
 				<h1 class="archive-title h2">
-					<span><?php _e("Posts Categorized:", 'blankout'); ?></span> <?php echo mapi_single_cat_title(); ?>
+					<?php printf(__('Category Archives: %s', 'blankout'), single_cat_title('', FALSE)); ?>
 				</h1>
+
 				<?php
 				$category_description = category_description();
 				if(!empty($category_description)) {

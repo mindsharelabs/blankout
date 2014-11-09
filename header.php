@@ -31,9 +31,11 @@
 	<?php if(function_exists('mapi_is_true') && mapi_is_true(get_option('default_ping_status'))) : ?>
 		<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 	<?php endif; ?>
+	<link href='//fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic|Source+Code+Pro:400,600,700|Oswald:400,700,300' rel='stylesheet' type='text/css' />
 
 	<?php wp_head(); ?>
-	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,700,600,800,300" rel="stylesheet" type="text/css" />
+
+
 	<?php blankout_enable_nav_hover(); ?>
 </head>
 <body <?php body_class(); ?>>

@@ -19,16 +19,13 @@
 						</small>
 					</header>
 					<section class="entry-content clearfix" itemprop="articleBody">
+
 						<?php the_content(); ?>
 					</section>
 					<footer class="article-footer">
 						<?php
 						wp_link_pages(
 							array(
-								'before'           => '<ul class="pagination">'.__('Pages:', 'blankout'),
-								'after'            => '</div>',
-								'link_before'      => '<li>',
-								'link_after'       => '</li>',
 								'next_or_number'   => 'number',
 								'nextpagelink'     => __('Next page', 'blankout'),
 								'previouspagelink' => __('Previous page', 'blankout'),

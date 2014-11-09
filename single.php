@@ -18,14 +18,29 @@
 					</section>
 					<footer class="article-footer">
 						<?php the_taxonomies('before=<p class="tags">&after=</p>&template=%s: %l'); ?>
+						<?php
+						wp_link_pages(
+							array(
+								'next_or_number'   => 'number',
+								'nextpagelink'     => __('Next page', 'blankout'),
+								'previouspagelink' => __('Previous page', 'blankout'),
+								'pagelink'         => '%',
+								'echo'             => 1
+							)
+						);
+						?>
 						<?php if(function_exists('mapi_edit_link')) {
 							echo mapi_edit_link();
 						} ?>
 					</footer>
 
-					<?php if(comments_open()) {
+					<?php
+
+					// If comments are open or we have at least one comment, load up the comment template.
+					if(comments_open() || get_comments_number()) {
 						comments_template();
-					} ?>
+					}
+					?>
 				</article>
 
 			<?php endwhile; ?>

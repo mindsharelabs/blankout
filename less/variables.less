@@ -44,42 +44,33 @@
 //
 //## Font, line-height, and color for body text, headings, and more.
 
-@font-family-sans-serif:"Helvetica Neue", Helvetica, Arial, sans-serif;
+@font-family-sans-serif:Arimo, "Helvetica Neue", Helvetica, Arial, sans-serif;
 @font-family-serif:Georgia, "Times New Roman", Times, serif;
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
-@font-family-monospace:Menlo, Monaco, Consolas, "Courier New", monospace;
+@font-family-monospace:'Source Code Pro', Menlo, Monaco, Consolas, "Courier New", monospace;
 @font-family-base:@font-family-sans-serif;
 
 @font-size-base:14px;
-@font-size-large:ceil((@font-size-base * 1.25));
-// ~18px
-@font-size-small:ceil((@font-size-base * 0.85));
-// ~12px
+@font-size-large:ceil((@font-size-base * 1.25)); // ~18px
+@font-size-small:ceil((@font-size-base * 0.85)); // ~12px
 
-@font-size-h1:floor((@font-size-base * 2.6));
-// ~36px
-@font-size-h2:floor((@font-size-base * 2.15));
-// ~30px
-@font-size-h3:ceil((@font-size-base * 1.7));
-// ~24px
-@font-size-h4:ceil((@font-size-base * 1.25));
-// ~18px
+@font-size-h1:floor((@font-size-base * 2.6)); // ~36px
+@font-size-h2:floor((@font-size-base * 2.15)); // ~30px
+@font-size-h3:ceil((@font-size-base * 1.7)); // ~24px
+@font-size-h4:ceil((@font-size-base * 1.25)); // ~18px
 @font-size-h5:@font-size-base;
-@font-size-h6:ceil((@font-size-base * 0.85));
-// ~12px
+@font-size-h6:ceil((@font-size-base * 0.85)); // ~12px
 
 //** Unit-less `line-height` for use in components like buttons.
-@line-height-base:1.428571429;
-// 20/14
+@line-height-base:1.428571429; // 20/14
 //** Computed "line-height" (`font-size` * `line-height`) for use with `margin`, `padding`, etc.
-@line-height-computed:floor((@font-size-base * @line-height-base));
-// ~20px
+@line-height-computed:floor((@font-size-base * @line-height-base)); // ~20px
 
 //** By default, this inherits from the `<body>`.
-@headings-font-family:inherit;
+@headings-font-family:Oswald, inherit;
 @headings-font-weight:500;
 @headings-line-height:1.1;
-@headings-color:inherit;
+@headings-color:@brand-primary, inherit;
 
 //== Iconography
 //
@@ -96,7 +87,7 @@
 //
 //## Define common padding and border radius sizes and more. Values based on 14px text and 1.428 line-height (~20px to start).
 
-@padding-base-vertical:6px;
+@padding-base-vertical:5px;
 @padding-base-horizontal:12px;
 
 @padding-large-vertical:10px;
@@ -472,7 +463,7 @@
 @jumbotron-padding:30px;
 @jumbotron-color:inherit;
 @jumbotron-bg:@gray-lighter;
-@jumbotron-heading-color:inherit;
+@jumbotron-heading-color:@headings-color;
 @jumbotron-font-size:ceil((@font-size-base * 1.5));
 
 //== Form states and alerts
@@ -823,7 +814,7 @@
 //** Blockquote small color
 @blockquote-small-color:@gray-light;
 //** Blockquote font size
-@blockquote-font-size:(@font-size-base * 1.25);
+@blockquote-font-size:(@font-size-base * 1.1);
 //** Blockquote border color
 @blockquote-border-color:@gray-lighter;
 //** Page header border color
