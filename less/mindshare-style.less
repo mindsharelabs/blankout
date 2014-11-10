@@ -31,6 +31,15 @@ body {
 	top:-1px;
 }
 //
+// Archives
+// --------------------------------------------------
+
+.archive {
+	.mapi-featured-img {
+		.alignleft;
+	}
+}
+//
 // Single post
 // --------------------------------------------------
 
@@ -108,23 +117,6 @@ article {
 
 		}
 
-		.alignleft, img.alignleft {
-			float:left;
-			margin:@padding-base-vertical 20px @padding-base-vertical 0;
-		}
-		.alignright, img.alignright {
-			float:right;
-			margin:@padding-base-vertical 0 6px 20px;
-		}
-		.aligncenter, img.aligncenter {
-			float:none;
-			margin:@padding-base-vertical auto;
-		}
-		.alignnone, img.alignnone {
-			float:none;
-			margin:@padding-base-vertical 0;
-		}
-
 		video, object {
 			max-width:100%;
 			height:auto;
@@ -161,6 +153,22 @@ article {
 }
 /* end single post */
 
+.alignleft, img.alignleft {
+	float:left;
+	margin:@padding-base-vertical 20px @padding-base-vertical 0;
+}
+.alignright, img.alignright {
+	float:right;
+	margin:@padding-base-vertical 0 6px 20px;
+}
+.aligncenter, img.aligncenter {
+	float:none;
+	margin:@padding-base-vertical auto;
+}
+.alignnone, img.alignnone {
+	float:none;
+	margin:@padding-base-vertical 0;
+}
 // Comments
 
 .comments {
@@ -217,13 +225,28 @@ article {
 				.form-control;
 			}
 
-			> ul:not(.children) {
+			> ul {
 				.list-group;
 
 				li {
 					.list-group-item;
 				}
 
+			}
+
+			ul.children {
+				li {
+					padding:0;
+					margin:0 0 0 @padding-base-horizontal*2;
+					border:none;
+
+					.badge {
+						.label;
+						.label-info;
+						float:none;
+					}
+
+				}
 			}
 
 		}
