@@ -22,7 +22,7 @@ define('BOOTSTRAP_DROPDOWN_ON_HOVER', FALSE); // if TRUE, overrides the default 
  * Includes
  */
 //include(get_stylesheet_directory().'/inc/customize.php'); // enable theme customizer for Blankout (Appearance > Themes)
-//include(get_stylesheet_directory().'/inc/custom-post-types.php');
+include(get_stylesheet_directory().'/inc/custom-post-types.php');
 //include(get_stylesheet_directory().'/inc/woocommerce.php'); // enable WooCommerce support
 
 /**
