@@ -9,6 +9,8 @@
 * Contributing author: Tyler Smith (@mbmufffin)
 */
 
+@flex-height:480px;
+
 /* Browser Resets
 *********************************/
 .flex-container a:active,
@@ -70,7 +72,7 @@ html[xmlns] .slides {
 /* FlexSlider Default Theme
 *********************************/
 .flexslider {
-	margin:0 0 50px;
+	margin:0 0 40px;
 	position:relative;
 	zoom:1;
 }
@@ -82,10 +84,12 @@ html[xmlns] .slides {
 	transition:all 1s ease;
 }
 .loading .flex-viewport {
-	max-height:300px;
+	max-height:@flex-height;
 }
 .flexslider .slides {
 	zoom:1;
+	max-height:@flex-height;
+	overflow:hidden;
 }
 .carousel li {
 	margin-right:5px;

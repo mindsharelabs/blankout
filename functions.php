@@ -524,7 +524,7 @@ function _blankout_comment($comment, $args, $depth) {
 
 	if('pingback' == $comment->comment_type || 'trackback' == $comment->comment_type) : ?>
 
-		
+
 		<li id="comment-<?php comment_ID(); ?>" <?php comment_class(empty($args['has_children']) ? '' : 'parent'); ?>>
 		<article id="div-comment-<?php comment_ID(); ?>" class="comment-body media">
 			<a class="pull-left" href="#comment-<?php comment_ID(); ?>">
@@ -536,7 +536,8 @@ function _blankout_comment($comment, $args, $depth) {
 			<div class="media-body">
 				<div class="media-body-wrap panel panel-default">
 					<div class="panel-heading">
-						<h5 class="media-heading"><?php _e('Pingback: ', 'blankout'); comment_author_link() ?></h5>
+						<h5 class="media-heading"><?php _e('Pingback: ', 'blankout');
+							comment_author_link() ?></h5>
 
 						<div class="comment-meta">
 							<a href="<?php echo esc_url(get_comment_link($comment->comment_ID)); ?>">
@@ -572,7 +573,7 @@ function _blankout_comment($comment, $args, $depth) {
 			</div>
 			<!-- .media-body -->
 		</article><!-- .comment-body -->
-		
+
 
 	<?php else : ?>
 
@@ -718,4 +719,56 @@ function blankout_enable_nav_hover() {
 			</style>
 		<?php endif;
 	}
+}
+
+// @todo, pretty sure this isn't working
+add_filter('image_resize_dimensions', 'blankout_align_cropped_images_top', 11, 6);
+function blankout_align_cropped_images_top($payload, $orig_w, $orig_h, $dest_w, $dest_h, $crop) {
+
+	// Change this to a conditional that decides whether you
+	// want to override the defaults for this image or not.
+	if(FALSE) {
+		return $payload;
+	}
+
+	if($crop) {
+		// crop the largest possible portion of the original image that we can size to $dest_w x $dest_h
+		$aspect_ratio = $orig_w / $orig_h;
+		$new_w = min($dest_w, $orig_w);
+		$new_h = min($dest_h, $orig_h);
+
+		if(!$new_w) {
+			$new_w = intval($new_h * $aspect_ratio);
+		}
+
+		if(!$new_h) {
+			$new_h = intval($new_w / $aspect_ratio);
+		}
+
+		$size_ratio = max($new_w / $orig_w, $new_h / $orig_h);
+
+		$crop_w = round($new_w / $size_ratio);
+		$crop_h = round($new_h / $size_ratio);
+
+		$s_x = floor(($orig_w - $crop_w) / 2);
+		$s_y = 0; // [[ formerly ]] ==> floor( ($orig_h - $crop_h) / 2 );
+	} else {
+		// don't crop, just resize using $dest_w x $dest_h as a maximum bounding box
+		$crop_w = $orig_w;
+		$crop_h = $orig_h;
+
+		$s_x = 0;
+		$s_y = 0;
+
+		//list($new_w, $new_h) = wp_constrain_dimensions($orig_w, $orig_h, $dest_w, $dest_h);
+		$new_w = $orig_w;
+		$new_h = $orig_h;
+
+	}
+
+
+
+	// the return array matches the parameters to imagecopyresampled()
+	// int dst_x, int dst_y, int src_x, int src_y, int dst_w, int dst_h, int src_w, int src_h
+	return array(0, 0, (int) $s_x, (int) $s_y, (int) $new_w, (int) $new_h, (int) $crop_w, (int) $crop_h);
 }

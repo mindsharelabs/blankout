@@ -20,29 +20,24 @@ function carousel_post() {
 				'not_found_in_trash' => __('Nothing found in Trash', 'blankout'), // This displays if there is nothing in the trash
 				'parent_item_colon'  => ''
 			), // end of arrays
-			'description'         => __('Home page carousel items', 'blankout'), // Custom Type Description
-			'public'              => TRUE,
+			'description'         => __('Homepage Slides', 'blankout'), // Custom Type Description
+			'public'              => FALSE,
 			'publicly_queryable'  => TRUE,
-			'exclude_from_search' => FALSE,
+			'exclude_from_search' => TRUE,
 			'show_ui'             => TRUE,
-			'query_var'           => TRUE,
+			'query_var'           => FALSE,
 			'menu_position'       => 8, // this is what order you want it to appear in on the left hand side menu
 			'menu_icon'           => get_stylesheet_directory_uri().'/img/custom-post-icon.png', // the icon for the custom post type menu
-			'rewrite'             => array('slug' => 'carousel', 'with_front' => FALSE), // you can specify its url slug
-			'has_archive'         => 'carousel', // you can rename the slug here
+			//'rewrite'             => array('slug' => 'carousel', 'with_front' => FALSE), // you can specify its url slug
+			//'has_archive'         => 'carousel', // you can rename the slug here
 			'capability_type'     => 'post',
 			'hierarchical'        => FALSE,
-			// the next one is important, it tells what's enabled in the post editor
 			'supports'            => array('title', 'editor', 'thumbnail')
-		) // end of options 
-	); // end of register post type 
+		)
+	);
 }
 
-// adding the function to the Wordpress init
 add_action('init', 'carousel_post');
-
-
-// Uncomment for custom taxonomy
 
 
 /* add_action( 'init', 'custom_taxonomy', 0 );
