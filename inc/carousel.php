@@ -18,17 +18,7 @@ if($slide_query->have_posts()) : ?>
 			<?php while($slide_query->have_posts()) : $slide_query->the_post(); ?>
 				<?php if(has_post_thumbnail() && function_exists('mapi_thumb')) : ?>
 					<li class="item">
-						<?php
-						$img_src = mapi_image(mapi_get_attachment_image_src(),
-							array(
-								'width'   => 1170,
-								'height'  => 480,
-								'quality' => 90
-							)
-						);
-						?>
-						<img src="<?php echo $img_src; ?>" class="attachment-full wp-post-image" alt="<?php echo mapi_get_attachment_image_title(); ?>" />
-
+						<img src="<?php echo mapi_thumb(mapi_get_attachment_image_src(), 1170, 480, 90); ?>" class="attachment-full wp-post-image" alt="<?php echo mapi_get_attachment_image_title(); ?>" />
 
 						<?php if(function_exists('mapi_excerpt') && (mapi_excerpt() != '')) : ?>
 							<div class="flex-caption hidden-sm hidden-xs">
