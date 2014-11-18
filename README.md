@@ -12,6 +12,10 @@ Built using:
 
 ## Changelog
 
+### v3.6.1
+* Updated to Bootstrap 3.3.1
+* Refactored LESS files
+
 ### v3.6
 * Updated to Bootstrap 3.3.0
 * Various minor improvements

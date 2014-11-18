@@ -25,7 +25,7 @@ module.exports = function(grunt) {
 			},
 
 			less: {
-				files: ['less/*.less'], tasks: ['less']
+				files: ['less/*.less', 'less/bootstrap/*.less'], tasks: ['less']
 			}
 
 		}
