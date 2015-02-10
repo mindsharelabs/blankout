@@ -182,3 +182,6 @@ local.properties
 
 #sftp configuration file
 sftp-config.json
+
+## Backup stuff
+backup-db

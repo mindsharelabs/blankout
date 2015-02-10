@@ -19,7 +19,6 @@
 						</small>
 					</header>
 					<section class="entry-content clearfix" itemprop="articleBody">
-
 						<?php the_content(); ?>
 					</section>
 					<footer class="article-footer">

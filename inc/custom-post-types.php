@@ -1,35 +1,37 @@
 <?php
 
-// Uncomment for custom post type
-
-function carousel_post() {
+/**
+ * Register custom post types
+ *
+ */
+function blankout_custom_types() {
 	register_post_type('carousel',
 		array(
 			'labels'              => array(
-				'name'               => __('Slides', 'blankout'), // This is the Title of the Group
-				'singular_name'      => __('Slide', 'blankout'), // This is the individual type
-				'all_items'          => __('All Slides', 'blankout'), // the all items menu item
-				'add_new'            => __('Add New', 'blankout'), // The add new menu item
-				'add_new_item'       => __('Add New Slide', 'blankout'), // Add New Display Title
-				'edit'               => __('Edit', 'blankout'), // Edit Dialog
-				'edit_item'          => __('Edit Slide', 'blankout'), // Edit Display Title
-				'new_item'           => __('New Slide', 'blankout'), // New Display Title
-				'view_item'          => __('View Slide', 'blankout'), // View Display Title
-				'search_items'       => __('Search Slides', 'blankout'), // Search Custom Type Title
-				'not_found'          => __('Nothing found in the Database.', 'blankout'), // This displays if there are no entries yet
-				'not_found_in_trash' => __('Nothing found in Trash', 'blankout'), // This displays if there is nothing in the trash
+				'name'               => __('Slides', 'blankout'),
+				'singular_name'      => __('Slide', 'blankout'),
+				'all_items'          => __('All Slides', 'blankout'),
+				'add_new'            => __('Add New', 'blankout'),
+				'add_new_item'       => __('Add New Slide', 'blankout'),
+				'edit'               => __('Edit', 'blankout'),
+				'edit_item'          => __('Edit Slide', 'blankout'),
+				'new_item'           => __('New Slide', 'blankout'),
+				'view_item'          => __('View Slide', 'blankout'),
+				'search_items'       => __('Search Slides', 'blankout'),
+				'not_found'          => __('Nothing found in the Database.', 'blankout'),
+				'not_found_in_trash' => __('Nothing found in Trash', 'blankout'),
 				'parent_item_colon'  => ''
-			), // end of arrays
-			'description'         => __('Homepage Slides', 'blankout'), // Custom Type Description
+			),
+			'description'         => __('Homepage Slides', 'blankout'),
 			'public'              => FALSE,
 			'publicly_queryable'  => TRUE,
 			'exclude_from_search' => TRUE,
 			'show_ui'             => TRUE,
 			'query_var'           => FALSE,
-			'menu_position'       => 8, // this is what order you want it to appear in on the left hand side menu
-			'menu_icon'           => get_stylesheet_directory_uri().'/img/custom-post-icon.png', // the icon for the custom post type menu
-			//'rewrite'             => array('slug' => 'carousel', 'with_front' => FALSE), // you can specify its url slug
-			//'has_archive'         => 'carousel', // you can rename the slug here
+			'menu_position'       => 8,
+			'menu_icon'           => get_stylesheet_directory_uri() . '/img/custom-post-icon.png',
+			//'rewrite'             => array('slug' => 'carousel', 'with_front' => FALSE),
+			//'has_archive'         => 'carousel',
 			'capability_type'     => 'post',
 			'hierarchical'        => FALSE,
 			'supports'            => array('title', 'editor', 'thumbnail')
@@ -37,8 +39,7 @@ function carousel_post() {
 	);
 }
 
-add_action('init', 'carousel_post');
-
+add_action('init', 'blankout_custom_types');
 
 /* add_action( 'init', 'custom_taxonomy', 0 );
 

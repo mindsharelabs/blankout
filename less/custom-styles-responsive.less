@@ -7,6 +7,15 @@
 //
 // --------------------------------------------------
 
+/* Responsive Text Centering */
+.text-center-sm,
+.text-center-md,
+.text-center-lg,
+.text-right-sm,
+.text-right-md,
+.text-right-lg {
+	text-align:inherit;
+}
 // Breakpoint styles: these styles will only apply on screens smaller than
 // the defined @grid-float-breakpoint-max (usually 767px).
 
@@ -15,7 +24,13 @@
 }
 // XS styles - default: x <= 479px
 @media (max-width:@screen-xs-max) {
-
+	.text-center-xs {
+		text-align:center !important;
+		float:none !important;
+	}
+	.text-right-xs {
+		text-align:right;
+	}
 }
 // Small styles - default: 480px <= x <= 991px
 @media (min-width:@screen-sm) and (max-width:@screen-sm-max) {
@@ -33,3 +48,33 @@
 		min-height:250px;
 	}
 }
+/* Define xs styles after defaults so they take precedence */
+
+/* Small grid */
+@media (min-width:@screen-tablet) {
+	.text-center-sm, .text-center-xs {
+		text-align:center;
+	}
+	.text-right-sm, .text-right-xs {
+		text-align:right;
+	}
+}
+/* Medium grid */
+@media (min-width:@screen-desktop) {
+	.text-center-md, .text-center-sm, .text-center-xs {
+		text-align:center;
+	}
+	.text-right-md, .text-right-sm, .text-right-xs {
+		text-align:right;
+	}
+}
+/* Large grid */
+@media (min-width:@screen-lg-desktop) {
+	.text-center-lg, .text-center-md, .text-center-sm, .text-center-xs {
+		text-align:center;
+	}
+	.text-right-lg, .text-right-md, .text-right-sm, .text-right-xs {
+		text-align:right;
+	}
+}
+

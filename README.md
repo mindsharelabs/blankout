@@ -12,6 +12,12 @@ Built using:
 
 ## Changelog
 
+### v3.7
+* Bugfixes, minor updates
+* Added styles for mapi_social()
+* Added styles for responsive text centering
+* Updated to Bootstrap 3.3.2
+
 ### v3.6.1
 * Updated to Bootstrap 3.3.1
 * Refactored LESS files

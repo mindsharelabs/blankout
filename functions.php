@@ -11,7 +11,7 @@
 }*/
 
 // check for dependencies
-require_once(dirname(__FILE__).'/inc/dependencies/check.php');
+require_once(dirname(__FILE__) . '/inc/dependencies/check.php');
 
 /**
  * Constants
@@ -22,7 +22,7 @@ define('BOOTSTRAP_DROPDOWN_ON_HOVER', FALSE); // if TRUE, overrides the default 
  * Includes
  */
 //include(get_stylesheet_directory().'/inc/customize.php'); // enable theme customizer for Blankout (Appearance > Themes)
-include(get_stylesheet_directory().'/inc/custom-post-types.php');
+//include(get_stylesheet_directory() . '/inc/custom-post-types.php');
 //include(get_stylesheet_directory().'/inc/woocommerce.php'); // enable WooCommerce support
 
 /**
@@ -53,25 +53,25 @@ if(!function_exists('blankout_theme_features')) {
 
 		// Add theme support for Custom Background
 		$background_args = array(
-			'default-color'          => 'ffffff',
-			'default-image'          => '',
-			'wp-head-callback'       => '_custom_background_cb',
-			'admin-head-callback'    => '',
+			'default-color' => 'ffffff',
+			'default-image' => '',
+			'wp-head-callback' => '_custom_background_cb',
+			'admin-head-callback' => '',
 			'admin-preview-callback' => '',
 		);
 		add_theme_support('custom-background', $background_args);
 
 		// Add theme support for Custom Header
 		$header_args = array(
-			'default-image'      => '',
-			'width'              => 1170,
-			'height'             => 480,
-			'flex-width'         => TRUE,
-			'flex-height'        => TRUE,
-			'random-default'     => TRUE,
-			'header-text'        => TRUE,
+			'default-image' => '',
+			'width' => 1170,
+			'height' => 480,
+			'flex-width' => TRUE,
+			'flex-height' => TRUE,
+			'random-default' => TRUE,
+			'header-text' => TRUE,
 			'default-text-color' => '000',
-			'uploads'            => TRUE,
+			'uploads' => TRUE,
 
 		);
 		//add_theme_support('custom-header', $header_args);
@@ -81,9 +81,9 @@ if(!function_exists('blankout_theme_features')) {
 		add_theme_support('html5', $markup);
 
 		// Add theme support for Translation
-		load_theme_textdomain('blankout', get_stylesheet_directory().'/translation');
+		load_theme_textdomain('blankout', get_stylesheet_directory() . '/translation');
 		$locale = get_locale();
-		$locale_file = get_stylesheet_directory()."/translation/$locale.php";
+		$locale_file = get_stylesheet_directory() . "/translation/$locale.php";
 		if(is_readable($locale_file)) {
 			require_once($locale_file);
 		}
@@ -93,7 +93,9 @@ if(!function_exists('blankout_theme_features')) {
 	add_action('after_setup_theme', 'blankout_theme_features');
 }
 
-// Add theme support for custom CSS in the TinyMCE visual editor
+/**
+ * Add theme support for custom CSS in the TinyMCE visual editor *
+ */
 function blankout_add_editor_styles() {
 	add_editor_style('css/editor-style.css');
 }
@@ -105,7 +107,7 @@ add_action('init', 'blankout_add_editor_styles');
  */
 register_nav_menus(
 	array(
-		'main-nav'   => __('Main Navigation', 'blankout'), // main nav in header
+		'main-nav' => __('Main Navigation', 'blankout'), // main nav in header
 		'footer-nav' => __('Footer Navigation', 'blankout') // secondary nav in footer
 	)
 );
@@ -116,38 +118,41 @@ if(!is_nav_menu('footer-nav')) {
 	wp_create_nav_menu('Footer Navigation', array('slug' => 'footer-nav'));
 }
 
+/**
+ *    Widgets
+ */
 function blankout_widgets_init() {
 
 	register_sidebar(
 		array(
-			'name'          => __('Main Sidebar', 'blankout'),
-			'id'            => 'main-sidebar',
+			'name' => __('Main Sidebar', 'blankout'),
+			'id' => 'main-sidebar',
 			'before_widget' => '<div id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</div>',
-			'before_title'  => '<h4 class="widgettitle">',
-			'after_title'   => '</h4>',
+			'after_widget' => '</div>',
+			'before_title' => '<h4 class="widgettitle">',
+			'after_title' => '</h4>',
 		)
 	);
 
 	register_sidebar(
 		array(
-			'name'          => __('Blog Sidebar', 'blankout'),
-			'id'            => 'blog-sidebar',
+			'name' => __('Blog Sidebar', 'blankout'),
+			'id' => 'blog-sidebar',
 			'before_widget' => '<div id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</div>',
-			'before_title'  => '<h4 class="widgettitle">',
-			'after_title'   => '</h4>',
+			'after_widget' => '</div>',
+			'before_title' => '<h4 class="widgettitle">',
+			'after_title' => '</h4>',
 		)
 	);
 
 	register_sidebar(
 		array(
-			'name'          => __('Footer Widgets', 'blankout'),
-			'id'            => 'footer-widgets',
+			'name' => __('Footer Widgets', 'blankout'),
+			'id' => 'footer-widgets',
 			'before_widget' => '<div id="%1$s" class="widget col-lg-4 %2$s">',
-			'after_widget'  => '</div>',
-			'before_title'  => '<h4 class="widgettitle">',
-			'after_title'   => '</h4>',
+			'after_widget' => '</div>',
+			'before_title' => '<h4 class="widgettitle">',
+			'after_title' => '</h4>',
 		)
 	);
 }
@@ -190,17 +195,30 @@ function blankout_configure_mapi() {
 add_action('wp_loaded', 'blankout_configure_mapi');
 
 /**
+ *
+ */
+function blankout_dequeue_social_css() {
+	wp_dequeue_style('mapi-social');
+}
+
+add_action('wp_enqueue_scripts', 'blankout_dequeue_social_css', 101);
+
+/**
  * Load frontend CSS/JS
  *
  */
 function blankout_styles() {
 	if(!is_admin()) {
-		wp_enqueue_style('blankout-stylesheet', get_stylesheet_directory_uri().'/style.css', array(), '', 'all');
+		wp_enqueue_style('blankout-stylesheet', get_stylesheet_directory_uri() . '/style.css', array(), '', 'all');
 	}
 }
 
 add_action('wp_enqueue_style', 'blankout_styles', 999);
 
+/**
+ * Enqueue scripts
+ *
+ */
 function blankout_scripts() {
 	if(!is_admin()) {
 
@@ -208,14 +226,16 @@ function blankout_scripts() {
 			wp_enqueue_script('comment-reply');
 		}
 
-		wp_enqueue_script('blankout-js', get_stylesheet_directory_uri().'/js/main.js', array('jquery'), FALSE, TRUE);
-		wp_enqueue_style('blankout-stylesheet', get_stylesheet_directory_uri().'/style.css', array(), '', 'all');
+		wp_enqueue_script('blankout-js', get_stylesheet_directory_uri() . '/js/main.js', array('jquery'), FALSE, TRUE);
+		wp_enqueue_style('blankout-stylesheet', get_stylesheet_directory_uri() . '/style.css', array(), '', 'all');
 	}
 }
 
 add_action('wp_enqueue_scripts', 'blankout_scripts', 999);
 
 /**
+ * Adds an CSS class 'active' to menu items.
+ *
  * @param $classes
  * @param $item
  *
@@ -241,8 +261,8 @@ if(!class_exists('Blankout_Menu_Walker')) {
 		 * @since 3.0.0
 		 *
 		 * @param string $output Passed by reference. Used to append additional content.
-		 * @param int    $depth  Depth of page. Used for padding.
-		 * @param array  $args
+		 * @param int $depth Depth of page. Used for padding.
+		 * @param array $args
 		 */
 		function start_lvl(&$output, $depth = 0, $args = array()) {
 			$indent = str_repeat("\t", $depth);
@@ -253,11 +273,11 @@ if(!class_exists('Blankout_Menu_Walker')) {
 		 * @see      Walker::start_el()
 		 * @since    3.0.0
 		 *
-		 * @param string       $output Passed by reference. Used to append additional content.
-		 * @param object       $item   Menu item data object.
-		 * @param int          $depth  Depth of menu item. Used for padding.
+		 * @param string $output Passed by reference. Used to append additional content.
+		 * @param object $item Menu item data object.
+		 * @param int $depth Depth of menu item. Used for padding.
 		 * @param array|object $args
-		 * @param int          $id
+		 * @param int $id
 		 *
 		 * @internal param int $current_page Menu item ID.
 		 */
@@ -276,21 +296,21 @@ if(!class_exists('Blankout_Menu_Walker')) {
 			 */
 			if(strcasecmp($item->title, 'divider') == 0) {
 				// Item is a Divider
-				$output .= $indent.'<li class="divider">';
+				$output .= $indent . '<li class="divider">';
 			} else {
 				if(strcasecmp($item->title, 'divider-vertical') == 0) {
 					// Item is a Vertical Divider
-					$output .= $indent.'<li class="divider-vertical">';
+					$output .= $indent . '<li class="divider-vertical">';
 				} else {
 					if(strcasecmp($item->title, 'nav-header') == 0) {
 						// Item is a Header
-						$output .= $indent.'<li class="nav-header">'.esc_attr($item->attr_title);
+						$output .= $indent . '<li class="nav-header">' . esc_attr($item->attr_title);
 					} else {
 
 						$class_names = $value = '';
 						$classes = empty($item->classes) ? array() : (array) $item->classes;
 						$classes[] = ($item->current) ? 'active' : '';
-						$classes[] = 'menu-item-'.$item->ID;
+						$classes[] = 'menu-item-' . $item->ID;
 						$class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args));
 
 						if($args->has_children && $depth > 0) {
@@ -301,16 +321,16 @@ if(!class_exists('Blankout_Menu_Walker')) {
 							}
 						}
 
-						$class_names = $class_names ? ' class="'.esc_attr($class_names).'"' : '';
+						$class_names = $class_names ? ' class="' . esc_attr($class_names) . '"' : '';
 
-						$id = apply_filters('nav_menu_item_id', 'menu-item-'.$item->ID, $item, $args);
-						$id = $id ? ' id="'.esc_attr($id).'"' : '';
+						$id = apply_filters('nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args);
+						$id = $id ? ' id="' . esc_attr($id) . '"' : '';
 
-						$output .= $indent.'<li'.$id.$value.$class_names.'>';
+						$output .= $indent . '<li' . $id . $value . $class_names . '>';
 
-						$attributes = !empty($item->target) ? ' target="'.esc_attr($item->target).'"' : '';
-						$attributes .= !empty($item->xfn) ? ' rel="'.esc_attr($item->xfn).'"' : '';
-						$attributes .= !empty($item->url) ? ' href="'.esc_attr($item->url).'"' : '';
+						$attributes = !empty($item->target) ? ' target="' . esc_attr($item->target) . '"' : '';
+						$attributes .= !empty($item->xfn) ? ' rel="' . esc_attr($item->xfn) . '"' : '';
+						$attributes .= !empty($item->url) ? ' href="' . esc_attr($item->url) . '"' : '';
 						$attributes .= ($args->has_children) ? ' data-toggle="dropdown" data-target="#" class="dropdown-toggle"' : '';
 
 						$item_output = $args->before;
@@ -323,12 +343,12 @@ if(!class_exists('Blankout_Menu_Walker')) {
 						 * property is NOT null we apply it as the class name for the glyphicon.
 						 */
 						if(!empty($item->attr_title)) {
-							$item_output .= '<a'.$attributes.'><i class="'.esc_attr($item->attr_title).'"></i>&nbsp;';
+							$item_output .= '<a' . $attributes . '><i class="' . esc_attr($item->attr_title) . '"></i>&nbsp;';
 						} else {
-							$item_output .= '<a'.$attributes.'>';
+							$item_output .= '<a' . $attributes . '>';
 						}
 
-						$item_output .= $args->link_before.apply_filters('the_title', $item->title, $item->ID).$args->link_after;
+						$item_output .= $args->link_before . apply_filters('the_title', $item->title, $item->ID) . $args->link_after;
 						$item_output .= ($args->has_children && $depth == 0) ? ' <span class="caret"></span></a>' : '</a>';
 						$item_output .= $args->after;
 
@@ -350,12 +370,12 @@ if(!class_exists('Blankout_Menu_Walker')) {
 		 * @see   Walker::start_el()
 		 * @since 2.5.0
 		 *
-		 * @param object $element           Data object
-		 * @param array  $children_elements List of elements to continue traversing.
-		 * @param int    $max_depth         Max depth to traverse.
-		 * @param int    $depth             Depth of current element.
-		 * @param array  $args
-		 * @param string $output            Passed by reference. Used to append additional content.
+		 * @param object $element Data object
+		 * @param array $children_elements List of elements to continue traversing.
+		 * @param int $max_depth Max depth to traverse.
+		 * @param int $depth Depth of current element.
+		 * @param array $args
+		 * @param string $output Passed by reference. Used to append additional content.
 		 *
 		 * @return null Null on failure with no changes to parameters.
 		 */
@@ -413,10 +433,10 @@ function blankout_page_nav($before = '<div class="pagination pagination-centered
 	if($start_page <= 0) {
 		$start_page = 1;
 	}
-	echo $before."<ul class='pagination'>";
+	echo $before . "<ul class='pagination'>";
 	if($start_page >= 2 && $pages_to_show < $max_page) {
 		$first_page_text = "First";
-		echo '<li class="bpn-first-page-link"><a href="'.get_pagenum_link().'" title="'.$first_page_text.'">'.$first_page_text.'</a></li>';
+		echo '<li class="bpn-first-page-link"><a href="' . get_pagenum_link() . '" title="' . $first_page_text . '">' . $first_page_text . '</a></li>';
 	}
 	if($paged <= 1) {
 		echo '<li class="disabled"><span>&laquo;</span></li>';
@@ -427,9 +447,9 @@ function blankout_page_nav($before = '<div class="pagination pagination-centered
 	}
 	for($i = $start_page; $i <= $end_page; $i++) {
 		if($i == $paged) {
-			echo '<li class="disabled"><a href="'.get_pagenum_link($i).'">'.$i.'</a></li>';
+			echo '<li class="disabled"><a href="' . get_pagenum_link($i) . '">' . $i . '</a></li>';
 		} else {
-			echo '<li><a href="'.get_pagenum_link($i).'">'.$i.'</a></li>';
+			echo '<li><a href="' . get_pagenum_link($i) . '">' . $i . '</a></li>';
 		}
 	}
 	echo '<li class="bpn-next-link">';
@@ -437,9 +457,9 @@ function blankout_page_nav($before = '<div class="pagination pagination-centered
 	echo '</li>';
 	if($end_page < $max_page) {
 		$last_page_text = "Last";
-		echo '<li class="bpn-last-page-link"><a href="'.get_pagenum_link($max_page).'" title="'.$last_page_text.'">'.$last_page_text.'</a></li>';
+		echo '<li class="bpn-last-page-link"><a href="' . get_pagenum_link($max_page) . '" title="' . $last_page_text . '">' . $last_page_text . '</a></li>';
 	}
-	echo "</ul>".$after;
+	echo "</ul>" . $after;
 }
 
 /**
@@ -461,7 +481,7 @@ function blankout_link_pages_args($args) {
  * Wrap pagination/pager links in list items
  *
  * @param string $link
- * @param int    $page_number
+ * @param int $page_number
  *
  * @return string
  */
@@ -473,9 +493,9 @@ function blankout_link_pages_link($link, $page_number) {
 	$not_current_page = ($page_number != $page);
 	$more_front = (empty($more) && 1 == $page);
 	if($not_current_page || $more_front) {
-		$link = '<li>'.$link.'</li>';
+		$link = '<li>' . $link . '</li>';
 	} else {
-		$link = '<li class="active"><span>'.$link.'</span></li>';
+		$link = '<li class="active"><span>' . $link . '</span></li>';
 	}
 
 	return $link;
@@ -562,10 +582,10 @@ function _blankout_comment($comment, $args, $depth) {
 						array_merge(
 							$args, array(
 								'add_below' => 'div-comment',
-								'depth'     => $depth,
+								'depth' => $depth,
 								'max_depth' => $args['max_depth'],
-								'before'    => '<footer class="reply comment-reply panel-footer">',
-								'after'     => '</footer><!-- .reply -->'
+								'before' => '<footer class="reply comment-reply panel-footer">',
+								'after' => '</footer><!-- .reply -->'
 							)
 						)
 					); ?>
@@ -613,10 +633,10 @@ function _blankout_comment($comment, $args, $depth) {
 						array_merge(
 							$args, array(
 								'add_below' => 'div-comment',
-								'depth'     => $depth,
+								'depth' => $depth,
 								'max_depth' => $args['max_depth'],
-								'before'    => '<footer class="reply comment-reply panel-footer">',
-								'after'     => '</footer><!-- .reply -->'
+								'before' => '<footer class="reply comment-reply panel-footer">',
+								'after' => '</footer><!-- .reply -->'
 							)
 						)
 					); ?>
@@ -659,7 +679,7 @@ function blankout_copyright() {
  */
 function blankout_footer_credit() {
 	$host = parse_url(esc_url(home_url()));
-	$c = '<p id="credit" class="source-org copyright pull-right"><a class="no-icon tip" href="http://mind.sh/are/?ref='.$host['host'].'" target="_blank" title="Web design, development + SEO by Mindshare Studios"><img src="'.get_stylesheet_directory_uri().'/img/credit.png" alt="Web design, development + SEO by Mindshare Studios" /></a></p>';
+	$c = '<p id="credit" class="source-org copyright"><a class="no-icon tip" href="http://mind.sh/are/?ref=' . $host['host'] . '" target="_blank" title="Web design, development + SEO by Mindshare Studios"><img src="' . get_stylesheet_directory_uri() . '/img/credit.png" alt="Web design, development + SEO by Mindshare Studios" /></a></p>';
 	if(function_exists('mapi_get_option')) {
 		if(mapi_get_option('show_credit') == TRUE || (array_key_exists('credit', $_GET) && $_GET['credit'] == 1)) {
 			echo $c;
@@ -723,6 +743,16 @@ function blankout_enable_nav_hover() {
 
 // @todo, pretty sure this isn't working
 add_filter('image_resize_dimensions', 'blankout_align_cropped_images_top', 11, 6);
+/**
+ * @param $payload
+ * @param $orig_w
+ * @param $orig_h
+ * @param $dest_w
+ * @param $dest_h
+ * @param $crop
+ *
+ * @return array
+ */
 function blankout_align_cropped_images_top($payload, $orig_w, $orig_h, $dest_w, $dest_h, $crop) {
 
 	// Change this to a conditional that decides whether you
@@ -763,10 +793,7 @@ function blankout_align_cropped_images_top($payload, $orig_w, $orig_h, $dest_w, 
 		//list($new_w, $new_h) = wp_constrain_dimensions($orig_w, $orig_h, $dest_w, $dest_h);
 		$new_w = $orig_w;
 		$new_h = $orig_h;
-
 	}
-
-
 
 	// the return array matches the parameters to imagecopyresampled()
 	// int dst_x, int dst_y, int src_x, int src_y, int dst_w, int dst_h, int src_w, int src_h

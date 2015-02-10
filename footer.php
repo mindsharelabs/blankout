@@ -10,24 +10,28 @@
 
 				wp_nav_menu(
 					array(
-						'container'       => FALSE, // remove nav container
+						'container' => FALSE, // remove nav container
 						'container_class' => 'footer-nav clearfix',
-						'menu'            => __('Footer Menu', 'blankout'),
-						'menu_class'      => 'nav footer-nav clearfix nav-pills',
-						'theme_location'  => 'footer-nav',
-						'before'          => '',
-						'after'           => '',
-						'link_before'     => '',
-						'link_after'      => '',
-						'depth'           => 1
+						'menu' => __('Footer Menu', 'blankout'),
+						'menu_class' => 'nav footer-nav clearfix nav-pills',
+						'theme_location' => 'footer-nav',
+						'before' => '',
+						'after' => '',
+						'link_before' => '',
+						'link_after' => '',
+						'depth' => 1
 					)
 				);
 			} ?>
 		</nav>
 		<span class="copyright pull-left">
+			<?php mapi_social_links(); ?>
 			&copy;<?php echo date('Y'); ?> <a href="<?php echo home_url('/') ?>" title="<?php bloginfo('name'); ?>"><?php bloginfo('name'); ?></a>. <?php _e('All rights reserved', 'blankout'); ?>.
 		</span>
-		<?php blankout_footer_credit(); ?>
+
+		<div class="pull-right text-center-xs">
+			<?php blankout_footer_credit(); ?>
+		</div>
 	</footer>
 </div>
 <?php wp_footer(); ?>
