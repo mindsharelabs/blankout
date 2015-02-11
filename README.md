@@ -13,7 +13,7 @@ Built using:
 ## Changelog
 
 ### v3.7
-* Bugfixes, minor updates
+* Bugfixes, minor updates and improvements
 * Added styles for mapi_social()
 * Added styles for responsive text centering
 * Updated to Bootstrap 3.3.2

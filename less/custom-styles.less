@@ -333,8 +333,9 @@ footer, .footer {
 .btn.btn-primary a {
 	color:@btn-primary-color;
 }
-/* override for google talk plugin */
-span.gc-cs-link {
+
+/* override for google talk / skype plugins */
+span.gc-cs-link, a[href^="tel:"] {
 	color:inherit !important;
 	text-decoration:inherit !important;
 	cursor:inherit !important;
