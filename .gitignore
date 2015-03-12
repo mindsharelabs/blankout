@@ -1,4 +1,4 @@
-# Mindshare .gitignore template
+# Mindshare .gitignore template v 1.0.1
 
 ### Composer template
 composer.phar
@@ -124,22 +124,22 @@ Temporary Items
 ## WP stuff
 sitemap.xml
 sitemap.xml.gz
-#wp-config.php
+wp-config.php
 wp-content/advanced-cache.php
 wp-content/backup-db/
 wp-content/backups/
 wp-content/blogs.dir/
 wp-content/cache/
 wp-content/upgrade/
-#wp-content/uploads/
+wp-content/uploads/
 wp-content/wp-cache-config.php
+## ignore the top level .htaccess file (in case you need a different one for local development)
+/.htaccess
 
 ## SVN Stuff
-
 .svn/
 
 ## Eclipse stuff
-
 *.pydevproject
 .metadata
 .gradle
