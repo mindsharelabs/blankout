@@ -12,6 +12,11 @@ Built using:
 
 ## Changelog
 
+### v3.7.1
+* Update Boostrap to 3.3.4
+* Added PHP filters for Gravity Forms to add Bootstrap classes
+* Misc. minor improvements
+
 ### v3.7
 * Bugfixes, minor updates and improvements
 * Added styles for mapi_social()

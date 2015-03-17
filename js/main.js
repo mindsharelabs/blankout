@@ -6,7 +6,7 @@ jQuery(document).ready(function($) {
 	// setup some additional Bootstrap CSS classes
 	$('.aside-block .link-icons').addClass('pull-right');
 	$('.mapi.edit-link').addClass('text-right');
-	$('.wp-caption-text, .gfield_description').addClass('muted');
+	//$('.wp-caption-text, .gfield_description').addClass('muted');
 	$('.button, .button-primary, .field input[type="submit"], #wp-submit').addClass('btn');
 	$('.login p.error').addClass('alert alert-error');
 	$('.login p.message').addClass('alert alert-info');
@@ -36,10 +36,10 @@ jQuery(document).ready(function($) {
 	$('table#wp-calendar').addClass('table table-striped');
 
 	// Gravity Forms stuff
-	$(".gform_wrapper .disable input").attr('disabled', 'disabled');
+	//$(".gform_wrapper .disable input").attr('disabled', 'disabled');
 
 	// FlexSlider setup
-	if($('.flexslider').length && $.isFunction($.fn.flexslider)) {
+	if ($('.flexslider').length && $.isFunction($.fn.flexslider)) {
 
 		$(function() {
 			var slider, // Global slider value to force playing and pausing by direct access of the slider control
@@ -48,7 +48,7 @@ jQuery(document).ready(function($) {
 			// Load the YouTube API. For some reason it's required to load it like this
 			var tag = document.createElement('script');
 			tag.src = "//www.youtube.com/iframe_api";
-			var firstScriptTag = document.getElementsByTagName('script')[0];
+			var firstScriptTag = document.getElementsByTagName('script')[ 0 ];
 			firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 			// Setup a callback for the YouTube api to attach video event handlers
@@ -64,7 +64,7 @@ jQuery(document).ready(function($) {
 
 					// Watch for changes on the player
 					player.addEventListener("onStateChange", function(state) {
-						switch(state.data) {
+						switch (state.data) {
 							// If the user is playing a video, stop the slider
 							case YT.PlayerState.PLAYING:
 								slider.flexslider("stop");
@@ -81,31 +81,31 @@ jQuery(document).ready(function($) {
 
 					$(this).data('player', player);
 				});
-			}
+			};
 
 			// Setup the slider control
-			slider = $(".flexslider").flexslider({
-				animation:      "fade",
-				easing:         "swing",
+			slider = $('.flexslider').flexslider({
+				animation: "fade",
+				easing: "swing",
 				slideshowSpeed: 6500,
 				animationSpeed: 900,
-				pauseOnHover:   true,
-				pauseOnAction:  true,
-				touch:          true,
-				video:          true,
-				controlNav:     true,
-				animationLoop:  true,
-				slideshow:      true,
-				useCSS:         false, // Before you go to change slides, make sure you can!
-				before:         function() {
-					if(!canSlide) {
+				pauseOnHover: true,
+				pauseOnAction: true,
+				touch: true,
+				video: true,
+				controlNav: true,
+				animationLoop: true,
+				slideshow: true,
+				useCSS: false, // Before you go to change slides, make sure you can!
+				before: function() {
+					if (!canSlide) {
 						slider.flexslider("stop");
 					}
 				}
 			});
 
-			if($.isFunction($.fn.fitVids)) {
-				$(".flexslider").fitVids;
+			if ($.isFunction($.fn.fitVids)) {
+				$('.flexslider').fitVids;
 			}
 
 			slider.on("click", ".flex-prev, .flex-next", function() {
@@ -116,7 +116,7 @@ jQuery(document).ready(function($) {
 			});
 		});
 
-	} else if($('.flexslider').length) {
+	} else if ($('.flexslider').length) {
 		console.log('Please enable FlexSlider (Settings > Developer Settings > Libraries & Plugins).');
 	}
 
@@ -135,17 +135,17 @@ jQuery(document).ready(function($) {
 	var viewport = $(window).width();
 
 	// smaller than 481px
-	if(viewport < 481) {
+	if (viewport < 481) {
 
 	}
 
 	// larger than 481px
-	if(viewport > 481) {
+	if (viewport > 481) {
 
 	}
 
 	// larger than or equal to 768px
-	if(viewport >= 768) {
+	if (viewport >= 768) {
 
 		// load gravatars
 		$('.comment img[data-gravatar]').each(function() {
@@ -154,7 +154,7 @@ jQuery(document).ready(function($) {
 	}
 
 	// larger than 1030px
-	if(viewport > 1030) {
+	if (viewport > 1030) {
 
 	}
 

@@ -1,6 +1,5 @@
 module.exports = function(grunt) {
 	'use strict';
-
 	require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
 	grunt.initConfig({
@@ -11,7 +10,10 @@ module.exports = function(grunt) {
 				files:      {
 					"style.css": "less/style.less"
 				}, options: {
-					sourceMap: true, compress: true, cleancss: true, sourceMapFilename: "style.css.map"
+					//compress: true,
+					//cleancss: true,
+					sourceMap: true,
+					sourceMapFilename: "style.css.map"
 				}
 			}
 		},
@@ -25,11 +27,15 @@ module.exports = function(grunt) {
 			},
 
 			less: {
-				files: ['less/*.less', 'less/bootstrap/*.less'], tasks: ['less']
+				files: [
+					'less/*.less',
+					'less/bootstrap/*.less'
+				],
+				tasks: [
+					'less'
+				]
 			}
-
 		}
 	});
-
 	grunt.registerTask('default', ['watch']);
 };
