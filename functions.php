@@ -5,11 +5,6 @@
  *
  */
 
-// uncomment for tilde support in mThumb/TimThumb in the Mindshare Theme API
-/*if(!array_key_exists('DOCUMENT_ROOT', $_SERVER) && empty($_SERVER['DOCUMENT_ROOT'])) {
-	$_SERVER['DOCUMENT_ROOT'] = '/path/to/webroot/';
-}*/
-
 // check for dependencies
 require_once(dirname(__FILE__).'/inc/dependencies/check.php');
 
