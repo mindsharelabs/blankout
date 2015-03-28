@@ -12,14 +12,18 @@ Built using:
 
 ## Changelog
 
+### v3.7.2
+* Added equal heights styling (see `less\equal-heights.less`)
+* Tweaked README.md files
+
 ### v3.7.1
-* Update Boostrap to 3.3.4
+* Update Bootstrap to 3.3.4
 * Added PHP filters for Gravity Forms to add Bootstrap classes
 * Misc. minor improvements
 
 ### v3.7
 * Bugfixes, minor updates and improvements
-* Added styles for mapi_social()
+* Added styles for `mapi_social()`
 * Added styles for responsive text centering
 * Updated to Bootstrap 3.3.2
 
@@ -32,9 +36,9 @@ Built using:
 * Various minor improvements
 
 ### v3.5
-* new CSS/LESS structure, now compiles to style.css instead of boostrap.css
+* new CSS/LESS structure, now compiles to style.css instead of `bootstrap.css`
 * Remove focus highlight from form fields
-* misc bugfixes
+* misc bug fixes
 
 ### v3.4
 * Custom post types include now commented out by default

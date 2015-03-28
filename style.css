@@ -5731,6 +5731,15 @@ button.close {
     display: none !important;
   }
 }
+/* add this to .row div that holds the columns you want to be equal heights. */
+.row-equal-height {
+  overflow: hidden;
+}
+/* add this class to each column */
+.equal-height {
+  margin-bottom: -99999px;
+  padding-bottom: 99999px;
+}
 /*
 * jQuery FlexSlider v2.2.0
 * http://www.woothemes.com/flexslider/
