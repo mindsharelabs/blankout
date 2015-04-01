@@ -12,6 +12,9 @@ Built using:
 
 ## Changelog
 
+### v3.7.3
+* Added `blankout_add_loginout_nav()` and filter `blankout_add_loginout_nav_slug` to add a login/out link to the footer nav 
+
 ### v3.7.2
 * Added equal heights styling (see `less\equal-heights.less`)
 * Tweaked README.md files

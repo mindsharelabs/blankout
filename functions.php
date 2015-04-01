@@ -117,6 +117,29 @@ if(!is_nav_menu('footer-nav')) {
 }
 
 /**
+ * Adds a login/out link to a specific wp_nav_menu.
+ *
+ * @param $items string The menu HTML.
+ * @param $args  object Menu settings object.
+ *
+ * @usage <code>add_filter('wp_nav_menu_items', 'blankout_add_loginout_nav', 10, 2);</code>
+ *
+ * @return string
+ */
+function blankout_add_loginout_nav($items, $args) {
+
+	$target_menu_slug = apply_filters('blankout_add_loginout_nav_slug', 'footer-nav');
+
+	if($args->menu && $args->menu == $target_menu_slug) {
+		$items .= '<li id="menu-item-loginout" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-loginout">'.wp_loginout('', FALSE).'</li>';
+	}
+
+	return $items;
+}
+
+add_filter('wp_nav_menu_items', 'blankout_add_loginout_nav', 10, 2);
+
+/**
  *    Widgets
  */
 function blankout_widgets_init() {
@@ -529,7 +552,7 @@ function blankout_comments($comment, $args, $depth) {
 			<button class="btn btn-primary btn-sm"><?php comment_reply_link(array_merge($args, array('depth' => $depth, 'max_depth' => $args['max_depth']))) ?></button>
 		</section>
 	</article>
-<?php
+	<?php
 }
 
 /**
@@ -643,7 +666,7 @@ function _blankout_comment($comment, $args, $depth) {
 			<!-- .media-body -->
 		</article><!-- .comment-body -->
 
-	<?php
+		<?php
 	endif;
 }
 
