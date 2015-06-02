@@ -1,16 +1,10 @@
 <?php
 /**
- * gravity-forms.php
- *
  * Gravity Forms Bootstrap Styles
  *
- * Applies bootstrap classes to various common field types.
+ * Applies bootstrap classes to various common field types. Using this function allows use of Gravity Forms default CSS in conjunction with Bootstrap (benefit for fields types such as Address).
  *
- *
- * Using this function allows use of Gravity Forms default CSS in conjunction with Bootstrap (benefit for fields types such as Address).
- *
- * Contributed to Blankout by Geet Jacobs (ANAGR.AM) - https://github.com/Jeradin
- * Original git https://github.com/5t3ph/gravity-forms-snippets
+ * Contributed to Blankout by Geet Jacobs - https://github.com/Jeradin
  *
  * @created   3/17/15 11:14 AM
  * @author    Mindshare Studios, Inc.
@@ -19,7 +13,7 @@
  */
 
 if(!is_admin()) {
-	add_filter("gform_field_content", "blankout_bootstrap_styles_for_gravityforms_fields", 10, 5);
+	//add_filter("gform_field_content", "blankout_bootstrap_styles_for_gravityforms_fields", 10, 5);
 	add_action('gform_field_container', 'blankout_field_container', 10, 6);
 	add_filter("gform_submit_button", "blankout_form_submit_button", 10, 2);
 	add_filter('gform_next_button', 'blankout_next_button_markup', 10, 2);
@@ -187,16 +181,16 @@ function blankout_field_container($field_container, $field, $form, $class_attr, 
 		//$field_content = str_replace('ginput_cardextras', 'ginput_cardextras form-inline', $field_content);
 		//$field_content = str_replace('ginput_full', 'ginput_full col-md-12', $field_content);
 		//$field_content = '<div class="col-md-4">'.$field_content.'</div>';
-		$field_content = '<div class="row"><div class="col-md-4"><div class=" panel panel-default "><div class="panel-body">'.$field_content.'<div class="card-wrapper"></div></div></div></div></div>';
+		$field_content = '<div class="row"><div class="col-md-4"><div class=" panel panel-default "><div class="panel-body">' . $field_content . '<div class="card-wrapper"></div></div></div></div></div>';
 	} else {
 		$field_content = str_replace('ginput_complex', 'ginput_complex row', $field_content);
 	}
 
 	if($field["size"] == 'number') {
-		$field_content = '<div class="row"><div class="col-md-4">'.$field_content.'</div></div>';
+		$field_content = '<div class="row"><div class="col-md-4">' . $field_content . '</div></div>';
 	}
 
-	return '<li id="field_'.$form['id'].'_'.$field['id'].'" class="'.$class_attr.' form-group">'.$field_content.'</li>';
+	return '<li id="field_' . $form['id'] . '_' . $field['id'] . '" class="' . $class_attr . ' form-group">' . $field_content . '</li>';
 }
 
 /**
@@ -280,16 +274,12 @@ function blankout_custom_validation($result, $value, $form, $field) {
  */
 function blankout_enqueue_custom_script($form, $is_ajax) {
 
-	//array_key_exists($form["fields"],'creditcard' )
-	// add theme scripts
-	wp_enqueue_script('blankout_howto-gform', (get_template_directory_uri()."/js/gforms-custom.js"), 'jquery', filemtime(get_stylesheet_directory().'/js/gforms-custom.js'), TRUE);
-	// load gforms-style.css
-	wp_enqueue_style('blankout_gforms-style', get_stylesheet_directory_uri().'/css/gforms-style.css', array(), filemtime(get_stylesheet_directory().'/css/gforms-style.css'));
+	// add custom theme scripts
+	wp_enqueue_script('custom', (get_template_directory_uri() . "/js/gforms-custom.js"), 'jquery');
 
 	foreach($form['fields'] as $field) {
-		if($field->type == 'creditcard') {
-			wp_enqueue_script('blankout_theme_card_min', '//cdnjs.cloudflare.com/ajax/libs/card/0.0.2/js/card.min.js', array('jquery'));
-			wp_enqueue_style('blankout_theme_card_min_css', '//cdnjs.cloudflare.com/ajax/libs/card/0.0.2/css/card.min.css');
+		if($field->type == 'custom') {
+			// do something custom
 		}
 	}
 }

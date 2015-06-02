@@ -6,7 +6,7 @@ jQuery(document).ready(function($) {
 	// setup some additional Bootstrap CSS classes
 	$('.aside-block .link-icons').addClass('pull-right');
 	$('.mapi.edit-link').addClass('text-right');
-	//$('.wp-caption-text, .gfield_description').addClass('muted');
+	$('.wp-caption-text, .gfield_description').addClass('text-muted');
 	$('.button, .button-primary, .field input[type="submit"], #wp-submit').addClass('btn');
 	$('.login p.error').addClass('alert alert-error');
 	$('.login p.message').addClass('alert alert-info');

@@ -24,10 +24,10 @@
 				);
 			} ?>
 		</nav>
-		<span class="copyright pull-left">
+		<div class="copyright pull-left">
 			<?php mapi_social_links(); ?>
 			&copy;<?php echo date('Y'); ?> <a href="<?php echo home_url('/') ?>" title="<?php bloginfo('name'); ?>"><?php bloginfo('name'); ?></a>. <?php _e('All rights reserved', 'blankout'); ?>.
-		</span>
+		</div>
 
 		<div class="pull-right text-center-xs">
 			<?php blankout_footer_credit(); ?>

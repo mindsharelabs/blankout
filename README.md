@@ -12,6 +12,15 @@ Built using:
 
 ## Changelog
 
+### v3.7.4
+* Added new comments template and FB comment plugin option
+* Added new blankout_nav fns
+* Removed unsued image filters
+* Change screen-reader-text to sr-only
+* Change muted to text-muted
+* Misc validation improvements
+* Gravity forms CSS improvements
+
 ### v3.7.3
 * Added `blankout_add_loginout_nav()` and filter `blankout_add_loginout_nav_slug` to add a login/out link to the footer nav 
 

@@ -45,6 +45,7 @@
 
 			<?php endwhile; ?>
 			<?php endif; ?>
+			<?php blankout_nav_below(); ?>
 		</div>
 
 		<?php get_sidebar(); ?>

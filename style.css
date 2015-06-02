@@ -5,7 +5,7 @@ Description: An advanced HTML5 theme framework by Mindshare Studios.
 Author: Mindshare Studios, Inc.
 Author URI: https://mind.sh/are/
 Theme URI: https://github.com/mindsharestudios/blankout/
-Version: 3.7
+Version: 3.7.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -5840,14 +5840,14 @@ html[xmlns] .slides {
   left: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.6);
-  color: #FFF;
+  color: #FFFFFF;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
   font-size: 14px;
   line-height: 18px;
   margin: 0;
 }
 .flex-caption a {
-  color: #fff;
+  color: #FFFFFF;
 }
 /* Direction Nav */
 .flex-direction-nav {
@@ -5926,7 +5926,7 @@ html[xmlns] .slides {
   z-index: 10;
   overflow: hidden;
   cursor: pointer;
-  color: #000;
+  color: #000000;
 }
 .flex-pauseplay a:before {
   font-family: "fontawesome";
@@ -5957,7 +5957,7 @@ html[xmlns] .slides {
   width: 11px;
   height: 11px;
   display: block;
-  background: #666;
+  background: #666666;
   background: rgba(0, 0, 0, 0.5);
   cursor: pointer;
   text-indent: -9999px;
@@ -5971,11 +5971,11 @@ html[xmlns] .slides {
   box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
 }
 .flex-control-paging li a:hover {
-  background: #333;
+  background: #333333;
   background: rgba(0, 0, 0, 0.7);
 }
 .flex-control-paging li a.flex-active {
-  background: #000;
+  background: #000000;
   background: rgba(0, 0, 0, 0.9);
   cursor: default;
 }
@@ -6337,7 +6337,8 @@ fieldset[disabled] .gform_wrapper .gform_button.active {
 .gform_wrapper .gfield_checkbox label,
 .gform_wrapper .gfield_radio label {
   font-weight: normal;
-  padding-left: 8px;
+  padding-left: 4px;
+  vertical-align: middle;
   margin: 0;
 }
 .gform_wrapper .ginput_complex .ginput_left {
@@ -6354,6 +6355,57 @@ fieldset[disabled] .gform_wrapper .gform_button.active {
 }
 .gform_wrapper .ginput_complex label {
   font-size: 11px;
+}
+.gform_wrapper li {
+  clear: both;
+}
+.gform_wrapper .ginput_container input,
+.gform_wrapper .ginput_container select,
+.gform_wrapper .ginput_container textarea,
+.gform_wrapper .ginput_container .gform_button {
+  font-size: 12px;
+}
+.gform_wrapper .gfield_description {
+  font-size: 12px;
+}
+.gform_wrapper .gform_button {
+  background: #5bc0de;
+  border-radius: 0;
+  padding: 10px 20px;
+  border: none;
+}
+.gform_wrapper .ginput_container input,
+.gform_wrapper .ginput_container select,
+.gform_wrapper .ginput_container textarea {
+  border-radius: 0;
+  box-shadow: none;
+  border: 1px solid #777777;
+  vertical-align: text-top;
+}
+.gform_wrapper .ginput_complex .ginput_left {
+  width: 48%;
+  float: left;
+}
+.gform_wrapper .gfield_checkbox li,
+.gform_wrapper .gfield_radio li,
+.gform_wrapper .ginput_complex li {
+  margin-bottom: 0;
+}
+.gform_wrapper .gfield_checkbox br,
+.gform_wrapper .gfield_radio br,
+.gform_wrapper .ginput_complex br {
+  display: none;
+}
+.gform_wrapper #gform_fields_15 li {
+  margin-bottom: 0;
+}
+.gform_wrapper .gform_validation_container,
+.gform_wrapper .validation_error,
+.gform_wrapper .gfield_required {
+  display: none;
+}
+.gform_wrapper .ui-datepicker .ui-datepicker-title select {
+  color: #000000;
 }
 /******************************************************************
 Site Name:
@@ -6432,7 +6484,7 @@ body.login form .input {
   height: 30px;
   margin: 0px 1px;
   line-height: 30px;
-  color: #fff;
+  color: #FFFFFF;
   display: inline-block;
   text-align: center;
   text-decoration: none;
@@ -6447,7 +6499,7 @@ body.login form .input {
   background: #36465D;
 }
 .mapi-social-links a.twitter {
-  background: #52b9e9;
+  background: #52B9E9;
 }
 .mapi-social-links a.facebook {
   background: #3B5998;
@@ -6456,16 +6508,16 @@ body.login form .input {
   background: #0077B5;
 }
 .mapi-social-links a.google-plus {
-  background: #db4437;
+  background: #DB4437;
 }
 .mapi-social-links a.pinterest {
-  background: #cb2027;
+  background: #CB2027;
 }
 .mapi-social-links a.youtube {
   background: #CC181E;
 }
 .mapi-social-links a.rss {
-  background: #ff6600;
+  background: #FF6600;
 }
 .mapi-social-links a.email {
   background: #222222;
@@ -6525,7 +6577,7 @@ article section.entry-content img {
   height: auto;
 }
 article section.entry-content .wp-caption {
-  background: #eee;
+  background: #EEEEEE;
   padding: 5px;
   /* images inside wp-caption */
 }
@@ -6544,8 +6596,8 @@ article section.entry-content object {
   height: auto;
 }
 article section.entry-content pre {
-  background: #eee;
-  border: 1px solid #cecece;
+  background: #EEEEEE;
+  border: 1px solid #CECECE;
   padding: 10px;
 }
 article footer,
@@ -6619,7 +6671,7 @@ img.alignnone {
   padding: 20px;
 }
 .comments .comment.odd {
-  background: #f8f8f8;
+  background: #F8F8F8;
 }
 .comments .comment img.media-object {
   width: 64px;
@@ -6819,7 +6871,7 @@ footer .copyright,
 .footer .copyright,
 footer #credit,
 .footer #credit {
-  color: #ccc;
+  color: #CCCCCC;
   text-transform: uppercase;
   font-size: 10px;
   margin: 20px 0;
@@ -6938,7 +6990,7 @@ a[href^="tel:"] {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  color: #fff;
+  color: #FFFFFF;
   font-size: 12px;
   line-height: 1.5;
   margin: 0;

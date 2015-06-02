@@ -6,11 +6,15 @@
  */
 
 // check for dependencies
-require_once(dirname(__FILE__).'/inc/dependencies/check.php');
+require_once(dirname(__FILE__) . '/inc/dependencies/check.php');
 
 /**
  * Constants
  */
+
+// Facebook app ID for Facebook comments plugin
+define('FB_APP_ID', FALSE); // input your app ID to enable Facebook comments, e.g. '13586768111'
+
 define('BOOTSTRAP_DROPDOWN_ON_HOVER', FALSE); // if TRUE, overrides the default bootstrap behavior where user must click on a top level menu item in order to see subpages
 
 /**
@@ -19,9 +23,9 @@ define('BOOTSTRAP_DROPDOWN_ON_HOVER', FALSE); // if TRUE, overrides the default 
 //include(get_stylesheet_directory().'/inc/customize.php'); // enable theme customizer for Blankout (Appearance > Themes)
 //include(get_stylesheet_directory() . '/inc/custom-post-types.php');
 //include(get_stylesheet_directory().'/inc/woocommerce.php'); // enable WooCommerce support
-/*if(get_option('rg_gforms_disable_css') == 1) {
+if(get_option('rg_gforms_disable_css') == 1) {
 	include(get_stylesheet_directory().'/inc/gravity-forms.php'); // enable Gravity forms CSS styling
-}*/
+}
 
 /**
  * WordPress setup
@@ -40,7 +44,17 @@ if(!function_exists('blankout_theme_features')) {
 		add_theme_support('automatic-feed-links');
 
 		// Add theme support for Post Formats
-		$formats = array('status', 'quote', 'gallery', 'image', 'video', 'audio', 'link', 'aside', 'chat',);
+		$formats = array(
+			'status',
+			'quote',
+			'gallery',
+			'image',
+			'video',
+			'audio',
+			'link',
+			'aside',
+			'chat',
+		);
 		//add_theme_support('post-formats', $formats);
 
 		// Add theme support for Featured Images
@@ -79,9 +93,9 @@ if(!function_exists('blankout_theme_features')) {
 		add_theme_support('html5', $markup);
 
 		// Add theme support for Translation
-		load_theme_textdomain('blankout', get_stylesheet_directory().'/translation');
+		load_theme_textdomain('blankout', get_stylesheet_directory() . '/translation');
 		$locale = get_locale();
-		$locale_file = get_stylesheet_directory()."/translation/$locale.php";
+		$locale_file = get_stylesheet_directory() . "/translation/$locale.php";
 		if(is_readable($locale_file)) {
 			require_once($locale_file);
 		}
@@ -131,7 +145,7 @@ function blankout_add_loginout_nav($items, $args) {
 	$target_menu_slug = apply_filters('blankout_add_loginout_nav_slug', 'footer-nav');
 
 	if($args->menu && $args->menu == $target_menu_slug) {
-		$items .= '<li id="menu-item-loginout" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-loginout">'.wp_loginout('', FALSE).'</li>';
+		$items .= '<li id="menu-item-loginout" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-loginout">' . wp_loginout('', FALSE) . '</li>';
 	}
 
 	return $items;
@@ -230,11 +244,15 @@ add_action('wp_enqueue_scripts', 'blankout_dequeue_social_css', 101);
  */
 function blankout_styles() {
 	if(!is_admin()) {
-		wp_enqueue_style('blankout-stylesheet', get_stylesheet_directory_uri().'/style.css', array(), '', 'all');
+		wp_enqueue_style('blankout-font-stylesheet', '//fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic|Source+Code+Pro:400,600,700|Oswald:400,700,300', array(), '', 'all');
+		if(get_option('rg_gforms_disable_css') == 1) {
+			wp_enqueue_style('blankout-gforms', get_stylesheet_directory_uri() . '/css/gforms-blankout.min.css');
+		}
+		wp_enqueue_style('blankout-stylesheet', get_stylesheet_directory_uri() . '/style.css', array(), '', 'all');
 	}
 }
 
-add_action('wp_enqueue_style', 'blankout_styles', 999);
+add_action('wp_enqueue_scripts', 'blankout_styles', 999);
 
 /**
  * Enqueue scripts
@@ -247,8 +265,7 @@ function blankout_scripts() {
 			wp_enqueue_script('comment-reply');
 		}
 
-		wp_enqueue_script('blankout-js', get_stylesheet_directory_uri().'/js/main.js', array('jquery'), FALSE, TRUE);
-		wp_enqueue_style('blankout-stylesheet', get_stylesheet_directory_uri().'/style.css', array(), '', 'all');
+		wp_enqueue_script('blankout-js', get_stylesheet_directory_uri() . '/js/main.js', array('jquery'), FALSE, TRUE);
 	}
 }
 
@@ -317,21 +334,21 @@ if(!class_exists('Blankout_Menu_Walker')) {
 			 */
 			if(strcasecmp($item->title, 'divider') == 0) {
 				// Item is a Divider
-				$output .= $indent.'<li class="divider">';
+				$output .= $indent . '<li class="divider">';
 			} else {
 				if(strcasecmp($item->title, 'divider-vertical') == 0) {
 					// Item is a Vertical Divider
-					$output .= $indent.'<li class="divider-vertical">';
+					$output .= $indent . '<li class="divider-vertical">';
 				} else {
 					if(strcasecmp($item->title, 'nav-header') == 0) {
 						// Item is a Header
-						$output .= $indent.'<li class="nav-header">'.esc_attr($item->attr_title);
+						$output .= $indent . '<li class="nav-header">' . esc_attr($item->attr_title);
 					} else {
 
 						$class_names = $value = '';
-						$classes = empty($item->classes) ? array() : (array) $item->classes;
+						$classes = empty($item->classes) ? array() : (array)$item->classes;
 						$classes[] = ($item->current) ? 'active' : '';
-						$classes[] = 'menu-item-'.$item->ID;
+						$classes[] = 'menu-item-' . $item->ID;
 						$class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args));
 
 						if($args->has_children && $depth > 0) {
@@ -342,16 +359,16 @@ if(!class_exists('Blankout_Menu_Walker')) {
 							}
 						}
 
-						$class_names = $class_names ? ' class="'.esc_attr($class_names).'"' : '';
+						$class_names = $class_names ? ' class="' . esc_attr($class_names) . '"' : '';
 
-						$id = apply_filters('nav_menu_item_id', 'menu-item-'.$item->ID, $item, $args);
-						$id = $id ? ' id="'.esc_attr($id).'"' : '';
+						$id = apply_filters('nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args);
+						$id = $id ? ' id="' . esc_attr($id) . '"' : '';
 
-						$output .= $indent.'<li'.$id.$value.$class_names.'>';
+						$output .= $indent . '<li' . $id . $value . $class_names . '>';
 
-						$attributes = !empty($item->target) ? ' target="'.esc_attr($item->target).'"' : '';
-						$attributes .= !empty($item->xfn) ? ' rel="'.esc_attr($item->xfn).'"' : '';
-						$attributes .= !empty($item->url) ? ' href="'.esc_attr($item->url).'"' : '';
+						$attributes = !empty($item->target) ? ' target="' . esc_attr($item->target) . '"' : '';
+						$attributes .= !empty($item->xfn) ? ' rel="' . esc_attr($item->xfn) . '"' : '';
+						$attributes .= !empty($item->url) ? ' href="' . esc_attr($item->url) . '"' : '';
 						$attributes .= ($args->has_children) ? ' data-toggle="dropdown" data-target="#" class="dropdown-toggle"' : '';
 
 						$item_output = $args->before;
@@ -364,12 +381,12 @@ if(!class_exists('Blankout_Menu_Walker')) {
 						 * property is NOT null we apply it as the class name for the glyphicon.
 						 */
 						if(!empty($item->attr_title)) {
-							$item_output .= '<a'.$attributes.'><i class="'.esc_attr($item->attr_title).'"></i>&nbsp;';
+							$item_output .= '<a' . $attributes . '><i class="' . esc_attr($item->attr_title) . '"></i>&nbsp;';
 						} else {
-							$item_output .= '<a'.$attributes.'>';
+							$item_output .= '<a' . $attributes . '>';
 						}
 
-						$item_output .= $args->link_before.apply_filters('the_title', $item->title, $item->ID).$args->link_after;
+						$item_output .= $args->link_before . apply_filters('the_title', $item->title, $item->ID) . $args->link_after;
 						$item_output .= ($args->has_children && $depth == 0) ? ' <span class="caret"></span></a>' : '</a>';
 						$item_output .= $args->after;
 
@@ -410,7 +427,7 @@ if(!class_exists('Blankout_Menu_Walker')) {
 
 			//display this element
 			if(is_object($args[0])) {
-				$args[0]->has_children = !empty($children_elements[$element->$id_field]);
+				$args[0]->has_children = !empty($children_elements[ $element->$id_field ]);
 			}
 
 			parent::display_element($element, $children_elements, $max_depth, $depth, $args, $output);
@@ -454,10 +471,10 @@ function blankout_page_nav($before = '<div class="pagination pagination-centered
 	if($start_page <= 0) {
 		$start_page = 1;
 	}
-	echo $before."<ul class='pagination'>";
+	echo $before . "<ul class='pagination'>";
 	if($start_page >= 2 && $pages_to_show < $max_page) {
 		$first_page_text = "First";
-		echo '<li class="bpn-first-page-link"><a href="'.get_pagenum_link().'" title="'.$first_page_text.'">'.$first_page_text.'</a></li>';
+		echo '<li class="bpn-first-page-link"><a href="' . get_pagenum_link() . '" title="' . $first_page_text . '">' . $first_page_text . '</a></li>';
 	}
 	if($paged <= 1) {
 		echo '<li class="disabled"><span>&laquo;</span></li>';
@@ -468,9 +485,9 @@ function blankout_page_nav($before = '<div class="pagination pagination-centered
 	}
 	for($i = $start_page; $i <= $end_page; $i++) {
 		if($i == $paged) {
-			echo '<li class="disabled"><a href="'.get_pagenum_link($i).'">'.$i.'</a></li>';
+			echo '<li class="disabled"><a href="' . get_pagenum_link($i) . '">' . $i . '</a></li>';
 		} else {
-			echo '<li><a href="'.get_pagenum_link($i).'">'.$i.'</a></li>';
+			echo '<li><a href="' . get_pagenum_link($i) . '">' . $i . '</a></li>';
 		}
 	}
 	echo '<li class="bpn-next-link">';
@@ -478,9 +495,9 @@ function blankout_page_nav($before = '<div class="pagination pagination-centered
 	echo '</li>';
 	if($end_page < $max_page) {
 		$last_page_text = "Last";
-		echo '<li class="bpn-last-page-link"><a href="'.get_pagenum_link($max_page).'" title="'.$last_page_text.'">'.$last_page_text.'</a></li>';
+		echo '<li class="bpn-last-page-link"><a href="' . get_pagenum_link($max_page) . '" title="' . $last_page_text . '">' . $last_page_text . '</a></li>';
 	}
-	echo "</ul>".$after;
+	echo "</ul>" . $after;
 }
 
 /**
@@ -514,9 +531,9 @@ function blankout_link_pages_link($link, $page_number) {
 	$not_current_page = ($page_number != $page);
 	$more_front = (empty($more) && 1 == $page);
 	if($not_current_page || $more_front) {
-		$link = '<li>'.$link.'</li>';
+		$link = '<li>' . $link . '</li>';
 	} else {
-		$link = '<li class="active"><span>'.$link.'</span></li>';
+		$link = '<li class="active"><span>' . $link . '</span></li>';
 	}
 
 	return $link;
@@ -700,7 +717,7 @@ function blankout_copyright() {
  */
 function blankout_footer_credit() {
 	$host = parse_url(esc_url(home_url()));
-	$c = '<p id="credit" class="source-org copyright"><a class="no-icon tip" href="http://mind.sh/are/?ref='.$host['host'].'" target="_blank" title="Web design, development + SEO by Mindshare Studios"><img src="'.get_stylesheet_directory_uri().'/img/credit.png" alt="Web design, development + SEO by Mindshare Studios" /></a></p>';
+	$c = '<p id="credit" class="source-org copyright"><a class="no-icon tip" href="http://mind.sh/are/?ref=' . $host['host'] . '" target="_blank" title="Web design, development + SEO by Mindshare Studios"><img src="' . get_stylesheet_directory_uri() . '/img/credit.png" alt="Web design, development + SEO by Mindshare Studios" /></a></p>';
 	if(function_exists('mapi_get_option')) {
 		if(mapi_get_option('show_credit') == TRUE || (array_key_exists('credit', $_GET) && $_GET['credit'] == 1)) {
 			echo $c;
@@ -762,61 +779,49 @@ function blankout_enable_nav_hover() {
 	}
 }
 
-// @todo, pretty sure this isn't working
-add_filter('image_resize_dimensions', 'blankout_align_cropped_images_top', 11, 6);
 /**
- * @param $payload
- * @param $orig_w
- * @param $orig_h
- * @param $dest_w
- * @param $dest_h
- * @param $crop
- *
- * @return array
+ * Adds a Bootstrap pager nav to various WP templates.
  */
-function blankout_align_cropped_images_top($payload, $orig_w, $orig_h, $dest_w, $dest_h, $crop) {
+function blankout_nav_above() {
+	blankout_nav('above');
+}
 
-	// Change this to a conditional that decides whether you
-	// want to override the defaults for this image or not.
-	if(FALSE) {
-		return $payload;
-	}
+/**
+ * Adds a Bootstrap pager nav to various WP templates.
+ */
+function blankout_nav_below() {
+	blankout_nav();
+}
 
-	if($crop) {
-		// crop the largest possible portion of the original image that we can size to $dest_w x $dest_h
-		$aspect_ratio = $orig_w / $orig_h;
-		$new_w = min($dest_w, $orig_w);
-		$new_h = min($dest_h, $orig_h);
-
-		if(!$new_w) {
-			$new_w = intval($new_h * $aspect_ratio);
-		}
-
-		if(!$new_h) {
-			$new_h = intval($new_w / $aspect_ratio);
-		}
-
-		$size_ratio = max($new_w / $orig_w, $new_h / $orig_h);
-
-		$crop_w = round($new_w / $size_ratio);
-		$crop_h = round($new_h / $size_ratio);
-
-		$s_x = floor(($orig_w - $crop_w) / 2);
-		$s_y = 0; // [[ formerly ]] ==> floor( ($orig_h - $crop_h) / 2 );
-	} else {
-		// don't crop, just resize using $dest_w x $dest_h as a maximum bounding box
-		$crop_w = $orig_w;
-		$crop_h = $orig_h;
-
-		$s_x = 0;
-		$s_y = 0;
-
-		//list($new_w, $new_h) = wp_constrain_dimensions($orig_w, $orig_h, $dest_w, $dest_h);
-		$new_w = $orig_w;
-		$new_h = $orig_h;
-	}
-
-	// the return array matches the parameters to imagecopyresampled()
-	// int dst_x, int dst_y, int src_x, int src_y, int dst_w, int dst_h, int src_w, int src_h
-	return array(0, 0, (int) $s_x, (int) $s_y, (int) $new_w, (int) $new_h, (int) $crop_w, (int) $crop_h);
+/**
+ * Adds a Bootstrap pager nav to various WP templates.
+ *
+ * @param string $position
+ */
+function blankout_nav($position = 'below') {
+	?>
+	<div id="nav-<?php echo $position; ?>" class="<?php echo get_post_type(); ?>-navigation" role="navigation">
+		<h5 class="sr-only"><?php echo ucwords(get_post_type()); ?> <?php _e('navigation', 'blankout'); ?></h5>
+		<ul class="pager">
+		<?php if(is_singular()) : ?>
+		<li class="nav-previous"><?php next_post_link('%link', '&lsaquo; %title', TRUE) ?></li>
+		<li class="nav-next"><?php previous_post_link('%link', '%title &rsaquo;', TRUE) ?></li>
+	<?php elseif(is_search()) : ?>
+		<?php if(get_next_posts_link('Previous Results')) : ?>
+				<li class="nav-previous"><?php next_posts_link('Previous Results') ?></div>
+			<?php endif; ?>
+		<?php if(get_previous_posts_link('More Results')) : ?>
+			<li class="nav-next"><?php previous_posts_link('More Results') ?></li>
+		<?php endif; ?>
+	<?php else : ?>
+		<?php if(get_next_posts_link('Previous Entries')) : ?>
+			<li class="nav-previous"><?php next_posts_link('Previous Entries') ?></li>
+		<?php endif; ?>
+		<?php if(get_previous_posts_link('Next Entries')) : ?>
+			<li class="nav-next"><?php previous_posts_link('Next Entries') ?></li>
+		<?php endif; ?>
+	<?php endif; ?>
+		</ul>
+	</div>
+	<?php
 }

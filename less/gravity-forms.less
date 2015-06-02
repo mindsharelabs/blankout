@@ -133,7 +133,8 @@
 
 	.gfield_checkbox label, .gfield_radio label {
 		font-weight:normal;
-		padding-left:8px;
+		padding-left: 4px;
+		vertical-align: middle;
 		margin:0;
 	}
 
@@ -156,6 +157,67 @@
 
 		label {
 			font-size:11px;
+		}
+
+	}
+
+	li {
+		clear:both;
+
+	}
+
+	.ginput_container {
+		input, select, textarea, .gform_button {
+			font-size:@font-size-small;
+		}
+	}
+
+	.gfield_description {
+		font-size:@font-size-small;
+	}
+	.gform_button {
+		background:@brand-info;
+		border-radius:0;
+		padding:10px 20px;
+		border:none;
+	}
+	.ginput_container {
+		input,
+		select,
+		textarea {
+			border-radius:0;
+			box-shadow:none;
+			border:1px solid @gray-light;
+			vertical-align: text-top;
+		}
+	}
+	.ginput_complex {
+		.ginput_left {
+			width:48%;
+			float:left;
+		}
+	}
+	.gfield_checkbox, .gfield_radio, .ginput_complex {
+		li {
+			margin-bottom:0
+		}
+		br {
+			display:none;
+		}
+	}
+
+	#gform_fields_15 li {
+		margin-bottom:0;
+	}
+	.gform_validation_container, .validation_error, .gfield_required {
+		display:none;
+	}
+
+	.ui-datepicker {
+		.ui-datepicker-title {
+			select {
+				color:#000000;
+			}
 		}
 
 	}
