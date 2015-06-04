@@ -26,7 +26,7 @@
 
 			<?php elseif(is_tag()) : ?>
 				<h1 class="archive-title h2">
-					<span><?php _e("Posts Tagged:", 'blankout'); ?></span> <?php echo mapi_single_term_title(); ?>
+					<span><?php _e("Posts Tagged:", 'blankout'); ?></span> <?php single_term_title(); ?>
 				</h1>
 
 			<?php
