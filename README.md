@@ -12,6 +12,10 @@ Built using:
 
 ## Changelog
 
+### v3.7.5
+* Add Instagram style for `mapi_social_links()`
+* Update Bootstrap to 3.3.5
+
 ### v3.7.4
 * Added new comments template and FB comment plugin option
 * Added new blankout_nav fns
