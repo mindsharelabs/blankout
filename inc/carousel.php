@@ -11,16 +11,16 @@
 
 $slide_query = new WP_Query('post_type=carousel');
 
-if($slide_query->have_posts()) : ?>
+if ($slide_query->have_posts()) : ?>
 
 	<div id="carousel" class="flexslider">
 		<ul class="slides">
-			<?php while($slide_query->have_posts()) : $slide_query->the_post(); ?>
-				<?php if(has_post_thumbnail() && function_exists('mapi_thumb')) : ?>
+			<?php while ($slide_query->have_posts()) : $slide_query->the_post(); ?>
+				<?php if (has_post_thumbnail() && function_exists('mapi_thumb')) : ?>
 					<li class="item">
 						<img src="<?php echo mapi_thumb(mapi_get_attachment_image_src(), 1170, 480, 90); ?>" class="attachment-full wp-post-image" alt="<?php echo mapi_get_attachment_image_title(); ?>" />
 
-						<?php if(function_exists('mapi_excerpt') && (mapi_excerpt() != '')) : ?>
+						<?php if (function_exists('mapi_excerpt') && (mapi_excerpt() != '')) : ?>
 							<div class="flex-caption hidden-sm hidden-xs">
 								<?php the_content(); ?>
 							</div>

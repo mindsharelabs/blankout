@@ -2,14 +2,14 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
-			<?php include(get_stylesheet_directory().'/inc/carousel.php'); ?>
+			<?php include(get_stylesheet_directory() . '/inc/carousel.php'); ?>
 		</div>
 	</div>
 	<div class="row">
 		<div id="main" class="col-lg-9">
-			<?php if(have_posts()) : while(have_posts()) : the_post(); ?>
+			<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
-				<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?> role="article" itemscope itemtype="http://schema.org/BlogPosting">
+				<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?> itemscope itemtype="http://schema.org/BlogPosting">
 					<header class="article-header post-header">
 						<?php blankout_rich_snippets(); ?>
 
@@ -23,7 +23,7 @@
 						<?php the_content(); ?>
 					</section>
 					<footer class="article-footer">
-						<?php if(function_exists('mapi_edit_link')) {
+						<?php if (function_exists('mapi_edit_link')) {
 							echo mapi_edit_link();
 						} ?>
 					</footer>

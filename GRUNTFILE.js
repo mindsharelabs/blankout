@@ -1,4 +1,4 @@
-module.exports = function (grunt) {
+module.exports = function(grunt) {
     'use strict';
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
@@ -10,10 +10,10 @@ module.exports = function (grunt) {
                 files: {
                     "style.css": "less/style.less"
                 }, options: {
-                    //compress: true,
-                    //cleancss: true,
-                    sourceMap: true,
-                    sourceMapFilename: "style.css.map"
+                    compress: true,
+                    cleancss: true,
+                    //sourceMap: true,
+                    //sourceMapFilename: "style.css.map"
                 }
             }
         },

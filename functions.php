@@ -244,7 +244,7 @@ add_action('wp_enqueue_scripts', 'blankout_dequeue_social_css', 101);
  */
 function blankout_styles() {
 	if(!is_admin()) {
-		wp_enqueue_style('blankout-font-stylesheet', '//fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic|Source+Code+Pro:400,600,700|Oswald:400,700,300', array(), '', 'all');
+		wp_enqueue_style('blankout-font-stylesheet', '//fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic%7CSource+Code+Pro:400,600,700%7COswald:400,700,300', array(), '', 'all');
 		if(get_option('rg_gforms_disable_css') == 1) {
 			wp_enqueue_style('blankout-gforms', get_stylesheet_directory_uri() . '/css/gforms-blankout.min.css');
 		}
@@ -800,7 +800,7 @@ function blankout_nav_below() {
  */
 function blankout_nav($position = 'below') {
 	?>
-	<div id="nav-<?php echo $position; ?>" class="<?php echo get_post_type(); ?>-navigation" role="navigation">
+	<div id="nav-<?php echo $position; ?>" class="<?php echo get_post_type(); ?>-navigation">
 		<h5 class="sr-only"><?php echo ucwords(get_post_type()); ?> <?php _e('navigation', 'blankout'); ?></h5>
 		<ul class="pager">
 		<?php if(is_singular()) : ?>

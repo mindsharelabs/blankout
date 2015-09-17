@@ -3,11 +3,11 @@
 <div class="container">
 	<div class="row">
 		<div id="main" class="col-lg-9">
-			<?php if(have_posts()) : while(have_posts()) : the_post(); ?>
+			<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
-				<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?> role="article" itemscope itemtype="http://schema.org/BlogPosting">
+				<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?> itemscope itemtype="http://schema.org/BlogPosting">
 					<header class="article-header page-header">
-						<?php if(function_exists('bcn_display')) : ?>
+						<?php if (function_exists('bcn_display')) : ?>
 							<ol class="breadcrumb">
 								<?php bcn_display_list(); ?>
 							</ol>
@@ -21,15 +21,15 @@
 						<?php
 						wp_link_pages(
 							array(
-								'next_or_number' => 'number',
-								'nextpagelink' => __('Next page', 'blankout'),
+								'next_or_number'   => 'number',
+								'nextpagelink'     => __('Next page', 'blankout'),
 								'previouspagelink' => __('Previous page', 'blankout'),
-								'pagelink' => '%',
-								'echo' => 1
+								'pagelink'         => '%',
+								'echo'             => 1
 							)
 						);
 						?>
-						<?php if(function_exists('mapi_edit_link')) {
+						<?php if (function_exists('mapi_edit_link')) {
 							echo mapi_edit_link();
 						} ?>
 					</footer>

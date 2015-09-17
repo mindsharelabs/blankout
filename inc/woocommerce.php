@@ -30,7 +30,7 @@ function blankout_woo_wrapper_start() {
 	<div class="container">
 	<div class="row">
 	<div id="main" class="col-lg-12">
-<?php
+	<?php
 }
 
 /**
@@ -42,7 +42,7 @@ function blankout_woo_wrapper_end() {
 	<?php //get_sidebar(); ?>
 	</div>
 	</div>
-<?php
+	<?php
 }
 
 /**

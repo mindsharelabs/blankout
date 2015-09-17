@@ -17,18 +17,18 @@
 	<meta name="HandheldFriendly" content="True" />
 	<meta name="MobileOptimized" content="320" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-	<?php if(function_exists('mapi_get_favicon_url') && mapi_get_favicon_url() != NULL) : ?>
+	<?php if (function_exists('mapi_get_favicon_url') && mapi_get_favicon_url() != NULL) : ?>
 		<link rel="shortcut icon" href="<?php echo mapi_get_favicon_url(); ?>" />
 	<?php else : ?>
 		<link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/img/favicon.png" />
 	<?php endif; ?>
 	<link rel="alternate" type="application/rss+xml" href="<?php echo htmlspecialchars(get_feed_link()); ?>" title="<?php echo esc_html(get_bloginfo('name')); ?> latest updates" />
 
-	<?php if(function_exists('mapi_is_true') && mapi_is_true(get_option('default_comment_status'))) : ?>
+	<?php if (function_exists('mapi_is_true') && mapi_is_true(get_option('default_comment_status'))) : ?>
 		<link rel="alternate" type="application/rss+xml" href="<?php echo htmlspecialchars(get_post_comments_feed_link()); ?>" title="<?php echo esc_html(get_bloginfo('name')); ?> recent comments" />
 	<?php endif; ?>
 
-	<?php if(function_exists('mapi_is_true') && mapi_is_true(get_option('default_ping_status'))) : ?>
+	<?php if (function_exists('mapi_is_true') && mapi_is_true(get_option('default_ping_status'))) : ?>
 		<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 	<?php endif; ?>
 
@@ -41,19 +41,19 @@
 <a id="top"></a>
 
 <div class="container">
-	<header class="header" role="banner">
+	<header class="header">
 		<nav class="navbar navbar-default">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 					<span class="sr-only"><?php _e('Toggle navigation', 'blankout'); ?></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 				</button>
-				<?php if(get_theme_mod('menu_title')) : ?>
+				<?php if (get_theme_mod('menu_title')) : ?>
 					<a class="navbar-brand" id="logo" title="<?php bloginfo('name'); ?> - <?php bloginfo('description'); ?>" href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a>
 				<?php endif; ?>
 			</div>
 			<div class="collapse navbar-collapse">
 				<?php
-				if(has_nav_menu('main-nav')) {
+				if (has_nav_menu('main-nav')) {
 					wp_nav_menu(
 						array(
 							'container'       => ' ',

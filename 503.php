@@ -5,4 +5,4 @@
 // Feel free to delete or replace with a regular HTML or PHP file.
 
 $refresh_url = '/v1/';
-die('<meta http-equiv="refresh" content="0;URL='.$refresh_url.'" />');
+die('<meta http-equiv="refresh" content="0;URL=' . $refresh_url . '" />');

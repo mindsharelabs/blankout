@@ -13,7 +13,7 @@
 				</section>
 				<section class="search">
 					<?php get_search_form(); ?>
-					<?php if(function_exists('wbz404_suggestions')) : wbz404_suggestions(); endif; ?>
+					<?php if (function_exists('wbz404_suggestions')) : wbz404_suggestions(); endif; ?>
 				</section>
 				<footer class="article-footer"></footer>
 			</article>

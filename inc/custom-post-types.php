@@ -34,7 +34,7 @@ function blankout_custom_types() {
 			//'has_archive'         => 'carousel',
 			'capability_type'     => 'post',
 			'hierarchical'        => FALSE,
-			'supports'            => array('title', 'editor', 'thumbnail')
+			'supports'            => array( 'title', 'editor', 'thumbnail' )
 		)
 	);
 }

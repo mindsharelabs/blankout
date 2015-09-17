@@ -9,7 +9,7 @@
 
 $show_facebook_comments = FALSE;
 
-if(defined('FB_APP_ID') && FB_APP_ID != FALSE) {
+if (defined('FB_APP_ID') && FB_APP_ID != FALSE) {
 	$show_facebook_comments = TRUE;
 }
 
@@ -18,7 +18,7 @@ if(defined('FB_APP_ID') && FB_APP_ID != FALSE) {
  * the visitor has not yet entered the password we will
  * return early without loading the comments.
  */
-if(post_password_required()) {
+if (post_password_required()) {
 	return;
 }
 
@@ -33,16 +33,16 @@ if(post_password_required()) {
 
 		<!-- Nav tabs -->
 		<ul class="nav nav-tabs" role="tablist">
-			<?php if($show_facebook_comments) : ?>
+			<?php if ($show_facebook_comments) : ?>
 				<li class="active" role="presentation"><a href="#fb-comment-form" aria-controls="profile" role="tab" data-toggle="tab">Leave a Comment with Facebook</a></li>
 			<?php endif; ?>
-			<li <?php if(!$show_facebook_comments) : ?>class="active" <?php endif; ?> role="presentation"><a href="#wp-comment-form" aria-controls="messages" role="tab" data-toggle="tab">Leave a Comment</a></li>
+			<li <?php if (!$show_facebook_comments) : ?>class="active" <?php endif; ?> role="presentation"><a href="#wp-comment-form" aria-controls="messages" role="tab" data-toggle="tab">Leave a Comment</a></li>
 
 		</ul>
 
 		<!-- Tab panes -->
 		<div class="tab-content">
-			<?php if($show_facebook_comments) : ?>
+			<?php if ($show_facebook_comments) : ?>
 				<div role="tabpanel" class="tab-pane active" id="fb-comment-form">
 					<div id="facebook-comments">
 						<div id="fb-root"></div>
@@ -79,7 +79,7 @@ if(post_password_required()) {
 		</div>
 	</div>
 
-	<?php if(have_comments()) : ?>
+	<?php if (have_comments()) : ?>
 		<header class="page-header">
 			<h2 class="comments-title">
 				<?php
@@ -89,8 +89,8 @@ if(post_password_required()) {
 			</h2>
 		</header>
 
-		<?php if(get_comment_pages_count() > 1 && get_option('page_comments')) : // are there comments to navigate through {?>
-			<nav id="comment-nav-above" class="comment-navigation" role="navigation">
+		<?php if (get_comment_pages_count() > 1 && get_option('page_comments')) : // are there comments to navigate through {?>
+			<nav id="comment-nav-above" class="comment-navigation">
 				<h5 class="sr-only"><?php _e('Comment navigation', 'blankout'); ?></h5>
 				<ul class="pager">
 					<li class="nav-previous"><?php previous_comments_link(__('&larr; Older Comments', 'blankout')); ?></li>
@@ -102,12 +102,12 @@ if(post_password_required()) {
 		<ol class="comment-list media-list">
 			<?php
 
-			wp_list_comments(array('callback' => '_blankout_comment', 'avatar_size' => 50));
+			wp_list_comments(array( 'callback' => '_blankout_comment', 'avatar_size' => 50 ));
 			?>
 		</ol>
 
-		<?php if(get_comment_pages_count() > 1 && get_option('page_comments')) : // are there comments to navigate through {?>
-			<nav id="comment-nav-below" class="comment-navigation" role="navigation">
+		<?php if (get_comment_pages_count() > 1 && get_option('page_comments')) : // are there comments to navigate through {?>
+			<nav id="comment-nav-below" class="comment-navigation">
 				<h5 class="sr-only"><?php _e('Comment navigation', 'blankout'); ?></h5>
 				<ul class="pager">
 					<li class="nav-previous"><?php previous_comments_link(__('&larr; Older Comments', 'blankout')); ?></li>
@@ -119,7 +119,7 @@ if(post_password_required()) {
 	<?php endif; ?>
 
 	<?php
-	if(!comments_open() && '0' != get_comments_number() && post_type_supports(get_post_type(), 'comments')) :
+	if (!comments_open() && '0' != get_comments_number() && post_type_supports(get_post_type(), 'comments')) :
 		?>
 		<p class="no-comments"><?php _e('Comments are closed.', 'blankout'); ?></p>
 	<?php endif; ?>

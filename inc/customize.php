@@ -7,6 +7,7 @@
  * @since Blankout 1.0
  */
 class Blankout_Customize {
+
 	/**
 	 * This hooks into 'customize_register' (available as of WP 3.4) and allows
 	 * you to add new sections and controls to the Theme Customize screen.
@@ -121,7 +122,7 @@ class Blankout_Customize {
 			self::generate_css('.navbar', 'background-color', 'navbar_background');
 			?>
 		</style>
-	<?php
+		<?php
 	}
 
 	/**
@@ -138,8 +139,8 @@ class Blankout_Customize {
 	public static function live_preview() {
 		wp_enqueue_script(
 			'blankout-themecustomizer', //Give the script an ID
-			get_stylesheet_directory_uri().'/js/theme-customizer.min.js',
-			array('jquery', 'customize-preview')
+			get_stylesheet_directory_uri() . '/js/theme-customizer.min.js',
+			array( 'jquery', 'customize-preview' )
 		);
 	}
 
@@ -162,13 +163,13 @@ class Blankout_Customize {
 	public static function generate_css($selector, $style, $mod_name, $prefix = '', $postfix = '', $echo = TRUE) {
 		$return = '';
 		$mod = get_theme_mod($mod_name);
-		if(!empty($mod)) {
+		if (!empty($mod)) {
 			$return = sprintf('%s { %s:%s; }',
 				$selector,
 				$style,
-				$prefix.$mod.$postfix
+				$prefix . $mod . $postfix
 			);
-			if($echo) {
+			if ($echo) {
 				echo $return;
 			}
 		}
@@ -178,10 +179,10 @@ class Blankout_Customize {
 }
 
 //Setup the Theme Customizer settings and controls...
-add_action('customize_register', array('Blankout_Customize', 'register'));
+add_action('customize_register', array( 'Blankout_Customize', 'register' ));
 
 //Output custom CSS to live site
-add_action('wp_head', array('Blankout_Customize', 'header_output'));
+add_action('wp_head', array( 'Blankout_Customize', 'header_output' ));
 
 //Enqueue live preview javascript in Theme Customizer admin screen
-add_action('customize_preview_init', array('Blankout_Customize', 'live_preview'));
+add_action('customize_preview_init', array( 'Blankout_Customize', 'live_preview' ));

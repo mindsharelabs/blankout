@@ -3,12 +3,12 @@
 <div class="container">
 	<div class="row">
 		<div id="main" class="col-lg-9">
-			<?php if(have_posts()) : ?>
+			<?php if (have_posts()) : ?>
 				<h1 class="archive-title"><span><?php _e('Search Results for', 'blankout'); ?>:</span> <?php the_search_query(); ?></h1>
 
-				<?php while(have_posts()) : the_post(); ?>
+				<?php while (have_posts()) : the_post(); ?>
 
-					<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?> role="article">
+					<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?>>
 						<header class="article-header page-header">
 							<h1 class="entry-title page-title" itemprop="headline"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a>
 							</h1>
@@ -18,8 +18,8 @@
 							</small>
 						</header>
 						<section class="entry-content">
-							<?php if(function_exists('mapi_excerpt')) {
-								echo mapi_excerpt().mapi_excerpt_more();
+							<?php if (function_exists('mapi_excerpt')) {
+								echo mapi_excerpt() . mapi_excerpt_more();
 							} ?>
 						</section>
 						<footer class="article-footer"></footer>
@@ -27,7 +27,7 @@
 
 				<?php endwhile; ?>
 
-				<?php if(function_exists('blankout_page_nav')) : ?>
+				<?php if (function_exists('blankout_page_nav')) : ?>
 					<?php blankout_page_nav(); ?>
 				<?php else : ?>
 					<nav class="wp-prev-next">
@@ -40,7 +40,7 @@
 
 			<?php else : ?>
 				<h1 class="archive-title"><span><?php _e('Search Results for', 'blankout'); ?>:</span> <?php the_search_query(); ?></h1>
-				<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?> role="article">
+				<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?>>
 					<header class="article-header page-header">
 						<h4 class="entry-title page-title" itemprop="headline"><?php _e('Try a different search term?', 'blankout'); ?></h4>
 					</header>

@@ -1,25 +1,25 @@
 <div class="container">
-	<footer class="footer" role="contentinfo">
+	<footer class="footer">
 		<hr />
 
-		<?php if(is_active_sidebar('footer-widgets')) : dynamic_sidebar('footer-widgets'); endif; ?>
+		<?php if (is_active_sidebar('footer-widgets')) : dynamic_sidebar('footer-widgets'); endif; ?>
 
-		<nav role="navigation">
+		<nav>
 			<?php
-			if(has_nav_menu('footer-nav')) {
+			if (has_nav_menu('footer-nav')) {
 
 				wp_nav_menu(
 					array(
-						'container' => FALSE, // remove nav container
+						'container'       => FALSE, // remove nav container
 						'container_class' => 'footer-nav clearfix',
-						'menu' => __('Footer Menu', 'blankout'),
-						'menu_class' => 'nav footer-nav clearfix nav-pills',
-						'theme_location' => 'footer-nav',
-						'before' => '',
-						'after' => '',
-						'link_before' => '',
-						'link_after' => '',
-						'depth' => 1
+						'menu'            => __('Footer Menu', 'blankout'),
+						'menu_class'      => 'nav footer-nav clearfix nav-pills',
+						'theme_location'  => 'footer-nav',
+						'before'          => '',
+						'after'           => '',
+						'link_before'     => '',
+						'link_after'      => '',
+						'depth'           => 1
 					)
 				);
 			} ?>

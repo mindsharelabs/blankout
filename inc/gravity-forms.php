@@ -12,7 +12,7 @@
  * @link      https://mindsharelabs.com/
  */
 
-if(!is_admin()) {
+if (!is_admin()) {
 	//add_filter("gform_field_content", "blankout_bootstrap_styles_for_gravityforms_fields", 10, 5);
 	add_action('gform_field_container', 'blankout_field_container', 10, 6);
 	add_filter("gform_submit_button", "blankout_form_submit_button", 10, 2);
@@ -39,47 +39,47 @@ if(!is_admin()) {
 function blankout_bootstrap_styles_for_gravityforms_fields($content, $field, $value, $lead_id, $form_id) {
 
 	// Currently only applies to most common field types, but could be expanded.
-	if($field["type"] != 'hidden' && $field["type"] != 'list' && $field["type"] != 'multiselect' && $field["type"] != 'checkbox' && $field["type"] != 'fileupload' && $field["type"] != 'date' && $field["type"] != 'html' && $field["type"] != 'address') {
+	if ($field[ "type" ] != 'hidden' && $field[ "type" ] != 'list' && $field[ "type" ] != 'multiselect' && $field[ "type" ] != 'checkbox' && $field[ "type" ] != 'fileupload' && $field[ "type" ] != 'date' && $field[ "type" ] != 'html' && $field[ "type" ] != 'address') {
 		$content = str_replace('class=\'medium', 'class=\'form-control medium', $content);
 	}
 
-	if($field["type"] == 'list') {
+	if ($field[ "type" ] == 'list') {
 		$content = str_replace('<input ', '<input class=\'form-control\' ', $content);
 	}
 
-	if($field["type"] == 'multiselect') {
+	if ($field[ "type" ] == 'multiselect') {
 		$content = str_replace('<select ', '<select class=\'form-control\' ', $content);
 	}
 
-	if($field["type"] == 'name') {
+	if ($field[ "type" ] == 'name') {
 		$content = str_replace('<input ', '<input class=\'form-control\' ', $content);
 		//$content = str_replace('<select ', '<select class=\'form-control\' ', $content);
 	}
 
-	if($field["type"] == 'address') {
+	if ($field[ "type" ] == 'address') {
 		$content = str_replace('<input ', '<input class=\'form-control\' ', $content);
 		$content = str_replace('<select ', '<select class=\'form-control\' ', $content);
 	}
 
-	if($field["type"] == 'textarea' || ($field["type"] == 'survey' && $field["inputType"] = 'textarea')) {
+	if ($field[ "type" ] == 'textarea' || ($field[ "type" ] == 'survey' && $field[ "inputType" ] = 'textarea')) {
 		$content = str_replace('class=\'textarea', 'class=\'form-control textarea', $content);
 	}
 
-	if(($field["type"] == 'survey' && $field["inputType"] = 'checkbox' && !empty($field["inputs"]))) {
+	if (($field[ "type" ] == 'survey' && $field[ "inputType" ] = 'checkbox' && !empty($field[ "inputs" ]))) {
 		//echo '<pre>';var_dump($field);echo '</pre>';
 		$content = str_replace('li class=\'', 'li class=\'checkbox ', $content);
 		$content = str_replace('<input ', '<input style=\'margin-left:1px;\' ', $content);
 	}
 
-	if(($field["type"] == 'survey' && empty($field["inputType"]))) {
+	if (($field[ "type" ] == 'survey' && empty($field[ "inputType" ]))) {
 
 		$content = str_replace('li class=\'', 'li class=\'radio ', $content);
 		$content = str_replace('type=\'radio\' ', 'type=\'radio\' style=\'margin-left:1px;\' ', $content);
 		$content = str_replace('type=\'text\' ', 'type=\'text\' style=\'margin-left:20px;\' ', $content);
 	}
 
-	if($field["type"] == 'checkbox') {
-		if($field["cssClass"] == 'display-inline') {
+	if ($field[ "type" ] == 'checkbox') {
+		if ($field[ "cssClass" ] == 'display-inline') {
 			$content = str_replace('li class=\'', 'li class=\'checkbox-inline ', $content);
 		} else {
 			$content = str_replace('li class=\'', 'li class=\'checkbox ', $content);
@@ -87,9 +87,9 @@ function blankout_bootstrap_styles_for_gravityforms_fields($content, $field, $va
 		};
 	}
 
-	if($field["type"] == 'radio') {
+	if ($field[ "type" ] == 'radio') {
 
-		if($field["cssClass"] == 'display-inline') {
+		if ($field[ "cssClass" ] == 'display-inline') {
 			$content = str_replace('li class=\'', 'li class=\'radio-inline ', $content);
 		} else {
 			$content = str_replace('li class=\'', 'li class=\'radio ', $content);
@@ -100,11 +100,11 @@ function blankout_bootstrap_styles_for_gravityforms_fields($content, $field, $va
 		$content = str_replace('type=\'text\' ', 'type=\'text\' style=\'margin-left:20px;\' ', $content);
 	}
 
-	if($field["isRequired"] == TRUE && !($field["type"] == 'checkbox' || $field["type"] == 'survey' || $field["type"] == 'radio')) {
+	if ($field[ "isRequired" ] == TRUE && !($field[ "type" ] == 'checkbox' || $field[ "type" ] == 'survey' || $field[ "type" ] == 'radio')) {
 		$content = str_replace('<input ', '<input required="required" ', $content);
 	}
 
-	if($field["type"] == 'creditcard') {
+	if ($field[ "type" ] == 'creditcard') {
 
 		//echo '<pre>';var_dump($content);echo '</pre>';
 		$content = str_replace('<input ', '<input class=\'form-control\' ', $content);
@@ -128,11 +128,11 @@ function blankout_bootstrap_styles_for_gravityforms_fields($content, $field, $va
  */
 function blankout_field_container($field_container, $field, $form, $class_attr, $style, $field_content) {
 
-	if($field["type"] == 'name') {
+	if ($field[ "type" ] == 'name') {
 		//echo '<pre>';var_dump($field);echo '</pre>';
 		//$field_content = preg_replace('~<span(.*?) class=\'(.*?)\'>~i', '<span$1 class="col-sm-6">', $field_content);
 		$field_content = str_replace('name_prefix_select', 'name_prefix_select col-sm-12', $field_content);
-		if(strpos($field_content, 'name_middle') !== FALSE) {
+		if (strpos($field_content, 'name_middle') !== FALSE) {
 			$field_content = str_replace('name_middle', 'name_middle col-sm-4', $field_content);
 			$field_content = str_replace('name_first', 'name_first col-sm-4', $field_content);
 			$field_content = str_replace('name_last', 'name_last col-sm-4', $field_content);
@@ -142,7 +142,7 @@ function blankout_field_container($field_container, $field, $form, $class_attr, 
 		}
 		$field_content = str_replace('name_suffix ', 'name_suffix  col-sm-1', $field_content);
 	}
-	if($field["type"] == 'address') {
+	if ($field[ "type" ] == 'address') {
 		//echo '<pre>';var_dump($field_content);echo '</pre>';
 		//$field_content = preg_replace('~<span(.*?) class=(.*?)(.*?)(.*?)>~i', '<span$1 class="col-sm-6">', $field_content);
 		$field_content = str_replace('ginput_full', 'ginput_full col-sm-12', $field_content);
@@ -150,12 +150,12 @@ function blankout_field_container($field_container, $field, $form, $class_attr, 
 		$field_content = str_replace('ginput_right', 'ginput_right col-sm-6', $field_content);
 	}
 
-	if($field["isRequired"] == TRUE) {
+	if ($field[ "isRequired" ] == TRUE) {
 
 		$class_attr = str_replace('gfield_error', 'gfield_error has-error', $class_attr);
 	}
 
-	if($field["type"] == 'creditcard') {
+	if ($field[ "type" ] == 'creditcard') {
 
 		// echo '<pre>';var_dump($field);echo '</pre>';
 		//$field_content = str_replace('ginput_complex', 'ginput_complex', $field_content);
@@ -186,11 +186,11 @@ function blankout_field_container($field_container, $field, $form, $class_attr, 
 		$field_content = str_replace('ginput_complex', 'ginput_complex row', $field_content);
 	}
 
-	if($field["size"] == 'number') {
+	if ($field[ "size" ] == 'number') {
 		$field_content = '<div class="row"><div class="col-md-4">' . $field_content . '</div></div>';
 	}
 
-	return '<li id="field_' . $form['id'] . '_' . $field['id'] . '" class="' . $class_attr . ' form-group">' . $field_content . '</li>';
+	return '<li id="field_' . $form[ 'id' ] . '_' . $field[ 'id' ] . '" class="' . $class_attr . ' form-group">' . $field_content . '</li>';
 }
 
 /**
@@ -259,7 +259,7 @@ function blankout_change_message($message, $form) {
  * @return mixed
  */
 function blankout_custom_validation($result, $value, $form, $field) {
-	$result['message'] = '<span class="help-block">This field is required.</span>';
+	$result[ 'message' ] = '<span class="help-block">This field is required.</span>';
 
 	return $result;
 }
@@ -277,8 +277,8 @@ function blankout_enqueue_custom_script($form, $is_ajax) {
 	// add custom theme scripts
 	wp_enqueue_script('custom', (get_template_directory_uri() . "/js/gforms-custom.js"), 'jquery');
 
-	foreach($form['fields'] as $field) {
-		if($field->type == 'custom') {
+	foreach ($form[ 'fields' ] as $field) {
+		if ($field->type == 'custom') {
 			// do something custom
 		}
 	}
