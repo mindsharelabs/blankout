@@ -13,10 +13,10 @@ Built using:
 ## Changelog
 
 ### v3.7.6
-* Fix for the "Mroe Tag" on archive.php
+* Fix for the "More Tag" on archive.php
 * Add featured images to single.php 
 * Better styling default comment form
-* Many improvemnts to index.php and archive.php
+* Many improvements to index.php and archive.php
 * Minor styling improvements
 
 ### v3.7.5
