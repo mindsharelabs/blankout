@@ -14,7 +14,6 @@ Built using:
 
 ### v3.8
 * Update Bootstrap to 3.3.6
-* 
 * Enable field visibility settings in Gravity Forms
 * Added some Mindshare Theme API integrations to `functions.php`
 
