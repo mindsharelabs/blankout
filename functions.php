@@ -23,9 +23,13 @@ define('BOOTSTRAP_DROPDOWN_ON_HOVER', FALSE); // if TRUE, overrides the default 
 //include(get_stylesheet_directory().'/inc/customize.php'); // enable theme customizer for Blankout (Appearance > Themes)
 //include(get_stylesheet_directory() . '/inc/custom-post-types.php');
 //include(get_stylesheet_directory().'/inc/woocommerce.php'); // enable WooCommerce support
+//include(get_stylesheet_directory().'/inc/mindshare.php'); // Mindshare stuff
 if(get_option('rg_gforms_disable_css') == 1) {
 	include(get_stylesheet_directory().'/inc/gravity-forms.php'); // enable Gravity forms CSS styling
 }
+// enable field visibility settings in Gravity Forms
+add_filter( 'gform_enable_field_label_visibility_settings', '__return_true' );
+
 
 /**
  * WordPress setup
@@ -623,7 +627,7 @@ function _blankout_comment($comment, $args, $depth) {
 								'depth'     => $depth,
 								'max_depth' => $args['max_depth'],
 								'before'    => '<footer class="reply comment-reply panel-footer">',
-								'after'     => '</footer><!-- .reply -->'
+								'after'     => '</footer><!-- .reply -->',
 							)
 						)
 					); ?>
@@ -674,7 +678,7 @@ function _blankout_comment($comment, $args, $depth) {
 								'depth'     => $depth,
 								'max_depth' => $args['max_depth'],
 								'before'    => '<footer class="reply comment-reply panel-footer">',
-								'after'     => '</footer><!-- .reply -->'
+								'after'     => '</footer><!-- .reply -->',
 							)
 						)
 					); ?>
