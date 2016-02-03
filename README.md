@@ -12,6 +12,10 @@ Built using:
 
 ## Changelog
 
+### v3.8
+* Update Bootstrap to 3.3.6
+* Added some Mindshare Theme API integrations to `functions.php`
+
 ### v3.7.6
 * Fix for the "More Tag" on archive.php
 * Add featured images to single.php 
