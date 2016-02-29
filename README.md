@@ -12,6 +12,9 @@ Built using:
 
 ## Changelog
 
+### v3.8.1
+* Fix for fatal error from old versions of TGMPA library
+
 ### v3.8
 * Update Bootstrap to 3.3.6
 * Enable field visibility settings in Gravity Forms
