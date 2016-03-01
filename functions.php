@@ -127,14 +127,15 @@ add_action('init', 'blankout_add_editor_styles');
 register_nav_menus(
 	array(
 		'main-nav'   => __('Main Navigation', 'blankout'), // main nav in header
-		'footer-nav' => __('Footer Navigation', 'blankout') // secondary nav in footer
+		'footer-nav' => __('Footer Navigation', 'blankout'), // secondary nav in footer
+		'side-nav' => __('Sidebar Navigation', 'sfcc'), // secondary nav in sidebar
 	)
 );
 if(!is_nav_menu('main-nav')) {
-	wp_create_nav_menu('Main Navigation', array('slug' => 'main-nav'));
+	wp_create_nav_menu('Main Navigation');
 }
 if(!is_nav_menu('footer-nav')) {
-	wp_create_nav_menu('Footer Navigation', array('slug' => 'footer-nav'));
+	wp_create_nav_menu('Footer Navigation');
 }
 
 /**
