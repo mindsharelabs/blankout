@@ -44,6 +44,9 @@ if(!function_exists('blankout_theme_features')) {
 	// Register Theme Features
 	function blankout_theme_features() {
 
+		// Add theme support for 4.1+ title tag output style
+		add_theme_support('title-tag');
+
 		// Add theme support for Automatic Feed Links
 		add_theme_support('automatic-feed-links');
 

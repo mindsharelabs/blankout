@@ -12,6 +12,10 @@ Built using:
 
 ## Changelog
 
+### v3.8.2
+* Update title tag output for new WP 4.1+ method
+* Remove old mobile friendly meta tags
+
 ### v3.8.1
 * Fix for fatal error from old versions of TGMPA library
 

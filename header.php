@@ -10,12 +10,8 @@
 <html <?php language_attributes(); ?> class="no-js"><![endif]-->
 <head>
 	<meta charset="<?php bloginfo('charset'); ?>" />
-	<title><?php wp_title(); ?></title>
 	<?php blankout_copyright(); ?>
-	<!--[if IE]>
-	<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1' />    <![endif]-->
-	<meta name="HandheldFriendly" content="True" />
-	<meta name="MobileOptimized" content="320" />
+	<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1' /><![endif]-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 	<?php if (function_exists('mapi_get_favicon_url') && mapi_get_favicon_url() != NULL) : ?>
 		<link rel="shortcut icon" href="<?php echo mapi_get_favicon_url(); ?>" />
@@ -31,10 +27,7 @@
 	<?php if (function_exists('mapi_is_true') && mapi_is_true(get_option('default_ping_status'))) : ?>
 		<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 	<?php endif; ?>
-
 	<?php wp_head(); ?>
-
-
 	<?php blankout_enable_nav_hover(); ?>
 </head>
 <body <?php body_class(); ?>>
@@ -63,7 +56,7 @@
 							'menu_class'      => 'nav navbar-nav',
 							'theme_location'  => 'main-nav',
 							'depth'           => '2',
-							'walker'          => new Blankout_Menu_Walker()
+							'walker'          => new Blankout_Menu_Walker(),
 						)
 					);
 				} ?>
