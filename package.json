@@ -5,7 +5,7 @@
     "main": "index.php",
     "repository": {
         "type": "git",
-        "url": "ssh://git@github.com:mindsharestudios/blankout.git"
+        "url": "ssh://git@github.com:mindsharelabs/blankout.git"
     },
     "devDependencies": {
         "grunt": "^0.4.5",
