@@ -13,6 +13,8 @@ Built using:
 ## Changelog
 
 ### v3.8.2
+* 
+* Add equalheight DIV Js function
 * Update title tag output for new WP 4.1+ method
 * Remove old mobile friendly meta tags
 
