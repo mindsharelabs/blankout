@@ -1,4 +1,5 @@
-# Mindshare .gitignore template v 1.0.1
+### Mindshare .gitignore template v 1.0.6
+# https://raw.githubusercontent.com/mindsharestudios/gitignore/master/.gitignore
 
 ### Composer template
 composer.phar
@@ -63,15 +64,17 @@ com_crashlytics_export_strings.xml
 # Notepad++ backups #
 *.bak
 
-## Dreamweaver added files
+## Dreamweaver cruft
 _notes
 dwsync.xml
 
-## Node stuff
-
-# Logs
-logs
+# Logs and debugging
 *.log
+debug.log
+debug_log
+error_log
+log.txt
+logs
 
 # Runtime data
 pids
@@ -90,9 +93,7 @@ coverage
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
 
-# Dependency directory
-# Commenting this out is preferred by some people, see
-# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
+## Node dependency directory
 node_modules
 
 # Users Environment Variables
@@ -100,8 +101,8 @@ node_modules
 
 ## Mac OSX stuff
 
-.DS_Store
 .AppleDouble
+.DS_Store
 .LSOverride
 
 # Icon must end with two \r
@@ -115,43 +116,96 @@ Icon
 .Trashes
 
 # Directories potentially created on remote AFP share
+.apdisk
 .AppleDB
 .AppleDesktop
 Network Trash Folder
 Temporary Items
-.apdisk
 
-## WP stuff
+## WordPress, gallery, temp/caches, and backup stuff
+*_backup
+.cache
+_wpeprivate
+backup-db
+backup-templates
+backupbuddy_backups
+backupbuddy_temp
+cache
+cgi-bin/
+gallery/*
+gator_cache
+gt-cache
+ics-importer-cache
+imagecache*
+minify-cache
+pclzip-*
+plugins/wp-file-cache/cache
+shadowbox-js
 sitemap.xml
 sitemap.xml.gz
-wp-config.php
+temp
+tmp
+uploads*
+#wp-config.php
+wp-config-sample.php
 wp-content/advanced-cache.php
+wp-content/album/*
+wp-content/backup*
 wp-content/backup-db/
+wp-content/backup-db/*
+wp-content/backups
 wp-content/backups/
 wp-content/blogs.dir/
+wp-content/blogs.dir/*/*
 wp-content/cache/
+wp-content/cache/*
+wp-content/debug.log
+wp-content/gallery/*
+wp-content/managewp
+wp-content/managewp/*
+wp-content/plugins/*/cache
+wp-content/plugins/ezpz-one-click-backup/*
+wp-content/plugins/plugins
+wp-content/plugins/wpengine-snapshot/snapshots/*
+wp-content/temp*
+wp-content/themes/*/cache
+wp-content/themes/thesis*/custom/cache
+wp-content/themes/thesis*/lib/scripts/cache
 wp-content/upgrade/
+wp-content/upgrade/*
+wp-content/uploads
 wp-content/uploads/
+wp-content/uploads/backupbuddy/*
+wp-content/uploads/cache/*
+wp-content/uploads/shadowbox*
+wp-content/uploads/snapshots
+wp-content/uploads/wp-clone/*
+wp-content/w3-*
+wp-content/w3tc*
+wp-content/w3tc-bak
 wp-content/wp-cache-config.php
+
 ## ignore the top level .htaccess file (in case you need a different one for local development)
 /.htaccess
 
-## SVN Stuff
-.svn/
+## Versioning stuff
+.cvs
+.git
+.listing
+.svn
 
 ## Eclipse stuff
 *.pydevproject
-.metadata
-.gradle
-bin/
-tmp/
-*.tmp
-*.bak
 *.swp
+*.tmp
 *~.nib
-local.properties
-.settings/
+.gradle
 .loadpath
+.metadata
+.settings/
+bin/
+local.properties
+tmp/
 
 # External tool builders
 .externalToolBuilders/
@@ -165,7 +219,7 @@ local.properties
 # PDT-specific
 .buildpath
 
-# sbteclipse plugin 
+# sbteclipse plugin
 .target
 
 # TeXlipse plugin
@@ -173,15 +227,48 @@ local.properties
 
 ## Sublime text
 
-# workspace files are user-specific
 *.sublime-workspace
-
-# project files should be checked into the repository, unless a significant
-# proportion of contributors will probably not be using SublimeText
-# *.sublime-project
+*.sublime-project
 
 #sftp configuration file
 sftp-config.json
 
-## Backup stuff
-backup-db
+# Known large file types
+*.3gp
+*.3gpp
+*.asf
+*.asx
+*.avi
+*.bin
+*.deb
+*.dll
+*.dmg
+*.exe
+*.flv
+*.gz
+*.hqx
+*.img
+*.iso
+*.kar
+*.m4a
+*.m4v
+*.mid
+*.midi
+*.mng
+*.mov
+*.mp3
+*.mp4
+*.mpeg
+*.mpg
+*.ogg
+*.pdf
+*.ra
+*.tar
+*.tgz
+*.webm
+*.wmv
+*.zip
+*.doc
+*.docx
+*.rtf
+*.odt
