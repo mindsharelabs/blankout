@@ -7,7 +7,6 @@
 		<nav>
 			<?php
 			if (has_nav_menu('footer-nav')) {
-
 				wp_nav_menu(
 					array(
 						'container'       => FALSE, // remove nav container
@@ -22,13 +21,13 @@
 						'depth'           => 1,
 					)
 				);
-			} ?>
+			}
+			?>
 		</nav>
 		<div class="copyright pull-left">
 			<?php mapi_social_links(); ?>
 			&copy;<?php echo date('Y'); ?> <a href="<?php echo home_url('/') ?>" title="<?php bloginfo('name'); ?>"><?php bloginfo('name'); ?></a>. <?php _e('All rights reserved', 'blankout'); ?>.
 		</div>
-
 		<div class="pull-right text-center-xs">
 			<?php blankout_footer_credit(); ?>
 		</div>

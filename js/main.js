@@ -25,7 +25,7 @@ jQuery(document).ready(function($) {
     // here for the submit button of the comment reply form
     $('#commentsubmit').addClass('btn btn-primary');
     $('#commentform').addClass('form-inline');
-    $('#comments input').addClass('form-control');
+    $('#comments').find('input').addClass('form-control');
 
     // the search widget
     $('input.search-field, .textwidget select, .widget_archive select').addClass('form-control');
@@ -130,10 +130,10 @@ jQuery(document).ready(function($) {
     });
 
     /**
-     *  Responsive jQuery
+     * viewport width
+     *
+     * @type {any}
      */
-
-        // viewport width
     var viewport = $(window).width();
 
     // smaller than 481px
@@ -148,7 +148,6 @@ jQuery(document).ready(function($) {
 
     // larger than or equal to 768px
     if (viewport >= 768) {
-
         // load gravatars
         $('.comment img[data-gravatar]').each(function() {
             $(this).attr('src', $(this).attr('data-gravatar'));
@@ -188,6 +187,7 @@ jQuery(document).ready(function($) {
         }
     });
 
+    // Un-hide the BODY tag
     $(document.body).show();
 
 });

@@ -1,12 +1,11 @@
 <?php
 /**
- * carousel.php
+ * carousel.php - flexslider carousel
  *
  * @created   12/18/12 3:53 PM
- * @author    Mindshare Studios, Inc.
- * @copyright Copyright (c) 2013
- * @link      http://www.mindsharelabs.com/documentation/
- *
+ * @author    Mindshare Labs, Inc.
+ * @copyright Copyright (c) 2013-2016
+ * @link      https://mind.sh/are/
  */
 
 $slide_query = new WP_Query('post_type=carousel');

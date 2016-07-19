@@ -12,8 +12,8 @@ module.exports = function(grunt) {
                 }, options: {
                     compress: true,
                     cleancss: true,
-                    sourceMap: true,
-                    sourceMapFilename: "style.css.map"
+                    sourceMap: false,
+                    //sourceMapFilename: "style.css.map"
                 }
             }
         },

@@ -1,10 +1,13 @@
 Blankout
 ========
 
-Blankout: a robust, responsive, Bootstrap 3-enabled theme framework for WordPress developed by Mindshare Studios as a foundation for client projects. Blankout is open source and ready to rock n’ roll on your next WP project. Blankout is lightweight and super flexible and is built to be used with the Mindshare Theme API plugin.
+Blankout: a robust, responsive, Bootstrap 3-enabled theme framework for WordPress developed by Mindshare Labs as a foundation for client WordPress projects. Blankout is open source and ready to rock n’ roll on your next WP project. Blankout is lightweight and super flexible and is built to be used with the Mindshare Theme API plugin.
 
-Built using:
-* Bootstrap
+<img src="./screenshot.png" width="300" height="225" />
+<br />
+
+Built with love using:
+* Bootstrap (Bootstrap 4 coming soon)
 * FontAwesome
 * jQuery
 * LESS
@@ -30,6 +33,10 @@ Waiting...
 1. Upload the newly compiled `style.css` to the remote server.
 
 # Changelog
+
+### v3.9
+* Reorganization and cleanup
+* Update branding
 
 ### v3.8.3
 * Updated README

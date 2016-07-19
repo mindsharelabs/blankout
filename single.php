@@ -37,7 +37,7 @@
 								'nextpagelink'     => __('Next page', 'blankout'),
 								'previouspagelink' => __('Previous page', 'blankout'),
 								'pagelink'         => '%',
-								'echo'             => 1
+								'echo'             => 1,
 							)
 						);
 						?>

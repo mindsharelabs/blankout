@@ -5,7 +5,7 @@
  * Settings specific to the Mindshare Security plugin.
  *
  * @created   2/3/16 4:10 PM
- * @author    Mindshare Studios, Inc.
+ * @author    Mindshare Labs, Inc.
  * @copyright Copyright (c) 2006-2016
  * @link      https://mindsharelabs.com/
  *

@@ -3,18 +3,15 @@
  * Include the TGM_Plugin_Activation class. Check for dependencies.
  */
 //require_once dirname(__FILE__).'/class-tgm-plugin-activation.php';
-require_once(dirname(__FILE__).'/class-tgm-plugin-activation.php');
+require_once(dirname(__FILE__) . '/class-tgm-plugin-activation.php');
 add_action('tgmpa_register', 'blankout_register_required_plugins');
 
 /**
  * Register the required plugins for this theme.
- *
  * In this example, we register two plugins - one included with the TGMPA library
  * and one from the .org repo.
- *
  * The variable passed to tgmpa_register_plugins() should be an array of plugin
  * arrays.
- *
  * This function is hooked into tgmpa_init, which is fired within the
  * TGM_Plugin_Activation class constructor.
  */
@@ -30,7 +27,7 @@ function blankout_register_required_plugins() {
 		array(
 			'name'               => 'Mindshare Theme API', // The plugin name.
 			'slug'               => 'mindshare-api-master', // The plugin slug (typically the folder name).
-			'source'             => 'https://github.com/mindsharestudios/mindshare-api/archive/master.zip', // The plugin source.
+			'source'             => 'https://github.com/mindsharelabs/mindshare-api/archive/master.zip', // The plugin source.
 			'required'           => TRUE, // If false, the plugin is only 'recommended' instead of required.
 			'force_activation'   => FALSE, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch.
 			'force_deactivation' => FALSE, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins.
@@ -91,7 +88,7 @@ function blankout_register_required_plugins() {
 			// %s = dashboard link.
 			'nag_type'                        => 'updated'
 			// Determines admin notice type - can only be 'updated', 'update-nag' or 'error'.
-		)
+		),
 	);
 
 	tgmpa($plugins, $config);

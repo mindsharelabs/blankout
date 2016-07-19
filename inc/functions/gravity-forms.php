@@ -7,8 +7,8 @@
  * Contributed to Blankout by Geet Jacobs - https://github.com/Jeradin
  *
  * @created   3/17/15 11:14 AM
- * @author    Mindshare Studios, Inc.
- * @copyright Copyright (c) 2006-2015
+ * @author    Mindshare Labs, Inc.
+ * @copyright Copyright (c) 2006-2016
  * @link      https://mindsharelabs.com/
  */
 

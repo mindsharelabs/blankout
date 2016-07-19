@@ -3,10 +3,9 @@
  * WooCommerce Hooks for Blankout
  *
  * @created   11/7/13 10:17 AM
- * @author    Mindshare Studios, Inc.
- * @copyright Copyright (c) 2013
- * @link      http://www.mindsharelabs.com/documentation/
- *
+ * @author    Mindshare Labs, Inc.
+ * @copyright Copyright (c) 2013-2016
+ * @link      https://mind.sh/are/
  */
 
 add_theme_support('woocommerce');
@@ -47,7 +46,6 @@ function blankout_woo_wrapper_end() {
 
 /**
  * Adds Blankout code to Woo item start
- *
  */
 function blankout_woo_item_start() {
 	// add any extra code to insert before each product here

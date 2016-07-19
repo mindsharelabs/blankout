@@ -1,50 +1,63 @@
 <?php
-
 /**
- * Blankout Theme WordPress Functions File
- *
+ * Check for dependencies
  */
-
-// check for dependencies
 require_once(dirname(__FILE__) . '/inc/dependencies/check.php');
 
 /**
- * Constants
+ * Misc. function includes
  */
+require_once get_stylesheet_directory() . '/inc/functions/comments.php';
+require_once get_stylesheet_directory() . '/inc/functions/nav.php';
+require_once get_stylesheet_directory() . '/inc/functions/opengraph.php';
+require_once get_stylesheet_directory() . '/inc/functions/pagination.php';
+require_once get_stylesheet_directory() . '/inc/functions/woocommerce.php';
+//require_once get_stylesheet_directory().'/inc/functions/mindshare.php';
 
-// Facebook app ID for Facebook comments plugin
-define('FB_APP_ID', FALSE); // input your app ID to enable Facebook comments, e.g. '13586768111'
-
-define('BOOTSTRAP_DROPDOWN_ON_HOVER', FALSE); // if TRUE, overrides the default bootstrap behavior where user must click on a top level menu item in order to see subpages
-
-/**
- * Includes
- */
-//include(get_stylesheet_directory().'/inc/customize.php'); // enable theme customizer for Blankout (Appearance > Themes)
-//include(get_stylesheet_directory() . '/inc/custom-post-types.php');
-//include(get_stylesheet_directory().'/inc/woocommerce.php'); // enable WooCommerce support
-//include(get_stylesheet_directory().'/inc/mindshare.php'); // Mindshare stuff
-if(get_option('rg_gforms_disable_css') == 1) {
-	include(get_stylesheet_directory().'/inc/gravity-forms.php'); // enable Gravity forms CSS styling
+// Enable Gravity forms CSS styling if CSS is disabled in the plugin settings
+if (get_option('rg_gforms_disable_css') == 1) {
+	include_once get_stylesheet_directory() . '/inc/functions/gravity-forms.php';
 }
-// enable field visibility settings in Gravity Forms
-add_filter( 'gform_enable_field_label_visibility_settings', '__return_true' );
-
+// Enable field visibility settings in Gravity Forms
+add_filter('gform_enable_field_label_visibility_settings', '__return_true');
 
 /**
- * WordPress setup
+ * Facebook app ID for Facebook comments plugin input your
+ * app ID to enable Facebook comments, e.g. '13586768111'
  */
-// Set content width value based on the theme's design
-if(!isset($content_width)) {
+define('FB_APP_ID', FALSE);
+
+/**
+ * When TRUE, this overrides the default Bootstrap behavior where
+ * user must click on a top level menu item in order to see subpages
+ */
+define('BOOTSTRAP_DROPDOWN_ON_HOVER', FALSE);
+
+/**
+ * WordPress theme setup
+ */
+if (!isset($content_width)) {
+	/**
+	 * Set content width value based on the Bootstrap grid
+	 */
 	$content_width = 1170;
 }
 
-if(!function_exists('blankout_theme_features')) {
+/**
+ * Add theme support for custom CSS in the TinyMCE visual editor
+ */
+function blankout_add_editor_styles() {
+	add_editor_style('css/editor-style.css');
+}
+
+add_action('init', 'blankout_add_editor_styles');
+
+if (!function_exists('blankout_theme_features')) {
 
 	// Register Theme Features
 	function blankout_theme_features() {
 
-		// Add theme support for 4.1+ title tag output style
+		// Add theme support for WP 4.1+ title tag output style
 		add_theme_support('title-tag');
 
 		// Add theme support for Automatic Feed Links
@@ -70,16 +83,6 @@ if(!function_exists('blankout_theme_features')) {
 		// Set custom thumbnail dimensions
 		set_post_thumbnail_size(125, 125, TRUE);
 
-		// Add theme support for Custom Background
-		$background_args = array(
-			'default-color'          => 'ffffff',
-			'default-image'          => '',
-			'wp-head-callback'       => '_custom_background_cb',
-			'admin-head-callback'    => '',
-			'admin-preview-callback' => '',
-		);
-		add_theme_support('custom-background', $background_args);
-
 		// Add theme support for Custom Header
 		$header_args = array(
 			'default-image'      => '',
@@ -100,12 +103,12 @@ if(!function_exists('blankout_theme_features')) {
 		add_theme_support('html5', $markup);
 
 		// Add theme support for Translation
-		load_theme_textdomain('blankout', get_stylesheet_directory() . '/translation');
+		/*load_theme_textdomain('blankout', get_stylesheet_directory() . '/translation');
 		$locale = get_locale();
 		$locale_file = get_stylesheet_directory() . "/translation/$locale.php";
-		if(is_readable($locale_file)) {
+		if (is_readable($locale_file)) {
 			require_once($locale_file);
-		}
+		}*/
 	}
 
 	// Hook into the 'after_setup_theme' action
@@ -113,56 +116,19 @@ if(!function_exists('blankout_theme_features')) {
 }
 
 /**
- * Add theme support for custom CSS in the TinyMCE visual editor *
- */
-function blankout_add_editor_styles() {
-	add_editor_style('css/editor-style.css');
-}
-
-add_action('init', 'blankout_add_editor_styles');
-
-/**
- * Menus
+ * Menus setup
  */
 register_nav_menus(
 	array(
 		'main-nav'   => __('Main Navigation', 'blankout'), // main nav in header
 		'footer-nav' => __('Footer Navigation', 'blankout'), // secondary nav in footer
-		'side-nav' => __('Sidebar Navigation', 'sfcc'), // secondary nav in sidebar
+		'side-nav'   => __('Sidebar Navigation', 'sfcc'), // secondary nav in sidebar
 	)
 );
-if(!is_nav_menu('main-nav')) {
-	wp_create_nav_menu('Main Navigation');
-}
-if(!is_nav_menu('footer-nav')) {
-	wp_create_nav_menu('Footer Navigation');
-}
+//if (!is_nav_menu('main-nav')) { wp_create_nav_menu('Main Navigation'); }
 
 /**
- * Adds a login/out link to a specific wp_nav_menu.
- *
- * @param $items string The menu HTML.
- * @param $args  object Menu settings object.
- *
- * @usage <code>add_filter('wp_nav_menu_items', 'blankout_add_loginout_nav', 10, 2);</code>
- *
- * @return string
- */
-function blankout_add_loginout_nav($items, $args) {
-
-	$target_menu_slug = apply_filters('blankout_add_loginout_nav_slug', 'footer-nav');
-
-	if($args->menu && $args->menu == $target_menu_slug) {
-		$items .= '<li id="menu-item-loginout" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-loginout">' . wp_loginout('', FALSE) . '</li>';
-	}
-
-	return $items;
-}
-
-add_filter('wp_nav_menu_items', 'blankout_add_loginout_nav', 10, 2);
-
-/**
- *    Widgets
+ *  Widget setup
  */
 function blankout_widgets_init() {
 
@@ -220,10 +186,9 @@ add_filter('wp_list_categories', 'blankout_add_cat_count');
 
 /**
  * Check for Mindshare Theme API plugin and initialize options
- *
  */
 function blankout_configure_mapi() {
-	if(function_exists('mapi_update_option')) {
+	if (function_exists('mapi_update_option')) {
 		mapi_update_option('load_bootstrap', TRUE);
 		add_action('wp_enqueue_scripts', 'mapi_load_bootstrap');
 
@@ -238,7 +203,7 @@ function blankout_configure_mapi() {
 add_action('wp_loaded', 'blankout_configure_mapi');
 
 /**
- *
+ * Remove Mindshare API Social CSS
  */
 function blankout_dequeue_social_css() {
 	wp_dequeue_style('mapi-social');
@@ -248,12 +213,11 @@ add_action('wp_enqueue_scripts', 'blankout_dequeue_social_css', 101);
 
 /**
  * Load frontend CSS/JS
- *
  */
 function blankout_styles() {
-	if(!is_admin()) {
+	if (!is_admin()) {
 		wp_enqueue_style('blankout-font-stylesheet', '//fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic%7CSource+Code+Pro:400,600,700%7COswald:400,700,300', array(), '', 'all');
-		if(get_option('rg_gforms_disable_css') == 1) {
+		if (get_option('rg_gforms_disable_css') == 1) {
 			wp_enqueue_style('blankout-gforms', get_stylesheet_directory_uri() . '/css/gforms-blankout.min.css');
 		}
 		wp_enqueue_style('blankout-stylesheet', get_stylesheet_directory_uri() . '/style.css', array(), '', 'all');
@@ -264,12 +228,11 @@ add_action('wp_enqueue_scripts', 'blankout_styles', 999);
 
 /**
  * Enqueue scripts
- *
  */
 function blankout_scripts() {
-	if(!is_admin()) {
+	if (!is_admin()) {
 
-		if(is_singular() && comments_open()) {
+		if (is_singular() && comments_open()) {
 			wp_enqueue_script('comment-reply');
 		}
 
@@ -279,557 +242,3 @@ function blankout_scripts() {
 
 add_action('wp_enqueue_scripts', 'blankout_scripts', 999);
 
-/**
- * Adds an CSS class 'active' to menu items.
- *
- * @param $classes
- * @param $item
- *
- * @return array
- */
-function blankout_add_active_class($classes, $item) {
-	if($item->menu_item_parent == 0 && in_array('current-menu-item', $classes)) {
-		$classes[] = "active";
-	}
-
-	return $classes;
-}
-
-add_filter('nav_menu_css_class', 'blankout_add_active_class', 10, 2);
-
-if(!class_exists('Blankout_Menu_Walker')) {
-	/**
-	 * Class Blankout_Menu_Walker
-	 */
-	class Blankout_Menu_Walker extends Walker_Nav_Menu {
-		/**
-		 * @see   Walker::start_lvl()
-		 * @since 3.0.0
-		 *
-		 * @param string $output Passed by reference. Used to append additional content.
-		 * @param int    $depth  Depth of page. Used for padding.
-		 * @param array  $args
-		 */
-		function start_lvl(&$output, $depth = 0, $args = array()) {
-			$indent = str_repeat("\t", $depth);
-			$output .= "\n$indent<ul class=\"dropdown-menu\">\n";
-		}
-
-		/**
-		 * @see      Walker::start_el()
-		 * @since    3.0.0
-		 *
-		 * @param string       $output Passed by reference. Used to append additional content.
-		 * @param object       $item   Menu item data object.
-		 * @param int          $depth  Depth of menu item. Used for padding.
-		 * @param array|object $args
-		 * @param int          $id
-		 *
-		 * @internal param int $current_page Menu item ID.
-		 */
-
-		function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0) {
-			global $wp_query;
-			$indent = ($depth) ? str_repeat("\t", $depth) : '';
-
-			/**
-			 * Dividers & Headers
-			 * ==================
-			 * Determine whether the item is a Divider, Header, or regular menu item.
-			 * To prevent errors we use the strcasecmp() function to so a comparison
-			 * that is not case sensitive. The strcasecmp() function returns a 0 if
-			 * the strings are equal.
-			 */
-			if(strcasecmp($item->title, 'divider') == 0) {
-				// Item is a Divider
-				$output .= $indent . '<li class="divider">';
-			} else {
-				if(strcasecmp($item->title, 'divider-vertical') == 0) {
-					// Item is a Vertical Divider
-					$output .= $indent . '<li class="divider-vertical">';
-				} else {
-					if(strcasecmp($item->title, 'nav-header') == 0) {
-						// Item is a Header
-						$output .= $indent . '<li class="nav-header">' . esc_attr($item->attr_title);
-					} else {
-
-						$class_names = $value = '';
-						$classes = empty($item->classes) ? array() : (array)$item->classes;
-						$classes[] = ($item->current) ? 'active' : '';
-						$classes[] = 'menu-item-' . $item->ID;
-						$class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args));
-
-						if($args->has_children && $depth > 0) {
-							$class_names .= ' dropdown-submenu';
-						} else {
-							if($args->has_children && $depth === 0) {
-								$class_names .= ' dropdown';
-							}
-						}
-
-						$class_names = $class_names ? ' class="' . esc_attr($class_names) . '"' : '';
-
-						$id = apply_filters('nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args);
-						$id = $id ? ' id="' . esc_attr($id) . '"' : '';
-
-						$output .= $indent . '<li' . $id . $value . $class_names . '>';
-
-						$attributes = !empty($item->target) ? ' target="' . esc_attr($item->target) . '"' : '';
-						$attributes .= !empty($item->xfn) ? ' rel="' . esc_attr($item->xfn) . '"' : '';
-						$attributes .= !empty($item->url) ? ' href="' . esc_attr($item->url) . '"' : '';
-						$attributes .= ($args->has_children) ? ' data-toggle="dropdown" data-target="#" class="dropdown-toggle"' : '';
-
-						$item_output = $args->before;
-
-						/**
-						 * Glyphicons
-						 * ===========
-						 * Since the the menu item is NOT a Divider or Header we check the see
-						 * if there is a value in the attr_title property. If the attr_title
-						 * property is NOT null we apply it as the class name for the glyphicon.
-						 */
-						if(!empty($item->attr_title)) {
-							$item_output .= '<a' . $attributes . '><i class="' . esc_attr($item->attr_title) . '"></i>&nbsp;';
-						} else {
-							$item_output .= '<a' . $attributes . '>';
-						}
-
-						$item_output .= $args->link_before . apply_filters('the_title', $item->title, $item->ID) . $args->link_after;
-						$item_output .= ($args->has_children && $depth == 0) ? ' <span class="caret"></span></a>' : '</a>';
-						$item_output .= $args->after;
-
-						$output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);
-					}
-				}
-			}
-		}
-
-		/**
-		 * Traverse elements to create list from elements.
-		 *
-		 * Display one element if the element doesn't have any children otherwise,
-		 * display the element and its children. Will only traverse up to the max
-		 * depth and no ignore elements under that depth.
-		 *
-		 * This method shouldn't be called directly, use the walk() method instead.
-		 *
-		 * @see   Walker::start_el()
-		 * @since 2.5.0
-		 *
-		 * @param object $element           Data object
-		 * @param array  $children_elements List of elements to continue traversing.
-		 * @param int    $max_depth         Max depth to traverse.
-		 * @param int    $depth             Depth of current element.
-		 * @param array  $args
-		 * @param string $output            Passed by reference. Used to append additional content.
-		 *
-		 * @return null Null on failure with no changes to parameters.
-		 */
-
-		function display_element($element, &$children_elements, $max_depth, $depth, $args, &$output) {
-			if(!$element) {
-				return;
-			}
-
-			$id_field = $this->db_fields['id'];
-
-			//display this element
-			if(is_object($args[0])) {
-				$args[0]->has_children = !empty($children_elements[ $element->$id_field ]);
-			}
-
-			parent::display_element($element, $children_elements, $max_depth, $depth, $args, $output);
-		}
-	}
-}
-
-/**
- * @param string $before
- * @param string $after
- */
-function blankout_page_nav($before = '<div class="pagination pagination-centered">', $after = '</div>') {
-	global $wp_query; // $wpdb
-	//$request = $wp_query->request;
-	$posts_per_page = intval(get_query_var('posts_per_page'));
-	$paged = intval(get_query_var('paged'));
-	$numposts = $wp_query->found_posts;
-	$max_page = $wp_query->max_num_pages;
-	if($numposts <= $posts_per_page) {
-		return;
-	}
-	if(empty($paged) || $paged == 0) {
-		$paged = 1;
-	}
-	$pages_to_show = 7;
-	$pages_to_show_minus_1 = $pages_to_show - 1;
-	$half_page_start = floor($pages_to_show_minus_1 / 2);
-	$half_page_end = ceil($pages_to_show_minus_1 / 2);
-	$start_page = $paged - $half_page_start;
-	if($start_page <= 0) {
-		$start_page = 1;
-	}
-	$end_page = $paged + $half_page_end;
-	if(($end_page - $start_page) != $pages_to_show_minus_1) {
-		$end_page = $start_page + $pages_to_show_minus_1;
-	}
-	if($end_page > $max_page) {
-		$start_page = $max_page - $pages_to_show_minus_1;
-		$end_page = $max_page;
-	}
-	if($start_page <= 0) {
-		$start_page = 1;
-	}
-	echo $before . "<ul class='pagination'>";
-	if($start_page >= 2 && $pages_to_show < $max_page) {
-		$first_page_text = "First";
-		echo '<li class="bpn-first-page-link"><a href="' . get_pagenum_link() . '" title="' . $first_page_text . '">' . $first_page_text . '</a></li>';
-	}
-	if($paged <= 1) {
-		echo '<li class="disabled"><span>&laquo;</span></li>';
-	} else {
-		echo '<li class="bpn-prev-link">';
-		previous_posts_link('&laquo;');
-		echo '</li>';
-	}
-	for($i = $start_page; $i <= $end_page; $i++) {
-		if($i == $paged) {
-			echo '<li class="disabled"><a href="' . get_pagenum_link($i) . '">' . $i . '</a></li>';
-		} else {
-			echo '<li><a href="' . get_pagenum_link($i) . '">' . $i . '</a></li>';
-		}
-	}
-	echo '<li class="bpn-next-link">';
-	next_posts_link('&raquo;');
-	echo '</li>';
-	if($end_page < $max_page) {
-		$last_page_text = "Last";
-		echo '<li class="bpn-last-page-link"><a href="' . get_pagenum_link($max_page) . '" title="' . $last_page_text . '">' . $last_page_text . '</a></li>';
-	}
-	echo "</ul>" . $after;
-}
-
-/**
- * Adjust pagination/pager container
- *
- * @param array $args
- *
- * @return array
- */
-function blankout_link_pages_args($args) {
-
-	$args['before'] = '<div class="pagination pagination-centered"><ul class="pagination">';
-	$args['after'] = '</ul></div>';
-
-	return $args;
-}
-
-/**
- * Wrap pagination/pager links in list items
- *
- * @param string $link
- * @param int    $page_number
- *
- * @return string
- */
-function blankout_link_pages_link($link, $page_number) {
-
-	global $page, $more;
-
-	// blame core
-	$not_current_page = ($page_number != $page);
-	$more_front = (empty($more) && 1 == $page);
-	if($not_current_page || $more_front) {
-		$link = '<li>' . $link . '</li>';
-	} else {
-		$link = '<li class="active"><span>' . $link . '</span></li>';
-	}
-
-	return $link;
-}
-
-add_filter('wp_link_pages_args', 'blankout_link_pages_args');
-add_filter('wp_link_pages_link', 'blankout_link_pages_link', 10, 2);
-
-/**
- * wp_list_comments callback
- *
- * @param $comment
- * @param $args
- * @param $depth
- */
-function blankout_comments($comment, $args, $depth) {
-	$GLOBALS['comment'] = $comment;
-	$bgauthemail = get_comment_author_email(); ?>
-	<article id="comment-<?php comment_ID(); ?>" <?php comment_class("media clearfix"); ?>>
-		<img data-gravatar="http://www.gravatar.com/avatar/<?php echo md5($bgauthemail); ?>?s=48" class="pull-left media-object load-gravatar avatar avatar-48 photo" height="48" width="48" src="<?php echo get_stylesheet_directory_uri(); ?>/img/nothing.gif" />
-		<header class="comment-author vcard">
-			<?php printf(__('<cite class="fn">%s</cite>'), get_comment_author_link()) ?>
-			<time datetime="<?php comment_time('Y-m-j'); ?>"><a href="<?php echo htmlspecialchars(get_comment_link($comment->comment_ID)) ?>"><?php comment_time('F jS, Y'); ?> </a></time>
-			<?php edit_comment_link(__('Edit', 'blankout'), '<button class="btn btn-default btn-xs">', '</button>') ?>
-		</header>
-		<?php if($comment->comment_approved == '0') : ?>
-			<div class="alert info">
-				<p><?php _e('Your comment is awaiting moderation.', 'blankout') ?></p>
-			</div>
-		<?php endif; ?>
-		<section class="comment_content media-body clearfix">
-			<?php comment_text() ?>
-			<button class="btn btn-primary btn-sm"><?php comment_reply_link(array_merge($args, array('depth' => $depth, 'max_depth' => $args['max_depth']))) ?></button>
-		</section>
-	</article>
-	<?php
-}
-
-/**
- * Template for comments and pingbacks.
- *
- * Used as a callback by wp_list_comments() for displaying the comments.
- */
-function _blankout_comment($comment, $args, $depth) {
-	$GLOBALS['comment'] = $comment;
-
-	if('pingback' == $comment->comment_type || 'trackback' == $comment->comment_type) : ?>
-
-
-		<li id="comment-<?php comment_ID(); ?>" <?php comment_class(empty($args['has_children']) ? '' : 'parent'); ?>>
-		<article id="div-comment-<?php comment_ID(); ?>" class="comment-body media">
-			<a class="pull-left" href="#comment-<?php comment_ID(); ?>">
-				<?php if(0 != $args['avatar_size']) {
-					echo get_avatar($comment, $args['avatar_size']);
-				} ?>
-			</a>
-
-			<div class="media-body">
-				<div class="media-body-wrap panel panel-default">
-					<div class="panel-heading">
-						<h5 class="media-heading"><?php _e('Pingback: ', 'blankout');
-							comment_author_link() ?></h5>
-
-						<div class="comment-meta">
-							<a href="<?php echo esc_url(get_comment_link($comment->comment_ID)); ?>">
-								<time datetime="<?php comment_time('c'); ?>">
-									<?php printf(_x('%1$s at %2$s', '1: date, 2: time', 'blankout'), get_comment_date(), get_comment_time()); ?>
-								</time>
-							</a>
-							<?php edit_comment_link(__('<span style="margin-left: 5px;" class="glyphicon glyphicon-edit"></span> Edit', 'blankout'), '<span class="edit-link">', '</span>'); ?>
-						</div>
-					</div>
-
-					<?php if('0' == $comment->comment_approved) : ?>
-						<p class="comment-awaiting-moderation"><?php _e('Your comment is awaiting moderation.', 'blankout'); ?></p>
-					<?php endif; ?>
-
-					<div class="comment-content panel-body">
-						<?php comment_text(); ?>
-					</div>
-					<!-- .comment-content -->
-
-					<?php comment_reply_link(
-						array_merge(
-							$args, array(
-								'add_below' => 'div-comment',
-								'depth'     => $depth,
-								'max_depth' => $args['max_depth'],
-								'before'    => '<footer class="reply comment-reply panel-footer">',
-								'after'     => '</footer><!-- .reply -->',
-							)
-						)
-					); ?>
-				</div>
-			</div>
-			<!-- .media-body -->
-		</article><!-- .comment-body -->
-
-
-	<?php else : ?>
-
-		<li id="comment-<?php comment_ID(); ?>" <?php comment_class(empty($args['has_children']) ? '' : 'parent'); ?>>
-		<article id="div-comment-<?php comment_ID(); ?>" class="comment-body media">
-			<a class="pull-left" href="#comment-<?php comment_ID(); ?>">
-				<?php if(0 != $args['avatar_size']) {
-					echo get_avatar($comment, $args['avatar_size']);
-				} ?>
-			</a>
-
-			<div class="media-body">
-				<div class="media-body-wrap panel panel-default">
-					<div class="panel-heading">
-						<h5 class="media-heading"><?php printf(__('%s <span class="says">says:</span>', 'blankout'), sprintf('<cite class="fn">%s</cite>', get_comment_author_link())); ?></h5>
-
-						<div class="comment-meta">
-							<a href="<?php echo esc_url(get_comment_link($comment->comment_ID)); ?>">
-								<time datetime="<?php comment_time('c'); ?>">
-									<?php printf(_x('%1$s at %2$s', '1: date, 2: time', 'blankout'), get_comment_date(), get_comment_time()); ?>
-								</time>
-							</a>
-							<?php edit_comment_link(__('<span style="margin-left: 5px;" class="glyphicon glyphicon-edit"></span> Edit', 'blankout'), '<span class="edit-link">', '</span>'); ?>
-						</div>
-					</div>
-
-					<?php if('0' == $comment->comment_approved) : ?>
-						<p class="comment-awaiting-moderation"><?php _e('Your comment is awaiting moderation.', 'blankout'); ?></p>
-					<?php endif; ?>
-
-					<div class="comment-content panel-body">
-						<?php comment_text(); ?>
-					</div>
-					<!-- .comment-content -->
-
-					<?php comment_reply_link(
-						array_merge(
-							$args, array(
-								'add_below' => 'div-comment',
-								'depth'     => $depth,
-								'max_depth' => $args['max_depth'],
-								'before'    => '<footer class="reply comment-reply panel-footer">',
-								'after'     => '</footer><!-- .reply -->',
-							)
-						)
-					); ?>
-				</div>
-			</div>
-			<!-- .media-body -->
-		</article><!-- .comment-body -->
-
-		<?php
-	endif;
-}
-
-/**
- * Adds a hidden div with HTML5 Microdata for posts.
- *
- * @see http://support.google.com/webmasters/bin/answer.py?hl=en&answer=99170 for info on rich snippets
- *
- */
-function blankout_rich_snippets() {
-	if(function_exists('mapi_rich_snippets')) {
-		mapi_rich_snippets();
-	}
-}
-
-/**
- * Optionally displays a credit message in compatible themes when enabled in the Mindshare Theme API
- * (Settings > Developer Settings > Misc. Settings > Show Credit)
- *
- */
-function blankout_copyright() {
-	if(function_exists('mapi_copyright')) {
-		mapi_copyright();
-	}
-}
-
-/**
- * Optionally displays a credit message in compatible themes when enabled in the Mindshare Theme API
- * (Settings > Developer Settings > Misc. Settings > Show Credit)
- *
- */
-function blankout_footer_credit() {
-	$host = parse_url(esc_url(home_url()));
-	$c = '<p id="credit" class="source-org copyright"><a class="no-icon tip" href="http://mind.sh/are/?ref=' . $host['host'] . '" target="_blank" title="Web design, development + SEO by Mindshare Studios"><img src="' . get_stylesheet_directory_uri() . '/img/credit.png" alt="Web design, development + SEO by Mindshare Studios" /></a></p>';
-	if(function_exists('mapi_get_option')) {
-		if(mapi_get_option('show_credit') == TRUE || (array_key_exists('credit', $_GET) && $_GET['credit'] == 1)) {
-			echo $c;
-		}
-	} else {
-		if(isset($_GET['credit'])) {
-			if($_GET['credit'] == 1) {
-				echo $c;
-			}
-		}
-	}
-}
-
-/**
- * Open Graph meta tags and language attributes (for IE)
- *
- * @param $output
- *
- * @return string
- */
-function blankout_add_opengraph_doctype($output) {
-	if(function_exists('mapi_add_opengraph_doctype')) {
-		return mapi_add_opengraph_doctype($output);
-	}
-}
-
-add_filter('language_attributes', 'blankout_add_opengraph_doctype');
-
-/**
- * Adds Facebook Open Graph API stuff to head
- *
- */
-function blankout_facebook_head() {
-	if(function_exists('mapi_facebook_head')) {
-		mapi_facebook_head();
-	}
-}
-
-add_action('wp_head', 'blankout_facebook_head', 5);
-
-/**
- * Changes the default behavior of Bootstrap dropdown nav menus
- * if the constant BOOTSTRAP_DROPDOWN_ON_HOVER is TRUE.
- *
- */
-function blankout_enable_nav_hover() {
-	if(function_exists('mapi_is_mobile_device')) {
-		if(!mapi_is_mobile_device() && BOOTSTRAP_DROPDOWN_ON_HOVER) : ?>
-			<style type="text/css">
-				ul.nav li.dropdown:hover ul.dropdown-menu {
-					display:block;
-					margin:0;
-				}
-				a.menu:after, .dropdown-toggle:after {
-					content:none;
-				}
-			</style>
-		<?php endif;
-	}
-}
-
-/**
- * Adds a Bootstrap pager nav to various WP templates.
- */
-function blankout_nav_above() {
-	blankout_nav('above');
-}
-
-/**
- * Adds a Bootstrap pager nav to various WP templates.
- */
-function blankout_nav_below() {
-	blankout_nav();
-}
-
-/**
- * Adds a Bootstrap pager nav to various WP templates.
- *
- * @param string $position
- */
-function blankout_nav($position = 'below') {
-	?>
-	<div id="nav-<?php echo $position; ?>" class="<?php echo get_post_type(); ?>-navigation">
-		<h5 class="sr-only"><?php echo ucwords(get_post_type()); ?> <?php _e('navigation', 'blankout'); ?></h5>
-		<ul class="pager">
-		<?php if(is_singular()) : ?>
-		<li class="nav-previous"><?php next_post_link('%link', '&lsaquo; %title', TRUE) ?></li>
-		<li class="nav-next"><?php previous_post_link('%link', '%title &rsaquo;', TRUE) ?></li>
-	<?php elseif(is_search()) : ?>
-		<?php if(get_next_posts_link('Previous Results')) : ?>
-				<li class="nav-previous"><?php next_posts_link('Previous Results') ?></div>
-			<?php endif; ?>
-		<?php if(get_previous_posts_link('More Results')) : ?>
-			<li class="nav-next"><?php previous_posts_link('More Results') ?></li>
-		<?php endif; ?>
-	<?php else : ?>
-		<?php if(get_next_posts_link('Previous Entries')) : ?>
-			<li class="nav-previous"><?php next_posts_link('Previous Entries') ?></li>
-		<?php endif; ?>
-		<?php if(get_previous_posts_link('Next Entries')) : ?>
-			<li class="nav-next"><?php previous_posts_link('Next Entries') ?></li>
-		<?php endif; ?>
-	<?php endif; ?>
-		</ul>
-	</div>
-	<?php
-}
