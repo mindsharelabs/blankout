@@ -133,7 +133,7 @@ jQuery(document).ready(function($) {
      *  Responsive jQuery
      */
 
-    // viewport width
+        // viewport width
     var viewport = $(window).width();
 
     // smaller than 481px
@@ -159,6 +159,34 @@ jQuery(document).ready(function($) {
     if (viewport > 1030) {
 
     }
+
+    // back to top
+    var offset = 300, offset_opacity = 1200, scroll_top_duration = 700, $back_to_top = $('.to-top');
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > offset) {
+            $back_to_top.addClass('to-top-is-visible');
+        } else {
+            $back_to_top.removeClass('to-top-is-visible to-top-fade-out');
+        }
+        if ($(this).scrollTop() > offset_opacity) {
+            $back_to_top.addClass('to-top-fade-out');
+        }
+    });
+
+    // smooth scrooling on all in page # anchors, excluding BS data attirbutes
+    //$('a[href*='#']:not([href='#'], .nav, .tab, [data-toggle], [data-animation], [data-content],[data-content], [data-container])').click(function() {
+    $('a.to-top').click(function() {
+        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+            var target = $(this.hash);
+            target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+            if (target.length) {
+                $('html, body').animate({
+                    scrollTop: target.offset().top
+                }, 500);
+                return false;
+            }
+        }
+    });
 
     $(document.body).show();
 
@@ -200,13 +228,13 @@ equalheight = function(container) {
     });
 };
 /*
-// usage examples: 
+ // usage examples:
 
-$(window).load(function() {
-    equalheight('.main article');
-});
+ $(window).load(function() {
+ equalheight('.main article');
+ });
 
-$(window).resize(function() {
-    equalheight('.main article');
-});
-*/
+ $(window).resize(function() {
+ equalheight('.main article');
+ });
+ */

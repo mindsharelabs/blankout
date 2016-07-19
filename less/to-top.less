@@ -1,0 +1,62 @@
+// to top
+.to-top {
+
+	@back-to-top-size: 40px;
+
+	color:              #FFFFFF;
+	display:            inline-block;
+	height:             @back-to-top-size;
+	width:              @back-to-top-size;
+	position:           fixed;
+	bottom:             100px;
+	right:              10px;
+	z-index:            @zindex-navbar;
+	box-shadow:         0 0 10px rgba(0, 0, 0, 0.05);
+	text-align:         center;
+	padding-top:        19px;
+	overflow:           hidden;
+	white-space:        nowrap;
+	background:         @brand-primary;
+	opacity:            0;
+	-webkit-transition: opacity .3s 0s, visibility 0s .3s;
+	-moz-transition:    opacity .3s 0s, visibility 0s .3s;
+	transition:         opacity .3s 0s, visibility 0s .3s;
+
+	&.to-top-visible {
+		visibility: visible;
+		opacity:    1;
+	}
+	&.to-top-fade-out {
+		opacity: .5;
+	}
+
+	&.to-top-is-visible, &.to-top-fade-out {
+		background-color: @brand-primary;
+		opacity:          1;
+	}
+
+	i {
+
+	}
+
+	@media only screen and (min-width: @screen-sm) {
+		right:  20px;
+		bottom: 20px;
+
+	}
+
+	@media only screen and (min-width: @screen-md) {
+		height: 60px;
+		width:  60px;
+		right:  30px;
+		bottom: 30px;
+	}
+
+}
+
+
+@media (max-width: @screen-md-min) {
+	.to-top {
+		padding-top: 8px;
+	}
+}

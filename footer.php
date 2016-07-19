@@ -19,7 +19,7 @@
 						'after'           => '',
 						'link_before'     => '',
 						'link_after'      => '',
-						'depth'           => 1
+						'depth'           => 1,
 					)
 				);
 			} ?>
@@ -34,6 +34,8 @@
 		</div>
 	</footer>
 </div>
+
+<a href="#top" class="to-top" title="Back to top"><i class="fa fa-chevron-up"></i></a>
 <?php wp_footer(); ?>
 </body>
 </html>

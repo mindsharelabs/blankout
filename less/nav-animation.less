@@ -1,0 +1,38 @@
+// adds a fade animation to Bootstrap's nav menu
+.open > .dropdown-menu {
+	animation-name:                    blankoutNavAnimation;
+	animation-duration:                .2s;
+	animation-iteration-count:         1;
+	animation-timing-function:         ease;
+	animation-fill-mode:               forwards;
+
+	-webkit-animation-name:            blankoutNavAnimation;
+	-webkit-animation-duration:        .2s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease;
+	-webkit-animation-fill-mode:       forwards;
+
+	-moz-animation-name:               blankoutNavAnimation;
+	-moz-animation-duration:           .2s;
+	-moz-animation-iteration-count:    1;
+	-moz-animation-timing-function:    ease;
+	-moz-animation-fill-mode:          forwards;
+}
+
+@keyframes blankoutNavAnimation {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@-webkit-keyframes blankoutNavAnimation {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}

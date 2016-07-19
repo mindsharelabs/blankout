@@ -10,10 +10,31 @@ Built using:
 * LESS
 * Mindshare Theme API
 
-## Changelog
+# Getting Started with Blankout
+
+1. Rename the blankout folder to something specific to your project, e.g. `wp-content/your-theme`
+1. Install Grunt/ NPM Dependencies `npm install -g grunt grunt-cli`
+1. Navigate to the theme folder:cd wp-content/your-theme;
+1. Run `npm install`
+1. Start the Blankout 'grunt' task to watch your LESS for changes by running: `grunt`
+
+You should see the following in terminal:
+```
+Running "watch" task
+Waiting...
+```
+
+# Compiling LESS with Grunt
+
+1. Open `header.less` and change the Theme Name to the name of your new theme, save the file, grunt will automatically recompile your CSS.
+1. Upload the newly compiled `style.css` to the remote server.
+
+# Changelog
 
 ### v3.8.3
-* 
+* Updated README
+* Added nav dropdown CSS animation
+* Added Back To Top CSS
 
 ### v3.8.2
 * Add equalheight DIV Js function
