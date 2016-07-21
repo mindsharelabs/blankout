@@ -3,7 +3,7 @@
  * comments.php - Blankout comment functions
  *
  * @created   7/19/16 3:52 PM
- * @author    Mindshare Studios, Inc.
+ * @author    Mindshare Labs, Inc.
  * @copyright Copyright (c) 2006-2016
  * @link      https://mindsharelabs.com/
  */
@@ -19,7 +19,7 @@ function blankout_comments($comment, $args, $depth) {
 	$GLOBALS[ 'comment' ] = $comment;
 	$bgauthemail = get_comment_author_email(); ?>
 	<article id="comment-<?php comment_ID(); ?>" <?php comment_class("media clearfix"); ?>>
-		<img data-gravatar="http://www.gravatar.com/avatar/<?php echo md5($bgauthemail); ?>?s=48" class="pull-left media-object load-gravatar avatar avatar-48 photo" height="48" width="48" src="<?php echo get_stylesheet_directory_uri(); ?>/img/nothing.gif" />
+		<img data-gravatar="http://www.gravatar.com/avatar/<?php echo md5($bgauthemail); ?>?s=48" class="pull-left media-object load-gravatar avatar avatar-48 photo" height="48" width="48" src="<?php echo get_stylesheet_directory_uri(); ?>/img/mm.png" />
 		<header class="comment-author vcard">
 			<?php printf(__('<cite class="fn">%s</cite>'), get_comment_author_link()) ?>
 			<time datetime="<?php comment_time('Y-m-j'); ?>"><a href="<?php echo htmlspecialchars(get_comment_link($comment->comment_ID)) ?>"><?php comment_time('F jS, Y'); ?> </a></time>
@@ -40,7 +40,6 @@ function blankout_comments($comment, $args, $depth) {
 
 /**
  * Template for comments and pingbacks.
- *
  * Used as a callback by wp_list_comments() for displaying the comments.
  */
 function _blankout_comment($comment, $args, $depth) {

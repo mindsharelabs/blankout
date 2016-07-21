@@ -34,6 +34,10 @@ Waiting...
 
 # Changelog
 
+### v3.9.1
+* Add `mm.png`
+* Minor Bugfixes
+
 ### v3.9
 * Reorganization and cleanup
 * Update branding

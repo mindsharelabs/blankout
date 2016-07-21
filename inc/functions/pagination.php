@@ -3,7 +3,7 @@
  * pagination.php
  *
  * @created   7/19/16 3:54 PM
- * @author    Mindshare Studios, Inc.
+ * @author    Mindshare Labs, Inc.
  * @copyright Copyright (c) 2006-2016
  * @link      https://mindsharelabs.com/
  */

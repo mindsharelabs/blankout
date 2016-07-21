@@ -3,7 +3,7 @@
  * opengraph.php
  *
  * @created   7/19/16 3:55 PM
- * @author    Mindshare Studios, Inc.
+ * @author    Mindshare Labs, Inc.
  * @copyright Copyright (c) 2006-2016
  * @link      https://mindsharelabs.com/
  */
@@ -59,6 +59,8 @@ function blankout_footer_credit() {
 function blankout_add_opengraph_doctype($output) {
 	if (function_exists('mapi_add_opengraph_doctype')) {
 		return mapi_add_opengraph_doctype($output);
+	} else {
+		return FALSE;
 	}
 }
 
