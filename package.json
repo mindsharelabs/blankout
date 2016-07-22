@@ -8,11 +8,11 @@
         "url": "ssh://git@github.com:mindsharelabs/blankout.git"
     },
     "devDependencies": {
-        "grunt": "^0.4.5",
-        "grunt-contrib-less": "^0.11.4",
-        "grunt-contrib-watch": "^0.6.1",
-        "grunt-newer": "^0.7.0",
-        "matchdep": "^0.3.0"
+        "grunt": "",
+        "grunt-contrib-less": "",
+        "grunt-contrib-watch": "",
+        "grunt-newer": "",
+        "matchdep": ""
     },
     "author": "Mindshare Labs, Inc.",
     "license": "GPL-3.0"
