@@ -32,6 +32,25 @@ Waiting...
 1. Open `header.less` and change the Theme Name to the name of your new theme, save the file, grunt will automatically recompile your CSS.
 1. Upload the newly compiled `style.css` to the remote server.
 
+
+# Structure
+
+Blankout is laid out with the following folder structure:
+
+```
+├── css					-> all compiled CSS
+├── img					-> all images
+├── inc					-> folder for any includes/WP template parts
+│   ├── dependencies	-> TGM Plugin Activation config
+│   └── functions		-> files included in `functions.php`
+├── js					-> all theme JavaScript
+├── less				-> custom LESS
+│   ├── bootstrap		-> vanilla (unmodified) Boostrap LESS
+│   └── util			-> 3rd-party and utility LESS files
+├── templates			-> custom WP page template files
+└── translation			-> internationalization files
+```
+
 # Changelog
 
 ### v3.9.1
