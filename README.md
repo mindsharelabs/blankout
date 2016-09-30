@@ -53,6 +53,9 @@ Blankout is laid out with the following folder structure:
 
 # Changelog
 
+### v3.9.2
+* Add responsive video embed styling
+
 ### v3.9.1
 * Add `mm.png`
 * Minor Bugfixes

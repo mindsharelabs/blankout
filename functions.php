@@ -212,6 +212,15 @@ function blankout_dequeue_social_css() {
 add_action('wp_enqueue_scripts', 'blankout_dequeue_social_css', 101);
 
 /**
+ * Remove Mindshare API Embed CSS
+ */
+function blankout_dequeue_embed_css() {
+	wp_dequeue_style('mapi-embed');
+}
+
+add_action('wp_enqueue_scripts', 'blankout_dequeue_embed_css', 101);
+
+/**
  * Load frontend CSS/JS
  */
 function blankout_styles() {
