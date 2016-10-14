@@ -2,8 +2,7 @@
 /**
  * Include the TGM_Plugin_Activation class. Check for dependencies.
  */
-//require_once dirname(__FILE__).'/class-tgm-plugin-activation.php';
-require_once(dirname(__FILE__) . '/class-tgm-plugin-activation.php');
+require_once(get_template_directory() . '/vendor/tgmpa/tgm-plugin-activation/class-tgm-plugin-activation.php');
 add_action('tgmpa_register', 'blankout_register_required_plugins');
 
 /**

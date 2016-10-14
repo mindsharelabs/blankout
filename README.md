@@ -55,6 +55,8 @@ Blankout is laid out with the following folder structure:
 
 ### v3.9.2
 * Add responsive video embed styling
+* Update Bootstrap to 3.3.7
+* Move to Composer
 
 ### v3.9.1
 * Add `mm.png`

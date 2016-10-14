@@ -1,0 +1,15 @@
+{
+    "name": "mindsharelabs/blankout",
+    "description": "Blankout: a robust, responsive, Bootstrap 3-enabled theme framework for WordPress. https://mind.sh/are/ — Edit",
+    "type": "project",
+    "license": "GPLv3",
+    "authors": [
+        {
+            "name": "Mindshare Labs",
+            "email": "support@mindsharelabs.com"
+        }
+    ],
+    "require": {
+        "tgmpa/tgm-plugin-activation": "^2.6"
+    }
+}
