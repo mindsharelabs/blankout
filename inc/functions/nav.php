@@ -11,7 +11,6 @@
 /**
  * Changes the default behavior of Bootstrap dropdown nav menus
  * if the constant BOOTSTRAP_DROPDOWN_ON_HOVER is TRUE.
-
  */
 function blankout_enable_nav_hover() {
 	if (function_exists('mapi_is_mobile_device')) {
@@ -76,7 +75,6 @@ function blankout_nav($position = 'below') {
 	</div>
 	<?php
 }
-
 
 /**
  * Adds a login/out link to a specific wp_nav_menu.

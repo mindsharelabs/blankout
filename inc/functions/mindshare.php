@@ -1,14 +1,12 @@
 <?php
 /**
  * mindshare.php
- *
  * Settings specific to the Mindshare Security plugin.
  *
  * @created   2/3/16 4:10 PM
  * @author    Mindshare Labs, Inc.
  * @copyright Copyright (c) 2006-2016
  * @link      https://mindsharelabs.com/
- *
  */
 
 //remove_action('admin_menu', array('mcms_ui', 'clear_dashboard'));

@@ -2,7 +2,7 @@
 /**
  * Check for dependencies
  */
-require_once(dirname(__FILE__) . '/inc/dependencies/check.php');
+require_once(dirname(__FILE__) . '/inc/functions/check.php');
 
 /**
  * Misc. function includes

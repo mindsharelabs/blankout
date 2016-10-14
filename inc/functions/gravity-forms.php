@@ -1,9 +1,7 @@
 <?php
 /**
  * Gravity Forms Bootstrap Styles
- *
  * Applies bootstrap classes to various common field types. Using this function allows use of Gravity Forms default CSS in conjunction with Bootstrap (benefit for fields types such as Address).
- *
  * Contributed to Blankout by Geet Jacobs - https://github.com/Jeradin
  *
  * @created   3/17/15 11:14 AM
@@ -32,9 +30,7 @@ if (!is_admin()) {
  *
  * @see  gform_field_content
  * @link http://www.gravityhelp.com/documentation/page/Gform_field_content
- *
  * @return string Modified field content
- *
  */
 function blankout_bootstrap_styles_for_gravityforms_fields($content, $field, $value, $lead_id, $form_id) {
 
@@ -236,7 +232,6 @@ function blankout_previous_button_markup($previous_button, $form) {
 }
 
 /**
- *
  * Validation message
  *
  * @param $message
@@ -265,7 +260,6 @@ function blankout_custom_validation($result, $value, $form, $field) {
 }
 
 /**
- *
  * Only enqueue scripts if the current page has a Gravity Form.
  * (not currently used)
  *
